@@ -13,6 +13,7 @@ type CourseVideoNav = {
   title: string
   order_index: number
   is_free_preview: boolean
+  duration_seconds?: number
 }
 
 export default async function VideoPage({ params }: PageProps) {
@@ -67,7 +68,7 @@ export default async function VideoPage({ params }: PageProps) {
   // Get all videos in the course for navigation
   const { data: allVideos } = await supabase
     .from('videos')
-    .select('id, title, order_index, is_free_preview')
+    .select('id, title, order_index, is_free_preview, duration_seconds')
     .eq('course_id', courseId)
     .order('order_index')
 
@@ -75,6 +76,8 @@ export default async function VideoPage({ params }: PageProps) {
   const currentIndex = typedAllVideos.findIndex((v: CourseVideoNav) => v.id === videoId) || 0
   const nextVideo = typedAllVideos?.[currentIndex + 1]
   const prevVideo = typedAllVideos?.[currentIndex - 1]
+
+  const totalCourseSeconds = typedAllVideos.reduce((acc, v) => acc + (v.duration_seconds || 0), 0)
 
   function formatDuration(seconds: number) {
     const hrs = Math.floor(seconds / 3600)
@@ -84,163 +87,103 @@ export default async function VideoPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-black">
-      {/* Video Player Area */}
-      <div className="relative bg-black">
-        {/* HLS Player */}
-        {
-          (() => {
-            const watermark = !video.is_free_preview && user ? `${user.email?.split('@')[0] || 'user'} • premium` : undefined
-            return (
-              <VideoPlayer
-                videoId={videoId}
-                title={video.title}
-                isPremium={!video.is_free_preview}
-                watermarkText={watermark}
-              />
-            )
-          })()
-        }
+    <div className="min-h-screen pt-24">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 pb-12 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
+        {/* Main column (player + details) ~58% */}
+        <main className="lg:col-span-7">
+          <div className="overflow-hidden rounded-xl border border-gray-200 bg-black shadow-sm">
+            {(() => {
+              const watermark = !video.is_free_preview && user ? `${user.email?.split('@')[0] || 'user'} • premium` : undefined
+              return (
+                <VideoPlayer
+                  videoId={videoId}
+                  title={video.title}
+                  isPremium={!video.is_free_preview}
+                  watermarkText={watermark}
+                  showTitleOverlay={false}
+                />
+              )
+            })()}
+          </div>
 
-        {/* Video Controls Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
-          <div className="flex items-center justify-between text-white">
-            <div>
-              <h1 className="text-xl font-semibold">{video.title}</h1>
-              <p className="text-gray-300 text-sm">
-                {video.courses?.course_categories?.name} • {formatDuration(video.duration_seconds)}
-              </p>
+          {/* Next video quick action */}
+          {nextVideo && (
+            <div className="mt-4 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+              <div>
+                <div className="text-xs text-gray-500">Next video</div>
+                <Link href={`/academy/courses/${courseId}/videos/${nextVideo.id}`} className="text-sm font-medium text-blue-700 hover:text-blue-800">
+                  {nextVideo.title}
+                </Link>
+              </div>
+              <Link href={`/academy/courses/${courseId}/videos/${nextVideo.id}`} className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700">
+                Play next
+              </Link>
             </div>
-            
-            {!video.is_free_preview && (
-              <div className="bg-green-600 px-3 py-1 rounded-full text-sm">
-                Premium Content
+          )}
+
+          {/* Title and meta */}
+          <div className="mt-4 flex flex-col gap-1">
+            <h1 className="text-2xl font-bold text-gray-900">{video.title}</h1>
+            <div className="text-sm text-gray-500">{video.courses?.course_categories?.name} • {formatDuration(video.duration_seconds)}</div>
+          </div>
+
+          {/* Description */}
+          <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <p className="text-gray-700 leading-relaxed">{video.description}</p>
+          </div>
+
+          
+        </main>
+
+        {/* Right sidebar (outline) ~42% */}
+        <aside className="lg:col-span-5">
+          <div className="sticky top-24 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-base font-semibold text-gray-900">Course Content</h3>
+              <div className="text-xs text-gray-500">{typedAllVideos.length} lectures • {formatDuration(totalCourseSeconds)}</div>
+            </div>
+            <div className="max-h-[70vh] space-y-2 overflow-y-auto pr-1">
+              {typedAllVideos?.map((v: CourseVideoNav, index: number) => {
+                const canAccess = v.is_free_preview || isEnrolled
+                const isCurrent = v.id === videoId
+                return (
+                  <Link
+                    key={v.id}
+                    href={canAccess ? `/academy/courses/${courseId}/videos/${v.id}` : `/academy/courses/${courseId}`}
+                    className={`block rounded-lg border p-3 transition-colors ${
+                      isCurrent
+                        ? 'border-blue-300 bg-blue-50'
+                        : canAccess
+                          ? 'border-gray-200 hover:bg-gray-50'
+                          : 'border-gray-200 bg-gray-50'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${isCurrent ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>{index + 1}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className={`truncate text-sm font-medium ${isCurrent ? 'text-blue-900' : 'text-gray-900'}`}>{v.title}</div>
+                        <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                          <span>{v.is_free_preview ? 'FREE preview' : 'Premium'}</span>
+                          {typeof v.duration_seconds === 'number' && (
+                            <span>• {formatDuration(v.duration_seconds)}</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+
+            {!isEnrolled && (
+              <div className="mt-4 border-t pt-3">
+                <Link href={`/academy/courses/${courseId}`} className="block rounded-lg bg-green-600 px-4 py-2 text-center font-medium text-white hover:bg-green-700">
+                  Enroll to Access All Videos
+                </Link>
               </div>
             )}
           </div>
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-2">
-              {/* Navigation */}
-              <div className="mb-6">
-                <Link 
-                  href={`/academy/courses/${courseId}`}
-                  className="text-blue-600 hover:text-blue-800 flex items-center gap-2"
-                >
-                  ← Back to {video.courses?.title}
-                </Link>
-              </div>
-
-              {/* Video Info */}
-              <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">{video.title}</h2>
-                <p className="text-gray-600 leading-relaxed">{video.description}</p>
-              </div>
-
-              {/* Video Navigation */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {prevVideo && (
-                  <Link
-                    href={`/academy/courses/${courseId}/videos/${prevVideo.id}`}
-                    className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="text-sm text-gray-500 mb-1">Previous Video</div>
-                    <div className="font-medium text-gray-900">{prevVideo.title}</div>
-                  </Link>
-                )}
-                
-                {nextVideo && (
-                  <Link
-                    href={`/academy/courses/${courseId}/videos/${nextVideo.id}`}
-                    className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors md:ml-auto"
-                  >
-                    <div className="text-sm text-gray-500 mb-1">Next Video</div>
-                    <div className="font-medium text-gray-900">{nextVideo.title}</div>
-                  </Link>
-                )}
-              </div>
-            </div>
-
-            {/* Sidebar - Course Videos List */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-lg p-6 sticky top-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Course Videos</h3>
-                
-                <div className="space-y-2 max-h-96 overflow-y-auto">
-                  {typedAllVideos?.map((v: CourseVideoNav, index: number) => {
-                    const canAccess = v.is_free_preview || isEnrolled
-                    const isCurrent = v.id === videoId
-                    
-                    return (
-                      <div
-                        key={v.id}
-                        className={`p-3 rounded-lg border transition-colors ${
-                          isCurrent 
-                            ? 'bg-blue-50 border-blue-200' 
-                            : canAccess 
-                              ? 'hover:bg-gray-50 border-gray-200' 
-                              : 'bg-gray-50 border-gray-200'
-                        }`}
-                      >
-                        {canAccess ? (
-                          <Link
-                            href={`/academy/courses/${courseId}/videos/${v.id}`}
-                            className="block"
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold ${
-                                isCurrent ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
-                              }`}>
-                                {index + 1}
-                              </div>
-                              <div className="flex-1">
-                                <div className={`font-medium text-sm ${
-                                  isCurrent ? 'text-blue-900' : 'text-gray-900'
-                                }`}>
-                                  {v.title}
-                                </div>
-                                {v.is_free_preview && (
-                                  <div className="text-xs text-green-600 mt-1">FREE</div>
-                                )}
-                              </div>
-                            </div>
-                          </Link>
-                        ) : (
-                          <div className="flex items-center gap-3 opacity-50">
-                            <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold bg-gray-200 text-gray-400">
-                              {index + 1}
-                            </div>
-                            <div className="flex-1">
-                              <div className="font-medium text-sm text-gray-400">{v.title}</div>
-                              <div className="text-xs text-gray-400 mt-1">🔒 Premium</div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-
-                {!isEnrolled && (
-                  <div className="mt-6 pt-4 border-t border-gray-200">
-                    <Link
-                      href={`/academy/courses/${courseId}`}
-                      className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-center block font-medium"
-                    >
-                      Enroll to Access All Videos
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        </aside>
       </div>
     </div>
   )

@@ -2,19 +2,27 @@
 
 import Hls from 'hls.js'
 import { useEffect, useRef, useState } from 'react'
+import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaExpand, FaBackward, FaForward } from 'react-icons/fa'
 
 type VideoPlayerProps = {
   videoId: string
   title: string
   isPremium: boolean
   watermarkText?: string
+  showTitleOverlay?: boolean
 }
 
-export default function VideoPlayer({ videoId, title, isPremium, watermarkText }: VideoPlayerProps) {
+export default function VideoPlayer({ videoId, title, isPremium, watermarkText, showTitleOverlay = false }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [playbackUrl, setPlaybackUrl] = useState<string | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [volume, setVolume] = useState(1)
+  const [muted, setMuted] = useState(false)
+  const [playbackRate, setPlaybackRate] = useState(1)
 
   useEffect(() => {
     let hls: Hls | null = null
@@ -105,6 +113,150 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText }
     }
   }, [videoId])
 
+  // Wire up element events for UI state
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+
+    const onLoaded = () => {
+      setDuration(el.duration || 0)
+      setVolume(el.volume)
+      setMuted(el.muted)
+    }
+    const onTime = () => setCurrentTime(el.currentTime || 0)
+    const onPlay = () => setIsPlaying(true)
+    const onPause = () => setIsPlaying(false)
+    const onEnded = () => setIsPlaying(false)
+
+    el.addEventListener('loadedmetadata', onLoaded)
+    el.addEventListener('timeupdate', onTime)
+    el.addEventListener('play', onPlay)
+    el.addEventListener('pause', onPause)
+    el.addEventListener('ended', onEnded)
+
+    return () => {
+      el.removeEventListener('loadedmetadata', onLoaded)
+      el.removeEventListener('timeupdate', onTime)
+      el.removeEventListener('play', onPlay)
+      el.removeEventListener('pause', onPause)
+      el.removeEventListener('ended', onEnded)
+    }
+  }, [playbackUrl])
+
+  function formatTime(totalSeconds: number) {
+    const sec = Math.max(0, Math.floor(totalSeconds || 0))
+    const h = Math.floor(sec / 3600)
+    const m = Math.floor((sec % 3600) / 60)
+    const s = sec % 60
+    return h > 0
+      ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+      : `${m}:${String(s).padStart(2, '0')}`
+  }
+
+  const togglePlay = () => {
+    const el = videoRef.current
+    if (!el) return
+    if (el.paused) el.play().catch(() => {})
+    else el.pause()
+  }
+
+  const seekBy = (deltaSeconds: number) => {
+    const el = videoRef.current
+    if (!el) return
+    const next = Math.min(Math.max(0, (el.currentTime || 0) + deltaSeconds), el.duration || Infinity)
+    el.currentTime = next
+    setCurrentTime(next)
+  }
+
+  const onSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const el = videoRef.current
+    if (!el) return
+    const value = Number(e.target.value)
+    el.currentTime = value
+    setCurrentTime(value)
+  }
+
+  const onVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const el = videoRef.current
+    if (!el) return
+    const value = Number(e.target.value)
+    el.volume = value
+    setVolume(value)
+    if (value > 0 && el.muted) {
+      el.muted = false
+      setMuted(false)
+    }
+  }
+
+  const toggleMute = () => {
+    const el = videoRef.current
+    if (!el) return
+    el.muted = !el.muted
+    setMuted(el.muted)
+  }
+
+  const onRate = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const el = videoRef.current
+    if (!el) return
+    const rate = Number(e.target.value)
+    el.playbackRate = rate
+    setPlaybackRate(rate)
+  }
+
+  const goFullscreen = () => {
+    const el = videoRef.current
+    if (!el) return
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {})
+    } else {
+      el.requestFullscreen?.().catch(() => {})
+    }
+  }
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null
+      const isTyping = !!target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)
+      if (isTyping) return
+
+      if (e.code === 'Space' || e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        togglePlay()
+      } else if (e.key.toLowerCase() === 'j') {
+        seekBy(-10)
+      } else if (e.key.toLowerCase() === 'l') {
+        seekBy(10)
+      } else if (e.key === 'ArrowLeft') {
+        seekBy(-5)
+      } else if (e.key === 'ArrowRight') {
+        seekBy(5)
+      } else if (e.key.toLowerCase() === 'm') {
+        toggleMute()
+      } else if (e.key.toLowerCase() === 'f') {
+        goFullscreen()
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        const el = videoRef.current
+        if (!el) return
+        const v = Math.min(1, (el.volume || 0) + 0.05)
+        el.volume = v
+        setVolume(v)
+        if (v > 0 && el.muted) { el.muted = false; setMuted(false) }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        const el = videoRef.current
+        if (!el) return
+        const v = Math.max(0, (el.volume || 0) - 0.05)
+        el.volume = v
+        setVolume(v)
+        if (v === 0) { el.muted = true; setMuted(true) }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   // Deterrence against casual downloads
   const onContextMenu = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -116,10 +268,11 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText }
         <video
           ref={videoRef}
           className="h-full w-full"
-          controls
+          controls={false}
           playsInline
           preload="metadata"
           onContextMenu={onContextMenu}
+          onClick={togglePlay}
         />
       </div>
 
@@ -128,6 +281,81 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText }
           {watermarkText}
         </div>
       )}
+
+      {/* Controls overlay */}
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-end">
+        {/* Top bar (optional title overlay) */}
+        {showTitleOverlay && (
+          <div className="pointer-events-auto m-4 self-start rounded bg-black/40 px-2 py-1 text-xs text-white">
+            {title}
+          </div>
+        )}
+
+        {/* Bottom controls */}
+        <div className="pointer-events-auto w-full bg-gradient-to-t from-black/80 to-transparent p-4">
+          {/* Seek */}
+          <div className="mb-2 flex items-center gap-3">
+            <span className="text-xs tabular-nums text-white/80 w-14 text-right">{formatTime(currentTime)}</span>
+            <input
+              type="range"
+              min={0}
+              max={Math.max(1, duration)}
+              step={0.1}
+              value={Math.min(currentTime, duration)}
+              onChange={onSeek}
+              className="h-1 w-full cursor-pointer appearance-none rounded bg-white/30 accent-blue-500"
+            />
+            <span className="text-xs tabular-nums text-white/80 w-14">{formatTime(duration)}</span>
+          </div>
+
+          {/* Buttons row */}
+          <div className="flex items-center gap-3 text-white">
+            <button onClick={() => seekBy(-10)} className="rounded bg-white/10 p-2 hover:bg-white/20" aria-label="Seek backward 10 seconds">
+              <FaBackward />
+            </button>
+            <button onClick={togglePlay} className="rounded bg-white/10 p-2 hover:bg-white/20" aria-label={isPlaying ? 'Pause' : 'Play'}>
+              {isPlaying ? <FaPause /> : <FaPlay />}
+            </button>
+            <button onClick={() => seekBy(10)} className="rounded bg-white/10 p-2 hover:bg-white/20" aria-label="Seek forward 10 seconds">
+              <FaForward />
+            </button>
+
+            <button onClick={toggleMute} className="rounded bg-white/10 p-2 hover:bg-white/20" aria-label={muted ? 'Unmute' : 'Mute'}>
+              {muted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.05}
+              value={muted ? 0 : volume}
+              onChange={onVolume}
+              className="h-1 w-28 cursor-pointer appearance-none rounded bg-white/30 accent-blue-500"
+            />
+
+            <div className="ml-auto flex items-center gap-2">
+              <label className="text-xs text-white/70">Speed</label>
+              <select
+                value={playbackRate}
+                onChange={onRate}
+                className="rounded bg-white/10 px-2 py-1 text-xs text-white hover:bg-white/20"
+              >
+                <option value={0.5}>0.5x</option>
+                <option value={0.75}>0.75x</option>
+                <option value={1}>1x</option>
+                <option value={1.25}>1.25x</option>
+                <option value={1.5}>1.5x</option>
+                <option value={1.75}>1.75x</option>
+                <option value={2}>2x</option>
+              </select>
+
+              <button onClick={goFullscreen} className="rounded bg-white/10 p-2 hover:bg-white/20" aria-label="Fullscreen">
+                <FaExpand />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
