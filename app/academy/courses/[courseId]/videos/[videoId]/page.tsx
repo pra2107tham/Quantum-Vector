@@ -79,6 +79,21 @@ export default async function VideoPage({ params }: PageProps) {
 
   const totalCourseSeconds = typedAllVideos.reduce((acc, v) => acc + (v.duration_seconds || 0), 0)
 
+  // Get user progress for all videos (if logged in)
+  let progressMap: Record<string, any> = {}
+  if (user) {
+    const { data: progress } = await supabase
+      .from('video_progress')
+      .select('*')
+      .eq('user_id', user.id)
+      .in('video_id', typedAllVideos.map(v => v.id))
+    
+    progressMap = progress?.reduce((acc, p) => {
+      acc[p.video_id] = p
+      return acc
+    }, {} as Record<string, any>) || {}
+  }
+
   function formatDuration(seconds: number) {
     const hrs = Math.floor(seconds / 3600)
     const mins = Math.floor((seconds % 3600) / 60)
@@ -146,6 +161,10 @@ export default async function VideoPage({ params }: PageProps) {
               {typedAllVideos?.map((v: CourseVideoNav, index: number) => {
                 const canAccess = v.is_free_preview || isEnrolled
                 const isCurrent = v.id === videoId
+                const progress = progressMap[v.id]
+                const isCompleted = progress?.completed || false
+                const progressPercent = progress && v.duration_seconds ? (progress.progress_seconds / v.duration_seconds) * 100 : 0
+                
                 return (
                   <Link
                     key={v.id}
@@ -159,7 +178,15 @@ export default async function VideoPage({ params }: PageProps) {
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${isCurrent ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>{index + 1}</div>
+                      <div className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${
+                        isCompleted 
+                          ? 'bg-green-600 text-white' 
+                          : isCurrent 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-gray-200 text-gray-600'
+                      }`}>
+                        {isCompleted ? '✓' : index + 1}
+                      </div>
                       <div className="min-w-0 flex-1">
                         <div className={`truncate text-sm font-medium ${isCurrent ? 'text-blue-900' : 'text-gray-900'}`}>{v.title}</div>
                         <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
@@ -167,7 +194,16 @@ export default async function VideoPage({ params }: PageProps) {
                           {typeof v.duration_seconds === 'number' && (
                             <span>• {formatDuration(v.duration_seconds)}</span>
                           )}
+                          {isCompleted && <span className="text-green-600">• Completed</span>}
                         </div>
+                        {progress && progressPercent > 0 && progressPercent < 100 && (
+                          <div className="mt-2 w-full bg-gray-200 rounded-full h-1">
+                            <div
+                              className="bg-blue-600 h-1 rounded-full transition-all"
+                              style={{ width: `${Math.min(100, progressPercent)}%` }}
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Link>

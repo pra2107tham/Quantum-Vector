@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import AuthModal from "@/components/Auth/AuthModal";
 
 export function NavbarTop() {
   const pathname = usePathname();
@@ -38,9 +39,13 @@ export function NavbarTop() {
       name: "Webinars",
       link: "/webinars",
     },
+    // {
+    //   name: "About Us",
+    //   link: "/about",
+    // },
     {
-      name: "About Us",
-      link: "/about",
+      name: "Academy",
+      link: "/academy",
     },
     {
       name: "Blog",
@@ -49,6 +54,8 @@ export function NavbarTop() {
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
 
   return (
     <div className="relative w-full">
@@ -60,14 +67,27 @@ export function NavbarTop() {
             items={navItems} 
             className="text-blue-900"
           />
-          {/* Register for Webinar Button (Desktop) */}
-          <Link href="/webinars/terraform-azure-5day" style={{ cursor: 'pointer', zIndex: 1000 }}>
+          {/* Auth Buttons (Desktop) */}
+          <div className="flex items-center gap-3">
             <button
-              className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-800 transition-colors font-medium text-sm"
+              onClick={() => {
+                setAuthModalMode('login');
+                setIsAuthModalOpen(true);
+              }}
+              className="text-blue-700 hover:text-blue-800 transition-colors font-medium text-sm cursor-pointer"
             >
-              Register for Webinar
+              Sign In
             </button>
-          </Link>
+            <button
+              onClick={() => {
+                setAuthModalMode('signup');
+                setIsAuthModalOpen(true);
+              }}
+              className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium text-sm cursor-pointer"
+            >
+              Get Started
+            </button>
+          </div>
         </NavBody>
 
         {/* Mobile Navigation */}
@@ -99,16 +119,36 @@ export function NavbarTop() {
                 {item.name}
               </a>
             ))}
-            <Link
-              href="/webinars/terraform-azure-5day"
-              className="block bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium text-center"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button
+              onClick={() => {
+                setAuthModalMode('login');
+                setIsAuthModalOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+              className="block w-full text-blue-700 hover:text-blue-800 transition-colors font-medium text-center py-2.5 px-4 cursor-pointer"
             >
-              Register for Webinar
-            </Link>
+              Sign In
+            </button>
+            <button
+              onClick={() => {
+                setAuthModalMode('signup');
+                setIsAuthModalOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+              className="block w-full bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium text-center cursor-pointer"
+            >
+              Get Started
+            </button>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
+      
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
     </div>
   );
 }

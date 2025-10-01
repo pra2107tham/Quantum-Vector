@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import AcademyHero from '@/components/Academy/AcademyHero'
 import AcademyGrid from '@/components/Academy/AcademyGrid'
+import AcademyAuthSection from '@/components/Academy/AcademyAuthSection'
 
 export default async function AcademyPage() {
   const user = await getUser() // Optional user (no redirect if not logged in)
@@ -45,39 +46,7 @@ export default async function AcademyPage() {
 
         {/* Quick actions */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          {user ? (
-            <>
-              <Link
-                href="/academy/dashboard"
-                className="rounded-xl bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
-              >
-                Go to Dashboard
-              </Link>
-              <form action="/auth/logout" method="post">
-                <button
-                  type="submit"
-                  className="rounded-xl bg-gray-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-gray-600"
-                >
-                  Sign Out
-                </button>
-              </form>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/auth/login"
-                className="rounded-xl bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/auth/signup"
-                className="rounded-xl bg-blue-50 px-5 py-2.5 text-sm font-semibold text-blue-700 ring-1 ring-blue-200 hover:bg-blue-100"
-              >
-                Get Started
-              </Link>
-            </>
-          )}
+          <AcademyAuthSection user={user} />
         </div>
 
         {/* Enrolled Courses */}

@@ -23,6 +23,8 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
   const [volume, setVolume] = useState(1)
   const [muted, setMuted] = useState(false)
   const [playbackRate, setPlaybackRate] = useState(1)
+  const [lastSavedProgress, setLastSavedProgress] = useState(0)
+  const [isSavingProgress, setIsSavingProgress] = useState(false)
 
   useEffect(() => {
     let hls: Hls | null = null
@@ -113,6 +115,55 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
     }
   }, [videoId])
 
+  // Load existing progress on mount
+  useEffect(() => {
+    async function loadProgress() {
+      try {
+        const res = await fetch(`/api/academy/video-progress?videoId=${videoId}`)
+        if (res.ok) {
+          const data = await res.json()
+          if (data.progress && data.progress.progress_seconds > 0) {
+            setCurrentTime(data.progress.progress_seconds)
+            setLastSavedProgress(data.progress.progress_seconds)
+            // Auto-seek to saved position when video loads
+            const el = videoRef.current
+            if (el && el.duration > 0) {
+              el.currentTime = data.progress.progress_seconds
+            }
+          }
+        }
+      } catch (e) {
+        console.log('Could not load progress:', e)
+      }
+    }
+    loadProgress()
+  }, [videoId])
+
+  // Save progress function
+  const saveProgress = async (progressSeconds: number, completed: boolean = false) => {
+    if (isSavingProgress || Math.abs(progressSeconds - lastSavedProgress) < 5) return // Throttle saves
+    
+    setIsSavingProgress(true)
+    try {
+      const res = await fetch('/api/academy/video-progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          videoId,
+          progressSeconds: Math.floor(progressSeconds),
+          completed
+        })
+      })
+      if (res.ok) {
+        setLastSavedProgress(progressSeconds)
+      }
+    } catch (e) {
+      console.log('Could not save progress:', e)
+    } finally {
+      setIsSavingProgress(false)
+    }
+  }
+
   // Wire up element events for UI state
   useEffect(() => {
     const el = videoRef.current
@@ -123,10 +174,26 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
       setVolume(el.volume)
       setMuted(el.muted)
     }
-    const onTime = () => setCurrentTime(el.currentTime || 0)
+    const onTime = () => {
+      const time = el.currentTime || 0
+      setCurrentTime(time)
+      
+      // Save progress every 15 seconds or when paused
+      if (time - lastSavedProgress >= 15) {
+        saveProgress(time, false)
+      }
+    }
     const onPlay = () => setIsPlaying(true)
-    const onPause = () => setIsPlaying(false)
-    const onEnded = () => setIsPlaying(false)
+    const onPause = () => {
+      setIsPlaying(false)
+      // Save progress when paused
+      saveProgress(el.currentTime || 0, false)
+    }
+    const onEnded = () => {
+      setIsPlaying(false)
+      // Mark as completed when video ends
+      saveProgress(el.duration || 0, true)
+    }
 
     el.addEventListener('loadedmetadata', onLoaded)
     el.addEventListener('timeupdate', onTime)
@@ -141,7 +208,7 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
       el.removeEventListener('pause', onPause)
       el.removeEventListener('ended', onEnded)
     }
-  }, [playbackUrl])
+  }, [playbackUrl, lastSavedProgress])
 
   function formatTime(totalSeconds: number) {
     const sec = Math.max(0, Math.floor(totalSeconds || 0))
