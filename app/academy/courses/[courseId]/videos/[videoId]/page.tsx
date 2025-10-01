@@ -2,9 +2,17 @@ import { getUser } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
 import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
+import VideoPlayer from '@/components/Academy/VideoPlayer'
 
 interface PageProps {
   params: Promise<{ courseId: string; videoId: string }>
+}
+
+type CourseVideoNav = {
+  id: string
+  title: string
+  order_index: number
+  is_free_preview: boolean
 }
 
 export default async function VideoPage({ params }: PageProps) {
@@ -63,9 +71,10 @@ export default async function VideoPage({ params }: PageProps) {
     .eq('course_id', courseId)
     .order('order_index')
 
-  const currentIndex = allVideos?.findIndex(v => v.id === videoId) || 0
-  const nextVideo = allVideos?.[currentIndex + 1]
-  const prevVideo = allVideos?.[currentIndex - 1]
+  const typedAllVideos: CourseVideoNav[] = (allVideos || []) as unknown as CourseVideoNav[]
+  const currentIndex = typedAllVideos.findIndex((v: CourseVideoNav) => v.id === videoId) || 0
+  const nextVideo = typedAllVideos?.[currentIndex + 1]
+  const prevVideo = typedAllVideos?.[currentIndex - 1]
 
   function formatDuration(seconds: number) {
     const hrs = Math.floor(seconds / 3600)
@@ -78,21 +87,20 @@ export default async function VideoPage({ params }: PageProps) {
     <div className="min-h-screen bg-black">
       {/* Video Player Area */}
       <div className="relative bg-black">
-        {/* Placeholder for video player */}
-        <div className="aspect-video w-full bg-gray-900 flex items-center justify-center">
-          <div className="text-center text-white">
-            <div className="text-6xl mb-4">🎥</div>
-            <h2 className="text-xl font-medium mb-2">Video Player Coming Soon</h2>
-            <p className="text-gray-400">Cloudinary integration in Phase 2</p>
-            <div className="mt-4 p-4 bg-gray-800 rounded-lg">
-              <p className="text-sm">
-                <strong>Video:</strong> {video.title}<br/>
-                <strong>Duration:</strong> {formatDuration(video.duration_seconds)}<br/>
-                <strong>Cloudinary ID:</strong> {video.cloudinary_public_id}
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* HLS Player */}
+        {
+          (() => {
+            const watermark = !video.is_free_preview && user ? `${user.email?.split('@')[0] || 'user'} • premium` : undefined
+            return (
+              <VideoPlayer
+                videoId={videoId}
+                title={video.title}
+                isPremium={!video.is_free_preview}
+                watermarkText={watermark}
+              />
+            )
+          })()
+        }
 
         {/* Video Controls Overlay */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
@@ -165,7 +173,7 @@ export default async function VideoPage({ params }: PageProps) {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Course Videos</h3>
                 
                 <div className="space-y-2 max-h-96 overflow-y-auto">
-                  {allVideos?.map((v, index) => {
+                  {typedAllVideos?.map((v: CourseVideoNav, index: number) => {
                     const canAccess = v.is_free_preview || isEnrolled
                     const isCurrent = v.id === videoId
                     
