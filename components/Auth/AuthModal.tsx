@@ -47,7 +47,8 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
           options: {
             data: {
               full_name: fullName,
-            }
+            },
+            emailRedirectTo: `${window.location.origin}/auth/callback`
           }
         });
 

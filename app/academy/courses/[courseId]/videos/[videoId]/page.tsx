@@ -1,8 +1,10 @@
 import { getUser } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import VideoPlayer from '@/components/Academy/VideoPlayer'
+import VideoAccessGuard from '@/components/Academy/VideoAccessGuard'
+import SidebarEnrollButton from '@/components/Academy/SidebarEnrollButton'
 
 interface PageProps {
   params: Promise<{ courseId: string; videoId: string }>
@@ -21,7 +23,7 @@ export default async function VideoPage({ params }: PageProps) {
   const user = await getUser()
   const supabase = await createClient()
 
-  // Get video and course details
+  // Get video and course details including course fields used in UI
   const { data: video } = await supabase
     .from('videos')
     .select(`
@@ -29,6 +31,8 @@ export default async function VideoPage({ params }: PageProps) {
       courses(
         id,
         title,
+        description,
+        price,
         course_categories(name)
       )
     `)
@@ -40,10 +44,7 @@ export default async function VideoPage({ params }: PageProps) {
     notFound()
   }
 
-  // Check access permissions
-  const canWatch = video.is_free_preview || false
   let isEnrolled = false
-
   if (user && !video.is_free_preview) {
     const { data: enrollment } = await supabase
       .from('enrollments')
@@ -52,20 +53,10 @@ export default async function VideoPage({ params }: PageProps) {
       .eq('course_id', courseId)
       .eq('payment_status', 'completed')
       .single()
-    
     isEnrolled = !!enrollment
   }
 
-  // If user can't watch this video, redirect appropriately
-  if (!video.is_free_preview && !isEnrolled) {
-    if (!user) {
-      redirect(`/auth/login?redirect=/academy/courses/${courseId}/videos/${videoId}`)
-    } else {
-      redirect(`/academy/courses/${courseId}`)
-    }
-  }
-
-  // Get all videos in the course for navigation
+  // Course videos for sidebar
   const { data: allVideos } = await supabase
     .from('videos')
     .select('id, title, order_index, is_free_preview, duration_seconds')
@@ -101,28 +92,36 @@ export default async function VideoPage({ params }: PageProps) {
     return `${hrs > 0 ? `${hrs}:` : ''}${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
+  const canAccess = video.is_free_preview || isEnrolled
+
   return (
     <div className="min-h-screen pt-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 pb-12 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:px-8">
         {/* Main column (player + details) ~58% */}
         <main className="lg:col-span-7">
-          <div className="overflow-hidden rounded-xl border border-gray-200 bg-black shadow-sm">
-            {(() => {
-              const watermark = !video.is_free_preview && user ? `${user.email?.split('@')[0] || 'user'} • premium` : undefined
-              return (
-                <VideoPlayer
-                  videoId={videoId}
-                  title={video.title}
-                  isPremium={!video.is_free_preview}
-                  watermarkText={watermark}
-                  showTitleOverlay={false}
-                />
-              )
-            })()}
-          </div>
+          <VideoAccessGuard
+            canAccess={canAccess}
+            isEnrolled={isEnrolled}
+            hasUser={!!user}
+            courseId={courseId}
+            courseTitle={video.courses?.title}
+            courseDescription={video.courses?.description}
+            coursePrice={video.courses?.price}
+            videoTitle={video.title}
+          >
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-black shadow-sm">
+              <VideoPlayer
+                videoId={videoId}
+                title={video.title}
+                isPremium={!video.is_free_preview}
+                watermarkText={!video.is_free_preview && user ? `${user.email?.split('@')[0] || 'user'} • premium` : undefined}
+                showTitleOverlay={false}
+              />
+            </div>
+          </VideoAccessGuard>
 
           {/* Next video quick action */}
-          {nextVideo && (
+          {nextVideo && canAccess && (
             <div className="mt-4 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
               <div>
                 <div className="text-xs text-gray-500">Next video</div>
@@ -146,8 +145,6 @@ export default async function VideoPage({ params }: PageProps) {
           <div className="mt-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
             <p className="text-gray-700 leading-relaxed">{video.description}</p>
           </div>
-
-          
         </main>
 
         {/* Right sidebar (outline) ~42% */}
@@ -159,63 +156,89 @@ export default async function VideoPage({ params }: PageProps) {
             </div>
             <div className="max-h-[70vh] space-y-2 overflow-y-auto pr-1">
               {typedAllVideos?.map((v: CourseVideoNav, index: number) => {
-                const canAccess = v.is_free_preview || isEnrolled
+                const canAccessVideo = v.is_free_preview || isEnrolled
                 const isCurrent = v.id === videoId
                 const progress = progressMap[v.id]
                 const isCompleted = progress?.completed || false
                 const progressPercent = progress && v.duration_seconds ? (progress.progress_seconds / v.duration_seconds) * 100 : 0
                 
                 return (
-                  <Link
-                    key={v.id}
-                    href={canAccess ? `/academy/courses/${courseId}/videos/${v.id}` : `/academy/courses/${courseId}`}
-                    className={`block rounded-lg border p-3 transition-colors ${
-                      isCurrent
-                        ? 'border-blue-300 bg-blue-50'
-                        : canAccess
-                          ? 'border-gray-200 hover:bg-gray-50'
-                          : 'border-gray-200 bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${
-                        isCompleted 
-                          ? 'bg-green-600 text-white' 
-                          : isCurrent 
-                            ? 'bg-blue-600 text-white' 
-                            : 'bg-gray-200 text-gray-600'
-                      }`}>
-                        {isCompleted ? '✓' : index + 1}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className={`truncate text-sm font-medium ${isCurrent ? 'text-blue-900' : 'text-gray-900'}`}>{v.title}</div>
-                        <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
-                          <span>{v.is_free_preview ? 'FREE preview' : 'Premium'}</span>
-                          {typeof v.duration_seconds === 'number' && (
-                            <span>• {formatDuration(v.duration_seconds)}</span>
-                          )}
-                          {isCompleted && <span className="text-green-600">• Completed</span>}
-                        </div>
-                        {progress && progressPercent > 0 && progressPercent < 100 && (
-                          <div className="mt-2 w-full bg-gray-200 rounded-full h-1">
-                            <div
-                              className="bg-blue-600 h-1 rounded-full transition-all"
-                              style={{ width: `${Math.min(100, progressPercent)}%` }}
-                            />
+                  <div key={v.id}>
+                    {canAccessVideo ? (
+                      <Link
+                        href={`/academy/courses/${courseId}/videos/${v.id}`}
+                        className={`block rounded-lg border p-3 transition-colors ${
+                          isCurrent
+                            ? 'border-blue-300 bg-blue-50'
+                            : 'border-gray-200 hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold ${
+                            isCompleted 
+                              ? 'bg-green-600 text-white' 
+                              : isCurrent 
+                                ? 'bg-blue-600 text-white' 
+                                : 'bg-gray-200 text-gray-600'
+                          }`}>
+                            {isCompleted ? '✓' : index + 1}
                           </div>
-                        )}
+                          <div className="min-w-0 flex-1">
+                            <div className={`truncate text-sm font-medium ${isCurrent ? 'text-blue-900' : 'text-gray-900'}`}>{v.title}</div>
+                            <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                              <span>{v.is_free_preview ? 'FREE preview' : 'Premium'}</span>
+                              {typeof v.duration_seconds === 'number' && (
+                                <span>• {formatDuration(v.duration_seconds)}</span>
+                              )}
+                              {isCompleted && <span className="text-green-600">• Completed</span>}
+                            </div>
+                            {progress && progressPercent > 0 && progressPercent < 100 && (
+                              <div className="mt-2 w-full bg-gray-200 rounded-full h-1">
+                                <div
+                                  className="bg-blue-600 h-1 rounded-full transition-all"
+                                  style={{ width: `${Math.min(100, progressPercent)}%` }}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className="block rounded-lg border p-3 border-gray-200 bg-gray-50">
+                        <div className="flex items-start gap-3">
+                          <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold bg-gray-200 text-gray-600">
+                            {index + 1}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="truncate text-sm font-medium text-gray-900">{v.title}</div>
+                            <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                              <span>Premium</span>
+                              {typeof v.duration_seconds === 'number' && (
+                                <span>• {formatDuration(v.duration_seconds)}</span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="ml-2">
+                            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    )}
+                  </div>
                 )
               })}
             </div>
 
             {!isEnrolled && (
               <div className="mt-4 border-t pt-3">
-                <Link href={`/academy/courses/${courseId}`} className="block rounded-lg bg-green-600 px-4 py-2 text-center font-medium text-white hover:bg-green-700">
-                  Enroll to Access All Videos
-                </Link>
+                <SidebarEnrollButton
+                  courseId={courseId}
+                  title={video.courses?.title || 'Course'}
+                  description={video.courses?.description}
+                  price={video.courses?.price}
+                />
               </div>
             )}
           </div>

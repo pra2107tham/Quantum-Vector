@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { FaPlay, FaLock, FaClock, FaVideo } from 'react-icons/fa'
+import CourseEnrollmentSection from '@/components/Academy/CourseEnrollmentSection'
+import VideoAccessButton from '@/components/Academy/VideoAccessButton'
 
 interface PageProps {
   params: Promise<{ courseId: string }>
@@ -57,24 +59,24 @@ export default async function CoursePage({ params }: PageProps) {
       .from('video_progress')
       .select('*')
       .eq('user_id', user.id)
-      .in('video_id', course.videos?.map(v => v.id) || [])
+      .in('video_id', course.videos?.map((v: any) => v.id) || [])
     
-    progressMap = progress?.reduce((acc, p) => {
+    progressMap = progress?.reduce((acc: any, p: any) => {
       acc[p.video_id] = p
       return acc
     }, {} as Record<string, any>) || {}
   }
 
   // Sort videos by order_index
-  const sortedVideos = course.videos?.sort((a, b) => a.order_index - b.order_index) || []
+  const sortedVideos = course.videos?.sort((a: any, b: any) => a.order_index - b.order_index) || []
   
   // Calculate total duration
-  const totalDuration = sortedVideos.reduce((acc, video) => acc + (video.duration_seconds || 0), 0)
+  const totalDuration = sortedVideos.reduce((acc: number, video: any) => acc + (video.duration_seconds || 0), 0)
   const hours = Math.floor(totalDuration / 3600)
   const minutes = Math.floor((totalDuration % 3600) / 60)
 
-  const freeVideos = sortedVideos.filter(v => v.is_free_preview)
-  const paidVideos = sortedVideos.filter(v => !v.is_free_preview)
+  const freeVideos = sortedVideos.filter((v: any) => v.is_free_preview)
+  const paidVideos = sortedVideos.filter((v: any) => !v.is_free_preview)
 
   function formatDuration(seconds: number) {
     const hrs = Math.floor(seconds / 3600)
@@ -159,7 +161,7 @@ export default async function CoursePage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-blue-900 mb-6">Course Content</h2>
                 
                 <div className="space-y-4">
-                  {sortedVideos.map((video, index) => {
+                  {sortedVideos.map((video: any, index: number) => {
                     const status = getVideoStatus(video)
                     const progress = progressMap[video.id]
                     const isCompleted = progress?.completed || false
@@ -198,30 +200,15 @@ export default async function CoursePage({ params }: PageProps) {
                           </div>
                           
                           <div className="ml-4">
-                            {status === 'free' || status === 'enrolled' ? (
-                              <Link
-                                href={`/academy/courses/${courseId}/videos/${video.id}`}
-                                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                              >
-                                <FaPlay className="w-3 h-3" />
-                                {isCompleted ? 'Rewatch' : 'Watch'}
-                              </Link>
-                            ) : status === 'login_required' ? (
-                              <Link
-                                href="/auth/login"
-                                className="flex items-center gap-2 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm"
-                              >
-                                Login to Watch
-                              </Link>
-                            ) : (
-                              <button
-                                disabled
-                                className="flex items-center gap-2 bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed text-sm"
-                              >
-                                <FaLock className="w-3 h-3" />
-                                Locked
-                              </button>
-                            )}
+                            <VideoAccessButton
+                              video={video}
+                              courseId={courseId}
+                              courseTitle={course.title}
+                              user={user}
+                              isEnrolled={isEnrolled}
+                              isCompleted={isCompleted}
+                              coursePrice={course.price}
+                            />
                           </div>
                         </div>
                       </div>
@@ -255,48 +242,15 @@ export default async function CoursePage({ params }: PageProps) {
                 )}
               </div>
 
-              {isEnrolled ? (
-                <div className="space-y-3">
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-                    <p className="text-green-700 font-medium">✓ You're enrolled in this course</p>
-                  </div>
-                  <Link
-                    href="/academy/dashboard"
-                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center block"
-                  >
-                    Go to Dashboard
-                  </Link>
-                </div>
-              ) : user ? (
-                <div className="space-y-3">
-                  <button className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium">
-                    Enroll Now - ₹{course.price}
-                  </button>
-                  <p className="text-xs text-gray-500 text-center">
-                    30-day money-back guarantee
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  <Link
-                    href="/auth/signup"
-                    className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium text-center block"
-                  >
-                    Sign Up to Enroll
-                  </Link>
-                  <Link
-                    href="/auth/login"
-                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center block"
-                  >
-                    Already have an account?
-                  </Link>
-                  {freeVideos.length > 0 && (
-                    <p className="text-xs text-gray-500 text-center">
-                      {freeVideos.length} free preview{freeVideos.length > 1 ? 's' : ''} available without signup
-                    </p>
-                  )}
-                </div>
-              )}
+              <CourseEnrollmentSection
+                user={user}
+                isEnrolled={isEnrolled}
+                courseId={courseId}
+                coursePrice={course.price}
+                freeVideosCount={freeVideos.length}
+                courseTitle={course.title}
+                courseDescription={course.description}
+              />
             </div>
           </div>
         </div>
