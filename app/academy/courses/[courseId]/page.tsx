@@ -43,11 +43,11 @@ export default async function CoursePage({ params }: PageProps) {
   if (user) {
     const { data: enrollment } = await supabase
       .from('enrollments')
-      .select('id')
+      .select('id,payment_status')
       .eq('user_id', user.id)
       .eq('course_id', courseId)
-      .eq('payment_status', 'completed')
-      .single()
+      .in('payment_status', ['completed', 'captured', 'authorized'])
+      .maybeSingle()
     
     isEnrolled = !!enrollment
   }

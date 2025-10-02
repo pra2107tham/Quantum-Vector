@@ -39,41 +39,46 @@ export default async function AcademyPage() {
   }
 
   return (
-    <div className="mt-8 min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 py-20">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
-        <AcademyHero />
-
-        {/* Quick actions */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <AcademyAuthSection user={user} />
-        </div>
+        {/* Hero with dashboard CTA on the right */}
+        <AcademyHero actionHref={user ? '/academy/dashboard' : undefined} actionLabel="Go to Dashboard" />
 
         {/* Enrolled Courses */}
         {enrolledCourseIds.length > 0 && (
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-blue-900 mb-6">Your Enrolled Courses</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {courses?.filter(course => enrolledCourseIds.includes(course.id)).map((course) => (
-                <CourseCard 
-                  key={course.id} 
-                  course={course} 
-                  isEnrolled={true}
-                  user={user}
-                />
-              ))}
+            <div className="rounded-2xl border border-gray-200 bg-white/90 shadow-sm">
+              <div className="px-6 pt-6">
+                <h2 className="text-2xl font-bold text-blue-900">Your Enrolled Courses</h2>
+                <p className="text-sm text-gray-500 mt-1">Pick up where you left off</p>
+              </div>
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 pt-0">
+                {courses?.filter(course => enrolledCourseIds.includes(course.id)).map((course) => (
+                  <CourseCard 
+                    key={course.id} 
+                    course={course} 
+                    isEnrolled={true}
+                    user={user}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         )}
 
         {/* Catalog with filters */}
         <div className="mt-10">
-          <h2 className="mb-4 text-2xl font-bold text-blue-900">Browse Courses</h2>
-          <AcademyGrid
-            courses={(courses as any) || []}
-            categories={(categories as any) || []}
-            enrolledIds={enrolledCourseIds}
-          />
+          <div className="rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-4 sm:p-6">
+            <div className="mb-4">
+              <h2 className="text-2xl font-bold text-blue-900">Browse Courses</h2>
+              <p className="text-sm text-gray-500 mt-1">On‑demand lessons with free previews</p>
+            </div>
+            <AcademyGrid
+              courses={(courses as any) || []}
+              categories={(categories as any) || []}
+              enrolledIds={enrolledCourseIds}
+            />
+          </div>
         </div>
 
         {courses?.length === 0 && (
@@ -94,7 +99,7 @@ function CourseCard({ course, isEnrolled, user }: { course: any, isEnrolled: boo
   const minutes = Math.floor((totalDuration % 3600) / 60)
   
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+    <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       {course.thumbnail_url && (
         <img
           src={course.thumbnail_url}
@@ -103,14 +108,14 @@ function CourseCard({ course, isEnrolled, user }: { course: any, isEnrolled: boo
         />
       )}
       
-      <div className="p-6">
+      <div className="p-5 sm:p-6">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-blue-600 font-medium">
             {course.course_categories?.name || 'General'}
           </span>
           <div className="flex items-center gap-2 text-sm text-gray-500">
             {freePreviewCount > 0 && (
-              <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
+              <span className="bg-green-50 text-green-700 ring-1 ring-green-200 px-2 py-0.5 rounded-md text-xs">
                 {freePreviewCount} Free Preview{freePreviewCount > 1 ? 's' : ''}
               </span>
             )}
@@ -118,7 +123,7 @@ function CourseCard({ course, isEnrolled, user }: { course: any, isEnrolled: boo
           </div>
         </div>
         
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1.5">{course.title}</h3>
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">{course.description}</p>
         
         {totalDuration > 0 && (

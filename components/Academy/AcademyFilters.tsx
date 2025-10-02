@@ -14,7 +14,7 @@ export type AcademyFiltersProps = {
 };
 
 const chipBase =
-  "px-3 py-1.5 rounded-full text-sm font-medium ring-1 transition-colors";
+  "px-2.5 py-1 rounded-full text-xs sm:text-sm font-medium ring-1 transition-colors";
 
 export default function AcademyFilters({ categories, onChange }: AcademyFiltersProps) {
   const [search, setSearch] = useState("");
@@ -28,60 +28,54 @@ export default function AcademyFilters({ categories, onChange }: AcademyFiltersP
   }, [filter, onChange]);
 
   return (
-    <div className="rounded-2xl border border-blue-200/60 bg-white/70 p-4 shadow-sm">
-      <div className="grid gap-4 md:grid-cols-3">
+    <div className="rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
         {/* Search */}
-        <div>
-          <label className="mb-2 block text-sm font-semibold text-blue-900/80">Search</label>
+        <div className="flex-1 min-w-[180px] max-w-[360px]">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search courses"
-            className="w-full rounded-xl border border-blue-200 bg-white px-4 py-2.5 text-sm outline-none ring-0 placeholder:text-blue-900/40 focus:border-blue-400"
+            className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none ring-0 placeholder:text-gray-400 focus:border-blue-400"
           />
         </div>
-        {/* Categories */}
+
+        {/* Category (compact select instead of chips) */}
         <div>
-          <label className="mb-2 block text-sm font-semibold text-blue-900/80">Category</label>
-          <div className="flex flex-wrap gap-2">
-            <button
-              className={`${chipBase} ${
-                !category
-                  ? "bg-blue-600 text-white ring-blue-600"
-                  : "bg-white text-blue-900 ring-blue-200 hover:bg-blue-50"
-              }`}
-              onClick={() => setCategory(null)}
-            >
-              All
-            </button>
+          <select
+            value={category || ""}
+            onChange={(e) => setCategory(e.target.value || null)}
+            className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-400"
+          >
+            <option value="">All categories</option>
             {categories.map((c) => (
-              <button
-                key={c.id}
-                className={`${chipBase} ${
-                  category === c.id
-                    ? "bg-blue-600 text-white ring-blue-600"
-                    : "bg-white text-blue-900 ring-blue-200 hover:bg-blue-50"
-                }`}
-                onClick={() => setCategory(category === c.id ? null : c.id)}
-              >
-                {c.name}
-              </button>
+              <option key={c.id} value={c.id}>{c.name}</option>
             ))}
-          </div>
+          </select>
         </div>
+
         {/* Sort */}
         <div>
-          <label className="mb-2 block text-sm font-semibold text-blue-900/80">Sort</label>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as AcademyFilter["sort"])}
-            className="w-full rounded-xl border border-blue-200 bg-white px-4 py-2.5 text-sm outline-none ring-0 focus:border-blue-400"
+            className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-blue-400"
           >
             <option value="newest">Newest</option>
             <option value="price_low">Price: Low to High</option>
             <option value="price_high">Price: High to Low</option>
           </select>
         </div>
+
+        {/* Optional clear */}
+        {(search || category) && (
+          <button
+            className="text-xs font-medium text-gray-600 hover:text-gray-800 underline underline-offset-2"
+            onClick={() => { setSearch(""); setCategory(null); }}
+          >
+            Clear
+          </button>
+        )}
       </div>
     </div>
   );

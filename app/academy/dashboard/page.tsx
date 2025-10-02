@@ -40,35 +40,34 @@ export default async function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-blue-900">My Dashboard</h1>
-              <p className="text-gray-600 mt-1">Welcome back, {profile?.full_name || user.email}</p>
+          <div className="rounded-2xl border border-gray-200 bg-white/90 shadow-sm p-5 sm:p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">My Dashboard</h1>
+                <p className="text-gray-600 mt-1">Welcome back, {profile?.full_name || user.email}</p>
+              </div>
+              <Link href="/academy" className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                Browse Courses
+              </Link>
             </div>
-            <Link
-              href="/academy"
-              className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
-            >
-              Browse Courses
-            </Link>
           </div>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Enrolled Courses</h3>
             <p className="text-3xl font-bold text-blue-600">{enrollments?.length || 0}</p>
           </div>
           
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Videos Watched</h3>
             <p className="text-3xl font-bold text-green-600">
               {progress?.filter(p => p.completed).length || 0}
             </p>
           </div>
           
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Total Progress</h3>
             <p className="text-3xl font-bold text-purple-600">
               {Math.round((progress?.filter(p => p.completed).length || 0) * 100 / Math.max(progress?.length || 1, 1))}%
@@ -86,13 +85,13 @@ export default async function DashboardPage() {
                 if (!course) return null
 
                 const totalVideos = course.videos?.length || 0
-                const completedVideos = course.videos?.filter(video => 
+                const completedVideos = course.videos?.filter((video: any) => 
                   progressMap[video.id]?.completed
                 ).length || 0
                 const courseProgress = totalVideos > 0 ? (completedVideos / totalVideos) * 100 : 0
 
                 return (
-                  <div key={enrollment.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                  <div key={enrollment.id} className="bg-white/95 rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                     <div className="md:flex">
                       {course.thumbnail_url && (
                         <div className="md:w-1/3">
@@ -104,7 +103,7 @@ export default async function DashboardPage() {
                         </div>
                       )}
                       
-                      <div className="p-6 flex-1">
+                      <div className="p-5 sm:p-6 flex-1">
                         <div className="flex items-start justify-between mb-4">
                           <div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
@@ -148,7 +147,7 @@ export default async function DashboardPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="bg-white rounded-lg shadow p-8">
+            <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">No Courses Yet</h3>
               <p className="text-gray-600 mb-6">
                 You haven't enrolled in any courses yet. Browse our course catalog to get started!
