@@ -38,7 +38,7 @@ const webinars: WebinarCard[] = [
     speaker: {
       name: "Terraform Expert",
     },
-    isLive: true,
+    isLive: false,
     id: "terraform-azure-5day"
   },
   {
@@ -87,7 +87,7 @@ const webinars: WebinarCard[] = [
     speaker: {
       name: "Kubernetes Expert",
     },
-    isLive: true,
+    isLive: false,
     id: "docker-kubernetes-bootcamp"
   },
   {

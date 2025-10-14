@@ -82,7 +82,7 @@ export default function WebinarDetailsPage() {
   const webinars: Record<string, WebinarData> = {
     "terraform-azure-5day": {
       title: "Terraform Webinar Series (5 Days) – Azure-Focused Hands-on",
-      isLive: true,
+      isLive: false,
         date: "13th–17th October, 2025",
       time: "7:00 PM – 8:30 PM IST (Daily)",
       duration: "5 days, 1.5 hours each day",
@@ -177,7 +177,7 @@ export default function WebinarDetailsPage() {
     },
     "docker-kubernetes-bootcamp": {
       title: "Docker & Kubernetes Mastery – 2-Week Live Bootcamp",
-      isLive: true,
+      isLive: false,
       date: "13th–24th October, 2025",
       time: "10:00 AM – 11:00 AM IST (Daily)",
       duration: "2 weeks, 1 hour each day",

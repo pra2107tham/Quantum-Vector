@@ -331,13 +331,8 @@ export function HeroSectionOne() {
             </div>
             {/* Buttons */}
             <div className="flex gap-4 mt-4">
-              <Link href="/webinars/terraform-azure-5day">
-                <button className="bg-blue-700 hover:bg-blue-800 transition-colors text-white font-semibold px-6 py-3 rounded-full shadow-lg text-base cursor-pointer z-20">
-                  Join Terraform Webinar
-                </button>
-              </Link>
               <Link href="/courses" >
-                <button className="bg-white text-blue-700 border border-blue-700 hover:bg-blue-50 transition-colors font-semibold px-6 py-3 rounded-full shadow text-base cursor-pointer z-20">
+                <button className="bg-blue-700 hover:bg-blue-800 transition-colors text-white font-semibold px-6 py-3 rounded-full shadow-lg text-base cursor-pointer z-20">
                   Browse Courses
                 </button>
               </Link>
@@ -361,94 +356,6 @@ export function HeroSectionOne() {
           </div>
         </div>
 
-        {/* Upcoming Webinar Section removed as the bootcamp has ended */}
-        {/* Enhanced banner for upcoming webinar */}
-        <section className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-8 relative overflow-hidden">
-          {/* Decorative background elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-8 -translate-x-8" />
-          
-          <div className="max-w-6xl mx-auto px-4 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div className="text-center lg:text-left flex-1">
-                <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
-                    🔥 LIMITED TIME
-                  </span>
-                  <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                    Oct 13-24, 2025
-                  </span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-2 leading-tight">
-                  Terraform Webinar Series (Azure Focus)
-                </h3>
-                <p className="text-blue-100 text-sm md:text-base mb-4 max-w-2xl">
-                  Master Infrastructure as Code with hands-on Azure demos, best practices, and a production-style capstone project. 
-                  <span className="font-semibold"> 10:00–11:00 AM IST Daily</span>
-                </p>
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-blue-100">
-                  <span className="flex items-center gap-1">
-                    <span>✅</span>
-                    <span>5 Days Live Training</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span>✅</span>
-                    <span>Hands-on Labs</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span>✅</span>
-                    <span>Certificate Included</span>
-                  </span>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-3 min-w-[280px]">
-                <Link href="/webinars/terraform-azure-5day">
-                  <button className="bg-white text-blue-700 hover:bg-blue-50 font-bold px-6 py-3 rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
-                    🚀 Register Now - ₹999
-                  </button>
-                </Link>
-                <Link href="/webinars">
-                  <button className="bg-white/20 text-white hover:bg-white/30 border border-white/30 font-semibold px-4 py-3 rounded-xl text-sm transition-all duration-200">
-                    View All Webinars
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Docker & Kubernetes Bootcamp strip */}
-        <section className="w-full bg-gradient-to-r from-amber-600 to-orange-700 text-white py-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-y-6 translate-x-6" />
-          <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-full translate-y-6 -translate-x-6" />
-
-          <div className="max-w-6xl mx-auto px-4 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-              <div className="text-center lg:text-left flex-1">
-                <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
-                  <span className="bg-black/20 text-white px-3 py-1 rounded-full text-xs font-semibold">Oct 6-17, 2025</span>
-                  <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-semibold">10:00–11:00 AM IST</span>
-                </div>
-                <h3 className="text-lg md:text-xl font-bold mb-1 leading-tight">Docker & Kubernetes Mastery – 2-Week Live Bootcamp</h3>
-                <p className="text-white/90 text-xs md:text-sm">Hands-on containerization and Kubernetes, projects, and production strategies. Fee <span className="font-semibold">₹2,999</span>.</p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 min-w-[260px]">
-                <Link href="/webinars/docker-kubernetes-bootcamp">
-                  <button className="bg-white text-orange-700 hover:bg-orange-50 font-bold px-5 py-2.5 rounded-xl text-sm shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
-                    Register - ₹2,999
-                  </button>
-                </Link>
-                <Link href="/webinars">
-                  <button className="bg-white/20 text-white hover:bg-white/30 border border-white/30 font-semibold px-4 py-2.5 rounded-xl text-sm transition-all duration-200">
-                    View All
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Trusted By / Featured In Section */}
         <section className="w-full bg-white border-y border-blue-100 py-10">
