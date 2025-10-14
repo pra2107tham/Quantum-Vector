@@ -24,11 +24,14 @@ interface NavBodyProps {
   visible?: boolean;
 }
 
+interface NavItemConfig {
+  name: string;
+  link?: string;
+  children?: { name: string; link: string }[];
+}
+
 interface NavItemsProps {
-  items: {
-    name: string;
-    link: string;
-  }[];
+  items: NavItemConfig[];
   className?: string;
   onItemClick?: () => void;
 }
@@ -122,17 +125,93 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         className,
       )}
     >
-      {items.map((item, idx) => (
-        <a
-          onClick={onItemClick}
-          className="relative px-4 py-2 text-blue-900 hover:text-[#1447E6] hover:bg-[#E0EDFE] transition-all duration-200 rounded-lg"
-          key={`link-${idx}`}
-          href={item.link}
-        >
-          <span className="relative z-20">{item.name}</span>
-        </a>
-      ))}
+      {items.map((item, idx) => {
+        const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+        if (!hasChildren) {
+          return (
+            <a
+              onClick={onItemClick}
+              className="relative px-4 py-2 text-blue-900 hover:text-[#1447E6] hover:bg-[#E0EDFE] transition-all duration-200 rounded-lg"
+              key={`link-${idx}`}
+              href={item.link}
+            >
+              <span className="relative z-20">{item.name}</span>
+            </a>
+          );
+        }
+
+        return (
+          <DropdownMenu key={`menu-${idx}`} item={item} onItemClick={onItemClick} />
+        );
+      })}
     </motion.div>
+  );
+};
+
+// Separate component for dropdown menu with hover intent delay
+const DropdownMenu = ({ item, onItemClick }: { item: NavItemConfig; onItemClick?: () => void }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsOpen(false);
+    }, 150); // 150ms delay to allow mouse movement
+    setHoverTimeout(timeout);
+  };
+
+  const handleChildClick = () => {
+    if (onItemClick) onItemClick();
+    setIsOpen(false);
+  };
+
+  return (
+    <div 
+      className="relative group"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className="relative px-4 py-2 text-blue-900 hover:text-[#1447E6] hover:bg-[#E0EDFE] transition-all duration-200 rounded-lg flex items-center gap-1"
+        onClick={onItemClick}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+      >
+        <span>{item.name}</span>
+        <span className={`transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}>▾</span>
+      </button>
+      
+      {/* Invisible bridge to cover the gap */}
+      <div className="absolute left-0 top-full h-2 w-full" />
+      
+      <div
+        className={`${isOpen ? "visible opacity-100" : "invisible opacity-0"} transition-opacity duration-150 absolute left-0 top-full pt-2 min-w-[220px] rounded-lg border border-blue-100 bg-white shadow-lg z-50`}
+        role="menu"
+      >
+        <ul className="py-2">
+          {item.children!.map((child, cIdx) => (
+            <li key={`menu-item-${cIdx}`}>
+              <a
+                href={child.link}
+                className="block px-4 py-2 text-blue-900 hover:bg-[#E0EDFE] hover:text-[#1447E6]"
+                onClick={handleChildClick}
+                role="menuitem"
+              >
+                {child.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 

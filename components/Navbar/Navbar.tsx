@@ -39,12 +39,11 @@ export function NavbarTop() {
       link: "/webinars",
     },
     {
-      name: "About Us",
-      link: "/about",
-    },
-    {
-      name: "Blog",
-      link: "/blog",
+      name: "Solutions",
+      children: [
+        { name: "Mock Interviews", link: "/mock-interviews" },
+        { name: "Blog", link: "/blog" },
+      ],
     },
   ];
 
@@ -84,21 +83,58 @@ export function NavbarTop() {
             isOpen={isMobileMenuOpen}
             className="bg-blue-100/95 backdrop-blur-sm"
           >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={(e) => {
-                  if (item.onClick) {
-                    item.onClick(e);
-                  }
-                  setIsMobileMenuOpen(false);
-                }}
-                className="block py-2.5 px-4 text-lg font-medium text-blue-900 hover:bg-black hover:text-white rounded-md transition-colors"
-              >
-                {item.name}
-              </a>
-            ))}
+            {(() => {
+              const [openIdx, setOpenIdx] = useState<number | null>(null);
+              return (
+                <div className="w-full">
+                  {navItems.map((item: any, idx: number) => {
+                    const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+                    if (!hasChildren) {
+                      return (
+                        <a
+                          key={`mobile-link-${idx}`}
+                          href={item.link}
+                          onClick={(e) => {
+                            if (item.onClick) {
+                              item.onClick(e);
+                            }
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="block py-2.5 px-4 text-lg font-medium text-blue-900 hover:bg-black hover:text-white rounded-md transition-colors"
+                        >
+                          {item.name}
+                        </a>
+                      );
+                    }
+                    return (
+                      <div key={`mobile-acc-${idx}`} className="w-full">
+                        <button
+                          className="w-full flex items-center justify-between py-2.5 px-4 text-lg font-medium text-blue-900 hover:bg-black hover:text-white rounded-md transition-colors"
+                          onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                        >
+                          <span>{item.name}</span>
+                          <span className={`transition-transform duration-200 ${openIdx === idx ? "rotate-180" : "rotate-0"}`}>▾</span>
+                        </button>
+                        {openIdx === idx && (
+                          <div className="pl-2">
+                            {item.children.map((child: any, cIdx: number) => (
+                              <a
+                                key={`mobile-sublink-${idx}-${cIdx}`}
+                                href={child.link}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block py-2 px-4 text-base text-blue-900 hover:bg-[#E0EDFE] hover:text-[#1447E6] rounded-md"
+                              >
+                                {child.name}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
             <Link
               href="/webinars/terraform-azure-5day"
               className="block bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium text-center"
