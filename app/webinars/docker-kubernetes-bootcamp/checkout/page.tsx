@@ -1,29 +1,8 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { motion } from "motion/react";
-import { CalendarIcon, ClockIcon, UserIcon, CurrencyRupeeIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import React from "react";
+import Link from "next/link";
 
-type PriceResponse = {
-  amount: number;
-  currency: string;
-  appliedPromo: string | null;
-  originalAmount: number;
-};
-
-function InfoCard({ icon, title, value }: { icon: React.ReactNode; title: string; value: string | React.ReactNode }) {
-  return (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center gap-3 hover:bg-blue-100 transition-colors">
-      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-        {icon}
-      </div>
-      <div>
-        <div className="text-xs md:text-sm text-blue-600 font-medium">{title}</div>
-        <div className="text-sm md:text-base font-semibold text-blue-900">{value}</div>
-      </div>
-    </div>
-  );
-}
 
 export default function DockerKubernetesCheckoutPage() {
   // Registration is closed for this webinar
@@ -43,18 +22,18 @@ export default function DockerKubernetesCheckoutPage() {
               Thank you for your interest!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <Link 
                 href="/webinars" 
                 className="bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors"
               >
                 View Other Webinars
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/courses" 
                 className="bg-white text-blue-700 border border-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
               >
                 Browse Courses
-              </a>
+              </Link>
             </div>
           </div>
         </div>
