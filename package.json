@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-label": "^2.1.6",
     "@supabase/supabase-js": "^2.49.8",
