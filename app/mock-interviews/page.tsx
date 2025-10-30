@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import Cal, { getCalApi } from "@calcom/embed-react";
+// Cal.com inline embed will be loaded via script in useEffect
 import { 
   CodeBracketIcon, 
   CpuChipIcon, 
@@ -29,10 +29,36 @@ export default function MockInterviewsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "devops-mock-interview" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
+    if (typeof window === 'undefined') return;
+    // Inject Cal.com inline embed exactly as provided (with queuing shim)
+    const inlineScript = document.createElement('script');
+    inlineScript.type = 'text/javascript';
+    inlineScript.text = `
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document; C.Cal = C.Cal || function () {
+          let cal = C.Cal; let ar = arguments;
+          if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+          if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;}
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "devops-mock-interview", {origin:"https://app.cal.com"});
+
+      Cal.ns["devops-mock-interview"]("inline", {
+        elementOrSelector:"#my-cal-inline-devops-mock-interview",
+        config: {"layout":"month_view"},
+        calLink: "nitish-sagar-akqnjf/devops-mock-interview",
+      });
+
+      Cal.ns["devops-mock-interview"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    `;
+    document.body.appendChild(inlineScript);
+
+    return () => {
+      inlineScript.remove();
+    };
   }, []);
 
   const benefits = [
@@ -578,12 +604,7 @@ export default function MockInterviewsPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent rounded-3xl blur-xl" />
             <div className="relative bg-white rounded-2xl shadow-xl border border-blue-100 p-8 md:p-12">
               <div className="min-h-[600px] rounded-xl overflow-hidden">
-                <Cal 
-                  namespace="devops-mock-interview"
-                  calLink="prathamshirbhate/devops-mock-interview"
-                  style={{ width: "100%", height: "100%", overflow: "scroll" }}
-                  config={{ layout: "month_view" }}
-                />
+                <div id="my-cal-inline-devops-mock-interview" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
               </div>
             </div>
           </motion.div>
