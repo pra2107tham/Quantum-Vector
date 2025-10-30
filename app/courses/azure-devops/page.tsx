@@ -334,7 +334,6 @@ export default function AzureDevopsCurriculumPage() {
             >
               <div className="relative rounded-2xl overflow-hidden border border-blue-200 bg-white shadow-lg">
                 <div className="w-full h-[260px] sm:h-[360px] md:h-[420px] lg:h-[520px] xl:h-[620px]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <iframe
                     className="w-full h-full"
                     src="https://www.youtube.com/embed/842ctAkTwa8"

@@ -17,10 +17,8 @@ import {
   ChartBarIcon,
   ShieldCheckIcon,
   ChevronDownIcon,
-  ChevronRightIcon,
   StarIcon,
   CheckCircleIcon,
-  ArrowRightIcon,
   PlayIcon
 } from "@heroicons/react/24/outline";
 import { StarIcon as StarSolidIcon } from "@heroicons/react/24/solid";
@@ -360,7 +358,7 @@ export default function MockInterviewsPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              What You'll Get
+              What You&apos;ll Get
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
               Comprehensive interview preparation covering all aspects of DevOps roles
@@ -581,7 +579,7 @@ export default function MockInterviewsPage() {
                   <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-semibold text-blue-900">Best Value</div>
-                    <div className="text-sm text-neutral-600">Exclusive pricing that won't last forever</div>
+                    <div className="text-sm text-neutral-600">Exclusive pricing that won&apos;t last forever</div>
                   </div>
                 </div>
               </div>
