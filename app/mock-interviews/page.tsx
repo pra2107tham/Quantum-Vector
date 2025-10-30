@@ -27,6 +27,7 @@ import { StarIcon as StarSolidIcon } from "@heroicons/react/24/solid";
 
 export default function MockInterviewsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [calLoaded, setCalLoaded] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -55,6 +56,23 @@ export default function MockInterviewsPage() {
       Cal.ns["devops-mock-interview"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
     `;
     document.body.appendChild(inlineScript);
+
+    // Detect when Cal iframe is injected to remove loader
+    const checkLoaded = () => {
+      const container = document.getElementById('my-cal-inline-devops-mock-interview');
+      if (container && container.querySelector('iframe')) {
+        setCalLoaded(true);
+        return true;
+      }
+      return false;
+    };
+    // quick checks, then fallback polling for a short time
+    const start = Date.now();
+    const interval = setInterval(() => {
+      if (checkLoaded() || Date.now() - start > 8000) {
+        clearInterval(interval);
+      }
+    }, 150);
 
     return () => {
       inlineScript.remove();
@@ -603,7 +621,15 @@ export default function MockInterviewsPage() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent rounded-3xl blur-xl" />
             <div className="relative bg-white rounded-2xl shadow-xl border border-blue-100 p-8 md:p-12">
-              <div className="min-h-[600px] rounded-xl overflow-hidden">
+              <div className="min-h-[600px] rounded-xl overflow-hidden relative">
+                {!calLoaded && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="h-8 w-8 rounded-full border-2 border-blue-300 border-t-blue-700 animate-spin" />
+                      <div className="text-sm text-neutral-600">Loading scheduler…</div>
+                    </div>
+                  </div>
+                )}
                 <div id="my-cal-inline-devops-mock-interview" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
               </div>
             </div>

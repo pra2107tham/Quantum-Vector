@@ -306,7 +306,48 @@ export default function AzureDevopsCurriculumPage() {
                   />
                 </motion.div>
               )}
+              {/* Course info badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="mt-5 flex flex-wrap gap-3"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-4 py-1.5 text-sm font-semibold">
+                  Starts 10 November
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white text-blue-800 border border-blue-200 px-4 py-1.5 text-sm font-semibold">
+                  Timings: 7:00–8:30 AM IST
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-blue-600 text-white border border-blue-700 px-4 py-1.5 text-sm font-semibold shadow-sm">
+                  Only 7 seats left (15 per batch)
+                </span>
+              </motion.div>
             </div>
+            {/* Promo video */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="mb-10 p-2 bg-transparent"
+            >
+              <div className="relative rounded-2xl overflow-hidden border border-blue-200 bg-white shadow-lg">
+                <div className="w-full h-[260px] sm:h-[360px] md:h-[420px] lg:h-[520px] xl:h-[620px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/842ctAkTwa8"
+                    title="Understand Docker in 4 Mins"
+                    frameBorder="0"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </motion.div>
             {showContent && modules.map((mod, i) => (
               <motion.div
                 key={mod.title}
@@ -340,6 +381,12 @@ export default function AzureDevopsCurriculumPage() {
                   <span className="text-neutral-500 line-through text-lg">₹25,000</span>
                   <span className="text-2xl font-extrabold text-blue-900">₹22,000</span>
                 </div>
+                <div className="mt-2 text-sm text-blue-900/80">
+                  Pay <span className="font-semibold">₹3,000</span> now to block your seat. The remaining balance will be collected by our team after registration.
+                </div>
+                <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 text-xs font-semibold">
+                  Only 7 seats left • Starts 10 Nov • 7:00–8:30 AM IST
+                </div>
               </div>
 
               {/* Benefits bullets */}
@@ -352,7 +399,7 @@ export default function AzureDevopsCurriculumPage() {
               {/* Razorpay Button */}
               <RazorpayButton
                 url="https://pages.razorpay.com/pl_RDakh7O49L14YT/view?label=azure_course"
-                text="Enroll Now — ₹22,000"
+                text="Block Your Seat — ₹3,000"
                 color="#1d4ed8"
                 size="large"
                 className="w-full"

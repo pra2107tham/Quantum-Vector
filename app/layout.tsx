@@ -63,6 +63,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="">
+      <head>
+        <link rel="preconnect" href="https://app.cal.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://app.cal.com" />
+        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+      </head>
       <body className={`${geist.variable} ${geistMono.variable} ${poppins.className} min-h-screen bg-[white/80]`}>
         <Analytics />
         <div className="fixed top-4 left-0 right-0 z-50">
