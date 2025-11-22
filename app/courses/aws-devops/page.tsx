@@ -7,6 +7,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "motion/react";
 import { useState } from "react";
 import RazorpayButton from "@/components/RazorpayButton/AWS_Course_RazorpayButton";
+import CoursePopup from "@/components/CoursePopup/CoursePopup";
 
 
 const modules = [
@@ -244,10 +245,20 @@ export default function AwsDevopsCurriculumPage() {
 
   const headingWords = "AWS DevOps";
   const subheadingWords = "View our curriculum";
-  const descriptionWords = "Master AWS DevOps with our comprehensive curriculum. This program takes approximately 6 months full-time or 8 months part-time to complete, covering everything from cloud foundations to advanced IaC and CI/CD on AWS.";
+  const descriptionWords = "Master AWS DevOps with our comprehensive curriculum. This program takes 2-3 months to complete, covering everything from cloud foundations to advanced IaC and CI/CD on AWS.";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 text-neutral-800 py-10 px-4 pt-24 md:pt-28">
+      <CoursePopup
+        showOnPages={["/courses/aws-devops"]}
+        delay={2500}
+        courseName="AWS DevOps Certification Course"
+        startDate="1st December"
+        duration="2-3 Months"
+        price="₹25,000"
+        blockingFee="₹22,000"
+        enrollUrl="/courses/aws-devops"
+      />
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left side - Modules (70%) */}
@@ -301,6 +312,23 @@ export default function AwsDevopsCurriculumPage() {
                   />
                 </motion.div>
               )}
+              {/* Course info badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="mt-5 flex flex-wrap gap-3"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-4 py-1.5 text-sm font-semibold">
+                  Starts 1st December
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white text-blue-800 border border-blue-200 px-4 py-1.5 text-sm font-semibold">
+                  Duration: 2-3 Months
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-blue-600 text-white border border-blue-700 px-4 py-1.5 text-sm font-semibold shadow-sm">
+                  Limited Seats Available
+                </span>
+              </motion.div>
             </div>
 
             {showContent && modules.map((mod, i) => (
@@ -336,6 +364,9 @@ export default function AwsDevopsCurriculumPage() {
                 <div className="mt-1 flex items-end gap-2">
                   <span className="text-neutral-500 line-through text-lg">₹25,000</span>
                   <span className="text-2xl font-extrabold text-blue-900">₹22,000</span>
+                </div>
+                <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 text-xs font-semibold">
+                  Starts 1 Dec • 2-3 Months • Limited Seats
                 </div>
               </div>
 
