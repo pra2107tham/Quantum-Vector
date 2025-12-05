@@ -255,6 +255,12 @@ export default function DevSecOpsNetflixProjectPage() {
                 <span className="inline-flex items-center gap-2 rounded-full bg-green-50 text-green-700 border border-green-200 px-4 py-1.5 text-sm font-semibold">
                   Job-Ready Skills
                 </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-purple-50 text-purple-700 border border-purple-200 px-4 py-1.5 text-sm font-semibold">
+                  📅 13-14th December 2025
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-orange-50 text-orange-700 border border-orange-200 px-4 py-1.5 text-sm font-semibold">
+                  ⏰ 9AM to 1PM IST
+                </span>
               </motion.div>
             </div>
 
@@ -382,8 +388,13 @@ export default function DevSecOpsNetflixProjectPage() {
                 <div className="mt-1 flex items-end gap-2">
                   <span className="text-2xl font-extrabold text-blue-900">₹1,499</span>
                 </div>
-                <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-red-50 text-red-700 border border-red-200 px-3 py-1 text-xs font-semibold">
-                  🎯 Hands-On Project • Production-Grade
+                <div className="mt-3 space-y-2">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 text-xs font-semibold w-full justify-center">
+                    📅 13-14th December 2025
+                  </div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 text-orange-700 border border-orange-200 px-3 py-1 text-xs font-semibold w-full justify-center">
+                    ⏰ 9AM to 1PM IST
+                  </div>
                 </div>
               </div>
 
@@ -398,7 +409,7 @@ export default function DevSecOpsNetflixProjectPage() {
 
               {/* Razorpay Button */}
               <RazorpayButton
-                url="https://pages.razorpay.com/pl_Qh23UMxKat9LKQ/view?label=devsecops_project"
+                url="https://rzp.io/rzp/pSK4kUHK"
                 text="Enroll Now — ₹1,499"
                 color="#1d4ed8"
                 size="large"
