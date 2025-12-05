@@ -388,6 +388,9 @@ export default function DevSecOpsNetflixProjectPage() {
                 <div className="mt-1 flex items-end gap-2">
                   <span className="text-2xl font-extrabold text-blue-900">₹1,499</span>
                 </div>
+                <div className="mt-2 text-sm text-blue-900/80 font-medium">
+                  Total 7-8 Hours End-to-End Project
+                </div>
                 <div className="mt-3 space-y-2">
                   <div className="inline-flex items-center gap-2 rounded-full bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1 text-xs font-semibold w-full justify-center">
                     📅 13-14th December 2025
