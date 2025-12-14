@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { imgShape1, imgFolder2, imgVector } from "../assets";
+import { imgShape1, imgFolder2 } from "../assets";
 
 export default function Header() {
   const pathname = usePathname();
@@ -23,39 +23,40 @@ export default function Header() {
   };
 
   return (
-    <div className="glass-card glass-card-blur-lg glass-card-opacity-heavy absolute flex flex-col h-[86px] items-center justify-center px-[24px] md:px-[40px] py-[6px] rounded-[50px] top-[25px] left-1/2 -translate-x-1/2 w-[95%] max-w-[1328px] z-50 !overflow-visible">
-      <div className="flex gap-[170px] items-center w-full justify-between max-lg:gap-8 max-md:flex-col max-md:gap-4 relative">
+    <div className="absolute top-[15px] md:top-[25px] left-1/2 -translate-x-1/2 w-[calc(100%-30px)] md:w-[95%] max-w-[1328px] z-50">
+      {/* Header Bar */}
+      <div className={`glass-card glass-card-blur-lg glass-card-opacity-heavy flex items-center justify-between px-4 md:px-[40px] py-3 md:py-[6px] ${isMobileMenuOpen ? 'rounded-t-[20px] rounded-b-none' : 'rounded-[30px] md:rounded-[50px]'} transition-all`}>
         {/* Logo */}
-        <Link href="/" className="flex gap-[14px] items-center">
-          <div className="overflow-clip relative shrink-0 size-[63px]">
+        <Link href="/" className="flex gap-2 md:gap-[14px] items-center shrink-0">
+          <div className="overflow-clip relative shrink-0 size-[45px] md:size-[63px]">
             <div className="absolute inset-[3.13%]">
               <div className="absolute inset-[-3.39%]">
-                <Image src={imgShape1} alt="DevOps Community" fill sizes="63px" className="object-contain" />
+                <Image src={imgShape1} alt="DevOps Community" fill sizes="(max-width: 768px) 45px, 63px" className="object-contain" />
               </div>
             </div>
             <div className="absolute contents inset-[32.03%_19.61%_31.48%_18.2%]">
               <div className="absolute inset-[32.03%_19.61%_31.48%_18.2%]">
-                <Image src={imgFolder2} alt="" fill sizes="63px" className="object-contain" />
+                <Image src={imgFolder2} alt="" fill sizes="(max-width: 768px) 45px, 63px" className="object-contain" />
               </div>
             </div>
           </div>
-          <p className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[#2d2d2d] text-[20px] whitespace-nowrap">
+          <p className="font-sans font-normal leading-normal text-[#2d2d2d] text-[16px] md:text-[20px] whitespace-nowrap">
             DevOps Community
           </p>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-[50px] items-center max-lg:gap-6">
+        <nav className="hidden lg:flex gap-[30px] xl:gap-[50px] items-center">
           <Link 
             href="/courses" 
             onClick={handleCoursesClick}
-            className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[#2d2d2d] text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
+            className="font-sans font-normal text-[#2d2d2d] text-[16px] xl:text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
           >
             Courses
           </Link>
           <Link 
             href="/webinars"
-            className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[#2d2d2d] text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
+            className="font-sans font-normal text-[#2d2d2d] text-[16px] xl:text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
           >
             Webinars
           </Link>
@@ -66,21 +67,24 @@ export default function Header() {
           >
             <button
               onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-              className="flex gap-[13px] items-center font-sans font-normal leading-normal not-italic relative shrink-0 text-[#2d2d2d] text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
+              className="flex gap-2 items-center font-sans font-normal text-[#2d2d2d] text-[16px] xl:text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
             >
               Solutions
-              <div className="flex h-[7.364px] items-center justify-center relative shrink-0 w-[12.728px]">
-                <div className={`flex-none transition-transform duration-200 ${isSolutionsOpen ? 'rotate-180' : 'rotate-0'}`}>
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </div>
+              <svg 
+                width="12" 
+                height="8" 
+                viewBox="0 0 12 8" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                className={`transition-transform duration-200 ${isSolutionsOpen ? 'rotate-180' : 'rotate-0'}`}
+              >
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
             {/* Desktop Dropdown */}
             {isSolutionsOpen && (
               <div 
-                className="hidden md:block absolute bg-white/95 backdrop-blur-md rounded-[12px] p-3 min-w-[180px] shadow-xl border border-gray-200/50"
+                className="absolute bg-white/95 backdrop-blur-md rounded-[12px] p-3 min-w-[180px] shadow-xl border border-gray-200/50"
                 style={{ 
                   top: 'calc(100% + 8px)',
                   left: '50%',
@@ -105,14 +109,14 @@ export default function Header() {
               </div>
             )}
           </div>
-        </div>
+        </nav>
 
         {/* Register for Webinar Button - Desktop */}
         <Link 
           href="/webinars/terraform-azure-5day"
-          className="hidden md:block bg-[rgba(147,155,164,0.49)] flex h-[52px] items-center justify-center px-[18px] py-[12px] relative rounded-[30px] shrink-0 hover:bg-[rgba(147,155,164,0.6)] transition-colors cursor-pointer"
+          className="hidden lg:flex bg-[rgba(147,155,164,0.49)] h-[44px] xl:h-[52px] items-center justify-center px-4 xl:px-[18px] py-2 rounded-[30px] shrink-0 hover:bg-[rgba(147,155,164,0.6)] transition-colors cursor-pointer"
         >
-          <p className="font-sans font-semibold leading-normal not-italic relative shrink-0 text-[20px] text-[rgba(45,45,45,0.79)] whitespace-nowrap">
+          <p className="font-sans font-semibold text-[14px] xl:text-[18px] text-[rgba(45,45,45,0.79)] whitespace-nowrap">
             Register For Webinar
           </p>
         </Link>
@@ -120,7 +124,7 @@ export default function Header() {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden flex items-center justify-center w-10 h-10 text-[#2d2d2d]"
+          className="lg:hidden flex items-center justify-center w-10 h-10 text-[#2d2d2d] shrink-0"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
@@ -135,46 +139,53 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Connected to header */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 mt-2 glass-card glass-card-blur-md glass-card-opacity-heavy rounded-[20px] p-4 z-50">
-          <div className="flex flex-col gap-4">
+        <div className="lg:hidden w-full rounded-b-[20px] border-t border-white/20 p-4 shadow-2xl bg-white">
+          <div className="flex flex-col gap-3">
             <Link
               href="/courses"
               onClick={(e) => {
                 handleCoursesClick(e);
                 setIsMobileMenuOpen(false);
               }}
-              className="font-sans font-normal text-[#2d2d2d] text-[18px] hover:text-[#1447e6] transition-all px-3 py-2 rounded-lg hover:bg-white/20"
+              className="font-sans font-normal text-[#2d2d2d] text-[16px] hover:text-[#1447e6] transition-all px-3 py-3 rounded-lg hover:bg-white/20"
             >
               Courses
             </Link>
             <Link
               href="/webinars"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="font-sans font-normal text-[#2d2d2d] text-[18px] hover:text-[#1447e6] transition-all px-3 py-2 rounded-lg hover:bg-white/20"
+              className="font-sans font-normal text-[#2d2d2d] text-[16px] hover:text-[#1447e6] transition-all px-3 py-3 rounded-lg hover:bg-white/20"
             >
               Webinars
             </Link>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col">
               <button
                 onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-                className="flex items-center justify-between font-sans font-normal text-[#2d2d2d] text-[18px] hover:text-[#1447e6] transition-all px-3 py-2 rounded-lg hover:bg-white/20 w-full text-left"
+                className="flex items-center justify-between font-sans font-normal text-[#2d2d2d] text-[16px] hover:text-[#1447e6] transition-all px-3 py-3 rounded-lg hover:bg-white/20 w-full text-left"
               >
                 Solutions
-                <div className={`transition-transform ${isSolutionsOpen ? 'rotate-180' : 'rotate-90'}`}>
-                  <Image src={imgVector} alt="" width={12} height={7} className="object-contain" />
-                </div>
+                <svg 
+                  width="12" 
+                  height="8" 
+                  viewBox="0 0 12 8" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`transition-transform duration-200 ${isSolutionsOpen ? 'rotate-180' : 'rotate-0'}`}
+                >
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
               {isSolutionsOpen && (
-                <div className="pl-4 flex flex-col gap-2">
+                <div className="pl-6 flex flex-col gap-1 mt-2">
                   <Link
                     href="/mock-interviews"
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       setIsSolutionsOpen(false);
                     }}
-                    className="font-sans font-normal text-[#2d2d2d] text-[16px] hover:text-[#1447e6] transition-colors"
+                    className="font-sans font-normal text-[#2d2d2d] text-[15px] hover:text-[#1447e6] transition-colors px-3 py-2 rounded-lg hover:bg-white/20"
                   >
                     Mock Interviews
                   </Link>
@@ -184,7 +195,7 @@ export default function Header() {
                       setIsMobileMenuOpen(false);
                       setIsSolutionsOpen(false);
                     }}
-                    className="font-sans font-normal text-[#2d2d2d] text-[16px] hover:text-[#1447e6] transition-colors"
+                    className="font-sans font-normal text-[#2d2d2d] text-[15px] hover:text-[#1447e6] transition-colors px-3 py-2 rounded-lg hover:bg-white/20"
                   >
                     Blog
                   </Link>
@@ -194,16 +205,15 @@ export default function Header() {
             <Link
               href="/webinars/terraform-azure-5day"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="bg-[rgba(147,155,164,0.49)] flex h-[52px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-[rgba(147,155,164,0.6)] transition-colors"
+              className="bg-[#66707d] flex h-[48px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-[#5a626d] transition-colors mt-2 shadow-md"
             >
-              <p className="font-sans font-semibold text-[18px] text-[rgba(45,45,45,0.79)] whitespace-nowrap">
+              <p className="font-sans font-semibold text-[16px] text-white whitespace-nowrap">
                 Register For Webinar
               </p>
             </Link>
           </div>
         </div>
       )}
-
     </div>
   );
 }
