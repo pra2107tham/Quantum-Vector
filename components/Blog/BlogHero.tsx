@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { CalendarIcon, ClockIcon, UserIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
@@ -12,46 +11,24 @@ interface BlogHeroProps {
   blog: BlogPost;
 }
 
-const getCategoryColor = (category: string) => {
-  const colors = {
-    DevOps: "bg-blue-100 text-blue-700 border-blue-200",
-    Kubernetes: "bg-purple-100 text-purple-700 border-purple-200",
-    AWS: "bg-orange-100 text-orange-700 border-orange-200",
-    Azure: "bg-cyan-100 text-cyan-700 border-cyan-200",
-    Infrastructure: "bg-green-100 text-green-700 border-green-200",
-    "Data Science": "bg-pink-100 text-pink-700 border-pink-200",
-  };
-  return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-700 border-gray-200";
-};
-
 export default function BlogHero({ blog }: BlogHeroProps) {
   return (
-    <div className="relative w-full">
-      {/* Cover Image */}
-      <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
-        <Image
-          src="/Gemini_Generated_Image.png"
-          alt={blog.title}
-          fill
-          className="object-cover object-bottom"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        
+    <div className="relative flex flex-col gap-[20px] items-start w-full flex-1 justify-center px-4 md:px-[59px] pb-[40px] md:pb-[60px]">
+      {/* Hero Content */}
+      <div className="flex flex-col gap-[20px] items-start w-full max-w-[1095px] mx-auto mt-[80px] md:mt-[100px]">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="absolute top-6 left-6"
+          className="mb-2"
         >
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-neutral-800 px-4 py-2 rounded-lg hover:bg-white transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 glass-card glass-card-blur-sm glass-card-opacity-light text-black px-4 py-2 rounded-[30px] hover:bg-white/20 transition-all"
           >
             <ArrowLeftIcon className="w-4 h-4" />
-            <span className="font-medium">Back to Blog</span>
+            <span className="font-sans font-medium text-[14px] md:text-[16px] whitespace-nowrap">Back to Blog</span>
           </Link>
         </motion.div>
 
@@ -60,83 +37,75 @@ export default function BlogHero({ blog }: BlogHeroProps) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="absolute top-6 right-6"
         >
-          <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold border backdrop-blur-sm ${getCategoryColor(blog.category)}`}>
+          <span className="glass-card glass-card-blur-sm glass-card-opacity-light text-[#1447e6] px-4 py-2 rounded-[30px] font-sans font-semibold text-[12px] md:text-[14px] whitespace-nowrap">
             {blog.category}
           </span>
         </motion.div>
 
-        {/* Hero Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-          <div className="max-w-4xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
-            >
-              {blog.title}
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-lg md:text-xl text-gray-200 mb-6 leading-relaxed max-w-3xl"
-            >
-              {blog.summary}
-            </motion.p>
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="font-outfit font-semibold text-black text-[32px] md:text-[48px] lg:text-[64px] leading-tight"
+        >
+          {blog.title}
+        </motion.h1>
+        
+        {/* Summary */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed max-w-[900px]"
+        >
+          {blog.summary}
+        </motion.p>
 
-            {/* Meta Information */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-4 md:gap-6 text-gray-300"
-            >
-              <div className="flex items-center gap-2">
-                <UserIcon className="w-5 h-5" />
-                <span className="font-medium">{blog.authors.join(", ")}</span>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <CalendarIcon className="w-5 h-5" />
-                <span>{getRelativeTime(blog.published_at)}</span>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <ClockIcon className="w-5 h-5" />
-                <span>{blog.reading_time} min read</span>
-              </div>
-            </motion.div>
+        {/* Meta Information */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="flex flex-wrap items-center gap-4 md:gap-6"
+        >
+          <div className="flex items-center gap-2">
+            <UserIcon className="w-5 h-5 text-[#2d2d2d]" />
+            <span className="font-sans font-medium text-[#2d2d2d] text-[14px] md:text-[16px]">{blog.authors.join(", ")}</span>
           </div>
-        </div>
-      </div>
+          
+          <div className="flex items-center gap-2">
+            <CalendarIcon className="w-5 h-5 text-[#2d2d2d]" />
+            <span className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px]">{getRelativeTime(blog.published_at)}</span>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <ClockIcon className="w-5 h-5 text-[#2d2d2d]" />
+            <span className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px]">{blog.reading_time} min read</span>
+          </div>
+        </motion.div>
 
-      {/* Breadcrumb */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-        className="bg-white border-b border-gray-100 py-4"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center text-sm text-neutral-500">
-            <Link href="/" className="hover:text-blue-600 transition-colors">
-              Home
-            </Link>
-            <span className="mx-2">/</span>
-            <Link href="/blog" className="hover:text-blue-600 transition-colors">
-              Blog
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-neutral-800 font-medium truncate">
-              {blog.title}
-            </span>
-          </nav>
-        </div>
-      </motion.div>
+        {/* Breadcrumb */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="flex items-center gap-2 mt-2"
+        >
+          <Link href="/" className="font-sans font-normal text-[#1447e6] text-[14px] md:text-[16px] hover:underline transition-all">
+            Home
+          </Link>
+          <span className="text-[#2d2d2d]">/</span>
+          <Link href="/blog" className="font-sans font-normal text-[#1447e6] text-[14px] md:text-[16px] hover:underline transition-all">
+            Blog
+          </Link>
+          <span className="text-[#2d2d2d]">/</span>
+          <span className="font-sans font-medium text-black text-[14px] md:text-[16px] truncate max-w-[300px] md:max-w-none">
+            {blog.title}
+          </span>
+        </motion.div>
+      </div>
     </div>
   );
 }

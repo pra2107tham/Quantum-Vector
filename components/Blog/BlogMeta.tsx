@@ -35,34 +35,34 @@ export default function BlogMeta({ blog }: BlogMetaProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-white rounded-2xl shadow-lg border border-blue-100 p-6 sticky top-6"
+      className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[20px] p-6"
     >
       {/* Article Info */}
       <div className="mb-6">
-        <h3 className="text-lg font-bold text-blue-900 mb-4">Article Info</h3>
+        <h3 className="font-outfit font-semibold text-black text-[20px] md:text-[24px] mb-4">Article Info</h3>
         
         <div className="space-y-3">
-          <div className="flex items-center gap-3 text-neutral-600">
-            <CalendarIcon className="w-5 h-5 text-blue-500 flex-shrink-0" />
+          <div className="flex items-center gap-3">
+            <CalendarIcon className="w-5 h-5 text-[#2d2d2d] flex-shrink-0" />
             <div>
-              <div className="text-sm font-medium">Published</div>
-              <div className="text-sm">{formatDate(blog.published_at)}</div>
+              <div className="font-sans font-medium text-[#2d2d2d] text-[12px] md:text-[14px]">Published</div>
+              <div className="font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px]">{formatDate(blog.published_at)}</div>
             </div>
           </div>
           
-          <div className="flex items-center gap-3 text-neutral-600">
-            <ClockIcon className="w-5 h-5 text-blue-500 flex-shrink-0" />
+          <div className="flex items-center gap-3">
+            <ClockIcon className="w-5 h-5 text-[#2d2d2d] flex-shrink-0" />
             <div>
-              <div className="text-sm font-medium">Reading Time</div>
-              <div className="text-sm">{blog.reading_time} minutes</div>
+              <div className="font-sans font-medium text-[#2d2d2d] text-[12px] md:text-[14px]">Reading Time</div>
+              <div className="font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px]">{blog.reading_time} minutes</div>
             </div>
           </div>
           
-          <div className="flex items-start gap-3 text-neutral-600">
-            <UserIcon className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+          <div className="flex items-start gap-3">
+            <UserIcon className="w-5 h-5 text-[#2d2d2d] flex-shrink-0 mt-0.5" />
             <div>
-              <div className="text-sm font-medium">Authors</div>
-              <div className="text-sm">
+              <div className="font-sans font-medium text-[#2d2d2d] text-[12px] md:text-[14px]">Authors</div>
+              <div className="font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px]">
                 {blog.authors.map((author, index) => (
                   <span key={author}>
                     {author}
@@ -77,17 +77,17 @@ export default function BlogMeta({ blog }: BlogMetaProps) {
 
       {/* Tags */}
       <div className="mb-6">
-        <h4 className="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
-          <TagIcon className="w-5 h-5" />
+        <h4 className="font-outfit font-semibold text-black text-[18px] md:text-[20px] mb-3 flex items-center gap-2">
+          <TagIcon className="w-5 h-5 text-[#2d2d2d]" />
           Tags
         </h4>
         <div className="flex flex-wrap gap-2">
           {blog.tags.map((tag) => (
             <span
               key={tag}
-              className="inline-block bg-blue-50 text-blue-600 text-xs font-medium px-3 py-1 rounded-full hover:bg-blue-100 transition-colors cursor-pointer"
+              className="inline-block glass-card glass-card-blur-sm glass-card-opacity-light text-[#1447e6] font-sans font-medium text-[11px] md:text-[12px] px-3 py-1 rounded-[30px] hover:bg-white/20 transition-colors cursor-pointer whitespace-nowrap"
             >
-              {tag}
+              #{tag}
             </span>
           ))}
         </div>
@@ -95,7 +95,7 @@ export default function BlogMeta({ blog }: BlogMetaProps) {
 
       {/* Share Section */}
       <div className="mb-6">
-        <h4 className="text-lg font-bold text-blue-900 mb-3">Share Article</h4>
+        <h4 className="font-outfit font-semibold text-black text-[18px] md:text-[20px] mb-3">Share Article</h4>
         <ShareButtons 
           url={currentUrl}
           title={blog.title}
@@ -104,15 +104,15 @@ export default function BlogMeta({ blog }: BlogMetaProps) {
       </div>
 
       {/* Reading Progress */}
-      <div className="border-t border-gray-100 pt-6 mt-6">
-        <h4 className="text-lg font-bold text-blue-900 mb-3">Reading Progress</h4>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="border-t border-[#e5e5e5] pt-6 mt-6">
+        <h4 className="font-outfit font-semibold text-black text-[18px] md:text-[20px] mb-3">Reading Progress</h4>
+        <div className="w-full bg-[#e5e5e5] rounded-full h-2">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
+            className="bg-[#1447e6] h-2 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${readingProgress}%` }}
           />
         </div>
-        <p className="text-xs text-neutral-500 mt-2">
+        <p className="font-sans font-normal text-[#2d2d2d] text-[11px] md:text-[12px] mt-2">
           {Math.round(readingProgress)}% completed
         </p>
       </div>

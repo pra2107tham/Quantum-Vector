@@ -5,7 +5,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import Image from "next/image";
 
 interface BlogContentProps {
   content: string;
@@ -24,46 +23,46 @@ export default function BlogContent({ content }: BlogContentProps) {
         components={{
           // Custom heading components
           h1: ({ children }) => (
-            <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6 mt-8 first:mt-0 leading-tight">
+            <h1 className="font-outfit font-semibold text-black text-[32px] md:text-[40px] mb-6 mt-8 first:mt-0 leading-tight">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4 mt-8 leading-tight border-b-2 border-blue-100 pb-2">
+            <h2 className="font-outfit font-semibold text-black text-[28px] md:text-[36px] mb-4 mt-8 leading-tight border-b-2 border-[#e5e5e5] pb-2">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-xl md:text-2xl font-semibold text-blue-700 mb-3 mt-6 leading-tight">
+            <h3 className="font-outfit font-semibold text-black text-[24px] md:text-[28px] mb-3 mt-6 leading-tight">
               {children}
             </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-lg md:text-xl font-semibold text-blue-600 mb-2 mt-4">
+            <h4 className="font-outfit font-semibold text-black text-[20px] md:text-[24px] mb-2 mt-4">
               {children}
             </h4>
           ),
           
           // Paragraph styling
           p: ({ children }) => (
-            <p className="text-neutral-700 leading-relaxed mb-4 text-base md:text-lg">
+            <p className="font-sans font-normal text-[#2d2d2d] leading-relaxed mb-4 text-[16px] md:text-[18px]">
               {children}
             </p>
           ),
           
           // List styling
           ul: ({ children }) => (
-            <ul className="list-disc list-inside space-y-2 mb-4 text-neutral-700 ml-4">
+            <ul className="list-disc list-inside space-y-2 mb-4 text-[#2d2d2d] ml-4">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="list-decimal list-inside space-y-2 mb-4 text-neutral-700 ml-4">
+            <ol className="list-decimal list-inside space-y-2 mb-4 text-[#2d2d2d] ml-4">
               {children}
             </ol>
           ),
           li: ({ children }) => (
-            <li className="text-base md:text-lg leading-relaxed">
+            <li className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[18px] leading-relaxed">
               {children}
             </li>
           ),
@@ -74,7 +73,7 @@ export default function BlogContent({ content }: BlogContentProps) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline font-medium transition-colors"
+              className="font-sans font-medium text-[#1447e6] hover:underline transition-colors"
             >
               {children}
             </a>
@@ -82,7 +81,7 @@ export default function BlogContent({ content }: BlogContentProps) {
           
           // Blockquote styling
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-blue-300 pl-6 py-2 my-6 bg-blue-50 rounded-r-lg italic text-blue-800">
+            <blockquote className="border-l-4 border-[#1447e6] pl-6 py-2 my-6 glass-card glass-card-blur-sm glass-card-opacity-light rounded-r-lg italic text-[#2d2d2d]">
               {children}
             </blockquote>
           ),
@@ -90,23 +89,23 @@ export default function BlogContent({ content }: BlogContentProps) {
           // Table styling
           table: ({ children }) => (
             <div className="overflow-x-auto my-6">
-              <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+              <table className="min-w-full border border-[#e5e5e5] rounded-lg overflow-hidden">
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-blue-50">
+            <thead className="glass-card glass-card-blur-sm glass-card-opacity-light">
               {children}
             </thead>
           ),
           th: ({ children }) => (
-            <th className="px-4 py-3 text-left text-sm font-semibold text-blue-900 border-b border-gray-200">
+            <th className="px-4 py-3 text-left font-sans font-semibold text-black text-[14px] md:text-[16px] border-b border-[#e5e5e5]">
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="px-4 py-3 text-sm text-neutral-700 border-b border-gray-100">
+            <td className="px-4 py-3 font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px] border-b border-[#e5e5e5]">
               {children}
             </td>
           ),
@@ -146,7 +145,7 @@ export default function BlogContent({ content }: BlogContentProps) {
             }
             
             return (
-              <code className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-mono" {...rest}>
+              <code className="glass-card glass-card-blur-sm glass-card-opacity-light text-black px-2 py-1 rounded text-[14px] font-mono" {...rest}>
                 {children}
               </code>
             );
@@ -155,16 +154,20 @@ export default function BlogContent({ content }: BlogContentProps) {
           // Image styling
           img: ({ src, alt }) => (
             <div className="my-8">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={typeof src === 'string' ? src : ''}
                 alt={alt || ''}
-                width={800}
-                height={400}
                 className="rounded-lg shadow-lg w-full h-auto"
                 style={{ objectFit: 'cover' }}
+                onError={(e) => {
+                  // Silently handle image load errors
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
               />
               {alt && (
-                <p className="text-center text-sm text-neutral-500 mt-2 italic">
+                <p className="text-center font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px] mt-2 italic">
                   {alt}
                 </p>
               )}
@@ -173,17 +176,17 @@ export default function BlogContent({ content }: BlogContentProps) {
           
           // Horizontal rule
           hr: () => (
-            <hr className="my-8 border-t-2 border-blue-100" />
+            <hr className="my-8 border-t-2 border-[#e5e5e5]" />
           ),
           
           // Strong and emphasis
           strong: ({ children }) => (
-            <strong className="font-bold text-blue-900">
+            <strong className="font-sans font-bold text-black">
               {children}
             </strong>
           ),
           em: ({ children }) => (
-            <em className="italic text-blue-800">
+            <em className="font-sans italic text-[#2d2d2d]">
               {children}
             </em>
           ),

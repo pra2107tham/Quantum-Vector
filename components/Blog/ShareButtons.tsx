@@ -151,10 +151,10 @@ export default function ShareButtons({ url, title, description }: ShareButtonsPr
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg"
+        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold py-3 px-4 rounded-[30px] transition-all duration-300 flex items-center justify-center gap-3 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-lg whitespace-nowrap"
       >
         <ShareIcon className="w-5 h-5" />
-        <span>Share Article</span>
+        <span className="text-[14px] md:text-[16px]">Share Article</span>
       </motion.button>
 
       {/* Share Dialog */}
@@ -175,20 +175,20 @@ export default function ShareButtons({ url, title, description }: ShareButtonsPr
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-2xl shadow-2xl border border-blue-100 p-6 z-50 w-full max-w-md mx-auto"
+                className="glass-card glass-card-blur-md glass-card-opacity-medium rounded-[20px] shadow-2xl p-6 z-50 w-full max-w-md mx-auto"
                 onClick={(e) => e.stopPropagation()}
               >
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <ShareIcon className="w-5 h-5 text-blue-600" />
-                  <h3 className="text-lg font-semibold text-blue-900">Share this article</h3>
+                  <ShareIcon className="w-5 h-5 text-[#1447e6]" />
+                  <h3 className="font-outfit font-semibold text-black text-[18px] md:text-[20px]">Share this article</h3>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors"
                 >
-                  <XMarkIcon className="w-5 h-5 text-gray-400" />
+                  <XMarkIcon className="w-5 h-5 text-[#2d2d2d]" />
                 </button>
               </div>
 
@@ -201,17 +201,17 @@ export default function ShareButtons({ url, title, description }: ShareButtonsPr
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleShare(option.platform)}
-                    className={`w-full ${option.color} ${option.textColor} font-medium py-3 px-4 rounded-lg transition-all duration-300 flex items-center gap-4 text-left hover:shadow-md`}
+                    className={`w-full glass-card glass-card-blur-sm glass-card-opacity-light ${option.textColor} font-sans font-medium py-3 px-4 rounded-[30px] transition-all duration-300 flex items-center gap-4 text-left hover:bg-white/20`}
                   >
                     {option.icon}
-                    <span>{option.name}</span>
+                    <span className="text-[14px] md:text-[16px]">{option.name}</span>
                   </motion.button>
                 ))}
               </div>
 
               {/* Footer */}
-              <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                <p className="text-xs text-blue-600 text-center">
+              <div className="mt-4 p-3 glass-card glass-card-blur-sm glass-card-opacity-light rounded-[10px]">
+                <p className="font-sans font-normal text-[#2d2d2d] text-[11px] md:text-[12px] text-center">
                   Share this article with your network and help others discover valuable DevOps insights!
                 </p>
               </div>

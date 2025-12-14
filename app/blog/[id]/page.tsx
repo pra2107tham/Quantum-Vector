@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 import { BlogPost } from "@/types/blog";
 import { getBlogById } from "@/lib/blog-api";
@@ -13,6 +14,9 @@ import LoadingSpinner from "@/components/ui/loading-spinner";
 import ErrorMessage from "@/components/ui/error-message";
 import WebinarPopup from "@/components/WebinarPopup/WebinarPopup";
 import { debugMetaTags } from "@/lib/social-sharing-utils";
+import Header from "@/web/components/Header";
+import Footer from "@/web/components/Footer";
+import { imgImage10 } from "@/web/assets";
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -207,10 +211,26 @@ export default function BlogDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center">
-        <div className="text-center">
-          <LoadingSpinner size="lg" />
-          <p className="mt-4 text-neutral-600">Loading blog post...</p>
+      <div className="relative w-full min-h-screen overflow-x-hidden">
+        {/* Background Image */}
+        <div className="fixed inset-0 -z-10 w-full h-full">
+          <Image
+            src={imgImage10}
+            alt="DevOps Community Background"
+            fill
+            className="object-cover object-center pointer-events-none"
+            priority
+            unoptimized
+          />
+        </div>
+        {/* Fallback background color */}
+        <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
+        
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <LoadingSpinner size="lg" />
+            <p className="mt-4 font-sans font-normal text-[#2d2d2d]">Loading blog post...</p>
+          </div>
         </div>
       </div>
     );
@@ -218,39 +238,82 @@ export default function BlogDetailPage() {
 
   if (error || !blog) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center">
-        <ErrorMessage
-          title={error === "Blog post not found" ? "Blog Post Not Found" : "Failed to Load Blog Post"}
-          message={error || "The blog post you're looking for doesn't exist or has been moved."}
-          onRetry={() => window.location.reload()}
-        />
+      <div className="relative w-full min-h-screen overflow-x-hidden">
+        {/* Background Image */}
+        <div className="fixed inset-0 -z-10 w-full h-full">
+          <Image
+            src={imgImage10}
+            alt="DevOps Community Background"
+            fill
+            className="object-cover object-center pointer-events-none"
+            priority
+            unoptimized
+          />
+        </div>
+        {/* Fallback background color */}
+        <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
+        
+        <div className="flex items-center justify-center min-h-screen">
+          <ErrorMessage
+            title={error === "Blog post not found" ? "Blog Post Not Found" : "Failed to Load Blog Post"}
+            message={error || "The blog post you're looking for doesn't exist or has been moved."}
+            onRetry={() => window.location.reload()}
+          />
+        </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 pt-20 md:pt-24">
-        <WebinarPopup showOnPages={["/blog", "/blog/"]} delay={2000} />
-        {/* Hero Section */}
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+      <WebinarPopup showOnPages={["/blog", "/blog/"]} delay={2000} />
+      
+      {/* Background Image */}
+      <div className="fixed inset-0 -z-10 w-full h-full">
+        <Image
+          src={imgImage10}
+          alt="DevOps Community Background"
+          fill
+          className="object-cover object-center pointer-events-none"
+          priority
+          unoptimized
+        />
+      </div>
+      {/* Fallback background color */}
+      <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
+
+      {/* Hero Section */}
+      <div className="glass-card-main relative min-h-[500px] md:min-h-[600px] mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px] flex flex-col">
+        <Header />
         <BlogHero blog={blog} />
+      </div>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="relative w-full mt-[40px] md:mt-[60px] mb-[40px] md:mb-[60px]">
+        <div className="relative flex flex-col lg:flex-row gap-8 items-start justify-center px-4 max-w-[1447.97px] mx-auto">
           {/* Main Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="lg:w-2/3"
+            className="lg:w-2/3 w-full"
           >
-            <div className="bg-white rounded-2xl shadow-lg border border-blue-100 p-8 md:p-12">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={blog.image_url && blog.image_url.trim() !== '' ? blog.image_url : "https://placehold.co/100x40"}
-                alt={blog.title}
-                className="w-full h-auto rounded-xl mb-8"
-              />
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[20px] p-6 md:p-8 lg:p-12">
+              {blog.image_url && blog.image_url.trim() !== '' && (
+                <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-[20px] overflow-hidden mb-8">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={blog.image_url}
+                    alt={blog.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Silently handle image load errors
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
               <BlogContent content={blog.content} />
             </div>
           </motion.div>
@@ -260,47 +323,52 @@ export default function BlogDetailPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="lg:w-1/3 space-y-6"
+            className="lg:w-1/3 w-full lg:sticky lg:top-6"
           >
             <BlogMeta blog={blog} />
           </motion.div>
         </div>
       </div>
 
-      {/* Related Posts Section */}
+      {/* Continue Reading Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16"
+        className="relative w-full mb-[40px] md:mb-[60px]"
       >
-        <div className="bg-white rounded-2xl shadow-lg border border-blue-100 p-8">
-          <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
-            Continue Reading
-          </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => window.history.back()}
-              className="px-6 py-3 bg-blue-100 text-blue-700 font-semibold rounded-lg hover:bg-blue-200 transition-colors duration-300"
-            >
-              ← Previous Page
-            </button>
-            <button
-              onClick={() => window.location.href = '/blog'}
-              className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-300"
-            >
-              View All Posts
-            </button>
+        <div className="relative flex items-center justify-center px-4 max-w-[1447.97px] mx-auto">
+          <div className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[20px] p-6 md:p-8 w-full">
+            <h2 className="font-outfit font-semibold text-black text-[24px] md:text-[28px] mb-6 text-center">
+              Continue Reading
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.history.back()}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light text-[#1447e6] px-6 py-3 font-sans font-semibold rounded-[30px] hover:bg-white/20 transition-all duration-200 whitespace-nowrap"
+              >
+                ← Previous Page
+              </button>
+              <button
+                onClick={() => window.location.href = '/blog'}
+                className="bg-[#1447e6] text-white px-6 py-3 font-sans font-semibold rounded-[30px] hover:bg-[#0d3bb3] transition-all duration-200 whitespace-nowrap shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
+              >
+                View All Posts
+              </button>
+            </div>
           </div>
         </div>
       </motion.div>
+
+      {/* Footer */}
+      <Footer />
 
       {/* Reading Progress Bar - Fixed at top */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50">
         <div
           data-progress-bar
-          className="h-full bg-blue-600 transition-all duration-300 ease-out"
+          className="h-full bg-[#1447e6] transition-all duration-300 ease-out"
           style={{ width: '0%' }}
         />
       </div>
@@ -317,6 +385,6 @@ export default function BlogDetailPage() {
           </button>
         </div>
       )}
-    </main>
+    </div>
   );
 }

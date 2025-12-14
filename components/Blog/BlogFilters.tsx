@@ -103,38 +103,40 @@ export default function BlogFilters({
                 Popular Tags
               </p>
             </div>
-            <div className="flex gap-[15px] items-center" ref={dropdownRef}>
-              <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] relative">
-                <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex gap-[10px] items-center justify-center w-full"
-                >
-                  <div className="flex flex-col items-start">
-                    <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
-                      All
-                    </p>
-                    <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
-                      Categories
-                    </p>
-                  </div>
-                  <ChevronDownIcon
-                    className={`w-4 h-4 text-[#1447e6] transition-transform flex-shrink-0 ${
-                      isDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+            <div className="relative shrink-0" ref={dropdownRef}>
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] gap-[10px]"
+              >
+                <div className="flex flex-col items-start">
+                  <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
+                    All
+                  </p>
+                  <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
+                    Categories
+                  </p>
+                </div>
+                <ChevronDownIcon
+                  className={`w-4 h-4 text-[#1447e6] transition-transform flex-shrink-0 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {/* Dropdown wrapper with height: 0 to not affect layout */}
+              <div className="absolute top-full left-0 h-0 overflow-visible" style={{ zIndex: 1000 }}>
                 {isDropdownOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 mt-2 glass-card glass-card-blur-md glass-card-opacity-medium rounded-[10px] p-2 min-w-[200px] z-50 shadow-lg"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="mt-1 flex flex-col glass-card glass-card-blur-md glass-card-opacity-medium rounded-[10px] p-1 shadow-lg"
                   >
                     {categories.map((category) => (
                       <button
                         key={category}
                         onClick={() => handleCategorySelect(category)}
-                        className={`w-full text-left px-4 py-2 text-sm rounded-lg transition-colors ${
+                        className={`text-left px-3 py-1.5 text-[11px] rounded-md transition-colors whitespace-nowrap ${
                           selectedCategory === category
                             ? "bg-white/20 text-[#1447e6] font-semibold"
                             : "text-[#2d2d2d] hover:bg-white/10"
