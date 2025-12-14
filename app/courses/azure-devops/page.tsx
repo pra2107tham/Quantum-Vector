@@ -233,7 +233,7 @@ function CurriculumCard({ icon, title, desc }: { icon: React.ReactNode; title: s
     <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col gap-4 items-start px-[20px] py-[24px] relative rounded-[12px] shrink-0 w-full hover:scale-[1.02] transition-transform">
       <div className="flex items-center gap-3 w-full">
         <div className="w-[48px] h-[48px] rounded-full bg-[#1447e6]/10 flex items-center justify-center shrink-0">
-          {icon}
+            {icon}
         </div>
         <div className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-[18px] leading-tight flex-1">{title}</div>
       </div>
@@ -278,95 +278,95 @@ export default function AzureDevopsCurriculumPage() {
             <div className="flex flex-col md:flex-row gap-[40px] md:gap-[60px] items-start">
               {/* Left side - Hero Content */}
               <div className="flex-1 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex items-center gap-3 mb-1"
+              >
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex items-center gap-3 mb-1"
-                >
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                     className="w-[60px] h-[60px] rounded-full bg-[#1447e6]/10 flex items-center justify-center"
-                  >
+                >
                     <VscAzure className="text-[#1447e6]" size={40} />
-                  </motion.div>
-                  <div className="text-3xl lg:text-5xl lg:leading-tight font-outfit font-semibold text-[#2d2d2d]">
-                    <TextGenerateEffect 
-                      words={headingWords} 
-                      onComplete={() => setShowSubheading(true)}
-                    />
-                  </div>
                 </motion.div>
-                {showSubheading && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-xl lg:text-2xl lg:leading-tight mt-2 font-sans font-medium text-[#1447e6] pl-1"
-                  >
-                    <TextGenerateEffect 
-                      words={subheadingWords} 
-                      onComplete={() => setShowDescription(true)}
-                    />
-                  </motion.div>
-                )}
-                {showDescription && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-base lg:text-lg lg:leading-relaxed mt-3 font-sans font-normal text-[#2d2d2d] pl-1"
-                  >
-                    <TextGenerateEffect 
-                      words={descriptionWords} 
-                      onComplete={() => setShowContent(true)}
-                    />
-                  </motion.div>
-                )}
-                {/* Course info badges */}
+                  <div className="text-3xl lg:text-5xl lg:leading-tight font-outfit font-semibold text-[#2d2d2d]">
+                  <TextGenerateEffect 
+                    words={headingWords} 
+                    onComplete={() => setShowSubheading(true)}
+                  />
+                </div>
+              </motion.div>
+              {showSubheading && (
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.35 }}
-                  className="mt-5 flex flex-wrap gap-3"
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-xl lg:text-2xl lg:leading-tight mt-2 font-sans font-medium text-[#1447e6] pl-1"
                 >
-                  <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#1447e6] whitespace-nowrap">
-                    Starts 10 November
-                  </span>
-                  <span className="glass-card glass-card-blur-lg glass-card-opacity-light inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#2d2d2d] whitespace-nowrap">
-                    Timings: 7:00–8:30 AM IST
-                  </span>
-                  <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#1447e6] whitespace-nowrap">
-                    Only 7 seats left (15 per batch)
-                  </span>
+                  <TextGenerateEffect 
+                    words={subheadingWords} 
+                    onComplete={() => setShowDescription(true)}
+                  />
                 </motion.div>
-              </div>
+              )}
+              {showDescription && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-base lg:text-lg lg:leading-relaxed mt-3 font-sans font-normal text-[#2d2d2d] pl-1"
+                >
+                  <TextGenerateEffect 
+                    words={descriptionWords} 
+                    onComplete={() => setShowContent(true)}
+                  />
+                </motion.div>
+              )}
+              {/* Course info badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="mt-5 flex flex-wrap gap-3"
+              >
+                  <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#1447e6] whitespace-nowrap">
+                  Starts 10 November
+                </span>
+                  <span className="glass-card glass-card-blur-lg glass-card-opacity-light inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#2d2d2d] whitespace-nowrap">
+                  Timings: 7:00–8:30 AM IST
+                </span>
+                  <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-sans font-semibold text-[#1447e6] whitespace-nowrap">
+                  Only 7 seats left (15 per batch)
+                </span>
+              </motion.div>
+            </div>
 
               {/* Right side - YouTube Embed */}
               <div className="flex-1 w-full md:max-w-[677px]">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5 }}
-                >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+            >
                   <div className="glass-card glass-card-blur-md glass-card-opacity-light relative rounded-[20px] overflow-hidden p-2">
                     <div className="w-full h-[260px] sm:h-[360px] md:h-[420px] lg:h-[498px] rounded-[16px] overflow-hidden">
-                      <iframe
-                        className="w-full h-full"
-                        src="https://www.youtube.com/embed/R9lH7uaSgUE"
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/R9lH7uaSgUE"
                         title="Master Azure DevOps from Real Engineers | Hands-on Azure & DevOps Course"
-                        frameBorder="0"
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                    frameBorder="0"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            </motion.div>
               </div>
             </div>
           </div>
@@ -412,15 +412,15 @@ export default function AzureDevopsCurriculumPage() {
       {/* Modules Content Section - Outside Hero Container */}
       <div className="relative w-full mt-[80px] md:mt-[120px]">
         <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
-          {showContent && modules.map((mod, i) => (
-            <motion.div
-              key={mod.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.05, type: "spring", stiffness: 90 }}
-              viewport={{ once: true, amount: 0.2 }}
+            {showContent && modules.map((mod, i) => (
+              <motion.div
+                key={mod.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.05, type: "spring", stiffness: 90 }}
+                viewport={{ once: true, amount: 0.2 }}
               className="w-full max-w-[1261px]"
-            >
+              >
               <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-6 md:p-8 rounded-[20px]">
                 <div className="inline-flex items-center gap-2 mb-4">
                   <span className="glass-card glass-card-blur-lg glass-card-opacity-medium px-4 py-1.5 text-sm font-sans font-semibold rounded-full text-[#1447e6] whitespace-nowrap">
@@ -433,11 +433,11 @@ export default function AzureDevopsCurriculumPage() {
                     <CurriculumCard key={topic.title} {...topic} />
                   ))}
                 </div>
+                </div>
+              </motion.div>
+            ))}
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
 
       {/* Footer Section */}
       <div className="relative w-full mt-[80px] md:mt-[120px]">

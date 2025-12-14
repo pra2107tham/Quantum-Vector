@@ -6,7 +6,6 @@ import Link from "next/link";
 import { CalendarIcon 
   ,ArrowRightIcon
  } from "@heroicons/react/24/outline";
-import { PointerHighlight } from "../ui/pointer-highlight";
 
 interface WebinarCard {
   title: string;
@@ -182,12 +181,11 @@ const webinars: WebinarCard[] = [
 } */
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.98 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { delay: i * 0.12, type: "spring", stiffness: 80 },
+    transition: { delay: i * 0.1, duration: 0.5 },
   }),
 };
 
@@ -217,15 +215,10 @@ const WebinarCard = ({ webinar, index }: { webinar: WebinarCard; index: number }
           <span className="text-sm text-neutral-500">{webinar.speaker.name}</span>
         </div>
         <Link href={`/webinars/${webinar.id}`} className="block w-full h-full text-center">
-          <button className="mt-2 px-7 py-2 w-auto bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-semibold shadow-sm text-base md:text-lg flex items-center gap-2 relative z-10 pointer-cursor">
-            <PointerHighlight 
-              pointerClassName="text-red-500" 
-              rectangleClassName="border-white rounded-xl"
-            >
-              <span className="inline-flex items-center gap-2 p-2">
-                Register Now <ArrowRightIcon className="w-4 h-4" />
-              </span>
-            </PointerHighlight>
+          <button className="mt-2 px-7 py-2 w-auto bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-semibold shadow-sm text-base md:text-lg flex items-center gap-2 relative z-10">
+            <span className="inline-flex items-center gap-2">
+              Register Now <ArrowRightIcon className="w-4 h-4" />
+            </span>
           </button>
         </Link>
       </div>
@@ -235,23 +228,8 @@ const WebinarCard = ({ webinar, index }: { webinar: WebinarCard; index: number }
 
 export default function Webinars() {
   return (
-    <section id="webinars" className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-blue-50 to-blue-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Short Introduction */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
-          viewport={{ once: true }}
-          className="text-center mb-8 md:mb-12 lg:mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-blue-900 tracking-tight">
-            Webinars: Learn DevOps Live
-          </h2>
-          <p className="text-base md:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto">
-            Join our live, hands-on webinars to master DevOps, Linux, and cloud technologies. Each session is designed for real-world skills, career clarity, and direct Q&A with experts. Check out our upcoming and past webinars below!
-          </p>
-        </motion.div>
+    <section id="webinars" className="w-full">
+      <div className="w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {webinars.length > 0 ? (
             webinars.map((webinar, idx) => (
@@ -261,84 +239,95 @@ export default function Webinars() {
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={webinar.isLive ? {
-                  y: -8,
-                  boxShadow: "0 8px 32px rgba(56,189,248,0.15)",
-                  borderColor: "#38bdf8",
-                  transition: { type: "spring", stiffness: 300, damping: 20 }
-                } : {}}
-                transition={{ type: "spring", stiffness: 120 }}
-                className={`relative flex flex-col bg-white rounded-2xl shadow-lg border-2 ${webinar.isLive ? 'border-blue-100' : 'border-gray-200 opacity-80'} overflow-hidden`}
+                viewport={{ once: true, amount: 0.2 }}
+                className={`relative flex flex-col glass-card glass-card-blur-sm glass-card-opacity-light rounded-[20px] overflow-hidden hover:scale-[1.02] transition-transform ${webinar.isLive ? '' : 'opacity-80'}`}
               >
-                <div className="hidden md:block w-2 bg-gradient-to-b from-blue-400 to-blue-600 rounded-r-2xl" />
-                <div className="p-4 md:p-6">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3 mb-3">
-                    <h3 className="text-xl md:text-2xl font-bold text-blue-900 flex-1">{webinar.title}</h3>
+                <div className="p-6 md:p-8 relative z-10 flex flex-col h-full">
+                  {/* Header Section */}
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl md:text-2xl font-outfit font-semibold text-[#2d2d2d] mb-2 leading-tight">{webinar.title}</h3>
+                      <p className="text-base md:text-lg font-sans font-normal text-[#1447e6] mb-3">{webinar.subheading}</p>
+                    </div>
                     {webinar.isLive ? (
-                      <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold w-fit">Upcoming</span>
+                      <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-block text-[#1447e6] px-3 py-1.5 rounded-full text-xs font-sans font-semibold whitespace-nowrap h-fit">Upcoming</span>
                     ) : (
-                      <span className="inline-block bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold w-fit">Completed</span>
+                      <span className="glass-card glass-card-blur-lg glass-card-opacity-light inline-block text-[#2d2d2d] px-3 py-1.5 rounded-full text-xs font-sans font-semibold whitespace-nowrap h-fit">Completed</span>
                     )}
                   </div>
-                  <p className="text-base md:text-lg text-neutral-600 mb-3">{webinar.subheading}</p>
                   
-                  {/* Webinar Info */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 text-xs md:text-sm">
-                    <div className="flex items-center gap-2 text-blue-800 bg-blue-50 rounded-lg p-2">
-                      <CalendarIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                      <span className="font-medium">{webinar.date}</span>
+                  {/* Webinar Info Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                    <div className="glass-card glass-card-blur-lg glass-card-opacity-light flex items-center gap-2.5 text-[#2d2d2d] rounded-lg p-3">
+                      <CalendarIcon className="w-5 h-5 text-[#1447e6] flex-shrink-0" />
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs font-sans font-medium text-[#2d2d2d]/70">Date</span>
+                        <span className="font-sans font-semibold text-sm truncate">{webinar.date}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 text-blue-800 bg-blue-50 rounded-lg p-2">
-                      <span className="text-blue-400 flex-shrink-0">🕐</span>
-                      <span className="font-medium">{webinar.time}</span>
+                    <div className="glass-card glass-card-blur-lg glass-card-opacity-light flex items-center gap-2.5 text-[#2d2d2d] rounded-lg p-3">
+                      <span className="text-[#1447e6] text-lg flex-shrink-0">🕐</span>
+                      <div className="flex flex-col min-w-0">
+                        <span className="text-xs font-sans font-medium text-[#2d2d2d]/70">Time</span>
+                        <span className="font-sans font-semibold text-sm truncate">{webinar.time}</span>
+                      </div>
                     </div>
                     {webinar.fee && (
-                      <div className="flex items-center gap-2 text-blue-800 bg-blue-50 rounded-lg p-2">
-                        <span className="text-blue-400 flex-shrink-0">💰</span>
-                        <div className="flex items-center gap-2">
-                          {webinar.originalPrice && (
-                            <span className="text-gray-500 line-through text-sm font-medium">{webinar.originalPrice}</span>
-                          )}
-                          <span className="font-bold text-green-600">{webinar.fee}</span>
-                          {webinar.discount && (
-                            <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">{webinar.discount}</span>
-                          )}
+                      <div className="glass-card glass-card-blur-lg glass-card-opacity-light flex items-center gap-2.5 text-[#2d2d2d] rounded-lg p-3">
+                        <span className="text-[#1447e6] text-lg flex-shrink-0">💰</span>
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <span className="text-xs font-sans font-medium text-[#2d2d2d]/70">Fee</span>
+                          <div className="flex items-center gap-2">
+                            {webinar.originalPrice && (
+                              <span className="text-[#2d2d2d]/50 line-through text-sm font-sans font-medium">{webinar.originalPrice}</span>
+                            )}
+                            <span className="font-sans font-bold text-[#1447e6] text-sm">{webinar.fee}</span>
+                          </div>
                         </div>
+                        {webinar.discount && (
+                          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-sans font-bold text-white bg-gradient-to-r from-[#ff4444] to-[#ff6666] shadow-lg shadow-[#ff4444]/30 whitespace-nowrap ml-auto animate-pulse">{webinar.discount}</span>
+                        )}
                       </div>
                     )}
                     {webinar.mode && (
-                      <div className="flex items-center gap-2 text-blue-800 bg-blue-50 rounded-lg p-2">
-                        <span className="text-blue-400 flex-shrink-0">💻</span>
-                        <span className="font-medium">{webinar.mode}</span>
+                      <div className="glass-card glass-card-blur-lg glass-card-opacity-light flex items-center gap-2.5 text-[#2d2d2d] rounded-lg p-3">
+                        <span className="text-[#1447e6] text-lg flex-shrink-0">💻</span>
+                        <div className="flex flex-col min-w-0">
+                          <span className="text-xs font-sans font-medium text-[#2d2d2d]/70">Mode</span>
+                          <span className="font-sans font-semibold text-sm truncate">{webinar.mode}</span>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  <p className="text-sm md:text-base text-neutral-700 mb-4 whitespace-pre-line line-clamp-4">{webinar.description}</p>
+                  {/* Description */}
+                  <p className="text-sm md:text-base font-sans font-normal text-[#2d2d2d] mb-5 whitespace-pre-line line-clamp-3 leading-relaxed flex-1">{webinar.description}</p>
                   
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                      <span className="text-blue-600 text-sm font-semibold">👤</span>
+                  {/* Footer Section */}
+                  <div className="mt-auto pt-4 border-t border-[#2d2d2d]/10">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-full bg-[#1447e6]/10 flex items-center justify-center">
+                          <span className="text-[#1447e6] text-base font-sans font-semibold">👤</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs font-sans font-medium text-[#2d2d2d]/70">Speaker</span>
+                          <span className="text-sm font-sans font-semibold text-[#2d2d2d]">{webinar.speaker.name}</span>
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-sm text-neutral-500">{webinar.speaker.name}</span>
-                  </div>
-                  
-                  <Link href={`/webinars/${webinar.id}`} className="block w-full">
-                    <button
-                      className={`w-full px-6 py-3 rounded-lg font-semibold shadow-sm text-sm md:text-base flex items-center justify-center gap-2 transition-colors duration-200 ${webinar.isLive ? 'bg-blue-700 text-white hover:bg-blue-800' : 'bg-gray-200 text-gray-500 cursor-not-allowed'}`}
-                      disabled={!webinar.isLive}
-                    >
-                      <PointerHighlight 
-                        pointerClassName="text-red-500" 
-                        rectangleClassName="border-white rounded-xl"
+                    
+                    <Link href={`/webinars/${webinar.id}`} className="block w-full">
+                      <button
+                        className={`w-full px-6 py-3 rounded-lg font-sans font-semibold shadow-sm text-sm md:text-base flex items-center justify-center gap-2 transition-all duration-200 whitespace-nowrap ${webinar.isLive ? 'bg-[#1447e6] text-white hover:bg-[#0d3bb8] hover:shadow-md' : 'glass-card glass-card-blur-lg glass-card-opacity-light text-[#2d2d2d] cursor-not-allowed'}`}
+                        disabled={!webinar.isLive}
                       >
-                        <span className="inline-flex items-center gap-2 p-2">
+                        <span className="inline-flex items-center gap-2">
                           {webinar.isLive ? 'Register Now' : 'View Details'} <ArrowRightIcon className="w-4 h-4" />
                         </span>
-                      </PointerHighlight>
-                    </button>
-                  </Link>
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))
@@ -348,17 +337,17 @@ export default function Webinars() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, type: "spring", stiffness: 80 }}
           viewport={{ once: true }}
-              className="col-span-full mb-16 md:mb-20 bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-blue-200 text-center"
+          className="col-span-full mb-16 md:mb-20 glass-card glass-card-blur-sm glass-card-opacity-light p-6 md:p-8 rounded-[20px] text-center"
         >
           <div className="max-w-2xl mx-auto">
-                <CalendarIcon className="w-12 md:w-16 h-12 md:h-16 text-blue-500 mx-auto mb-4" />
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-900 mb-4">No Webinars Currently Scheduled</h3>
-                <p className="text-base md:text-lg text-neutral-700 mb-6">
+            <CalendarIcon className="w-12 md:w-16 h-12 md:h-16 text-[#1447e6] mx-auto mb-4" />
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-outfit font-semibold text-[#2d2d2d] mb-4">No Webinars Currently Scheduled</h3>
+            <p className="text-base md:text-lg font-sans font-normal text-[#2d2d2d] mb-6">
               We are working on bringing you valuable webinars on DevOps, cloud technologies, and career development. 
               Check back soon for updates on our upcoming sessions.
             </p>
             <Link href="/courses">
-                  <button className="px-6 md:px-8 py-3 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm md:text-base">
+              <button className="px-6 md:px-8 py-3 bg-[#1447e6] text-white font-sans font-semibold rounded-xl hover:bg-[#0d3bb8] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm md:text-base whitespace-nowrap">
                 Explore Our Courses
               </button>
             </Link>

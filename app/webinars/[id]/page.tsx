@@ -2,11 +2,15 @@
 
 import { useParams } from "next/navigation";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { CalendarIcon, ClockIcon, UserIcon, CurrencyRupeeIcon } from "@heroicons/react/24/outline";
 import RazorpayButton from "@/components/RazorpayButton/AWS_Course_RazorpayButton";
 import Link from "next/link";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { useState } from "react";
+import Header from "@/web/components/Header";
+import Footer from "@/web/components/Footer";
+import { imgImage10 } from "@/web/assets";
 
 interface WebinarDetail {
   heading: string;
@@ -41,31 +45,26 @@ interface WebinarData {
 
 function DetailCard({ heading, items }: { heading: string; items: string[] }) {
   return (
-    <div className="relative border-2 border-blue-200 rounded-3xl p-2 bg-transparent overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <div className="bg-white border border-blue-100 rounded-2xl p-4 md:p-6 flex flex-col gap-4 shadow-lg">
-        {/* Lamp-like gradient accent at top left */}
-        <div className="absolute top-0 left-8 h-0.5 w-16 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full z-20" />
-        <div className="absolute top-[-8px] left-6 w-24 h-6 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 opacity-30 blur-2xl rounded-full z-10" />
-        <div className="text-lg md:text-xl font-bold text-blue-800 mb-2">{heading}</div>
-        <ul className="list-disc pl-6 text-blue-900 space-y-1 md:space-y-2">
-          {items.map((item, j) => (
-            <li key={j} className="text-sm md:text-base leading-relaxed">{item}</li>
-          ))}
-        </ul>
-      </div>
+    <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-6 md:p-8 rounded-[20px] h-full flex flex-col">
+      <h3 className="text-lg md:text-xl font-outfit font-semibold text-[#2d2d2d] mb-4">{heading}</h3>
+      <ul className="list-disc pl-6 space-y-2 flex-1">
+        {items.map((item, j) => (
+          <li key={j} className="text-sm md:text-base font-sans font-normal text-[#2d2d2d] leading-relaxed">{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 function InfoCard({ icon, title, value }: { icon: React.ReactNode; title: string; value: string | React.ReactNode }) {
   return (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center gap-3 hover:bg-blue-100 transition-colors">
-      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+    <div className="glass-card glass-card-blur-lg glass-card-opacity-light rounded-lg p-4 flex items-center gap-3">
+      <div className="w-10 h-10 rounded-full bg-[#1447e6]/10 flex items-center justify-center text-[#1447e6] flex-shrink-0">
         {icon}
       </div>
-      <div>
-        <div className="text-xs md:text-sm text-blue-600 font-medium">{title}</div>
-        <div className="text-sm md:text-base font-semibold text-blue-900">{value}</div>
+      <div className="min-w-0 flex-1">
+        <div className="text-xs md:text-sm font-sans font-medium text-[#2d2d2d]/70">{title}</div>
+        <div className="text-sm md:text-base font-sans font-semibold text-[#2d2d2d] truncate">{value}</div>
       </div>
     </div>
   );
@@ -373,29 +372,36 @@ export default function WebinarDetailsPage() {
   const webinar = webinars[id as keyof typeof webinars];
 
   if (!webinar) {
-  return (
-    <div className="min-h-screen bg-white text-gray-900 py-10 px-4 pt-24 md:pt-28 lg:mt-14">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-center justify-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <CalendarIcon className="w-20 h-20 text-blue-500 mx-auto mb-6" />
-            <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-                Webinar Not Found
+    return (
+      <div className="relative w-full min-h-screen overflow-x-hidden">
+        {/* Background Image */}
+        <div className="fixed inset-0 -z-10 w-full h-full">
+          <Image
+            src={imgImage10}
+            alt="DevOps Community Background"
+            fill
+            className="object-cover object-center pointer-events-none"
+            priority
+            unoptimized
+          />
+        </div>
+        {/* Fallback background color */}
+        <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
+
+        <div className="relative w-full min-h-screen flex items-center justify-center px-4">
+          <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-8 md:p-12 rounded-[20px] max-w-2xl w-full text-center">
+            <CalendarIcon className="w-20 h-20 text-[#1447e6] mx-auto mb-6" />
+            <h1 className="text-4xl md:text-5xl font-outfit font-semibold text-[#2d2d2d] mb-4">
+              Webinar Not Found
             </h1>
-            <p className="text-xl text-neutral-700 max-w-2xl mx-auto mb-8">
-                Sorry, we couldn&apos;t find the webinar you&apos;re looking for.
+            <p className="text-xl font-sans font-normal text-[#2d2d2d] mb-8">
+              Sorry, we couldn&apos;t find the webinar you&apos;re looking for.
             </p>
-              <Link href="/webinars">
-                <button className="px-8 py-3 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-base">
-                  Back to Webinars
-                </button>
-              </Link>
-            </motion.div>
+            <Link href="/webinars">
+              <button className="px-8 py-3 bg-[#1447e6] text-white font-sans font-semibold rounded-xl hover:bg-[#0d3bb8] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-base whitespace-nowrap">
+                Back to Webinars
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -403,79 +409,187 @@ export default function WebinarDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 text-neutral-800 py-10 px-4 pt-24 md:pt-28">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
-          {/* Left side - Main Content */}
-          <div className="lg:w-[65%]">
-            {/* Header Section */}
-            <div className="mb-8 md:mb-12 p-4 md:p-6 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-blue-100">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col sm:flex-row sm:items-center gap-3 mb-1"
-              >
-                <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <CalendarIcon className="text-blue-500 w-10 h-10 md:w-12 md:h-12" />
-                </motion.div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-1">
-                  <div className="text-2xl md:text-3xl lg:text-5xl lg:leading-tight font-bold text-blue-900">
-                    <TextGenerateEffect 
-                      words={webinar.headingWords} 
-                      onComplete={() => setShowSubheading(true)}
-                    />
-                  </div>
-                  {webinar.isCompleted ? (
-                    <span className="inline-block bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-xs md:text-sm font-semibold w-fit">Completed</span>
-                  ) : (
-                    <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs md:text-sm font-semibold w-fit">Upcoming</span>
-                  )}
-                </div>
-              </motion.div>
-              
-              {showSubheading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-lg md:text-xl lg:text-2xl lg:leading-tight mt-2 font-medium text-blue-700 pl-1"
-                >
-                  <TextGenerateEffect 
-                    words={webinar.subheadingWords} 
-                    onComplete={() => setShowDescription(true)}
-                  />
-                </motion.div>
-              )}
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+      {/* Background Image */}
+      <div className="fixed inset-0 -z-10 w-full h-full">
+        <Image
+          src={imgImage10}
+          alt="DevOps Community Background"
+          fill
+          className="object-cover object-center pointer-events-none"
+          priority
+          unoptimized
+        />
+      </div>
+      {/* Fallback background color */}
+      <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
 
-              {showDescription && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-sm md:text-base lg:text-lg lg:leading-relaxed mt-3 text-neutral-600 pl-1"
-                >
-                  <TextGenerateEffect 
-                    words={webinar.descriptionWords} 
-                    onComplete={() => setShowContent(true)}
-                  />
-                </motion.div>
-              )}
+      {/* Main Content Container with Header */}
+      <div className="glass-card-main relative min-h-[700px] md:min-h-[800px] mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px]">
+        <div className="relative min-h-[700px] md:min-h-[800px] w-full z-10">
+          <Header />
+          
+          {/* Hero Section */}
+          <div className="absolute flex flex-col md:flex-row gap-[40px] md:gap-[60px] items-center left-0 md:left-[59px] top-[120px] md:top-[140px] w-full md:w-[calc(100%-118px)] max-w-full md:max-w-none px-4 md:px-0 md:pr-[59px] pb-0">
+            {/* Left Content */}
+            <div className="flex flex-col gap-[30px] items-start relative shrink-0 w-full md:w-[60%]">
+              <div className="flex flex-col gap-[20px] items-start relative shrink-0 w-full">
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="w-[60px] h-[60px] rounded-full bg-[#1447e6]/10 flex items-center justify-center">
+                    <CalendarIcon className="text-[#1447e6] w-8 h-8" />
+                  </div>
+                  <div className="flex items-center gap-3 flex-1">
+                    <h1 className="text-2xl md:text-3xl lg:text-5xl font-outfit font-semibold text-[#2d2d2d] leading-tight">
+                      <TextGenerateEffect 
+                        words={webinar.headingWords} 
+                        onComplete={() => setShowSubheading(true)}
+                      />
+                    </h1>
+                    {webinar.isCompleted ? (
+                      <span className="glass-card glass-card-blur-lg glass-card-opacity-light inline-block text-[#2d2d2d] px-3 py-1.5 rounded-full text-xs font-sans font-semibold whitespace-nowrap h-fit">Completed</span>
+                    ) : (
+                      <span className="glass-card glass-card-blur-lg glass-card-opacity-medium inline-block text-[#1447e6] px-3 py-1.5 rounded-full text-xs font-sans font-semibold whitespace-nowrap h-fit">Upcoming</span>
+                    )}
+                  </div>
+                </div>
+                
+                {showSubheading && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-lg md:text-xl lg:text-2xl font-sans font-medium text-[#1447e6] pl-1"
+                  >
+                    <TextGenerateEffect 
+                      words={webinar.subheadingWords} 
+                      onComplete={() => setShowDescription(true)}
+                    />
+                  </motion.div>
+                )}
+
+                {showDescription && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-sm md:text-base lg:text-lg font-sans font-normal text-[#2d2d2d] leading-relaxed pl-1"
+                  >
+                    <TextGenerateEffect 
+                      words={webinar.descriptionWords} 
+                      onComplete={() => setShowContent(true)}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Why Join This Webinar Section */}
+                {showContent && (() => {
+                  const whySection = webinar.details.find((section) => 
+                    section.heading.toLowerCase().includes("why")
+                  );
+                  return whySection ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                      className="w-full mt-4"
+                    >
+                      <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-6 rounded-[16px]">
+                        <h3 className="text-base md:text-lg font-outfit font-semibold text-[#2d2d2d] mb-3">{whySection.heading}</h3>
+                        <ul className="flex flex-col gap-2">
+                          {whySection.items.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm md:text-base font-sans font-normal text-[#2d2d2d]">
+                              <span className="text-[#1447e6] mt-1">✓</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  ) : null;
+                })()}
+              </div>
             </div>
 
-            {/* Webinar Info Cards */}
-            {showContent && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-8 md:mb-10 p-4 md:p-6 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-blue-100"
-              >
-                <h3 className="text-lg md:text-xl font-bold text-blue-900 mb-4">Webinar Details</h3>
+            {/* Right Content - Pricing Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="w-full md:w-[38%] relative"
+            >
+              <div className="glass-card glass-card-blur-sm glass-card-opacity-light relative rounded-[20px] p-6 md:p-8 overflow-hidden">
+                <div className="flex flex-col items-center text-center mb-6 relative z-10">
+                  <div className="text-sm font-sans font-semibold text-[#2d2d2d]/70 mb-2">
+                    {webinar.isCompleted ? "Webinar Completed" : "Registration Fee"}
+                  </div>
+                  {!webinar.isCompleted && (
+                    <>
+                      <div className="flex items-end justify-center gap-2 mb-4">
+                        {webinar.originalPrice && (
+                          <span className="text-[#2d2d2d]/50 line-through text-lg font-sans">{webinar.originalPrice}</span>
+                        )}
+                        <span className="text-3xl md:text-4xl font-outfit font-extrabold text-[#2d2d2d]">{webinar.fee}</span>
+                      </div>
+                      {webinar.discount && (
+                        <div className="mb-4">
+                          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-sans font-bold text-white bg-gradient-to-r from-[#ff4444] to-[#ff6666] shadow-lg shadow-[#ff4444]/30 whitespace-nowrap animate-pulse">{webinar.discount}</span>
+                        </div>
+                      )}
+                      <div className="w-full mb-6">
+                        {id === 'docker-kubernetes-bootcamp' ? (
+                          <Link href="/webinars/docker-kubernetes-bootcamp/checkout" className="block w-full">
+                            <button className="w-full px-6 py-4 bg-[#1447e6] text-white rounded-lg font-sans font-semibold shadow-sm hover:bg-[#0d3bb8] hover:shadow-md transition-all duration-200 whitespace-nowrap">
+                              Secure Checkout
+                            </button>
+                          </Link>
+                        ) : (
+                          <div className="w-full [&>div]:w-full">
+                            <RazorpayButton
+                              url={webinar.registrationUrl}
+                              text={webinar.registrationText}
+                              color="#1447e6"
+                              size="large"
+                              className="w-full"
+                            />
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-xs font-sans text-[#2d2d2d]/50 text-center leading-relaxed">
+                        {id === 'docker-kubernetes-bootcamp' ? (
+                          <>Limited seats remaining — registration closes soon. After payment, you will receive a confirmation email, joining link, schedule, and free DevOps career PDF.</>
+                        ) : (
+                          <>After payment, you will receive a confirmation email, joining link, schedule, and free DevOps career PDF.</>
+                        )}
+                      </p>
+                    </>
+                  )}
+                  {webinar.isCompleted && (
+                    <div className="glass-card glass-card-blur-lg glass-card-opacity-light p-4 rounded-lg text-center">
+                      <div className="text-base font-sans font-semibold text-[#2d2d2d] mb-2">Registration Closed</div>
+                      <p className="text-xs font-sans font-normal text-[#2d2d2d]">This webinar has ended. Check back for future sessions!</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Section - Outside Hero Container */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          {/* Webinar Info Cards */}
+          {showContent && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="w-full max-w-[1261px]"
+            >
+              <div className="glass-card glass-card-blur-md glass-card-opacity-light p-6 md:p-8 rounded-[20px]">
+                <h3 className="text-lg md:text-xl font-outfit font-semibold text-[#2d2d2d] mb-4">Webinar Details</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                   <InfoCard 
                     icon={<CalendarIcon className="w-5 h-5" />}
@@ -498,10 +612,9 @@ export default function WebinarDetailsPage() {
                     value={
                       webinar.originalPrice ? (
                         <div className="flex items-center gap-2">
-                          {/* original price removed per request */}
-                          <span className="font-bold text-green-600">{webinar.fee}</span>
+                          <span className="font-sans font-bold text-[#1447e6]">{webinar.fee}</span>
                           {webinar.discount && (
-                            <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">{webinar.discount}</span>
+                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-sans font-bold text-white bg-gradient-to-r from-[#ff4444] to-[#ff6666] shadow-lg shadow-[#ff4444]/30 whitespace-nowrap animate-pulse">{webinar.discount}</span>
                           )}
                         </div>
                       ) : (
@@ -517,106 +630,61 @@ export default function WebinarDetailsPage() {
                     value={webinar.mode}
                   />
                 </div>
-                <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                  <p className="text-sm md:text-base text-blue-900 font-medium text-center">{webinar.description}</p>
+                <div className="mt-4 glass-card glass-card-blur-lg glass-card-opacity-light p-4 rounded-lg">
+                  <p className="text-sm md:text-base font-sans font-normal text-[#2d2d2d] text-center">{webinar.description}</p>
                 </div>
-              </motion.div>
-            )}
-
-            {/* Content Sections */}
-            {showContent && webinar.details.map((section, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.05, type: "spring", stiffness: 90 }}
-                viewport={{ once: true, amount: 0.2 }}
-                className="mb-6 md:mb-8"
-              >
-                <DetailCard heading={section.heading} items={section.items} />
-              </motion.div>
-            ))}
-
-            {/* Completion Message for Past Webinars */}
-            {showContent && webinar.isCompleted && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="mb-8 md:mb-10 p-4 md:p-6 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-blue-100"
-              >
-                <div className="bg-gray-100 border border-gray-200 rounded-xl p-4 md:p-6 text-gray-600 text-base md:text-lg font-semibold text-center">
-                  This webinar has been completed. <br />
-                  <span className="text-sm md:text-base font-normal">Recording or summary will be available soon.</span>
-            </div>
-          </motion.div>
-            )}
-          </div>
-
-          {/* Right side - Sticky Registration */}
-          <div className="lg:w-[35%]">
-            <div className="sticky top-28 bg-white/80 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-xl border border-blue-200">
-              <div className="mb-4 md:mb-6 text-center">
-                <h3 className="text-xl md:text-2xl font-bold mb-2 text-blue-900">
-                  {webinar.isCompleted ? "Webinar Completed" : "Join This Webinar!"}
-                </h3>
-                {!webinar.isCompleted && (
-                  <p className="text-xs md:text-sm text-neutral-600 mb-2 md:mb-4">
-                    Secure your spot in this exclusive live session
-                  </p>
-                )}
               </div>
-              
-              {webinar.isCompleted ? (
-                <div className="bg-gray-100 border border-gray-200 rounded-xl p-4 md:p-6 text-gray-600 text-center">
-                  <div className="text-base md:text-lg font-semibold mb-2">Registration Closed</div>
-                  <p className="text-xs md:text-sm">This webinar has ended. Check back for future sessions!</p>
-                </div>
-              ) : (
-                <>
-                  <div className="text-center mb-3 md:mb-4">
-                    {id === 'docker-kubernetes-bootcamp' ? (
-                      <Link href="/webinars/docker-kubernetes-bootcamp/checkout">
-                        <button className="w-full h-20 md:h-24 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-between px-5 md:px-8">
-                          <div className="flex items-center gap-2 md:gap-3">
-                            <span className="text-xl md:text-2xl">🚀</span>
-                            <div className="text-left">
-                              <div className="text-base md:text-lg font-semibold leading-tight">Secure Checkout</div>
-                              <div className="text-xs md:text-sm text-white/90">Few seats left • Confirm now</div>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            {/* original price removed per request */}
-                            <div className="text-lg md:text-2xl font-extrabold">{webinar.fee || '₹2,999'}</div>
-                          </div>
-                        </button>
-                      </Link>
-                    ) : (
-                      <div className="w-full [&>div]:w-full [&>div]:h-16 md:[&>div]:h-20">
-                        <RazorpayButton
-                          url={webinar.registrationUrl}
-                          text={webinar.registrationText}
-                          color="#2563eb"
-                          size="large"
-                          className="w-full h-16 md:h-20"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-xs text-neutral-600 text-center leading-relaxed">
-                    {id === 'docker-kubernetes-bootcamp' ? (
-                      <>Limited seats remaining — registration closes soon. After payment, you will receive a confirmation email, joining link, schedule, and free DevOps career PDF.</>
-                    ) : (
-                      <>
-                        After payment, you will receive a confirmation email, joining link, schedule, and free DevOps career PDF.
-                      </>
-                    )}
-                  </p>
-                </>
-              )}
+            </motion.div>
+          )}
+
+          {/* Content Sections */}
+          {showContent && (
+            <div className="w-full max-w-[1261px] grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+              {webinar.details
+                .filter((section) => !section.heading.toLowerCase().includes("why"))
+                .map((section, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.05, type: "spring", stiffness: 90 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="w-full h-full"
+                  >
+                    <DetailCard heading={section.heading} items={section.items} />
+                  </motion.div>
+                ))}
             </div>
-          </div>
+          )}
+
+          {/* Completion Message for Past Webinars */}
+          {showContent && webinar.isCompleted && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="w-full max-w-[1261px]"
+            >
+              <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-6 md:p-8 rounded-[20px]">
+                <div className="glass-card glass-card-blur-lg glass-card-opacity-light p-4 md:p-6 rounded-lg text-center">
+                  <div className="text-base md:text-lg font-sans font-semibold text-[#2d2d2d] mb-2">
+                    This webinar has been completed.
+                  </div>
+                  <span className="text-sm md:text-base font-sans font-normal text-[#2d2d2d]">
+                    Recording or summary will be available soon.
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <Footer />
         </div>
       </div>
     </div>
