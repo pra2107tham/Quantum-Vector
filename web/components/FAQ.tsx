@@ -42,24 +42,22 @@ function InquiryModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#66707d] flex h-[52px] items-center justify-center px-[18px] py-[12px] relative rounded-[30px] shrink-0 w-[164px] hover:bg-[#5a626d] transition-colors cursor-pointer shadow-[-1px_-1px_11.9px_0px_rgba(255,255,255,0.5)]"
+        className="bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] md:text-[16px] flex h-[52px] items-center justify-center px-[18px] py-[12px] relative rounded-[30px] shrink-0 w-[164px] transition-colors cursor-pointer shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] whitespace-nowrap"
       >
-        <p className="font-sans font-semibold leading-normal not-italic relative shrink-0 text-[16px] text-white z-10 whitespace-nowrap">
-          Contact Us
-        </p>
+        Contact Us
       </button>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
-          <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto p-6 z-10 flex flex-col">
+          <div className="relative glass-card glass-card-blur-md glass-card-opacity-medium rounded-[20px] shadow-xl w-full max-w-md mx-auto p-6 md:p-8 z-10 flex flex-col">
             <button
-              className="absolute top-3 right-3 text-blue-700 text-2xl font-bold hover:text-blue-900"
+              className="absolute top-3 right-3 text-[#2d2d2d] text-2xl font-bold hover:text-black transition-colors"
               onClick={() => setOpen(false)}
               aria-label="Close"
             >
               ×
             </button>
-            <h3 className="text-xl font-semibold mb-2 text-blue-900 text-center">Inquiry Form</h3>
+            <h3 className="font-outfit font-semibold text-black text-[20px] md:text-[24px] mb-4 text-center">Inquiry Form</h3>
             <InquiryForm />
           </div>
         </div>
@@ -126,22 +124,22 @@ const InquiryForm = () => {
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-lg text-center border border-blue-100">
-        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-8 rounded-[20px] text-center">
+        <div className="w-16 h-16 bg-[#1447e6] rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-blue-900 mb-2">Thank You!</h3>
-        <p className="text-blue-700">We&apos;ll get back to you soon.</p>
+        <h3 className="font-outfit font-semibold text-black text-[24px] md:text-[28px] mb-2">Thank You!</h3>
+        <p className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px]">We&apos;ll get back to you soon.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1">
-        <label htmlFor="name" className="block text-sm font-medium text-blue-900">
+        <label htmlFor="name" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
           Name
         </label>
         <input
@@ -152,11 +150,11 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           placeholder="Your name"
-          className="w-full px-4 py-2.5 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder:text-blue-200"
+          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
       <div className="space-y-1">
-        <label htmlFor="email" className="block text-sm font-medium text-blue-900">
+        <label htmlFor="email" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
           Email
         </label>
         <input
@@ -167,11 +165,11 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           placeholder="you@example.com"
-          className="w-full px-4 py-2.5 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder:text-blue-200"
+          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
       <div className="space-y-1">
-        <label htmlFor="phone" className="block text-sm font-medium text-blue-900">
+        <label htmlFor="phone" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
           Phone
         </label>
         <input
@@ -181,11 +179,11 @@ const InquiryForm = () => {
           value={form.phone}
           onChange={handleChange}
           placeholder="+1 (555) 000-0000"
-          className="w-full px-4 py-2.5 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder:text-blue-200"
+          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
       <div className="space-y-1">
-        <label htmlFor="message" className="block text-sm font-medium text-blue-900">
+        <label htmlFor="message" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
           Message
         </label>
         <textarea
@@ -196,18 +194,18 @@ const InquiryForm = () => {
           required
           rows={4}
           placeholder="How can we help you?"
-          className="w-full px-4 py-2.5 rounded-xl border border-blue-200 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder:text-blue-200 resize-none"
+          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d] resize-none"
         />
       </div>
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
+        <div className="glass-card glass-card-blur-sm glass-card-opacity-light border border-red-200 text-red-600 px-4 py-3 rounded-[10px] font-sans font-normal text-[12px] md:text-[14px]">
           {error}
         </div>
       )}
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] md:text-[16px] py-3 px-6 rounded-[30px] focus:outline-none focus:ring-2 focus:ring-[#1447e6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-lg whitespace-nowrap"
       >
         {loading ? (
           <span className="flex items-center justify-center gap-2">

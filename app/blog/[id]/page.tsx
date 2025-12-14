@@ -12,7 +12,6 @@ import BlogContent from "@/components/Blog/BlogContent";
 import BlogMeta from "@/components/Blog/BlogMeta";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 import ErrorMessage from "@/components/ui/error-message";
-import WebinarPopup from "@/components/WebinarPopup/WebinarPopup";
 import { debugMetaTags } from "@/lib/social-sharing-utils";
 import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
@@ -266,8 +265,6 @@ export default function BlogDetailPage() {
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
-      <WebinarPopup showOnPages={["/blog", "/blog/"]} delay={2000} />
-      
       {/* Background Image */}
       <div className="fixed inset-0 -z-10 w-full h-full">
         <Image
