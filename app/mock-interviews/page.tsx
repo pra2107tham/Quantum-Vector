@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
-// Cal.com inline embed will be loaded via script in useEffect
+import Image from "next/image";
+import Link from "next/link";
 import { 
   CodeBracketIcon, 
   CpuChipIcon, 
@@ -22,6 +23,9 @@ import {
   PlayIcon
 } from "@heroicons/react/24/outline";
 import { StarIcon as StarSolidIcon } from "@heroicons/react/24/solid";
+import Header from "@/web/components/Header";
+import Footer from "@/web/components/Footer";
+import { imgImage10, imgGroup, imgFrame6, imgBxsMessage, imgFrame1000003337, imgFrame1000003338 } from "@/web/assets";
 
 export default function MockInterviewsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -71,77 +75,65 @@ export default function MockInterviewsPage() {
 
   const benefits = [
     {
-      icon: <CodeBracketIcon className="w-8 h-8" />,
+      icon: <CodeBracketIcon className="w-6 h-6 text-black" />,
       title: "Technical Deep Dive",
       description: "Practice Kubernetes, Docker, CI/CD, Terraform, and Git with real-world scenarios and troubleshooting.",
-      gradient: "from-blue-500 to-blue-600",
-      bgGradient: "from-blue-50 to-blue-100"
     },
     {
-      icon: <CpuChipIcon className="w-8 h-8" />,
+      icon: <CpuChipIcon className="w-6 h-6 text-black" />,
       title: "System Design",
       description: "Discuss architecture patterns, scaling strategies, and reliability engineering with industry experts.",
-      gradient: "from-purple-500 to-purple-600",
-      bgGradient: "from-purple-50 to-purple-100"
     },
     {
-      icon: <UserGroupIcon className="w-8 h-8" />,
+      icon: <UserGroupIcon className="w-6 h-6 text-black" />,
       title: "Behavioral Questions",
       description: "Master STAR method, team scenarios, and conflict resolution for leadership and collaboration questions.",
-      gradient: "from-green-500 to-green-600",
-      bgGradient: "from-green-50 to-green-100"
     },
     {
-      icon: <DocumentTextIcon className="w-8 h-8" />,
+      icon: <DocumentTextIcon className="w-6 h-6 text-black" />,
       title: "Resume & Career",
       description: "Get CV review, job search tips, and salary negotiation strategies from experienced professionals.",
-      gradient: "from-orange-500 to-orange-600",
-      bgGradient: "from-orange-50 to-orange-100"
     },
     {
-      icon: <ExclamationTriangleIcon className="w-8 h-8" />,
+      icon: <ExclamationTriangleIcon className="w-6 h-6 text-black" />,
       title: "Real Scenarios",
       description: "Practice production incidents, on-call situations, and emergency troubleshooting scenarios.",
-      gradient: "from-red-500 to-red-600",
-      bgGradient: "from-red-50 to-red-100"
     },
     {
-      icon: <ChatBubbleLeftRightIcon className="w-8 h-8" />,
+      icon: <ChatBubbleLeftRightIcon className="w-6 h-6 text-black" />,
       title: "Expert Feedback",
       description: "Receive detailed review, improvement areas, and curated resources for continuous learning.",
-      gradient: "from-indigo-500 to-indigo-600",
-      bgGradient: "from-indigo-50 to-indigo-100"
     }
   ];
 
   const focusAreas = [
     {
-      icon: <CubeIcon className="w-12 h-12" />,
+      icon: <CubeIcon className="w-12 h-12 text-black" />,
       title: "Kubernetes & Containerization",
       description: "Pods, Services, Deployments, StatefulSets, and container orchestration"
     },
     {
-      icon: <CogIcon className="w-12 h-12" />,
+      icon: <CogIcon className="w-12 h-12 text-black" />,
       title: "CI/CD Pipelines & Automation",
       description: "Jenkins, GitHub Actions, GitLab CI, and deployment strategies"
     },
     {
-      icon: <CloudIcon className="w-12 h-12" />,
+      icon: <CloudIcon className="w-12 h-12 text-black" />,
       title: "Cloud Platforms",
       description: "AWS, Azure, GCP services, networking, and cost optimization"
     },
     {
-      icon: <WrenchScrewdriverIcon className="w-12 h-12" />,
+      icon: <WrenchScrewdriverIcon className="w-12 h-12 text-black" />,
       title: "Infrastructure as Code",
       description: "Terraform, Ansible, CloudFormation, and configuration management"
     },
     {
-      icon: <ChartBarIcon className="w-12 h-12" />,
+      icon: <ChartBarIcon className="w-12 h-12 text-black" />,
       title: "Monitoring & Observability",
       description: "Prometheus, Grafana, ELK Stack, and distributed tracing"
     },
     {
-      icon: <ShieldCheckIcon className="w-12 h-12" />,
+      icon: <ShieldCheckIcon className="w-12 h-12 text-black" />,
       title: "Security & Compliance",
       description: "DevSecOps, vulnerability management, and compliance frameworks"
     }
@@ -211,460 +203,344 @@ export default function MockInterviewsPage() {
 
   const earlyBirdOffers = [
     {
-      icon: <StarSolidIcon className="w-8 h-8" />,
+      icon: <StarSolidIcon className="w-6 h-6 text-black" />,
       title: "Early Bird Special",
       description: "Be among the first 50 participants and get 30% off your first mock interview session",
       highlight: "30% OFF",
-      color: "from-yellow-400 to-orange-500",
-      bgColor: "from-yellow-50 to-orange-50"
+      bgColor: "bg-[#e5e5e5]"
     },
     {
-      icon: <CheckCircleIcon className="w-8 h-8" />,
+      icon: <CheckCircleIcon className="w-6 h-6 text-black" />,
       title: "Founder's Choice",
       description: "Direct interview with our founder and DevOps expert for personalized career guidance",
       highlight: "FOUNDER ACCESS",
-      color: "from-blue-500 to-blue-600",
-      bgColor: "from-blue-50 to-blue-100"
+      bgColor: "bg-[#e5e5e5]"
     },
     {
-      icon: <ChatBubbleLeftRightIcon className="w-8 h-8" />,
+      icon: <ChatBubbleLeftRightIcon className="w-6 h-6 text-black" />,
       title: "Pioneer Program",
       description: "Help shape our interview process and get lifetime access to all future improvements",
       highlight: "LIFETIME ACCESS",
-      color: "from-green-500 to-green-600",
-      bgColor: "from-green-50 to-green-100"
+      bgColor: "bg-[#e5e5e5]"
     }
   ];
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.98 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { delay: i * 0.15, type: "spring", stiffness: 90 },
-    }),
-  };
-
-  const testimonialVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.2, type: "spring", stiffness: 100 },
-    }),
-  };
-
   return (
-    <main className="relative w-full flex flex-col items-center bg-gradient-to-b from-blue-50 to-blue-100 text-neutral-800">
-      {/* Hero Section */}
-      <section className="relative w-full pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-300/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
-            className="text-center mb-16"
-          >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-700 px-6 py-3 rounded-full text-sm font-bold mb-6 border border-orange-200 shadow-lg"
-            >
-              <StarSolidIcon className="w-4 h-4 text-yellow-600" />
-              <span>🚀 LAUNCHING NOW - Be the First to Experience</span>
-            </motion.div>
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+      {/* Background Image */}
+      <div className="fixed inset-0 -z-10 w-full h-full">
+        <Image
+          src={imgImage10}
+          alt="DevOps Community Background"
+          fill
+          className="object-cover object-center pointer-events-none"
+          priority
+          unoptimized
+        />
+      </div>
+      {/* Fallback background color */}
+      <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-blue-900 tracking-tight">
+      {/* Hero Section */}
+      <div className="glass-card-main relative min-h-[700px] md:min-h-[800px] mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px]">
+        <div className="relative min-h-[700px] md:min-h-[800px] w-full z-10">
+          <Header />
+          
+          {/* Hero Content */}
+          <div className="absolute flex flex-col gap-[30px] items-center left-1/2 top-[140px] md:top-[160px] -translate-x-1/2 w-full max-w-[1095px] px-4">
+            {/* Badge */}
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex gap-[10px] h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px]">
+              <Image src={imgFrame6} alt="" width={24} height={24} className="shrink-0" />
+              <span className="font-sans font-semibold text-[#2d2d2d] text-base whitespace-nowrap">🚀 LAUNCHING NOW - Be the First to Experience</span>
+            </div>
+
+            {/* Title and Description */}
+            <div className="flex flex-col gap-[15px] items-center">
+              <h1 className="font-outfit font-semibold text-black text-[48px] md:text-[64px] text-center leading-tight">
               Ace Your DevOps Interview
             </h1>
-            <p className="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto mb-8 leading-relaxed">
+              <p className="font-sans font-normal text-[#2d2d2d] text-[18px] md:text-[20px] text-center max-w-[723px] leading-relaxed">
               Practice with industry experts and get personalized feedback on technical, behavioral, and system design questions
             </p>
             
             {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-8 mb-8"
-            >
+              <div className="flex gap-[30px] items-start justify-center mt-4 flex-wrap">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-900">30%</div>
-                <div className="text-sm text-neutral-600">Early Bird Discount</div>
+                  <p className="font-sans font-semibold text-black text-[28px] md:text-[32px] mb-0">30%</p>
+                  <p className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[20px]">Early Bird Discount</p>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-900">50</div>
-                <div className="text-sm text-neutral-600">Limited Spots Available</div>
+                  <p className="font-sans font-semibold text-black text-[28px] md:text-[32px] mb-0">50</p>
+                  <p className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[20px]">Limited Spots Available</p>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-900">1-on-1</div>
-                <div className="text-sm text-neutral-600">Founder Sessions</div>
+                  <p className="font-sans font-semibold text-black text-[28px] md:text-[32px] mb-0">1-on-1</p>
+                  <p className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[20px]">Founder Sessions</p>
+                </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            >
-              <motion.button
+            {/* Buttons */}
+            <div className="flex gap-[20px] items-center justify-center flex-wrap">
+              <button
                 onClick={scrollToScheduler}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-800 transition-colors duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+                className="bg-black text-white px-6 py-3 rounded-lg font-sans font-semibold shadow-sm hover:bg-[#1a1a1a] hover:shadow-md transition-all duration-200 whitespace-nowrap"
               >
-                <PlayIcon className="w-5 h-5" />
                 Schedule Your Mock Interview
-              </motion.button>
-              <motion.button
+              </button>
+              <button
                 onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-700 px-8 py-4 rounded-xl font-semibold text-lg border border-blue-200 hover:bg-blue-50 transition-colors duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+                className="glass-card glass-card-blur-sm glass-card-opacity-light px-6 py-3 rounded-lg font-sans font-semibold text-black hover:bg-white/30 transition-all duration-200 whitespace-nowrap"
               >
-                <StarIcon className="w-5 h-5" />
-                See Success Stories
-              </motion.button>
-            </motion.div>
-          </motion.div>
+                See Your Success Stories
+              </button>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Benefits Section */}
-      <section className="w-full py-20 bg-white/30">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              What You&apos;ll Get
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Comprehensive interview preparation covering all aspects of DevOps roles
-            </p>
-          </motion.div>
+      {/* What You'll Get Section */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[17px] items-center text-center max-w-[579px]">
+            <h2 className="font-outfit font-semibold text-black text-[52px] md:text-[42px]">What You&apos;ll Get</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[20px]">Comprehensive interview preparation covering all aspects of DevOps roles</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-[1261px]">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={benefit.title}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="group relative"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-start p-6 md:p-8 rounded-[20px] h-full"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative bg-white rounded-2xl shadow-lg border border-blue-100 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${benefit.bgGradient} mb-6 text-white shadow-lg`}>
-                    <div className={`text-white`}>
+                <div className="flex flex-col gap-6 items-start w-full">
+                  <div className="glass-card glass-card-blur-md glass-card-opacity-medium flex items-center justify-center p-3 rounded-full size-[75px] bg-black/10">
                       {benefit.icon}
-                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-blue-900 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    {benefit.description}
-                  </p>
-                  <div className="mt-4 flex items-center text-blue-600 font-semibold text-sm">
-                    <CheckCircleIcon className="w-4 h-4 mr-2" />
-                    <span>Included in session</span>
+                  <div className="flex flex-col gap-3 items-start w-full">
+                    <h3 className="font-outfit font-semibold text-black text-xl md:text-2xl">{benefit.title}</h3>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base leading-relaxed">{benefit.description}</p>
+                    <div className="flex gap-2 items-center mt-2">
+                      <CheckCircleIcon className="w-5 h-5 text-black" />
+                      <span className="font-sans font-semibold text-black text-sm md:text-base">Included in session</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Focus Areas Section */}
-      <section className="w-full py-16 bg-white/50">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              Interview Focus Areas
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Cover all essential DevOps topics and technologies
-            </p>
-          </motion.div>
+      {/* Interview Focus Areas Section */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[17px] items-center text-center max-w-[579px]">
+            <h2 className="font-outfit font-semibold text-black text-[52px] md:text-[42px]">Interview Focus Areas</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[20px]">Cover all essential DevOps topics and technologies</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-[1261px] auto-rows-fr">
             {focusAreas.map((area, index) => (
               <motion.div
                 key={area.title}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="bg-white rounded-2xl shadow-lg border border-blue-100 p-8 text-center hover:shadow-xl transition-shadow duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-center p-6 md:p-8 rounded-[20px] w-full h-full"
               >
-                <div className="text-blue-600 mb-4 flex justify-center">
-                  {area.icon}
+                <div className="flex flex-col gap-5 items-center text-center w-full">
+                  <div className="flex justify-center">{area.icon}</div>
+                  <div className="flex flex-col gap-3 items-center">
+                    <h3 className="font-outfit font-semibold text-black text-xl md:text-2xl">{area.title}</h3>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base leading-relaxed">{area.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-blue-900 mb-3">
-                  {area.title}
-                </h3>
-                <p className="text-neutral-600 leading-relaxed">
-                  {area.description}
-                </p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* How It Works Section */}
-      <section className="w-full py-16">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              How It Works
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Simple 4-step process to get interview-ready
-            </p>
-          </motion.div>
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[17px] items-center text-center max-w-[579px]">
+            <h2 className="font-outfit font-semibold text-black text-[52px] md:text-[42px]">How It Works</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[20px]">Simple 4-step process to get interview-ready</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-[1261px]">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="bg-white rounded-2xl shadow-lg border border-blue-100 p-8 text-center hover:shadow-xl transition-shadow duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-center p-6 md:p-8 rounded-[20px] w-full h-full"
               >
-                <div className="text-4xl font-bold text-blue-600 mb-4">
-                  {step.number}
+                <div className="flex flex-col gap-5 items-center text-center w-full">
+                  <p className="font-outfit font-semibold text-black text-4xl md:text-5xl">{step.number}</p>
+                  <div className="flex flex-col gap-3 items-center">
+                    <h3 className="font-outfit font-semibold text-black text-xl md:text-2xl">{step.title}</h3>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base leading-relaxed">{step.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-blue-900 mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-neutral-600 leading-relaxed">
-                  {step.description}
-                </p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Early Bird Offers Section */}
-      <section id="testimonials" className="w-full py-20 bg-gradient-to-br from-blue-50 to-white">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-700 px-6 py-3 rounded-full text-sm font-bold mb-6 border border-orange-200 shadow-lg"
-            >
-              <StarSolidIcon className="w-5 h-5 text-yellow-600" />
-              <span>LAUNCH SPECIAL - Limited Time</span>
-            </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              Be the First to Experience
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+      {/* Be the First to Experience Section */}
+      <div id="testimonials" className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[15px] items-center">
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex gap-[10px] h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px]">
+              <Image src={imgFrame6} alt="" width={24} height={24} />
+              <span className="font-sans font-semibold text-[#2d2d2d] text-[16px] whitespace-nowrap">LAUNCH SPECIAL - Limited Time</span>
+            </div>
+            <h2 className="font-outfit font-semibold text-black text-[52px] md:text-[42px] text-center">Be the First to Experience</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[20px] text-center max-w-[681px]">
               Join our exclusive early bird program and get premium benefits while helping us perfect our interview process
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[1261px]">
             {earlyBirdOffers.map((offer, index) => (
               <motion.div
                 key={offer.title}
-                custom={index}
-                variants={testimonialVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                className="group relative"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-start p-6 md:p-8 rounded-[20px] w-full h-full"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${offer.bgColor} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                <div className="relative bg-white rounded-2xl shadow-lg border border-blue-100 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${offer.color} mb-6 text-white shadow-lg`}>
+                <div className="flex flex-col gap-5 items-start w-full">
+                  <div className="flex items-end gap-2">
+                    <div className={`${offer.bgColor} flex items-center justify-center p-3 rounded-[10px] size-[75px]`}>
                     {offer.icon}
                   </div>
-                  <div className={`inline-block bg-gradient-to-r ${offer.color} text-white px-4 py-2 rounded-full text-xs font-bold mb-4`}>
-                    {offer.highlight}
+                    <div className={`${offer.bgColor} flex h-[29px] items-center justify-center px-4 py-2 rounded-[30px]`}>
+                      <span className="font-sans font-normal text-black text-xs whitespace-nowrap">{offer.highlight}</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-blue-900 mb-3">
-                    {offer.title}
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed mb-6">
-                    {offer.description}
-                  </p>
-                  <div className="flex items-center text-blue-600 font-semibold text-sm">
-                    <CheckCircleIcon className="w-4 h-4 mr-2" />
-                    <span>Limited spots available</span>
+                  <div className="flex flex-col gap-3 items-start w-full">
+                    <h3 className="font-outfit font-semibold text-black text-xl md:text-2xl">{offer.title}</h3>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base leading-relaxed">{offer.description}</p>
+                    <div className="flex gap-2 items-center mt-2">
+                      <CheckCircleIcon className="w-5 h-5 text-black" />
+                      <span className="font-sans font-semibold text-black text-sm md:text-base">Limited spots available</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-2xl p-8 border border-blue-300">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">
-                Why Be an Early Adopter?
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                <div className="flex items-start gap-3">
-                  <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-semibold text-blue-900">Shape the Future</div>
-                    <div className="text-sm text-neutral-600">Your feedback helps us improve for everyone</div>
+          {/* Why Be an Early Adopter */}
+          <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-center p-6 md:p-8 rounded-[20px] w-full max-w-[1261px]">
+            <div className="flex flex-col gap-8 items-center w-full">
+              <h3 className="font-outfit font-semibold text-black text-2xl md:text-3xl text-center">Why Be an Early Adopter?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <div className="flex gap-3 items-start">
+                  <CheckCircleIcon className="w-6 h-6 text-black mt-1 flex-shrink-0" />
+                  <div className="flex flex-col items-start">
+                    <p className="font-sans font-semibold text-black text-base md:text-lg">Shape the Future</p>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">Your feedback helps us improve for everyone</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-semibold text-blue-900">Premium Access</div>
-                    <div className="text-sm text-neutral-600">Get founder-level attention and support</div>
+                <div className="flex gap-3 items-start">
+                  <CheckCircleIcon className="w-6 h-6 text-black mt-1 flex-shrink-0" />
+                  <div className="flex flex-col items-start">
+                    <p className="font-sans font-semibold text-black text-base md:text-lg">Premium Access</p>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">Get founder-level attention and support</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-semibold text-blue-900">Best Value</div>
-                    <div className="text-sm text-neutral-600">Exclusive pricing that won&apos;t last forever</div>
+                <div className="flex gap-3 items-start">
+                  <CheckCircleIcon className="w-6 h-6 text-black mt-1 flex-shrink-0" />
+                  <div className="flex flex-col items-start">
+                    <p className="font-sans font-semibold text-black text-base md:text-lg">Best Value</p>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">Exclusive pricing that won&apos;t last forever</p>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Cal.com Scheduler Section */}
-      <section id="scheduler-section" className="w-full py-20 bg-gradient-to-br from-blue-50 to-white">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold mb-6 border border-blue-200">
-              <CheckCircleIcon className="w-4 h-4" />
-              <span>Ready to get started?</span>
+      {/* Book Your Mock Interview Section */}
+      <div id="scheduler-section" className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[15px] items-center text-center max-w-[604px]">
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px]">
+              <div className="flex gap-[5px] items-center">
+                <Image src={imgGroup} alt="" width={20.5} height={17.78} />
+                <span className="font-sans font-normal text-black text-[16px]">Ready to get started?</span>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              Book Your Mock Interview
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+            <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[52px] md:text-[42px]">Book Your Mock Interview</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[16px] text-center max-w-[511px]">
               Choose your preferred time slot and start your interview preparation journey
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent rounded-3xl blur-xl" />
-            <div className="relative bg-white rounded-2xl shadow-xl border border-blue-100 p-8 md:p-12">
-              <div className="min-h-[600px] rounded-xl overflow-hidden relative">
+          <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-center justify-center p-6 md:p-8 rounded-[20px] w-full max-w-[1261px]">
+            <div className="min-h-[600px] w-full rounded-[20px] overflow-hidden relative">
                 {!calLoaded && (
-                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80">
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 rounded-[20px]">
                     <div className="flex flex-col items-center gap-3">
-                      <div className="h-8 w-8 rounded-full border-2 border-blue-300 border-t-blue-700 animate-spin" />
-                      <div className="text-sm text-neutral-600">Loading scheduler…</div>
+                    <div className="h-8 w-8 rounded-full border-2 border-black border-t-transparent animate-spin" />
+                    <div className="text-sm font-sans font-normal text-[#2d2d2d]">Loading scheduler…</div>
                     </div>
                   </div>
                 )}
                 <div id="my-cal-inline" style={{ width: '100%', height: '100%', overflow: 'scroll' }} />
               </div>
             </div>
-          </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* FAQ Section */}
-      <section className="w-full py-20 bg-white/30">
-        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-900">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-neutral-600">
-              Everything you need to know about our mock interviews
-            </p>
-          </motion.div>
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="flex flex-col gap-[15px] items-center text-center max-w-[656px]">
+            <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[52px] md:text-[42px]">Frequently Asked Questions</h2>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[16px]">Everything you need to know about our mock interviews</p>
+          </div>
 
-          <div className="space-y-4">
+          <div className="flex gap-[46px] items-end w-full max-w-[1261px] flex-wrap">
+            <div className="flex flex-col gap-[20px] items-end flex-1 min-w-[300px]">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-lg border border-blue-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="w-full"
               >
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
-                  className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-blue-50 transition-colors duration-200 group"
+                  className={`glass-card glass-card-blur-sm glass-card-opacity-light flex items-center justify-between px-5 py-4 rounded-[20px] w-full hover:bg-white/20 transition-all ${
+                    openFaqIndex === index ? 'bg-[#e5e5e5]' : ''
+                  }`}
                 >
-                  <span className="text-lg font-semibold text-blue-900 pr-4 group-hover:text-blue-700 transition-colors">
+                  <p className={`font-sans font-semibold text-base md:text-lg text-left pr-4 ${
+                    openFaqIndex === index ? 'text-black' : 'text-[#2d2d2d]'
+                  }`}>
                     {faq.question}
-                  </span>
-                  <div className={`transition-transform duration-200 ${openFaqIndex === index ? 'rotate-180' : 'rotate-0'}`}>
-                    <ChevronDownIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                  </div>
+                  </p>
+                  <ChevronDownIcon className={`w-5 h-5 flex-shrink-0 transition-transform ${
+                    openFaqIndex === index ? 'rotate-180 text-black' : 'text-black'
+                  }`} />
                 </button>
                 {openFaqIndex === index && (
                   <motion.div
@@ -672,87 +548,88 @@ export default function MockInterviewsPage() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="px-6 pb-6 border-t border-blue-100"
+                    className="glass-card glass-card-blur-sm glass-card-opacity-light mt-2 px-5 py-4 rounded-[20px]"
                   >
-                    <p className="text-neutral-600 leading-relaxed pt-4">
-                      {faq.answer}
-                    </p>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base leading-relaxed">{faq.answer}</p>
                   </motion.div>
                 )}
               </motion.div>
             ))}
+            </div>
+
+            {/* Contact Form Card */}
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex flex-col items-center justify-center p-8 md:p-12 rounded-[20px] w-full md:w-[513px]">
+              <div className="flex flex-col gap-8 items-center w-full">
+                <Image src={imgBxsMessage} alt="" width={88} height={88} />
+                <div className="flex flex-col gap-8 items-center w-full">
+                  <div className="flex flex-col gap-4 items-center text-center w-full">
+                    <h3 className="font-outfit font-semibold text-[#2d2d2d] text-2xl md:text-3xl">Still Have Questions?</h3>
+                    <p className="font-sans font-normal text-[#2d2d2d] text-base">
+                      Fill out the form and our team will get back to you soon.
+                    </p>
+                  </div>
+                  <button className="bg-[#66707d] text-white px-6 py-3 rounded-lg font-sans font-semibold shadow-sm hover:bg-[#5a6470] hover:shadow-md transition-all duration-200 whitespace-nowrap">
+                    Contact Us
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* CTA Section */}
-      <section className="relative w-full py-20 bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-300/20 rounded-full blur-2xl animate-pulse delay-1000" />
-        
-        <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/30 to-orange-500/30 backdrop-blur-sm text-white px-8 py-4 rounded-full text-sm font-bold mb-8 border border-yellow-300/30 shadow-lg"
-            >
-              <StarSolidIcon className="w-5 h-5 text-yellow-300" />
-              <span>🔥 30% OFF - First 50 Participants Only!</span>
-            </motion.div>
-
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-              Ready to Ace Your Next Interview?
-            </h2>
-            <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <div className="glass-card glass-card-blur-md glass-card-opacity-medium flex flex-col items-center justify-center p-8 md:p-12 rounded-[20px] w-full max-w-[1261px]">
+            <div className="flex flex-col gap-6 items-center justify-center w-full">
+              <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex gap-2 h-[40px] items-center justify-center px-4 py-2 rounded-[30px]">
+                <Image src={imgFrame6} alt="" width={24} height={24} />
+                <span className="font-sans font-semibold text-black text-sm md:text-base whitespace-nowrap">🔥 30% OFF - First 50 Participants Only!</span>
+              </div>
+              <h2 className="font-outfit font-semibold text-black text-3xl md:text-4xl text-center">Ready to Ace Your Next Interview?</h2>
+              <p className="font-sans font-normal text-[#2d2d2d] text-base md:text-lg text-center max-w-[771px]">
               Be among the first to experience our premium DevOps interview coaching and help us perfect our process for future participants
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <motion.button
+              <div className="flex gap-4 items-center justify-center flex-wrap">
+                <button
                 onClick={scrollToScheduler}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-10 py-5 rounded-xl font-bold text-lg hover:from-yellow-500 hover:to-orange-600 transition-colors duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3"
+                  className="bg-black text-white px-6 py-3 rounded-lg font-sans font-semibold shadow-sm hover:bg-[#1a1a1a] hover:shadow-md transition-all duration-200 whitespace-nowrap"
               >
-                <PlayIcon className="w-6 h-6" />
                 Get 30% Off - Book Now!
-              </motion.button>
-              <motion.button
+                </button>
+                <button
                 onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors duration-300 flex items-center gap-3"
+                  className="glass-card glass-card-blur-sm glass-card-opacity-light px-6 py-3 rounded-lg font-sans font-semibold text-black hover:bg-white/20 transition-all duration-200 whitespace-nowrap"
               >
-                <StarIcon className="w-6 h-6" />
                 See Early Bird Offers
-              </motion.button>
+                </button>
+              </div>
+              <div className="flex gap-6 items-start justify-center flex-wrap mt-4">
+                <div className="flex gap-2 items-center">
+                  <CheckCircleIcon className="w-5 h-5 text-black" />
+                  <span className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">30% discount for early birds</span>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <CheckCircleIcon className="w-5 h-5 text-black" />
+                  <span className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">Founder-level attention</span>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <CheckCircleIcon className="w-5 h-5 text-black" />
+                  <span className="font-sans font-normal text-[#2d2d2d] text-sm md:text-base">Shape our interview process</span>
+              </div>
+              </div>
             </div>
-
-            <div className="flex flex-wrap justify-center gap-8 text-blue-100">
-              <div className="flex items-center gap-2">
-                <CheckCircleIcon className="w-5 h-5 text-green-300" />
-                <span>30% discount for early birds</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircleIcon className="w-5 h-5 text-green-300" />
-                <span>Founder-level attention</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircleIcon className="w-5 h-5 text-green-300" />
-                <span>Shape our interview process</span>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+
+      {/* Footer Section */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          <Footer />
+        </div>
+      </div>
+    </div>
   );
 }

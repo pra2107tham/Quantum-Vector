@@ -112,7 +112,7 @@ export default function BlogGrid({ blogs, loading = false }: BlogGridProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full"
     >
       {blogs.map((blog, index) => (
         <BlogCard key={blog._id} blog={blog} index={index} />

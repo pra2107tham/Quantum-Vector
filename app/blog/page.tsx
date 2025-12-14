@@ -2,14 +2,19 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 import { BlogPost, BlogApiResponse } from "@/types/blog";
 import { getAllBlogs } from "@/lib/blog-api";
 import BlogGrid from "@/components/Blog/BlogGrid";
 import BlogFilters from "@/components/Blog/BlogFilters";
 import Pagination from "@/components/Blog/Pagination";
 import BackToTop from "@/components/Blog/BackToTop";
-import WebinarPopup from "@/components/WebinarPopup/WebinarPopup";
 import ErrorMessage from "@/components/ui/error-message";
+import Header from "@/web/components/Header";
+import Footer from "@/web/components/Footer";
+import { imgImage10, imgFrame, imgGroup } from "@/web/assets";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -25,6 +30,7 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [featuredTags, setFeaturedTags] = useState<string[]>([]);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
   // Fetch blogs with current filters
   const fetchBlogs = useCallback(async () => {
@@ -34,7 +40,7 @@ export default function BlogPage() {
       
       const data: BlogApiResponse = await getAllBlogs({
         page: currentPage,
-        limit: 9,
+        limit: 6,
         sort: sortBy as 'newest' | 'oldest' | 'title' | 'category',
         category: selectedCategory !== "All Categories" ? selectedCategory : undefined,
         search: searchQuery || undefined,
@@ -90,12 +96,13 @@ export default function BlogPage() {
   // Handle filter changes
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to first page when changing category
+    setCurrentPage(1);
+    setIsCategoryDropdownOpen(false);
   };
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    setCurrentPage(1); // Reset to first page when searching
+    setCurrentPage(1);
   };
 
   // Debounced search effect
@@ -109,12 +116,11 @@ export default function BlogPage() {
 
   const handleSortChange = (sort: string) => {
     setSortBy(sort);
-    setCurrentPage(1); // Reset to first page when changing sort
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    // Scroll to top when page changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -127,163 +133,176 @@ export default function BlogPage() {
     fetchBlogs();
   };
 
+  const getCategoryIcon = (cat: string) => {
+    const icons: Record<string, string> = {
+      DevOps: "🚀",
+      Kubernetes: "☸️",
+      AWS: "☁️",
+      Azure: "🔷",
+      Infrastructure: "🏗️",
+      "Data Science": "📊",
+      Security: "📝",
+      Monitoring: "📝",
+    };
+    return icons[cat] || "📝";
+  };
+
+  const getCategoryCount = (category: string) => {
+    return blogs.filter(blog => blog.category === category).length;
+  };
+
   return (
-    <main className="relative w-full flex flex-col items-center bg-gradient-to-b from-blue-50 to-blue-100 text-neutral-800 pt-32 pb-20 md:pt-40 md:pb-28">
-      <WebinarPopup showOnPages={["/blog", "/blog/"]} delay={2500} />
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900 tracking-tight">
-            DevOps Community Blog
-          </h1>
-          <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
-            AI-generated insights, tutorials, and best practices for DevOps, Cloud, and Data Science. 
-            Stay updated with the latest trends and technologies in the industry.
-          </p>
-        </motion.div>
-
-        {/* Filters */}
-        <BlogFilters
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={handleCategoryChange}
-          searchQuery={searchQuery}
-          onSearchChange={handleSearchChange}
-          totalBlogs={totalBlogs}
-          sortBy={sortBy}
-          onSortChange={handleSortChange}
-          featuredTags={featuredTags}
-          onTagFilter={handleTagFilter}
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+      {/* Background Image */}
+      <div className="fixed inset-0 -z-10 w-full h-full">
+        <Image
+          src={imgImage10}
+          alt="DevOps Community Background"
+          fill
+          className="object-cover object-center pointer-events-none"
+          priority
+          unoptimized
         />
+      </div>
+      {/* Fallback background color */}
+      <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
 
-        {/* Error State */}
-        {error && !loading && (
-          <ErrorMessage
-            title="Failed to Load Blog Posts"
-            message={error}
-            onRetry={handleRetry}
-            className="my-8"
-          />
-        )}
-
-        {/* Blog Grid */}
-        {!error && (
-          <>
-            <BlogGrid blogs={blogs} loading={loading} />
-            
-            {/* Pagination */}
-            {!loading && totalPages > 1 && (
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                hasNextPage={hasNextPage}
-                hasPrevPage={hasPrevPage}
-                onPageChange={handlePageChange}
-                loading={loading}
-              />
-            )}
-          </>
-        )}
-
-        {/* Featured Categories Section */}
-        {!loading && !error && blogs.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mt-16 pt-16 border-t border-blue-200"
-          >
-            <h2 className="text-3xl font-bold text-blue-900 text-center mb-8">
-              Explore by Category
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {categories.filter(cat => cat !== "All Categories").map((category) => {
-                // Note: This shows the count from current page, not total count
-                const categoryCount = blogs.filter(blog => blog.category === category).length;
-                const getCategoryIcon = (cat: string) => {
-                  const icons = {
-                    DevOps: "🚀",
-                    Kubernetes: "☸️",
-                    AWS: "☁️",
-                    Azure: "🔷",
-                    Infrastructure: "🏗️",
-                    "Data Science": "📊",
-                  };
-                  return icons[cat as keyof typeof icons] || "📝";
-                };
-
-                return (
-                  <motion.button
-                    key={category}
-                    onClick={() => handleCategoryChange(category)}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`p-4 rounded-xl border-2 transition-all duration-300 text-center ${
-                      selectedCategory === category
-                        ? "bg-blue-100 border-blue-300 text-blue-800"
-                        : "bg-white border-blue-100 text-neutral-700 hover:border-blue-200 hover:bg-blue-50"
-                    }`}
-                  >
-                    <div className="text-2xl mb-2">{getCategoryIcon(category)}</div>
-                    <div className="font-semibold text-sm mb-1">{category}</div>
-                    <div className="text-xs text-neutral-500">
-                      {categoryCount} {categoryCount === 1 ? "post" : "posts"}
-                    </div>
-                  </motion.button>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-
-        {/* Call to Action */}
-        {!loading && !error && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center bg-white rounded-2xl shadow-lg border border-blue-100 p-8"
-          >
-            <h3 className="text-2xl font-bold text-blue-900 mb-4">
-              Stay Updated with Latest Posts
-            </h3>
-            <p className="text-neutral-600 mb-6 max-w-2xl mx-auto">
-              Our AI-powered blog is constantly updated with new insights, tutorials, and best practices. 
-              Check back regularly for fresh content on DevOps, Cloud, and Data Science.
+      {/* Hero Section */}
+      <div className="glass-card-main relative min-h-[700px] md:min-h-[800px] mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px]">
+        <div className="relative min-h-[700px] md:min-h-[800px] w-full z-10 flex flex-col">
+          <Header />
+          
+          {/* Hero Content */}
+          <div className="flex flex-col gap-[15px] items-center justify-center flex-1 w-full max-w-[1095px] mx-auto px-4">
+            <h1 className="font-outfit font-semibold text-black text-[48px] md:text-[64px] text-center leading-tight">
+              DevOps Community Blog
+            </h1>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[18px] md:text-[20px] text-center max-w-[723px] leading-relaxed">
+              AI-generated insights, tutorials, and best practices for DevOps, Cloud, and Data Science. Stay updated with the latest trends and technologies in the industry.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => fetchBlogs()}
-                className="px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-300 shadow-md hover:shadow-lg"
-              >
-                Refresh for New Posts
-              </button>
-              <button
-                onClick={() => {
-                  setSelectedCategory("All Categories");
-                  setSearchQuery("");
-                  setSortBy("newest");
-                  setCurrentPage(1);
-                }}
-                className="px-6 py-3 bg-white border border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-300"
-              >
-                View All Posts
-              </button>
+            <p className="font-sans font-normal text-[#2d2d2d] text-[18px] md:text-[20px] text-center">
+              Home / Blog
+            </p>
+            
+            {/* Tag Badges */}
+            <div className="flex flex-wrap gap-[15px] items-center justify-center mt-4">
+              {featuredTags.slice(0, 3).map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => handleTagFilter(tag)}
+                  className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-white/20 transition-all"
+                >
+                  <p className="font-sans font-normal text-[#1447e6] text-[14px] md:text-[16px] whitespace-nowrap">
+                    {tag}
+                  </p>
+                </button>
+              ))}
             </div>
-          </motion.div>
-        )}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Section */}
+      <div className="relative w-full mt-[80px] md:mt-[120px]">
+        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+          
+          {/* Filters Section */}
+          <div className="w-full max-w-[1260px]">
+            <BlogFilters
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+              searchQuery={searchQuery}
+              onSearchChange={handleSearchChange}
+              totalBlogs={totalBlogs}
+              sortBy={sortBy}
+              onSortChange={handleSortChange}
+              featuredTags={featuredTags}
+              onTagFilter={handleTagFilter}
+              categoryCounts={categories.reduce((acc, cat) => {
+                if (cat !== "All Categories") {
+                  acc[cat] = getCategoryCount(cat);
+                }
+                return acc;
+              }, {} as Record<string, number>)}
+            />
+          </div>
+
+          {/* Error State */}
+          {error && !loading && (
+            <ErrorMessage
+              title="Failed to Load Blog Posts"
+              message={error}
+              onRetry={handleRetry}
+              className="my-8"
+            />
+          )}
+
+          {/* Blog Grid */}
+          {!error && (
+            <>
+              <div className="w-full max-w-[1260px]">
+                <BlogGrid blogs={blogs} loading={loading} />
+              </div>
+              
+              {/* Pagination */}
+              {!loading && totalPages > 1 && (
+                <div className="w-full max-w-[1260px]">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    hasNextPage={hasNextPage}
+                    hasPrevPage={hasPrevPage}
+                    onPageChange={handlePageChange}
+                    loading={loading}
+                  />
+                </div>
+              )}
+            </>
+          )}
+
+          {/* CTA Section */}
+          {!loading && !error && (
+            <div className="glass-card glass-card-blur-md glass-card-opacity-medium flex flex-col items-center justify-center p-8 md:p-12 rounded-[20px] w-full max-w-[1260px]">
+              <div className="flex flex-col gap-[15px] items-center">
+                <h2 className="font-outfit font-semibold text-[#1447e6] text-[28px] md:text-[32px] text-center">
+                  Stay Updated with Latest Posts
+                </h2>
+                <p className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px] text-center max-w-[771px]">
+                  Our AI-powered blog is constantly updated with new insights, tutorials, and best practices. Check back regularly for fresh content on DevOps, Cloud, and Data Science.
+                </p>
+                <div className="flex gap-[15px] items-center justify-center flex-wrap mt-4">
+                  <button
+                    onClick={() => fetchBlogs()}
+                    className="bg-[#9eabbb] text-white px-[18px] py-[12px] rounded-[30px] font-sans font-semibold text-[14px] md:text-[16px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:bg-[#8a96a5] transition-all duration-200 whitespace-nowrap"
+                  >
+                    Refresh For New Posts
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedCategory("All Categories");
+                      setSearchQuery("");
+                      setSortBy("newest");
+                      setCurrentPage(1);
+                    }}
+                    className="glass-card glass-card-blur-sm glass-card-opacity-light px-[18px] py-[12px] rounded-[30px] font-sans font-semibold text-[#1447e6] text-[14px] md:text-[16px] hover:bg-white/20 transition-all duration-200 whitespace-nowrap"
+                  >
+                    View All Posts
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Footer */}
+          <div className="w-full">
+            <Footer />
+          </div>
+        </div>
       </div>
       
       {/* Back to Top Button */}
       <BackToTop />
-    </main>
+    </div>
   );
 }

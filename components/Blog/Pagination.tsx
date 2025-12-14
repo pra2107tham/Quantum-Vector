@@ -66,29 +66,31 @@ export default function Pagination({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="flex items-center justify-center gap-2 mt-8 mb-4"
+      className="flex items-center justify-center gap-[15px] mt-8 mb-4"
     >
       {/* Previous Button */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={!hasPrevPage || loading}
-        className={`flex items-center justify-center w-10 h-10 rounded-lg border transition-all duration-200 ${
+        className={`flex items-center justify-center transition-all duration-200 ${
           hasPrevPage && !loading
-            ? "border-blue-200 bg-white text-blue-600 hover:bg-blue-50 hover:border-blue-300 shadow-sm hover:shadow"
-            : "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
+            ? "text-[#1447e6] hover:opacity-70 cursor-pointer"
+            : "text-gray-400 cursor-not-allowed"
         }`}
       >
-        <ChevronLeftIcon className="w-5 h-5" />
+        <svg className="w-[7px] h-[13px]" fill="none" viewBox="0 0 7 13" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 1L1 6.5L6 12" />
+        </svg>
       </button>
 
       {/* Page Numbers */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0">
         {visiblePages.map((page, index) => {
           if (page === '...') {
             return (
               <span
                 key={`dots-${index}`}
-                className="flex items-center justify-center w-10 h-10 text-gray-400"
+                className="font-sans font-normal text-[#1447e6] text-[24px] capitalize px-2"
               >
                 ...
               </span>
@@ -105,12 +107,12 @@ export default function Pagination({
               disabled={loading}
               whileHover={!isCurrentPage && !loading ? { scale: 1.05 } : {}}
               whileTap={!isCurrentPage && !loading ? { scale: 0.95 } : {}}
-              className={`flex items-center justify-center w-10 h-10 rounded-lg border font-medium text-sm transition-all duration-200 ${
+              className={`font-sans font-normal text-sm md:text-[24px] capitalize transition-all duration-200 ${
                 isCurrentPage
-                  ? "border-blue-500 bg-blue-500 text-white shadow-md"
+                  ? "bg-[#1447e6] text-white rounded-[400px] w-[36px] h-[36px] flex items-center justify-center px-[10px] py-0"
                   : loading
-                  ? "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
-                  : "border-blue-200 bg-white text-blue-600 hover:bg-blue-50 hover:border-blue-300 shadow-sm hover:shadow"
+                  ? "text-gray-400 cursor-not-allowed px-2"
+                  : "text-[#1447e6] hover:opacity-70 px-2"
               }`}
             >
               {pageNumber}
@@ -123,19 +125,21 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={!hasNextPage || loading}
-        className={`flex items-center justify-center w-10 h-10 rounded-lg border transition-all duration-200 ${
+        className={`flex items-center justify-center transition-all duration-200 rotate-180 ${
           hasNextPage && !loading
-            ? "border-blue-200 bg-white text-blue-600 hover:bg-blue-50 hover:border-blue-300 shadow-sm hover:shadow"
-            : "border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed"
+            ? "text-[#1447e6] hover:opacity-70 cursor-pointer"
+            : "text-gray-400 cursor-not-allowed"
         }`}
       >
-        <ChevronRightIcon className="w-5 h-5" />
+        <svg className="w-[7px] h-[13px]" fill="none" viewBox="0 0 7 13" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 1L1 6.5L6 12" />
+        </svg>
       </button>
 
       {/* Page Info */}
-      <div className="ml-4 text-sm text-gray-600 hidden sm:block">
+      <p className="font-sans font-normal text-[12px] text-[rgba(0,0,0,0.25)] ml-2">
         Page {currentPage} of {totalPages}
-      </div>
+      </p>
     </motion.div>
   );
 }

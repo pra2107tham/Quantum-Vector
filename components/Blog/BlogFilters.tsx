@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { ChevronDownIcon, MagnifyingGlassIcon, FunnelIcon, Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 
@@ -15,7 +15,22 @@ interface BlogFiltersProps {
   onSortChange: (sort: string) => void;
   featuredTags?: string[];
   onTagFilter?: (tag: string) => void;
+  categoryCounts?: Record<string, number>;
 }
+
+const getCategoryIcon = (cat: string) => {
+  const icons: Record<string, string> = {
+    DevOps: "🚀",
+    Kubernetes: "☸️",
+    AWS: "☁️",
+    Azure: "🔷",
+    Infrastructure: "🏗️",
+    "Data Science": "📊",
+    Security: "📝",
+    Monitoring: "📝",
+  };
+  return icons[cat] || "📝";
+};
 
 export default function BlogFilters({
   categories,
@@ -28,9 +43,27 @@ export default function BlogFilters({
   onSortChange,
   featuredTags = [],
   onTagFilter,
+  categoryCounts = {},
 }: BlogFiltersProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const handleCategorySelect = (category: string) => {
     onCategoryChange(category);
@@ -58,212 +91,116 @@ export default function BlogFilters({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="bg-white rounded-2xl shadow-lg border border-blue-100 p-6 mb-8"
+      className="flex flex-col gap-[30px] items-start w-full"
     >
       {/* Featured Tags Section */}
       {featuredTags.length > 0 && (
-        <div className="mb-6 pb-6 border-b border-gray-100">
-          <div className="flex items-center gap-2 mb-3">
-            <FunnelIcon className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-900">Popular Tags</span>
+        <div className="flex flex-col gap-[20px] items-start w-full">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 w-full">
+            <div className="flex gap-[15px] items-center">
+              <FunnelIcon className="w-6 h-6 text-[#2d2d2d] shrink-0" />
+              <p className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-[24px]">
+                Popular Tags
+              </p>
+            </div>
+            <div className="flex gap-[15px] items-center" ref={dropdownRef}>
+              <div className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] relative">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex gap-[10px] items-center justify-center w-full"
+                >
+                  <div className="flex flex-col items-start">
+                    <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
+                      All
+                    </p>
+                    <p className="font-sans font-normal text-[#1447e6] text-[12px] leading-tight">
+                      Categories
+                    </p>
+                  </div>
+                  <ChevronDownIcon
+                    className={`w-4 h-4 text-[#1447e6] transition-transform flex-shrink-0 ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 mt-2 glass-card glass-card-blur-md glass-card-opacity-medium rounded-[10px] p-2 min-w-[200px] z-50 shadow-lg"
+                  >
+                    {categories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => handleCategorySelect(category)}
+                        className={`w-full text-left px-4 py-2 text-sm rounded-lg transition-colors ${
+                          selectedCategory === category
+                            ? "bg-white/20 text-[#1447e6] font-semibold"
+                            : "text-[#2d2d2d] hover:bg-white/10"
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-[20px] items-center">
             {featuredTags.map((tag) => (
               <motion.button
                 key={tag}
                 onClick={() => onTagFilter && onTagFilter(tag)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-medium rounded-full border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-all duration-200"
+                className="glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-white/20 transition-all"
               >
-                <span className="mr-1">#</span>
-                {tag}
+                <p className="font-sans font-normal text-[#1447e6] text-[12px]">
+                  #{tag}
+                </p>
               </motion.button>
             ))}
           </div>
         </div>
       )}
 
-      <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-        {/* Search Bar */}
-        <div className="relative flex-1 max-w-md">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <MagnifyingGlassIcon className="h-5 w-5 text-neutral-400" />
+      {/* Explore by Category Section */}
+      {categories.length > 0 && (
+        <div className="flex flex-col gap-[20px] items-start w-full">
+          <div className="flex gap-[15px] items-center">
+            <FunnelIcon className="w-6 h-6 text-[#2d2d2d] shrink-0" />
+            <p className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-[24px]">
+              Explore by Category
+            </p>
           </div>
-          <input
-            type="text"
-            placeholder="Search blog posts..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm"
-          />
-        </div>
-
-        {/* Filters and Sorting */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          {/* Category Filter */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-600 whitespace-nowrap">
-              Category:
-            </span>
-            <div className="relative">
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center justify-between gap-2 px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium text-blue-700 min-w-[160px]"
-              >
-                <span>{selectedCategory}</span>
-                <ChevronDownIcon
-                  className={`h-4 w-4 transition-transform ${
-                    isDropdownOpen ? "rotate-180" : ""
+          <div className="flex flex-wrap gap-[20px] items-center">
+            {categories.filter(cat => cat !== "All Categories").slice(0, 8).map((category) => {
+              const categoryCount = categoryCounts[category] || 0;
+              return (
+                <motion.button
+                  key={category}
+                  onClick={() => onCategoryChange(category)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`glass-card glass-card-blur-sm glass-card-opacity-light flex h-[40px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-white/20 transition-all ${
+                    selectedCategory === category ? 'ring-2 ring-black' : ''
                   }`}
-                />
-              </button>
-
-              {isDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
                 >
-                  <div className="py-2">
-                    {categories.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => handleCategorySelect(category)}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-50 transition-colors ${
-                          selectedCategory === category
-                            ? "bg-blue-50 text-blue-700 font-medium"
-                            : "text-neutral-700"
-                        }`}
-                      >
-                        {category}
-                      </button>
-                    ))}
+                  <div className="flex gap-2 items-center">
+                    <span className="text-[16px]">{getCategoryIcon(category)}</span>
+                    <p className="font-sans font-normal text-[#1447e6] text-[12px] whitespace-nowrap">
+                      {category} ({categoryCount})
+                    </p>
                   </div>
-                </motion.div>
-              )}
-            </div>
+                </motion.button>
+              );
+            })}
           </div>
-
-          {/* Sort Filter */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-600 whitespace-nowrap">
-              <Bars3BottomLeftIcon className="w-4 h-4 inline mr-1" />
-              Sort:
-            </span>
-            <div className="relative">
-              <button
-                onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                className="flex items-center justify-between gap-2 px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700 min-w-[140px]"
-              >
-                <span>{getSortLabel(sortBy)}</span>
-                <ChevronDownIcon
-                  className={`h-4 w-4 transition-transform ${
-                    isSortDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {isSortDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
-                >
-                  <div className="py-2">
-                    {sortOptions.map((option) => (
-                      <button
-                        key={option.value}
-                        onClick={() => handleSortSelect(option.value)}
-                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                          sortBy === option.value
-                            ? "bg-gray-50 text-gray-900 font-medium"
-                            : "text-neutral-700"
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="text-sm text-neutral-500 whitespace-nowrap">
-          {totalBlogs} {totalBlogs === 1 ? "post" : "posts"} found
-        </div>
-      </div>
-
-      {/* Active Filters */}
-      {(selectedCategory !== "All Categories" || searchQuery) && (
-        <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-          <span className="text-xs font-medium text-neutral-500">Active filters:</span>
-          
-          {selectedCategory !== "All Categories" && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium"
-            >
-              {selectedCategory}
-              <button
-                onClick={() => onCategoryChange("All Categories")}
-                className="ml-1 hover:bg-blue-200 rounded-full p-0.5 transition-colors"
-              >
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </motion.span>
-          )}
-          
-          {searchQuery && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium"
-            >
-              &quot;{searchQuery}&quot;
-              <button
-                onClick={() => onSearchChange("")}
-                className="ml-1 hover:bg-green-200 rounded-full p-0.5 transition-colors"
-              >
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </motion.span>
-          )}
-          
-          <button
-            onClick={() => {
-              onCategoryChange("All Categories");
-              onSearchChange("");
-            }}
-            className="text-xs text-neutral-500 hover:text-neutral-700 underline transition-colors"
-          >
-            Clear all
-          </button>
         </div>
       )}
 
-      {/* Click outside to close dropdowns */}
-      {(isDropdownOpen || isSortDropdownOpen) && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => {
-            setIsDropdownOpen(false);
-            setIsSortDropdownOpen(false);
-          }}
-        />
-      )}
     </motion.div>
   );
 }
