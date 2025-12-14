@@ -22,7 +22,7 @@
     "cobe": "^0.6.3",
     "lucide-react": "^0.511.0",
     "motion": "^12.10.5",
-    "next": "15.3.2",
+    "next": "15.3.8",
     "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
