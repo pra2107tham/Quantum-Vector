@@ -12,13 +12,15 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
 
+  // Only scroll if on homepage AND section exists, otherwise navigate normally
   const handleCoursesClick = (e: React.MouseEvent) => {
     if (isHomePage) {
-      e.preventDefault();
       const coursesSection = document.querySelector('section[id="courses"]');
       if (coursesSection) {
+        e.preventDefault();
         coursesSection.scrollIntoView({ behavior: "smooth" });
       }
+      // If section doesn't exist, let the link navigate to /courses
     }
   };
 
