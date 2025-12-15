@@ -555,12 +555,14 @@ export default function DCLPPage() {
 
                 {/* CTA Buttons */}
                 <div className="flex items-center gap-3 mt-3">
-                  <Link
-                    href="/contact-us"
+                  <a
+                    href="https://rzp.io/rzp/E2yS4c0g"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
                   >
                     Apply Now – ₹5,000
-                  </Link>
+                  </a>
                   <a
                     href="#curriculum"
                     className="glass-card glass-card-blur-sm glass-card-opacity-light font-sans font-semibold text-[#2d2d2d] text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:bg-white/20 transition-colors whitespace-nowrap"
@@ -610,13 +612,15 @@ export default function DCLPPage() {
                     </div>
                   </div>
 
-                  <Link
-                    href="/contact-us"
+                  <a
+                    href="https://rzp.io/rzp/E2yS4c0g"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg flex items-center justify-center gap-2"
                   >
                     <CurrencyRupeeIcon className="w-5 h-5" />
                     Pay ₹5,000 to Apply
-                  </Link>
+                  </a>
                   <p className="font-sans text-[#66707d] text-[10px] md:text-xs text-center mt-2">
                     Registration fee • Refundable if not selected
                   </p>
@@ -984,12 +988,14 @@ export default function DCLPPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-                <Link
-                  href="/contact-us"
+                <a
+                  href="https://rzp.io/rzp/E2yS4c0g"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
                 >
                   Apply Now – ₹5,000
-                </Link>
+                </a>
                 <a
                   href="#curriculum"
                   className="glass-card glass-card-blur-sm font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-white/20 transition-colors whitespace-nowrap"
