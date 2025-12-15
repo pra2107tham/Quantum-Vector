@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
   imgFrame1000003337,
@@ -36,8 +37,35 @@ const faqs = [
   },
 ];
 
+// Modal Portal Component
+function ModalPortal({ children, open }: { children: React.ReactNode; open: boolean }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!mounted || !open) return null;
+
+  return createPortal(children, document.body);
+}
+
 function InquiryModal() {
   const [open, setOpen] = useState(false);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
   return (
     <>
       <button
@@ -46,16 +74,21 @@ function InquiryModal() {
       >
         Contact Us
       </button>
-      {open && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      
+      <ModalPortal open={open}>
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4"
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+        >
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-md" 
+            className="fixed inset-0 bg-black/60 backdrop-blur-md" 
             onClick={() => setOpen(false)} 
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           />
           
           {/* Modal */}
-          <div className="relative bg-white rounded-[20px] shadow-2xl w-full max-w-[420px] mx-auto p-6 md:p-8 z-10 animate-in fade-in zoom-in-95 duration-200">
+          <div className="relative bg-white rounded-[20px] shadow-2xl w-full max-w-[420px] mx-auto p-6 md:p-8 z-10">
             {/* Close Button */}
             <button
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
@@ -81,7 +114,7 @@ function InquiryModal() {
             <InquiryForm onSuccess={() => setOpen(false)} />
           </div>
         </div>
-      )}
+      </ModalPortal>
     </>
   );
 }
