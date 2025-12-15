@@ -47,18 +47,38 @@ function InquiryModal() {
         Contact Us
       </button>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="absolute inset-0" onClick={() => setOpen(false)} />
-          <div className="relative glass-card glass-card-blur-md glass-card-opacity-medium rounded-[16px] shadow-xl w-full max-w-md mx-auto p-4 md:p-6 z-10 flex flex-col">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-md" 
+            onClick={() => setOpen(false)} 
+          />
+          
+          {/* Modal */}
+          <div className="relative bg-white rounded-[20px] shadow-2xl w-full max-w-[420px] mx-auto p-6 md:p-8 z-10 animate-in fade-in zoom-in-95 duration-200">
+            {/* Close Button */}
             <button
-              className="absolute top-2 right-3 text-[#2d2d2d] text-2xl font-bold hover:text-black transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-700 transition-colors"
               onClick={() => setOpen(false)}
               aria-label="Close"
             >
-              ×
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
-            <h3 className="font-outfit font-semibold text-black text-[18px] md:text-[22px] mb-3 text-center">Get in Touch</h3>
-            <InquiryForm />
+            
+            {/* Header */}
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 bg-[#1447e6]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-6 h-6 text-[#1447e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-[24px]">Get in Touch</h3>
+              <p className="font-sans text-[#66707d] text-[13px] md:text-[14px] mt-1">We&apos;ll get back to you within 24 hours</p>
+            </div>
+            
+            <InquiryForm onSuccess={() => setOpen(false)} />
           </div>
         </div>
       )}
@@ -66,7 +86,7 @@ function InquiryModal() {
   );
 }
 
-const InquiryForm = () => {
+const InquiryForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -115,6 +135,11 @@ const InquiryForm = () => {
         phone: '',
         message: ''
       });
+      
+      // Auto close after 2 seconds
+      setTimeout(() => {
+        onSuccess?.();
+      }, 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to submit inquiry');
     } finally {
@@ -124,23 +149,23 @@ const InquiryForm = () => {
 
   if (submitted) {
     return (
-      <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-6 rounded-[16px] text-center">
-        <div className="w-12 h-12 bg-[#1447e6] rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="text-center py-6">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-outfit font-semibold text-black text-[18px] md:text-[22px] mb-1">Thank You!</h3>
-        <p className="font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px]">We&apos;ll get back to you soon.</p>
+        <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] mb-2">Message Sent!</h3>
+        <p className="font-sans text-[#66707d] text-[14px]">We&apos;ll get back to you soon.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
-          Name
+        <label htmlFor="name" className="block font-sans font-medium text-[#2d2d2d] text-[13px] mb-1.5">
+          Name <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -149,13 +174,14 @@ const InquiryForm = () => {
           value={form.name}
           onChange={handleChange}
           required
-          placeholder="Your name"
-          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          placeholder="Your full name"
+          className="w-full px-4 py-3 rounded-[10px] bg-gray-50 border border-gray-200 font-sans text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] focus:bg-white transition-all placeholder:text-gray-400 outline-none"
         />
       </div>
+      
       <div>
-        <label htmlFor="email" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
-          Email
+        <label htmlFor="email" className="block font-sans font-medium text-[#2d2d2d] text-[13px] mb-1.5">
+          Email <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -165,11 +191,12 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           placeholder="you@example.com"
-          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          className="w-full px-4 py-3 rounded-[10px] bg-gray-50 border border-gray-200 font-sans text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] focus:bg-white transition-all placeholder:text-gray-400 outline-none"
         />
       </div>
+      
       <div>
-        <label htmlFor="phone" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
+        <label htmlFor="phone" className="block font-sans font-medium text-[#2d2d2d] text-[13px] mb-1.5">
           Phone
         </label>
         <input
@@ -179,12 +206,13 @@ const InquiryForm = () => {
           value={form.phone}
           onChange={handleChange}
           placeholder="+91 00000 00000"
-          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          className="w-full px-4 py-3 rounded-[10px] bg-gray-50 border border-gray-200 font-sans text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] focus:bg-white transition-all placeholder:text-gray-400 outline-none"
         />
       </div>
+      
       <div>
-        <label htmlFor="message" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
-          Message
+        <label htmlFor="message" className="block font-sans font-medium text-[#2d2d2d] text-[13px] mb-1.5">
+          Message <span className="text-red-500">*</span>
         </label>
         <textarea
           id="message"
@@ -193,23 +221,25 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           rows={3}
-          placeholder="How can we help?"
-          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d] resize-none"
+          placeholder="How can we help you?"
+          className="w-full px-4 py-3 rounded-[10px] bg-gray-50 border border-gray-200 font-sans text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] focus:bg-white transition-all placeholder:text-gray-400 outline-none resize-none"
         />
       </div>
+      
       {error && (
-        <div className="glass-card glass-card-blur-sm glass-card-opacity-light border border-red-200 text-red-600 px-3 py-2 rounded-[8px] font-sans font-normal text-[11px] md:text-[12px]">
+        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-[10px] font-sans text-[13px]">
           {error}
         </div>
       )}
+      
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[13px] md:text-[14px] py-2.5 px-5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1447e6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] py-3.5 px-6 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-[#1447e6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl"
       >
         {loading ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
