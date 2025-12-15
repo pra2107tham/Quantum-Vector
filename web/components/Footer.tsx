@@ -44,14 +44,11 @@ export default function Footer() {
                 <Link href="/courses" className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[16px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
                   Courses
                 </Link>
-                <Link href="/webinars" className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[16px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
-                  Webinars
+                <Link href="/dclp" className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[16px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
+                  DCLP Program
                 </Link>
                 <Link href="/about" className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[16px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
                   About Us
-                </Link>
-                <Link href="/blog" className="font-sans font-normal leading-normal not-italic relative shrink-0 text-[16px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
-                  Blog
                 </Link>
               </div>
               <div className="flex flex-wrap font-sans gap-[20px] md:gap-[30px] items-center justify-center leading-normal not-italic relative shrink-0 text-[16px] text-white">
