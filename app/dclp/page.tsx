@@ -648,7 +648,7 @@ export default function DCLPPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
                 {enrollmentSteps.map((step, i) => (
                   <motion.div
                     key={i}
@@ -656,10 +656,10 @@ export default function DCLPPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
-                    className="glass-card glass-card-blur-sm glass-card-opacity-light pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 rounded-[12px] md:rounded-[16px] text-center relative"
+                    className="glass-card glass-card-blur-sm glass-card-opacity-light p-5 md:p-6 rounded-[12px] md:rounded-[16px] text-center flex flex-col items-center"
                   >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-[#1447e6] rounded-full flex items-center justify-center shadow-lg">
-                      <span className="font-outfit font-bold text-white text-sm md:text-base">{step.step}</span>
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-[#1447e6] rounded-full flex items-center justify-center shadow-lg mb-4">
+                      <span className="font-outfit font-bold text-white text-base md:text-lg">{step.step}</span>
                     </div>
                     <div className="text-[#1447e6] flex justify-center mb-3">
                       <div className="w-8 h-8 md:w-10 md:h-10 [&>svg]:w-full [&>svg]:h-full">{step.icon}</div>
