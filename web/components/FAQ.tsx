@@ -11,28 +11,28 @@ import {
 const faqs = [
   {
     id: 1,
-    question: "What is this platform about?",
-    answer: "This platform helps you master DevOps and Cloud skills with hands-on, project-based learning, live webinars, and expert mentorship.",
+    question: "Who is this program for?",
+    answer: "Perfect for freshers, career changers, and professionals looking to transition into DevOps. No prior experience needed.",
   },
   {
     id: 2,
-    question: "Are the courses beginner friendly?",
-    answer: "Yes! Our courses start from the basics and progress to advanced topics, suitable for both beginners and experienced professionals.",
+    question: "What makes DCLP different?",
+    answer: "Small batch of 6 learners, 1:1 mentorship, real production projects, and job placement support. Not just theory—actual hands-on skills.",
   },
   {
     id: 3,
-    question: "Do you offer live classes or only recorded content?",
-    answer: "We offer both live webinars and recorded modules so you can learn at your own pace and interact with instructors in real time.",
+    question: "How long is the program?",
+    answer: "The intensive program runs for 90 days with live sessions, project work, and career preparation included.",
   },
   {
     id: 4,
-    question: "Is there a community for doubt support?",
-    answer: "Absolutely! You get access to a peer community, expert engineers, and regular mock interviews for doubt resolution and career guidance.",
+    question: "Do you help with job placement?",
+    answer: "Yes! You get resume optimization, LinkedIn profile review, mock interviews, and referral support from our network.",
   },
   {
     id: 5,
-    question: "What is the refund policy?",
-    answer: "Purchases are processed via Whop, which has its own refund policy. Please review their terms before enrolling.",
+    question: "What if I can't keep up?",
+    answer: "We record all sessions. Plus, with only 6 learners per batch, you get personalized attention and support.",
   },
 ];
 
@@ -42,22 +42,22 @@ function InquiryModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] md:text-[16px] flex h-[52px] items-center justify-center px-[18px] py-[12px] relative rounded-[30px] shrink-0 w-[164px] transition-colors cursor-pointer shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] whitespace-nowrap"
+        className="bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[12px] md:text-[14px] flex h-[40px] md:h-[48px] items-center justify-center px-4 md:px-5 py-2 relative rounded-full shrink-0 transition-colors cursor-pointer shadow-lg whitespace-nowrap"
       >
         Contact Us
       </button>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
-          <div className="relative glass-card glass-card-blur-md glass-card-opacity-medium rounded-[20px] shadow-xl w-full max-w-md mx-auto p-6 md:p-8 z-10 flex flex-col">
+          <div className="relative glass-card glass-card-blur-md glass-card-opacity-medium rounded-[16px] shadow-xl w-full max-w-md mx-auto p-4 md:p-6 z-10 flex flex-col">
             <button
-              className="absolute top-3 right-3 text-[#2d2d2d] text-2xl font-bold hover:text-black transition-colors"
+              className="absolute top-2 right-3 text-[#2d2d2d] text-2xl font-bold hover:text-black transition-colors"
               onClick={() => setOpen(false)}
               aria-label="Close"
             >
               ×
             </button>
-            <h3 className="font-outfit font-semibold text-black text-[20px] md:text-[24px] mb-4 text-center">Inquiry Form</h3>
+            <h3 className="font-outfit font-semibold text-black text-[18px] md:text-[22px] mb-3 text-center">Get in Touch</h3>
             <InquiryForm />
           </div>
         </div>
@@ -124,22 +124,22 @@ const InquiryForm = () => {
 
   if (submitted) {
     return (
-      <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-8 rounded-[20px] text-center">
-        <div className="w-16 h-16 bg-[#1447e6] rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-6 rounded-[16px] text-center">
+        <div className="w-12 h-12 bg-[#1447e6] rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-outfit font-semibold text-black text-[24px] md:text-[28px] mb-2">Thank You!</h3>
-        <p className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px]">We&apos;ll get back to you soon.</p>
+        <h3 className="font-outfit font-semibold text-black text-[18px] md:text-[22px] mb-1">Thank You!</h3>
+        <p className="font-sans font-normal text-[#2d2d2d] text-[12px] md:text-[14px]">We&apos;ll get back to you soon.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-1">
-        <label htmlFor="name" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div>
+        <label htmlFor="name" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
           Name
         </label>
         <input
@@ -150,11 +150,11 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           placeholder="Your name"
-          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
-      <div className="space-y-1">
-        <label htmlFor="email" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
+      <div>
+        <label htmlFor="email" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
           Email
         </label>
         <input
@@ -165,11 +165,11 @@ const InquiryForm = () => {
           onChange={handleChange}
           required
           placeholder="you@example.com"
-          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
-      <div className="space-y-1">
-        <label htmlFor="phone" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
+      <div>
+        <label htmlFor="phone" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
           Phone
         </label>
         <input
@@ -178,12 +178,12 @@ const InquiryForm = () => {
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          placeholder="+1 (555) 000-0000"
-          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
+          placeholder="+91 00000 00000"
+          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d]"
         />
       </div>
-      <div className="space-y-1">
-        <label htmlFor="message" className="block font-sans font-medium text-black text-[12px] md:text-[14px]">
+      <div>
+        <label htmlFor="message" className="block font-sans font-medium text-black text-[11px] md:text-[12px] mb-1">
           Message
         </label>
         <textarea
@@ -192,31 +192,31 @@ const InquiryForm = () => {
           value={form.message}
           onChange={handleChange}
           required
-          rows={4}
-          placeholder="How can we help you?"
-          className="w-full px-4 py-2.5 rounded-[10px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[14px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d] resize-none"
+          rows={3}
+          placeholder="How can we help?"
+          className="w-full px-3 py-2 rounded-[8px] glass-card glass-card-blur-sm glass-card-opacity-light border border-white/30 font-sans font-normal text-[#2d2d2d] text-[13px] focus:ring-2 focus:ring-[#1447e6] focus:border-[#1447e6] transition-colors placeholder:text-[#66707d] resize-none"
         />
       </div>
       {error && (
-        <div className="glass-card glass-card-blur-sm glass-card-opacity-light border border-red-200 text-red-600 px-4 py-3 rounded-[10px] font-sans font-normal text-[12px] md:text-[14px]">
+        <div className="glass-card glass-card-blur-sm glass-card-opacity-light border border-red-200 text-red-600 px-3 py-2 rounded-[8px] font-sans font-normal text-[11px] md:text-[12px]">
           {error}
         </div>
       )}
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] md:text-[16px] py-3 px-6 rounded-[30px] focus:outline-none focus:ring-2 focus:ring-[#1447e6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-lg whitespace-nowrap"
+        className="w-full bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[13px] md:text-[14px] py-2.5 px-5 rounded-full focus:outline-none focus:ring-2 focus:ring-[#1447e6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
       >
         {loading ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Submitting...
+            Sending...
           </span>
         ) : (
-          'Submit Inquiry'
+          'Send Message'
         )}
       </button>
     </form>
@@ -231,53 +231,42 @@ export default function FAQ() {
   };
 
   return (
-    <div className="flex flex-col gap-[30px] items-center relative shrink-0 w-full max-w-[1261px]">
-      <div className="flex flex-col gap-[15px] items-start leading-normal relative shrink-0 text-[#2d2d2d] w-full max-w-[656px] whitespace-pre-wrap">
-        <p className="font-outfit font-semibold min-w-full relative shrink-0 text-[32px] md:text-[52px] w-[min-content]">
-          Frequently Asked Questions
-        </p>
-        <p className="font-sans font-normal not-italic relative shrink-0 text-[14px] md:text-[16px] text-center w-full max-w-[536px]">
-          Find answers to the most common questions about our platform, courses, and community.
+    <div id="faq" className="flex flex-col gap-5 md:gap-8 items-center relative shrink-0 w-full max-w-[1261px] px-2">
+      <div className="flex flex-col gap-2 md:gap-3 items-center text-center relative shrink-0 text-[#2d2d2d] w-full max-w-[600px]">
+        <h2 className="font-outfit font-semibold text-[22px] md:text-[36px] lg:text-[44px]">
+          Questions? We&apos;ve Got Answers
+        </h2>
+        <p className="font-sans font-normal not-italic text-[12px] md:text-[14px] text-[#66707d]">
+          Everything you need to know about the DCLP program
         </p>
       </div>
-      <div className="flex flex-col md:flex-row gap-[46px] items-end relative shrink-0 w-full">
-        <div className="flex flex-col gap-[20px] items-end relative shrink-0 w-full md:w-[702px]">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-stretch relative shrink-0 w-full">
+        {/* FAQ List */}
+        <div className="flex flex-col gap-2 md:gap-3 items-end relative shrink-0 w-full md:w-[60%]">
           {faqs.map((faq) => (
             <div
               key={faq.id}
               className={`${
                 openFaq === faq.id
-                  ? "bg-[#66707d]"
+                  ? "bg-[#1447e6]"
                   : "glass-card glass-card-blur-md glass-card-opacity-light"
-              } flex ${
-                openFaq === faq.id ? "h-auto min-h-[119px]" : "h-[68px]"
-              } items-center justify-center px-[20px] py-[10px] relative rounded-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] shrink-0 w-full cursor-pointer transition-all`}
+              } flex items-start justify-center px-4 py-3 md:px-5 md:py-4 relative rounded-[12px] md:rounded-[14px] shadow-md shrink-0 w-full cursor-pointer transition-all`}
               onClick={() => toggleFaq(faq.id)}
             >
-              <div className="flex items-center justify-between w-full gap-4">
-                {openFaq === faq.id ? (
-                  <div className="capitalize flex flex-col gap-[10px] items-start justify-center leading-[1.4] not-italic relative shrink-0 text-white whitespace-pre-wrap z-10 flex-1">
-                    <p className="font-sans font-semibold relative shrink-0 text-[16px] md:text-[20px] w-full">
-                      {faq.question}
-                    </p>
-                    {faq.answer && (
-                      <p className="font-sans font-normal relative shrink-0 text-[14px] md:text-[16px] w-full">
-                        {faq.answer}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <p className="capitalize font-sans font-semibold leading-[1.4] not-italic relative shrink-0 text-[#2d2d2d] text-[16px] md:text-[20px] w-full whitespace-pre-wrap z-10 flex-1">
+              <div className="flex items-start justify-between w-full gap-3">
+                <div className="flex-1">
+                  <p className={`font-sans font-semibold leading-tight text-[13px] md:text-[16px] ${openFaq === faq.id ? "text-white" : "text-[#2d2d2d]"}`}>
                     {faq.question}
                   </p>
-                )}
-                <div className="relative shrink-0 size-[43px] z-10">
+                  {openFaq === faq.id && faq.answer && (
+                    <p className="font-sans font-normal text-white/90 text-[11px] md:text-[14px] mt-2 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  )}
+                </div>
+                <div className="relative shrink-0 w-7 h-7 md:w-9 md:h-9 z-10">
                   <Image
-                    src={
-                      openFaq === faq.id
-                        ? imgFrame1000003338
-                        : imgFrame1000003337
-                    }
+                    src={openFaq === faq.id ? imgFrame1000003338 : imgFrame1000003337}
                     alt={openFaq === faq.id ? "Close" : "Open"}
                     fill
                     className="object-contain"
@@ -287,20 +276,20 @@ export default function FAQ() {
             </div>
           ))}
         </div>
-        <div className="glass-card glass-card-blur-md glass-card-opacity-light flex flex-col h-auto md:h-[471px] items-center justify-center px-[40px] md:px-[85px] py-[40px] md:py-[77px] relative rounded-[10px] shrink-0 w-full md:w-[513px]">
-          <div className="flex flex-col gap-[30px] items-center relative shrink-0 w-full max-w-[341px] z-10">
-            <div className="relative shrink-0 size-[88px]">
+        
+        {/* Contact Card */}
+        <div className="glass-card glass-card-blur-md glass-card-opacity-light flex flex-col h-auto items-center justify-center p-5 md:p-8 relative rounded-[12px] md:rounded-[16px] shrink-0 w-full md:w-[40%]">
+          <div className="flex flex-col gap-4 md:gap-5 items-center relative shrink-0 w-full max-w-[300px] z-10">
+            <div className="relative shrink-0 w-14 h-14 md:w-16 md:h-16">
               <Image src={imgBxsMessage} alt="Contact us" fill className="object-contain" />
             </div>
-            <div className="flex flex-col gap-[30px] items-center relative shrink-0 w-full">
-              <div className="capitalize flex flex-col gap-[15px] items-start leading-[1.4] not-italic relative shrink-0 text-black w-full whitespace-pre-wrap">
-                <p className="font-sans font-semibold relative shrink-0 text-[24px] md:text-[32px] w-full text-center">
-                  Still Have Questions?
-                </p>
-                <p className="font-sans font-normal relative shrink-0 text-[14px] md:text-[16px] text-center w-full">
-                  Fill out the form and our team will get back to you soon.
-                </p>
-              </div>
+            <div className="flex flex-col gap-3 items-center relative shrink-0 w-full text-center">
+              <h3 className="font-sans font-semibold text-[#2d2d2d] text-[18px] md:text-[24px]">
+                Still Have Questions?
+              </h3>
+              <p className="font-sans font-normal text-[#66707d] text-[11px] md:text-[14px]">
+                Our team is here to help you make the right decision.
+              </p>
               <InquiryModal />
             </div>
           </div>
@@ -309,4 +298,3 @@ export default function FAQ() {
     </div>
   );
 }
-

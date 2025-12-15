@@ -36,81 +36,80 @@ export default function CoursesPage() {
       <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
 
       {/* Hero Section */}
-      <div className="glass-card-main relative min-h-[700px] md:min-h-[800px] mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px]">
-        <div className="relative min-h-[700px] md:min-h-[800px] w-full z-10">
+      <div className="glass-card-main relative min-h-[600px] md:min-h-[750px] mx-auto my-[15px] md:my-[23px] rounded-[20px] md:rounded-[32px] w-[calc(100%-20px)] md:w-[calc(100%-50px)] max-w-[1383.548px]">
+        <div className="relative min-h-[600px] md:min-h-[750px] w-full z-10">
           <Header />
 
           {/* Hero Content */}
-          <div className="absolute flex flex-col md:flex-row gap-[40px] md:gap-[60px] items-center left-0 md:left-[59px] top-[120px] md:top-[140px] w-full md:w-[calc(100%-118px)] max-w-full md:max-w-none px-4 md:px-0 md:pr-[59px] pb-0">
+          <div className="absolute flex flex-col md:flex-row gap-6 md:gap-10 items-start left-0 md:left-[59px] top-[110px] md:top-[140px] w-full md:w-[calc(100%-118px)] max-w-full md:max-w-none px-3 md:px-0 md:pr-[59px] pb-0">
             {/* Left Content */}
-            <div className="flex flex-col gap-[20px] items-start relative shrink-0 w-full md:w-[60%]">
+            <div className="flex flex-col gap-3 md:gap-5 items-start relative shrink-0 w-full md:w-[58%]">
               {/* Badges */}
-              <div className="flex flex-wrap gap-3">
-                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-4 py-2 rounded-full font-sans font-semibold text-[#1447e6] text-sm whitespace-nowrap">
-                  🎯 Job-Ready Program
+              <div className="flex flex-wrap gap-2">
+                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm whitespace-nowrap">
+                  🎯 Job-Ready
                 </span>
-                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-4 py-2 rounded-full font-sans font-semibold text-[#2d2d2d] text-sm whitespace-nowrap">
-                  🚀 Limited to 6 Learners
+                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#e54a2d] text-[11px] md:text-sm whitespace-nowrap">
+                  🔥 Only 6 Seats
                 </span>
               </div>
 
               {/* Title */}
-              <h1 className="font-outfit font-semibold text-[#2d2d2d] text-[32px] md:text-[48px] lg:text-[56px] leading-tight w-full">
+              <h1 className="font-outfit font-bold text-[#2d2d2d] text-[26px] md:text-[44px] lg:text-[52px] leading-tight w-full">
                 DevOps & Cloud
-                <br />
-                <span className="text-[#1447e6]">Learning Program</span>
+                <span className="text-[#1447e6]"> Learning Program</span>
               </h1>
 
               {/* Description */}
-              <p className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[18px] leading-relaxed w-full max-w-[600px]">
-                A complete, end-to-end program designed to take you from core fundamentals to real-world production-level skills. Master Linux, Docker, Kubernetes, AWS, and more.
+              <p className="font-sans font-normal text-[#2d2d2d] text-[13px] md:text-[16px] leading-relaxed w-full max-w-[550px]">
+                Go from zero to job-ready in 90 days. Master Linux, Docker, Kubernetes, AWS, and CI/CD with hands-on projects and 1:1 mentorship.
               </p>
 
               {/* Course Highlights */}
-              <div className="flex flex-wrap gap-4 mt-2">
-                <div className="flex items-center gap-2">
-                  <ClockIcon className="w-5 h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-sm">Comprehensive Curriculum</span>
+              <div className="flex flex-wrap gap-3 md:gap-4">
+                <div className="flex items-center gap-1.5">
+                  <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">90-Day Program</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <UserGroupIcon className="w-5 h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-sm">1-on-1 Mentorship</span>
+                <div className="flex items-center gap-1.5">
+                  <UserGroupIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">1:1 Mentorship</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <RocketLaunchIcon className="w-5 h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-sm">Real Projects</span>
+                <div className="flex items-center gap-1.5">
+                  <RocketLaunchIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">Real Projects</span>
                 </div>
               </div>
 
               {/* CTA Button */}
               <Link
                 href="/dclp"
-                className="bg-[#1447e6] text-white font-sans font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-[30px] hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap mt-4"
+                className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-7 py-2.5 md:py-3.5 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap mt-2"
               >
-                View Program Details
+                View Program Details →
               </Link>
             </div>
 
             {/* Right Content - Why Choose Card */}
-            <div className="w-full md:w-[38%] shrink-0">
-              <div className="glass-card glass-card-blur-md glass-card-opacity-light flex flex-col gap-[24px] items-start px-[24px] py-[28px] relative rounded-[12px] shrink-0 w-full h-full">
-                <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-[24px]">
+            <div className="w-full md:w-[40%] shrink-0">
+              <div className="glass-card glass-card-blur-md glass-card-opacity-light flex flex-col gap-4 md:gap-5 items-start p-4 md:p-6 relative rounded-[12px] md:rounded-[16px] shrink-0 w-full">
+                <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-[22px]">
                   Why Choose DCLP?
                 </h3>
-                <div className="flex flex-col gap-[16px] w-full">
+                <div className="flex flex-col gap-3 md:gap-4 w-full">
                   {[
-                    { title: "Industry-Relevant Curriculum", desc: "Updated content aligned with current industry standards" },
-                    { title: "Project-Based Learning", desc: "Build real-world projects for your portfolio" },
-                    { title: "Lifetime Access", desc: "Access to recordings and materials forever" },
-                    { title: "Career Support", desc: "Resume review and interview preparation" },
+                    { title: "Industry Curriculum", desc: "Updated for 2024 job market" },
+                    { title: "Project Portfolio", desc: "4 production-grade projects" },
+                    { title: "Lifetime Access", desc: "Recordings & materials forever" },
+                    { title: "Career Support", desc: "Resume + interview prep" },
                   ].map((item, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="bg-[#1447e6] rounded-full p-1 shrink-0 mt-0.5">
-                        <CheckCircleIcon className="w-4 h-4 text-white" />
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="bg-[#1447e6] rounded-full p-0.5 shrink-0 mt-0.5">
+                        <CheckCircleIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />
                       </div>
-                      <div className="flex flex-col gap-1">
-                        <span className="font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-[16px]">{item.title}</span>
-                        <span className="font-sans font-normal text-[#66707d] text-[12px] md:text-[14px]">{item.desc}</span>
+                      <div className="flex flex-col">
+                        <span className="font-sans font-semibold text-[#2d2d2d] text-[12px] md:text-[14px]">{item.title}</span>
+                        <span className="font-sans font-normal text-[#66707d] text-[10px] md:text-[12px]">{item.desc}</span>
                       </div>
                     </div>
                   ))}
@@ -122,29 +121,29 @@ export default function CoursesPage() {
           {/* Scroll Indicator */}
           <button 
             onClick={scrollToCourses}
-            className="absolute bottom-[30px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+            className="absolute bottom-[20px] md:bottom-[30px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <span className="font-sans text-[#2d2d2d] text-sm whitespace-nowrap">Explore Program</span>
+            <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm whitespace-nowrap">See Details</span>
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             >
-              <ChevronDownIcon className="w-6 h-6 text-[#1447e6]" />
+              <ChevronDownIcon className="w-5 h-5 md:w-6 md:h-6 text-[#1447e6]" />
             </motion.div>
           </button>
         </div>
       </div>
 
       {/* Course Section */}
-      <div id="courses-section" className="relative w-full mt-[60px] scroll-mt-8">
-        <div className="relative flex flex-col gap-[40px] items-center px-4 max-w-[1383.548px] mx-auto">
+      <div id="courses-section" className="relative w-full mt-[40px] md:mt-[60px] scroll-mt-8">
+        <div className="relative flex flex-col gap-6 md:gap-10 items-center px-2 md:px-4 max-w-[1383.548px] mx-auto">
           {/* Section Header */}
           <div className="text-center">
-            <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[32px] md:text-[40px] mb-4">
-              Our Program
+            <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-[36px] mb-2">
+              Program Details
             </h2>
-            <p className="font-sans text-[#66707d] text-base md:text-lg max-w-2xl mx-auto">
-              Complete DevOps & Cloud training designed for serious learners
+            <p className="font-sans text-[#66707d] text-[12px] md:text-base max-w-xl mx-auto">
+              Everything you need to become a DevOps professional
             </p>
           </div>
 
@@ -154,55 +153,54 @@ export default function CoursesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-[900px]"
+            className="w-full max-w-[900px] px-2"
           >
             <Link href="/dclp" className="block">
-              <div className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[20px] p-6 md:p-8 hover:shadow-xl transition-all group">
-                <div className="flex flex-col md:flex-row gap-6 items-start">
+              <div className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[14px] md:rounded-[20px] p-4 md:p-6 hover:shadow-xl transition-all group">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
                   {/* Icon */}
-                  <div className="bg-[#1447e6] rounded-[16px] p-4 shrink-0 group-hover:scale-105 transition-transform">
-                    <AcademicCapIcon className="w-12 h-12 text-white" />
+                  <div className="bg-[#1447e6] rounded-[12px] md:rounded-[16px] p-3 md:p-4 shrink-0 group-hover:scale-105 transition-transform">
+                    <AcademicCapIcon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                   
                   {/* Content */}
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[24px] md:text-[28px]">
-                        DevOps & Cloud Learning Program (DCLP)
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 mb-2">
+                      <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[18px] md:text-[24px]">
+                        DevOps & Cloud Learning Program
                       </h3>
-                      <span className="glass-card glass-card-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-[#1447e6] whitespace-nowrap">
-                        Limited Seats
+                      <span className="glass-card glass-card-blur-sm px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold text-[#e54a2d] whitespace-nowrap w-fit">
+                        Only 6 Seats
                       </span>
                     </div>
                     
-                    <p className="font-sans text-[#66707d] text-base md:text-lg mb-4">
-                      End-to-end DevOps & Cloud job-ready program with focused batch of only 6 learners. 
-                      Master Linux, Shell Scripting, Git, Jenkins, Docker, Kubernetes, AWS, Terraform, and more.
+                    <p className="font-sans text-[#66707d] text-[12px] md:text-[15px] mb-3">
+                      Complete 90-day program covering Linux, Docker, Kubernetes, AWS, Terraform, and CI/CD with real-world projects.
                     </p>
 
                     {/* Features */}
-                    <div className="flex flex-wrap gap-3 mb-4">
-                      {["Linux & Shell Scripting", "Docker & Kubernetes", "AWS Cloud", "CI/CD with Jenkins", "Terraform IaC", "Real Projects"].map((feature, i) => (
-                        <span key={i} className="glass-card glass-card-blur-sm px-3 py-1.5 rounded-full text-sm font-sans text-[#2d2d2d]">
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3">
+                      {["Linux", "Docker", "Kubernetes", "AWS", "Terraform", "Jenkins"].map((feature, i) => (
+                        <span key={i} className="glass-card glass-card-blur-sm px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-sans text-[#2d2d2d]">
                           {feature}
                         </span>
                       ))}
                     </div>
 
                     {/* Bottom Row */}
-                    <div className="flex items-center justify-between flex-wrap gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <UserGroupIcon className="w-5 h-5 text-[#1447e6]" />
-                          <span className="font-sans text-[#2d2d2d] text-sm">6 Learners/Batch</span>
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <div className="flex items-center gap-1">
+                          <UserGroupIcon className="w-4 h-4 text-[#1447e6]" />
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">6/Batch</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <RocketLaunchIcon className="w-5 h-5 text-[#1447e6]" />
-                          <span className="font-sans text-[#2d2d2d] text-sm">Job-Ready</span>
+                        <div className="flex items-center gap-1">
+                          <RocketLaunchIcon className="w-4 h-4 text-[#1447e6]" />
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">Job-Ready</span>
                         </div>
                       </div>
-                      <span className="bg-[#1447e6] text-white font-sans font-semibold text-sm px-6 py-2 rounded-full group-hover:bg-[#0f3bb8] transition-colors">
-                        View Details →
+                      <span className="bg-[#1447e6] text-white font-sans font-semibold text-[11px] md:text-sm px-4 md:px-5 py-1.5 md:py-2 rounded-full group-hover:bg-[#0f3bb8] transition-colors">
+                        Learn More →
                       </span>
                     </div>
                   </div>
@@ -214,8 +212,8 @@ export default function CoursesPage() {
       </div>
 
       {/* Footer */}
-      <div className="relative w-full mt-[80px] md:mt-[120px]">
-        <div className="relative flex flex-col gap-[60px] md:gap-[80px] items-center justify-center pt-[40px] md:pt-[60px] pb-[40px] md:pb-[60px] px-4 max-w-[1447.97px] mx-auto">
+      <div className="relative w-full mt-[50px] md:mt-[80px]">
+        <div className="relative flex flex-col items-center justify-center pt-[30px] md:pt-[50px] pb-[30px] md:pb-[50px] px-2 md:px-4 max-w-[1447.97px] mx-auto">
           <Footer />
         </div>
       </div>
