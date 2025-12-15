@@ -13,6 +13,7 @@ import BlogMeta from "@/components/Blog/BlogMeta";
 import LoadingSpinner from "@/components/ui/loading-spinner";
 import ErrorMessage from "@/components/ui/error-message";
 import { debugMetaTags } from "@/lib/social-sharing-utils";
+import DCLPPopup from "@/components/DCLPPopup/DCLPPopup";
 import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
 import { imgImage10 } from "@/web/assets";
@@ -360,6 +361,9 @@ export default function BlogDetailPage() {
 
       {/* Footer */}
       <Footer />
+
+      {/* DCLP Popup */}
+      <DCLPPopup showOnPages={['/blog']} delay={3000} />
 
       {/* Reading Progress Bar - Fixed at top */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50">

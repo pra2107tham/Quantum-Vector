@@ -23,9 +23,9 @@ export default function Header() {
   };
 
   return (
-    <div className="absolute top-[15px] md:top-[25px] left-1/2 -translate-x-1/2 w-[calc(100%-30px)] md:w-[95%] max-w-[1328px] z-50">
+    <div className="absolute top-[15px] md:top-[25px] left-1/2 -translate-x-1/2 w-[calc(100%-30px)] md:w-[95%] max-w-[1328px] z-50 overflow-visible">
       {/* Header Bar */}
-      <div className={`glass-card glass-card-blur-lg glass-card-opacity-heavy flex items-center justify-between px-4 md:px-[40px] py-3 md:py-[6px] ${isMobileMenuOpen ? 'rounded-t-[20px] rounded-b-none' : 'rounded-[30px] md:rounded-[50px]'} transition-all`}>
+      <div className={`glass-card glass-card-blur-lg glass-card-opacity-heavy flex items-center justify-between px-4 md:px-[40px] py-3 md:py-[6px] h-auto md:h-[86px] ${isMobileMenuOpen ? 'rounded-t-[20px] rounded-b-none' : 'rounded-[30px] md:rounded-[50px]'} transition-all overflow-visible`}>
         {/* Logo */}
         <Link href="/" className="flex gap-2 md:gap-[14px] items-center shrink-0">
           <div className="overflow-clip relative shrink-0 size-[45px] md:size-[63px]">
@@ -61,13 +61,13 @@ export default function Header() {
             Webinars
           </Link>
           <div 
-            className="relative"
+            className="relative z-[100]"
             onMouseEnter={() => setIsSolutionsOpen(true)}
             onMouseLeave={() => setIsSolutionsOpen(false)}
           >
             <button
               onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-              className="flex gap-2 items-center font-sans font-normal text-[#2d2d2d] text-[16px] xl:text-[20px] hover:text-[#1447e6] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20"
+              className={`flex gap-2 items-center font-sans font-normal text-[16px] xl:text-[20px] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20 ${isSolutionsOpen ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
             >
               Solutions
               <svg 
@@ -84,13 +84,7 @@ export default function Header() {
             {/* Desktop Dropdown */}
             {isSolutionsOpen && (
               <div 
-                className="absolute bg-white/95 backdrop-blur-md rounded-[12px] p-3 min-w-[180px] shadow-xl border border-gray-200/50"
-                style={{ 
-                  top: 'calc(100% + 8px)',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  zIndex: 9999,
-                }}
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white/95 backdrop-blur-xl rounded-[12px] p-3 min-w-[180px] shadow-2xl border border-gray-200/50 z-[9999]"
               >
                 <Link
                   href="/mock-interviews"
@@ -105,6 +99,13 @@ export default function Header() {
                   onClick={() => setIsSolutionsOpen(false)}
                 >
                   Blog
+                </Link>
+                <Link
+                  href="/dclp"
+                  className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+                  onClick={() => setIsSolutionsOpen(false)}
+                >
+                  DCLP Program
                 </Link>
               </div>
             )}
@@ -198,6 +199,16 @@ export default function Header() {
                     className="font-sans font-normal text-[#2d2d2d] text-[15px] hover:text-[#1447e6] transition-colors px-3 py-2 rounded-lg hover:bg-white/20"
                   >
                     Blog
+                  </Link>
+                  <Link
+                    href="/dclp"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsSolutionsOpen(false);
+                    }}
+                    className="font-sans font-normal text-[#2d2d2d] text-[15px] hover:text-[#1447e6] transition-colors px-3 py-2 rounded-lg hover:bg-white/20"
+                  >
+                    DCLP Program
                   </Link>
                 </div>
               )}

@@ -8,7 +8,6 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { motion } from "motion/react";
 import RazorpayButton from "@/components/RazorpayButton/AWS_Course_RazorpayButton";
-import CoursePopup from "@/components/CoursePopup/CoursePopup";
 import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
 import { imgImage10 } from "@/web/assets";
@@ -261,17 +260,6 @@ export default function AwsDevopsCurriculumPage() {
       </div>
       {/* Fallback background color */}
       <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
-
-      <CoursePopup
-        showOnPages={["/courses/aws-devops"]}
-        delay={2500}
-        courseName="AWS DevOps Certification Course"
-        startDate="1st December"
-        duration="2-3 Months"
-        price="₹25,000"
-        blockingFee="₹22,000"
-        enrollUrl="/courses/aws-devops"
-      />
 
       {/* Main Content Container with Header */}
       <div className="glass-card-main relative mx-auto my-[23px] rounded-[32px] w-[calc(100%-50px)] max-w-[1383.548px]">

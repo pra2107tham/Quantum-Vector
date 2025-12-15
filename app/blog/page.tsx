@@ -11,6 +11,7 @@ import BlogFilters from "@/components/Blog/BlogFilters";
 import Pagination from "@/components/Blog/Pagination";
 import BackToTop from "@/components/Blog/BackToTop";
 import ErrorMessage from "@/components/ui/error-message";
+import DCLPPopup from "@/components/DCLPPopup/DCLPPopup";
 import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
 import { imgImage10, imgFrame, imgGroup } from "@/web/assets";
@@ -303,6 +304,9 @@ export default function BlogPage() {
       
       {/* Back to Top Button */}
       <BackToTop />
+      
+      {/* DCLP Popup */}
+      <DCLPPopup showOnPages={['/blog', '/blog/']} delay={3000} />
     </div>
   );
 }
