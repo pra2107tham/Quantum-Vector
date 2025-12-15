@@ -648,18 +648,25 @@ export default function DCLPPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 mt-4">
                 {enrollmentSteps.map((step, i) => (
-                  <div key={i} className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-5 rounded-[12px] md:rounded-[16px] text-center relative">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 md:w-8 md:h-8 bg-[#1447e6] rounded-full flex items-center justify-center">
-                      <span className="font-outfit font-bold text-white text-[12px] md:text-sm">{step.step}</span>
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                    className="glass-card glass-card-blur-sm glass-card-opacity-light pt-8 pb-5 px-4 md:pt-10 md:pb-6 md:px-5 rounded-[12px] md:rounded-[16px] text-center relative"
+                  >
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-[#1447e6] rounded-full flex items-center justify-center shadow-lg">
+                      <span className="font-outfit font-bold text-white text-sm md:text-base">{step.step}</span>
                     </div>
-                    <div className="text-[#1447e6] flex justify-center mt-3 mb-3">
+                    <div className="text-[#1447e6] flex justify-center mb-3">
                       <div className="w-8 h-8 md:w-10 md:h-10 [&>svg]:w-full [&>svg]:h-full">{step.icon}</div>
                     </div>
                     <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-2">{step.title}</h3>
-                    <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{step.description}</p>
-                  </div>
+                    <p className="font-sans text-[#66707d] text-[11px] md:text-sm leading-relaxed">{step.description}</p>
+                  </motion.div>
                 ))}
               </div>
 
