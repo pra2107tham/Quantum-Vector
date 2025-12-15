@@ -14,14 +14,39 @@ export default function Header() {
   const solutionsButtonRef = useRef<HTMLButtonElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
-  useEffect(() => {
-    if (isSolutionsOpen && solutionsButtonRef.current) {
+  // Calculate dropdown position when Solutions is opened
+  const getDropdownPosition = () => {
+    if (solutionsButtonRef.current) {
       const rect = solutionsButtonRef.current.getBoundingClientRect();
-      setDropdownPosition({
+      return {
         top: rect.bottom + 8,
         left: rect.left + rect.width / 2,
-      });
+      };
     }
+    return { top: 100, left: window.innerWidth / 2 };
+  };
+
+  useEffect(() => {
+    if (isSolutionsOpen) {
+      setDropdownPosition(getDropdownPosition());
+    }
+  }, [isSolutionsOpen]);
+
+  // Update position on scroll/resize
+  useEffect(() => {
+    if (!isSolutionsOpen) return;
+    
+    const updatePosition = () => {
+      setDropdownPosition(getDropdownPosition());
+    };
+    
+    window.addEventListener('scroll', updatePosition, true);
+    window.addEventListener('resize', updatePosition);
+    
+    return () => {
+      window.removeEventListener('scroll', updatePosition, true);
+      window.removeEventListener('resize', updatePosition);
+    };
   }, [isSolutionsOpen]);
 
   const handleCoursesClick = (e: React.MouseEvent) => {
@@ -97,43 +122,6 @@ export default function Header() {
           </div>
         </nav>
 
-        {/* Desktop Solutions Dropdown - Fixed position to avoid overflow hidden clipping */}
-        {isSolutionsOpen && (
-          <div 
-            className="hidden lg:block fixed bg-white/95 backdrop-blur-xl rounded-[12px] p-3 min-w-[180px] shadow-2xl border border-gray-200/50"
-            style={{ 
-              top: `${dropdownPosition.top}px`,
-              left: `${dropdownPosition.left}px`,
-              transform: 'translateX(-50%)',
-              zIndex: 9999,
-            }}
-            onMouseEnter={() => setIsSolutionsOpen(true)}
-            onMouseLeave={() => setIsSolutionsOpen(false)}
-          >
-            <Link
-              href="/mock-interviews"
-              className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-              onClick={() => setIsSolutionsOpen(false)}
-            >
-              Mock Interviews
-            </Link>
-            <Link
-              href="/blog"
-              className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-              onClick={() => setIsSolutionsOpen(false)}
-            >
-              Blog
-            </Link>
-            <Link
-              href="/dclp"
-              className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-              onClick={() => setIsSolutionsOpen(false)}
-            >
-              DCLP Program
-            </Link>
-          </div>
-        )}
-
         {/* Register for Webinar Button - Desktop */}
         <Link 
           href="/webinars/terraform-azure-5day"
@@ -161,6 +149,43 @@ export default function Header() {
           )}
         </button>
       </div>
+
+      {/* Desktop Solutions Dropdown - Outside header bar to avoid overflow hidden */}
+      {isSolutionsOpen && dropdownPosition.top > 0 && (
+        <div 
+          className="hidden lg:block fixed bg-white backdrop-blur-xl rounded-[12px] p-3 min-w-[180px] shadow-2xl border border-gray-200"
+          style={{ 
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            transform: 'translateX(-50%)',
+            zIndex: 9999,
+          }}
+          onMouseEnter={() => setIsSolutionsOpen(true)}
+          onMouseLeave={() => setIsSolutionsOpen(false)}
+        >
+          <Link
+            href="/mock-interviews"
+            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+            onClick={() => setIsSolutionsOpen(false)}
+          >
+            Mock Interviews
+          </Link>
+          <Link
+            href="/blog"
+            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+            onClick={() => setIsSolutionsOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            href="/dclp"
+            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+            onClick={() => setIsSolutionsOpen(false)}
+          >
+            DCLP Program
+          </Link>
+        </div>
+      )}
 
       {/* Mobile Menu - Connected to header */}
       {isMobileMenuOpen && (
