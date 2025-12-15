@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { imgShape1, imgFolder2 } from "../assets";
 
@@ -11,43 +11,6 @@ export default function Header() {
   const isHomePage = pathname === "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const solutionsButtonRef = useRef<HTMLButtonElement>(null);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-
-  // Calculate dropdown position when Solutions is opened
-  const getDropdownPosition = () => {
-    if (solutionsButtonRef.current) {
-      const rect = solutionsButtonRef.current.getBoundingClientRect();
-      return {
-        top: rect.bottom + 8,
-        left: rect.left + rect.width / 2,
-      };
-    }
-    return { top: 100, left: window.innerWidth / 2 };
-  };
-
-  useEffect(() => {
-    if (isSolutionsOpen) {
-      setDropdownPosition(getDropdownPosition());
-    }
-  }, [isSolutionsOpen]);
-
-  // Update position on scroll/resize
-  useEffect(() => {
-    if (!isSolutionsOpen) return;
-    
-    const updatePosition = () => {
-      setDropdownPosition(getDropdownPosition());
-    };
-    
-    window.addEventListener('scroll', updatePosition, true);
-    window.addEventListener('resize', updatePosition);
-    
-    return () => {
-      window.removeEventListener('scroll', updatePosition, true);
-      window.removeEventListener('resize', updatePosition);
-    };
-  }, [isSolutionsOpen]);
 
   const handleCoursesClick = (e: React.MouseEvent) => {
     if (isHomePage) {
@@ -60,9 +23,12 @@ export default function Header() {
   };
 
   return (
-    <div className="absolute top-[15px] md:top-[25px] left-1/2 -translate-x-1/2 w-[calc(100%-30px)] md:w-[95%] max-w-[1328px] z-50 overflow-visible">
-      {/* Header Bar */}
-      <div className={`glass-card glass-card-blur-lg glass-card-opacity-heavy flex items-center justify-between px-4 md:px-[40px] py-3 md:py-[6px] h-auto md:h-[86px] ${isMobileMenuOpen ? 'rounded-t-[20px] rounded-b-none' : 'rounded-[30px] md:rounded-[50px]'} transition-all`}>
+    <div className="absolute top-[15px] md:top-[25px] left-1/2 -translate-x-1/2 w-[calc(100%-30px)] md:w-[95%] max-w-[1328px] z-50">
+      {/* Header Bar - Force overflow visible on desktop for dropdown */}
+      <div 
+        className={`glass-card glass-card-blur-lg glass-card-opacity-heavy flex items-center justify-between px-4 md:px-[40px] py-3 md:py-[6px] h-auto md:h-[86px] ${isMobileMenuOpen ? 'rounded-t-[20px] rounded-b-none' : 'rounded-[30px] md:rounded-[50px]'} transition-all`}
+        style={{ overflow: 'visible' }}
+      >
         {/* Logo */}
         <Link href="/" className="flex gap-2 md:gap-[14px] items-center shrink-0">
           <div className="overflow-clip relative shrink-0 size-[45px] md:size-[63px]">
@@ -97,13 +63,13 @@ export default function Header() {
           >
             Webinars
           </Link>
+          {/* Solutions with Dropdown */}
           <div 
             className="relative"
             onMouseEnter={() => setIsSolutionsOpen(true)}
             onMouseLeave={() => setIsSolutionsOpen(false)}
           >
             <button
-              ref={solutionsButtonRef}
               onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
               className={`flex gap-2 items-center font-sans font-normal text-[16px] xl:text-[20px] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20 ${isSolutionsOpen ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
             >
@@ -119,6 +85,35 @@ export default function Header() {
                 <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
+            {/* Desktop Dropdown - Simple absolute positioning */}
+            {isSolutionsOpen && (
+              <div 
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-[12px] p-3 min-w-[180px] shadow-2xl border border-gray-200"
+                style={{ zIndex: 9999 }}
+              >
+                <Link
+                  href="/mock-interviews"
+                  className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+                  onClick={() => setIsSolutionsOpen(false)}
+                >
+                  Mock Interviews
+                </Link>
+                <Link
+                  href="/blog"
+                  className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+                  onClick={() => setIsSolutionsOpen(false)}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/dclp"
+                  className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
+                  onClick={() => setIsSolutionsOpen(false)}
+                >
+                  DCLP Program
+                </Link>
+              </div>
+            )}
           </div>
         </nav>
 
@@ -149,43 +144,6 @@ export default function Header() {
           )}
         </button>
       </div>
-
-      {/* Desktop Solutions Dropdown - Outside header bar to avoid overflow hidden */}
-      {isSolutionsOpen && dropdownPosition.top > 0 && (
-        <div 
-          className="hidden lg:block fixed bg-white backdrop-blur-xl rounded-[12px] p-3 min-w-[180px] shadow-2xl border border-gray-200"
-          style={{ 
-            top: `${dropdownPosition.top}px`,
-            left: `${dropdownPosition.left}px`,
-            transform: 'translateX(-50%)',
-            zIndex: 9999,
-          }}
-          onMouseEnter={() => setIsSolutionsOpen(true)}
-          onMouseLeave={() => setIsSolutionsOpen(false)}
-        >
-          <Link
-            href="/mock-interviews"
-            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-            onClick={() => setIsSolutionsOpen(false)}
-          >
-            Mock Interviews
-          </Link>
-          <Link
-            href="/blog"
-            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-            onClick={() => setIsSolutionsOpen(false)}
-          >
-            Blog
-          </Link>
-          <Link
-            href="/dclp"
-            className="block font-sans font-normal text-[#2d2d2d] text-[16px] py-2 px-3 rounded-lg hover:text-[#1447e6] hover:bg-[#1447e6]/10 transition-all whitespace-nowrap"
-            onClick={() => setIsSolutionsOpen(false)}
-          >
-            DCLP Program
-          </Link>
-        </div>
-      )}
 
       {/* Mobile Menu - Connected to header */}
       {isMobileMenuOpen && (
@@ -275,4 +233,3 @@ export default function Header() {
     </div>
   );
 }
-
