@@ -3,10 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  imgShape2,
-  imgFolder2,
-  imgFrame2147223317,
-  imgGroup231,
+  imgFrame2147223317 as imgEmail,
+  imgGroup231 as imgInstagram,
   imgLine1,
 } from "../assets";
 
@@ -17,22 +15,25 @@ export default function Footer() {
     <div className="bg-[#66707d] flex flex-col items-center px-4 md:px-[60px] py-5 md:py-[28px] relative rounded-[14px] md:rounded-[20px] shadow-md shrink-0 w-full max-w-[1410px]">
       <div className="flex flex-col gap-3 md:gap-4 items-center relative shrink-0 w-full max-w-[1260px]">
         {/* Logo */}
-        <Link href="/" className="flex gap-2 md:gap-[14px] items-center">
-          <div className="overflow-clip relative shrink-0 w-10 h-10 md:w-[55px] md:h-[55px]">
-            <div className="absolute inset-[3.13%]">
-              <div className="absolute inset-[-3.39%]">
-                <Image src={imgShape2} alt="DevOps Community" fill sizes="55px" className="object-contain" />
-              </div>
-            </div>
-            <div className="absolute contents inset-[32.03%_19.61%_31.48%_18.2%]">
-              <div className="absolute inset-[32.03%_19.61%_31.48%_18.2%]">
-                <Image src={imgFolder2} alt="" fill sizes="55px" className="object-contain" />
-              </div>
-            </div>
+        <Link href="/" className="flex gap-3 md:gap-4 items-center">
+          <div className="relative shrink-0 w-10 h-10 md:w-[52px] md:h-[52px]">
+            <Image
+              src="/Logo/LOGO_ICON_PNG_FORMAT.png"
+              alt="Quantum Vector"
+              fill
+              sizes="(max-width: 768px) 40px, 52px"
+              className="object-contain"
+              priority
+            />
           </div>
-          <p className="font-sans font-normal leading-normal text-[13px] md:text-[15px] text-white whitespace-nowrap">
-            DevOps Community
-          </p>
+          <div className="flex flex-col leading-[1.05]">
+            <span className="font-outfit font-semibold text-white text-[13px] md:text-[16px] whitespace-nowrap tracking-[-0.01em]">
+              Quantum <span className="text-blue-200">Vector</span>
+            </span>
+            <span className="font-sans font-medium text-white/80 text-[10px] md:text-[12px] whitespace-nowrap tracking-[0.02em] mt-0.5">
+              from TheDevOpsCommunity
+            </span>
+          </div>
         </Link>
         
         {/* Navigation Links */}
@@ -67,26 +68,14 @@ export default function Footer() {
             className="relative shrink-0 w-9 h-9 md:w-10 md:h-10 hover:opacity-80 transition-opacity"
             aria-label="Instagram"
           >
-            <Image
-              src={imgGroup231}
-              alt="Instagram"
-              fill
-              sizes="40px"
-              className="object-contain"
-            />
+            <Image src={imgInstagram} alt="Instagram" fill sizes="40px" className="object-contain" />
           </a>
           <a
             href="mailto:frontdesk@thedevopscommunity.com"
             className="relative shrink-0 w-9 h-9 md:w-10 md:h-10 hover:opacity-80 transition-opacity"
             aria-label="Email"
           >
-            <Image
-              src={imgFrame2147223317}
-              alt="Email"
-              fill
-              sizes="40px"
-              className="object-contain"
-            />
+            <Image src={imgEmail} alt="Email" fill sizes="40px" className="object-contain" />
           </a>
         </div>
         
@@ -100,7 +89,7 @@ export default function Footer() {
         {/* Copyright & Legal */}
         <div className="flex flex-col md:flex-row gap-2 items-center justify-center w-full">
           <p className="font-sans font-medium text-[11px] md:text-[13px] text-center text-white/90">
-            © {currentYear} DevOps Community
+            © {currentYear} Quantum Vector from TheDevOpsCommunity
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4 items-center justify-center">
             <Link href="/privacy-policy" className="font-sans font-normal text-[10px] md:text-[12px] text-white/70 hover:text-white transition-colors whitespace-nowrap">

@@ -32,15 +32,15 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devops-community.com"),
-  title: "DevOps Community",
-  description: "Master Your DevOps Career",
+  title: "Quantum Vector from TheDevOpsCommunity",
+  description: "Master Your DevOps Career with Quantum Vector",
   icons: {
-    icon: '/dc_logo.svg',
+    icon: '/Logo/LOGO_ICON_PNG_FORMAT.png',
   },
   openGraph: {
-    title: "DevOps Community",
-    description: "Master Your DevOps Career",
-    siteName: "DevOps Community",
+    title: "Quantum Vector from TheDevOpsCommunity",
+    description: "Master Your DevOps Career with Quantum Vector",
+    siteName: "Quantum Vector",
     locale: "en_US",
     type: "website",
     url: "https://devops-community.com",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/blue.png",
         width: 1536,
         height: 1024,
-        alt: "DevOps Community - Master Your DevOps Career",
+        alt: "Quantum Vector - Master Your DevOps Career",
       },
     ],
   },
@@ -57,8 +57,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@devops-community",
     creator: "@devops-community",
-    title: "DevOps Community",
-    description: "Master Your DevOps Career",
+    title: "Quantum Vector from TheDevOpsCommunity",
+    description: "Master Your DevOps Career with Quantum Vector",
     images: ["/blue.png"],
   },
 };

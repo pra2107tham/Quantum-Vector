@@ -7,11 +7,11 @@ export default function Footer() {
   return (
     <footer className="bg-blue-50 border-t border-blue-100 w-full pt-12 pb-8 px-4 md:px-12 mt-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 md:gap-8">
-        {/* Left: About DevOps Community */}
+        {/* Left: About Quantum Vector */}
         <div className="flex-1 min-w-[250px] md:max-w-xs">
           <div className="flex items-center gap-2 mb-3">
             <FaUsers className="w-8 h-8 text-blue-700" />
-            <span className="font-bold text-xl text-blue-900">DevOps Community</span>
+            <span className="font-bold text-xl text-blue-900">Quantum Vector</span>
           </div>
           <p className="text-neutral-600 text-sm leading-relaxed mb-3">
             Empowering engineers to grow, innovate, and lead in the world of DevOps and Cloud computing through hands-on training and community support.
@@ -55,7 +55,7 @@ export default function Footer() {
 
       {/* Bottom: Copyright and Quick Links */}
       <div className="max-w-7xl mx-auto mt-10 border-t border-blue-200 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-neutral-500">
-        <p>&copy; {new Date().getFullYear()} DevOps Community. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Quantum Vector from TheDevOpsCommunity. All rights reserved.</p>
         <div className="flex flex-wrap gap-x-5 gap-y-2 mt-4 sm:mt-0">
           <Link href="/privacy-policy" className="hover:text-blue-700 hover:underline">Privacy Policy</Link>
           <Link href="/terms-and-conditions" className="hover:text-blue-700 hover:underline">Terms & Conditions</Link>
