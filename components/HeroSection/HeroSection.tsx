@@ -401,7 +401,7 @@ export function HeroSectionOne() {
               {/* Review 1 */}
               <div className="bg-white rounded-xl p-6 border border-blue-100 shadow flex flex-col gap-3">
                 <div className="text-yellow-400 text-xl">★★★★★</div>
-                <div className="text-lg font-medium text-gray-900">&quot;I switched from QA to DevOps within 90 days. The trainers were brilliant and always available!&quot;</div>
+                <div className="text-lg font-medium text-gray-900">&quot;I switched from QA to DevOps within a few months. The trainers were brilliant and always available!&quot;</div>
                 <div className="text-sm text-blue-700 font-semibold">— Ravi, Now at Capgemini</div>
               </div>
               {/* Review 2 */}

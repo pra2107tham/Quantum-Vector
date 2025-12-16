@@ -5,7 +5,7 @@ import { imgGroup4, imgFrame57 } from "../assets";
 
 const testimonials = [
   {
-    quote: `"Switched from QA to DevOps in 90 days. The mentors were always available!"`,
+    quote: `"Switched from QA to DevOps in just a few months. The mentors were always available!"`,
     author: "Ravi",
     company: "Capgemini",
     initial: "R",

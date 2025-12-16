@@ -62,14 +62,14 @@ export default function CoursesPage() {
 
               {/* Description */}
               <p className="font-sans font-normal text-[#2d2d2d] text-[13px] md:text-[16px] leading-relaxed w-full max-w-[550px]">
-                Go from zero to job-ready in 90 days. Master Linux, Docker, Kubernetes, AWS, and CI/CD with hands-on projects and 1:1 mentorship.
+                Go from zero to job-ready in 2–3 months. Master Linux, Docker, Kubernetes, AWS, and CI/CD with hands-on projects and 1:1 mentorship.
               </p>
 
               {/* Course Highlights */}
               <div className="flex flex-wrap gap-3 md:gap-4">
                 <div className="flex items-center gap-1.5">
                   <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">90-Day Program</span>
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">2–3 Month Program</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <UserGroupIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
