@@ -17,23 +17,23 @@ export default function Header() {
         style={{ overflow: 'visible' }}
       >
         {/* Logo */}
-        <Link href="/" className="flex gap-2 md:gap-[14px] items-center shrink-0">
-          <div className="relative shrink-0 w-[44px] h-[44px] md:w-[56px] md:h-[56px]">
+        <Link href="/" className="flex gap-3 md:gap-4 items-center shrink-0">
+          <div className="relative shrink-0 w-[48px] h-[48px] md:w-[62px] md:h-[62px]">
             <Image
               src="/Logo/LOGO_ICON_PNG_FORMAT.png"
               alt="Quantum Vector"
               fill
-              sizes="(max-width: 768px) 44px, 56px"
+              sizes="(max-width: 768px) 48px, 62px"
               className="object-contain"
               priority
             />
           </div>
-          <div className="flex flex-col leading-tight">
-            <span className="font-outfit font-semibold text-[#2d2d2d] text-[15px] md:text-[20px] whitespace-nowrap">
-              Quantum Vector
+          <div className="flex flex-col leading-[1.05]">
+            <span className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-[22px] whitespace-nowrap tracking-[-0.01em]">
+              Quantum <span className="text-[#1447e6]">Vector</span>
             </span>
-            <span className="font-sans font-medium text-[#66707d] text-[10px] md:text-[12px] whitespace-nowrap -mt-0.5">
-              from TheDevOpsCommunity
+            <span className="font-sans font-medium text-[#2d2d2d]/60 text-[10px] md:text-[12px] whitespace-nowrap tracking-[0.02em] mt-0.5">
+              from <span className="text-[#2d2d2d]/70">TheDevOpsCommunity</span>
             </span>
           </div>
         </Link>
