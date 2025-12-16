@@ -30,6 +30,15 @@ const testimonials = [
   },
 ];
 
+const avatarPalette = [
+  "#1447e6",
+  "#16a34a",
+  "#f59e0b",
+  "#ec4899",
+  "#0ea5e9",
+  "#8b5cf6",
+];
+
 export default function Testimonials() {
   return (
     <div className="flex flex-col gap-4 md:gap-6 items-center justify-center relative shrink-0 w-full px-2">
@@ -60,7 +69,10 @@ export default function Testimonials() {
               
               {/* Author */}
               <div className="flex gap-2 md:gap-3 items-center justify-center relative shrink-0 mt-2">
-                <div className="relative rounded-full shrink-0 w-9 h-9 md:w-11 md:h-11 bg-[#1447e6] flex items-center justify-center">
+                <div
+                  className="relative rounded-full shrink-0 w-9 h-9 md:w-11 md:h-11 flex items-center justify-center text-white shadow-md"
+                  style={{ backgroundColor: avatarPalette[index % avatarPalette.length] }}
+                >
                   <span className="font-sans font-semibold text-white text-[14px] md:text-[18px]">
                     {testimonial.initial}
                   </span>
