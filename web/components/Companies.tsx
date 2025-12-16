@@ -11,17 +11,9 @@ import {
 } from "../assets";
 
 export default function Companies() {
-  const companyLogos = [
-    imgFrame,
-    imgFrame1,
-    imgFrame2,
-    imgFrame3,
-    imgFrame4,
-    imgFrame5,
-    imgFrame6,
-    // keep only seven unique logos for the marquee
-  ];
-
+  // Seven unique logos only
+  const companyLogos = [imgFrame, imgFrame1, imgFrame2, imgFrame3, imgFrame4, imgFrame5, imgFrame6];
+  // Duplicate track for seamless loop; second pass is aria-hidden
   const marqueeLogos = [...companyLogos, ...companyLogos];
 
   return (
