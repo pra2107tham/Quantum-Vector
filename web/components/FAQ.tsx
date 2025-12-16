@@ -23,7 +23,7 @@ const faqs = [
   {
     id: 3,
     question: "How long is the program?",
-    answer: "The intensive program runs for 90 days with live sessions, project work, and career preparation included.",
+    answer: "The intensive program typically runs for 2–3 months with live sessions, project work, and career preparation included.",
   },
   {
     id: 4,
