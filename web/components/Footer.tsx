@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import imgEmail from "../assets/imgFrame2147223317.png";
-import imgInstagram from "../assets/imgGroup231.png";
-import imgLine1 from "../assets/imgLine1.png";
+import {
+  imgFrame2147223317 as imgEmail,
+  imgGroup231 as imgInstagram,
+  imgLine1,
+} from "../assets";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
