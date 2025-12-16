@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { imgShape1, imgFolder2 } from "../assets";
 
 export default function Header() {
   const pathname = usePathname();
@@ -19,21 +18,24 @@ export default function Header() {
       >
         {/* Logo */}
         <Link href="/" className="flex gap-2 md:gap-[14px] items-center shrink-0">
-          <div className="overflow-clip relative shrink-0 size-[45px] md:size-[63px]">
-            <div className="absolute inset-[3.13%]">
-              <div className="absolute inset-[-3.39%]">
-                <Image src={imgShape1} alt="DevOps Community" fill sizes="(max-width: 768px) 45px, 63px" className="object-contain" />
-              </div>
-            </div>
-            <div className="absolute contents inset-[32.03%_19.61%_31.48%_18.2%]">
-              <div className="absolute inset-[32.03%_19.61%_31.48%_18.2%]">
-                <Image src={imgFolder2} alt="" fill sizes="(max-width: 768px) 45px, 63px" className="object-contain" />
-              </div>
-            </div>
+          <div className="relative shrink-0 w-[44px] h-[44px] md:w-[56px] md:h-[56px]">
+            <Image
+              src="/Logo/LOGO_ICON_PNG_FORMAT.png"
+              alt="Quantum Vector"
+              fill
+              sizes="(max-width: 768px) 44px, 56px"
+              className="object-contain"
+              priority
+            />
           </div>
-          <p className="font-sans font-normal leading-normal text-[#2d2d2d] text-[16px] md:text-[20px] whitespace-nowrap">
-            DevOps Community
-          </p>
+          <div className="flex flex-col leading-tight">
+            <span className="font-outfit font-semibold text-[#2d2d2d] text-[15px] md:text-[20px] whitespace-nowrap">
+              Quantum Vector
+            </span>
+            <span className="font-sans font-medium text-[#66707d] text-[10px] md:text-[12px] whitespace-nowrap -mt-0.5">
+              from TheDevOpsCommunity
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
