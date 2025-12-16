@@ -9,24 +9,28 @@ const testimonials = [
     author: "Ravi",
     company: "Capgemini",
     initial: "R",
+    avatar: "🧑‍💻",
   },
   {
     quote: `"Real projects made the difference. Landed my first DevOps job at Infosys!"`,
     author: "Priya",
     company: "Infosys",
     initial: "P",
+    avatar: "👩‍💻",
   },
   {
     quote: `"Resume help was a game changer. Got 3 MNC interviews in a month."`,
     author: "Sandeep",
     company: "TCS",
     initial: "S",
+    avatar: "👨‍🔧",
   },
   {
     quote: `"Mock interviews gave me confidence to ace my Azure DevOps interview."`,
     author: "Anjali",
     company: "Cognizant",
     initial: "A",
+    avatar: "👩‍🔧",
   },
 ];
 
@@ -60,10 +64,8 @@ export default function Testimonials() {
               
               {/* Author */}
               <div className="flex gap-2 md:gap-3 items-center justify-center relative shrink-0 mt-2">
-                <div className="relative rounded-full shrink-0 w-9 h-9 md:w-11 md:h-11 bg-[#1447e6] flex items-center justify-center">
-                  <span className="font-sans font-semibold text-white text-[14px] md:text-[18px]">
-                    {testimonial.initial}
-                  </span>
+                <div className="relative rounded-full shrink-0 w-9 h-9 md:w-11 md:h-11 flex items-center justify-center bg-white shadow-md text-[16px] md:text-[18px]">
+                  <span className="leading-none">{testimonial.avatar || testimonial.initial}</span>
                 </div>
                 <div className="text-left">
                   <p className="font-sans font-semibold leading-tight text-[#2d2d2d] text-[12px] md:text-[14px]">
