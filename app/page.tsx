@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { CheckCircleIcon, RocketLaunchIcon, UserGroupIcon, AcademicCapIcon, BriefcaseIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, RocketLaunchIcon, UserGroupIcon, AcademicCapIcon, BriefcaseIcon, CalendarIcon, ClockIcon, VideoCameraIcon } from "@heroicons/react/24/outline";
 import Header from "@/web/components/Header";
 import Hero from "@/web/components/Hero";
 import Companies from "@/web/components/Companies";
@@ -130,6 +130,80 @@ export default function Home() {
                   <p className="font-sans text-[#66707d] text-[10px] md:text-sm">{stat.label}</p>
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Webinars Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-[1300px] px-2"
+          >
+            <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-5 md:p-8 rounded-[16px] md:rounded-[20px]">
+              <div className="flex flex-col md:flex-row gap-5 md:gap-8 items-start">
+                {/* Left: Content */}
+                <div className="flex-1 flex flex-col gap-4">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm">
+                      🎯 Upcoming Webinar
+                    </span>
+                    <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#e54a2d] text-[11px] md:text-sm">
+                      ⚡ Limited Seats
+                    </span>
+                  </div>
+                  
+                  <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] lg:text-[32px] leading-tight">
+                    DevOps Roadmap 2026 – Complete Career Guide
+                  </h2>
+                  
+                  <p className="font-sans font-normal text-[#66707d] text-[13px] md:text-[16px] leading-relaxed">
+                    Learn What to Study, How to Study, and How to Get DevOps Jobs in 2026
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3 md:gap-4">
+                    <div className="flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">28th Dec 2025</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">9:00–10:30 AM IST</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">Live Online</span>
+                    </div>
+                  </div>
+                  
+                  <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[10px]">
+                    <p className="font-sans font-medium text-[#1447e6] text-[11px] md:text-[13px]">
+                      📄 Bonus: Full End-to-End DevOps Roadmap PDF
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Right: CTA */}
+                <div className="w-full md:w-[240px] shrink-0 flex flex-col gap-4">
+                  <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] text-center">
+                    <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] mb-1">One-Time Fee</p>
+                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹99</p>
+                  </div>
+                  <Link
+                    href="/webinars/devops-roadmap-2026"
+                    className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
+                  >
+                    View Details & Register →
+                  </Link>
+                  <Link
+                    href="/webinars"
+                    className="w-full glass-card glass-card-blur-sm glass-card-opacity-light font-sans font-semibold text-[#2d2d2d] text-[12px] md:text-[14px] py-2.5 px-6 rounded-full hover:bg-white/20 transition-colors text-center"
+                  >
+                    View All Webinars
+                  </Link>
+                </div>
+              </div>
             </div>
           </motion.div>
 
