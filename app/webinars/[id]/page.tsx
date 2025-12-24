@@ -229,7 +229,7 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
               What You'll Learn in This Session 📘
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {webinar.whatYoullLearn.map((item, index) => (
+              {webinar.whatYoullLearn.map((item: string, index: number) => (
                 <div key={index} className="flex items-start gap-2">
                   <CheckCircleIcon className="w-5 h-5 text-[#1447e6] shrink-0 mt-0.5" />
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{item}</span>
@@ -250,7 +250,7 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
               Who This Session Is For 👥
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {webinar.whoIsFor.map((item, index) => (
+              {webinar.whoIsFor.map((item: string, index: number) => (
                 <div key={index} className="flex items-start gap-2">
                   <UserGroupIcon className="w-5 h-5 text-[#1447e6] shrink-0 mt-0.5" />
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{item}</span>
@@ -274,7 +274,7 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
               What You'll Get 🎁
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {webinar.whatYoullGet.map((item, index) => (
+              {webinar.whatYoullGet.map((item: string, index: number) => (
                 <div key={index} className="flex items-start gap-2">
                   <DocumentTextIcon className="w-5 h-5 text-[#1447e6] shrink-0 mt-0.5" />
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{item}</span>
