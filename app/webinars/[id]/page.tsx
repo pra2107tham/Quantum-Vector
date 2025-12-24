@@ -63,8 +63,9 @@ const webinarData: Record<string, any> = {
   },
 };
 
-export default function WebinarDetailPage({ params }: { params: { id: string } }) {
-  const webinar = webinarData[params.id];
+export default async function WebinarDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const webinar = webinarData[id];
 
   if (!webinar) {
     return (
