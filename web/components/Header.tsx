@@ -53,6 +53,12 @@ export default function Header() {
             Courses
           </Link>
           <Link 
+            href="/webinars"
+            className={`font-sans font-normal text-[16px] xl:text-[20px] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20 ${pathname === '/webinars' || pathname?.startsWith('/webinars/') ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
+          >
+            Webinars
+          </Link>
+          <Link 
             href="/about"
             className={`font-sans font-normal text-[16px] xl:text-[20px] transition-all cursor-pointer whitespace-nowrap px-3 py-2 rounded-lg hover:bg-white/20 ${pathname === '/about' ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
           >
@@ -105,6 +111,13 @@ export default function Header() {
               className={`font-sans font-normal text-[16px] transition-all px-3 py-3 rounded-lg hover:bg-white/20 ${pathname === '/courses' || pathname === '/dclp' ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
             >
               Courses
+            </Link>
+            <Link
+              href="/webinars"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`font-sans font-normal text-[16px] transition-all px-3 py-3 rounded-lg hover:bg-white/20 ${pathname === '/webinars' || pathname?.startsWith('/webinars/') ? 'text-[#1447e6]' : 'text-[#2d2d2d] hover:text-[#1447e6]'}`}
+            >
+              Webinars
             </Link>
             <Link
               href="/about"
