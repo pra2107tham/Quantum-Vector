@@ -59,7 +59,7 @@ const webinarData: Record<string, any> = {
       title: "Where to Learn DevOps the Right Way 🏗️",
       content: "Continue your DevOps journey with QuantumVector, where we focus on real production-grade DevOps workflows, practical understanding over theory, and career-oriented learning, not just certifications. We teach DevOps the way companies use it in real environments.",
     },
-    paymentLink: "https://rzp.io/rzp/E2yS4c0g", // You can update this with actual Razorpay link
+    paymentLink: "https://rzp.io/rzp/82o07jIT",
   },
 };
 
