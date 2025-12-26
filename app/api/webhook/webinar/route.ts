@@ -138,141 +138,158 @@ function verifyWebhookSignature(
   }
 }
 
-// Send confirmation email
-async function sendConfirmationEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
-  const { email, amount, id, name, contact } = emailData;
+// Send confirmation email for DevOps Roadmap 2026 webinar
+async function sendRoadmapWebinarEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
+  const { email, amount, id, name } = emailData;
   const amountInRupees = (amount / 100).toFixed(2);
   const userName = name || 'Student';
 
   logEvent('EMAIL_ATTEMPT', {
     to: email,
     name: userName,
-    contact: contact || 'Not provided',
+    contact: emailData.contact || 'Not provided',
     amount: amountInRupees,
-    paymentId: id
+    paymentId: id,
+    webinar: 'devops_roadmap_2026'
   });
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
-    subject: 'Registration Confirmed - Terraform Webinar Series (Azure Focus)',
+    subject: 'Registration Confirmed - DevOps Roadmap 2026 Webinar',
     html: `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); min-height: 100vh;">
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa;">
         
         <!-- Main Container -->
         <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
           
-          <!-- Header -->
-          <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 32px; text-align: center; border-bottom: 3px solid #1e40af;">
-            <h1 style="color: #ffffff; font-size: 26px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.01em;">Registration Confirmed</h1>
-            <p style="color: #dbeafe; font-size: 16px; margin: 0; font-weight: 400;">Hello ${userName}</p>
-          </div>
-
           <!-- Content Container -->
           <div style="padding: 32px;">
             
-            <!-- Confirmation Details -->
-            <div style="margin-bottom: 32px;">
-              <h2 style="color: #212529; font-size: 20px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3;">Terraform Webinar Series</h2>
-              <p style="color: #6c757d; font-size: 16px; margin: 0 0 4px 0; font-weight: 500;">Azure Infrastructure as Code (5 Days)</p>
-              <p style="color: #495057; font-size: 14px; line-height: 1.5; margin: 0 0 24px 0;">Your registration has been successfully confirmed.</p>
-              
-              <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);">
-                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-                  <div style="flex: 1; min-width: 180px;">
-                    <span style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Transaction ID</span>
-                    <div style="color: #212529; font-size: 15px; font-weight: 600; margin-top: 4px; font-family: 'SF Mono', Monaco, monospace; background-color: #ffffff; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
-                  </div>
-                  <div style="flex: 1; min-width: 120px;">
-                    <span style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Amount Paid</span>
-                    <div style="color: #198754; font-size: 18px; font-weight: 700; margin-top: 4px;">₹${amountInRupees}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">Hi${userName !== 'Student' ? ` ${userName}` : ''},</p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              Thank you for registering for the <strong>DevOps Roadmap 2026 – Complete Career Guide</strong> webinar.
+            </p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              We're excited to have you join us.
+            </p>
 
-            <!-- Schedule -->
-            <div style="margin-bottom: 32px;">
-              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e9ecef;">Schedule Details</h3>
-              <div style="border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);">
-                <div style="padding: 16px 20px; border-bottom: 1px solid #e9ecef; background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);">
-                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Dates</div>
-                  <div style="color: #212529; font-size: 15px; font-weight: 600;">6th - 10th October, 2025</div>
-                </div>
-                <div style="padding: 16px 20px; border-bottom: 1px solid #e9ecef; background-color: #ffffff;">
-                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Time</div>
-                  <div style="color: #212529; font-size: 15px; font-weight: 600;">7:00 PM - 8:30 PM IST (Daily)</div>
-                </div>
-                <div style="padding: 16px 20px; border-bottom: 1px solid #e9ecef; background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);">
-                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
-                  <div style="color: #212529; font-size: 15px; font-weight: 600;">5 days, 1.5 hours each day</div>
-                </div>
-                <div style="padding: 16px 20px; background-color: #ffffff;">
-                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Format</div>
-                  <div style="color: #212529; font-size: 15px; font-weight: 600;">Live Zoom Sessions</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Course Curriculum -->
-            <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(37, 99, 235, 0.08);">
+            <!-- Webinar Details -->
+            <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px; border-bottom: 1px solid #1e40af;">
-                <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0 0 8px 0;">What You'll Learn</h3>
-                <p style="color: #dbeafe; font-size: 14px; line-height: 1.5; margin: 0;">Complete Terraform mastery with Azure focus, from basics to production deployment.</p>
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0;">📅 Webinar Details</h3>
               </div>
               
               <div style="background-color: #ffffff; padding: 24px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 16px;">
-                    <div style="color: #212529; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Day 1-2: Fundamentals</div>
-                    <div style="color: #6c757d; font-size: 12px; line-height: 1.4;">IaC concepts, Terraform basics, Azure demos</div>
-                  </div>
-                  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 16px;">
-                    <div style="color: #212529; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Day 3-4: Advanced</div>
-                    <div style="color: #6c757d; font-size: 12px; line-height: 1.4;">Modules, workspaces, Azure resources</div>
-                  </div>
-                  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 16px;">
-                    <div style="color: #212529; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Day 5: CI/CD</div>
-                    <div style="color: #6c757d; font-size: 12px; line-height: 1.4;">Azure DevOps, pipelines, best practices</div>
-                  </div>
-                  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 16px;">
-                    <div style="color: #212529; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Capstone Project</div>
-                    <div style="color: #6c757d; font-size: 12px; line-height: 1.4;">3-tier Azure app deployment</div>
-                  </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Date</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">28th December 2025</div>
                 </div>
-                
-                <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #0ea5e9; border-radius: 8px; padding: 16px; text-align: center;">
-                  <div style="color: #0c4a6e; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Certificate of Completion Included</div>
-                  <div style="color: #0369a1; font-size: 12px;">Lifetime access to recordings and materials</div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Time</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">9:00 – 10:30 AM (IST)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Mode</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">Live Online</div>
+                </div>
+                <div>
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">One-Time Fee</div>
+                  <div style="color: #198754; font-size: 18px; font-weight: 700;">₹${amountInRupees}</div>
                 </div>
               </div>
             </div>
 
-            <!-- Next Steps -->
+            <!-- What You'll Learn -->
             <div style="margin-bottom: 32px;">
-              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e9ecef;">Next Steps</h3>
-              
-              <div style="margin-bottom: 16px; background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; border-left: 4px solid #2563eb; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);">
-                <div style="color: #212529; font-size: 15px; font-weight: 600; margin-bottom: 6px;">Zoom Meeting Link</div>
-                <div style="color: #6c757d; font-size: 13px; line-height: 1.4;">Will be shared 24 hours before the webinar series starts</div>
-              </div>
-              
-              <div style="background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; border-left: 4px solid #2563eb; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);">
-                <div style="color: #212529; font-size: 15px; font-weight: 600; margin-bottom: 6px;">WhatsApp Community</div>
-                <div style="color: #6c757d; font-size: 13px; line-height: 1.4;">You will be added to our Terraform learners group soon</div>
-              </div>
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🔍 What You'll Learn</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                This session is designed to give you <strong>absolute clarity</strong> on your DevOps career in 2026:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">What to study (skills, tools, real expectations)</li>
+                <li style="margin-bottom: 8px;">How to study (right order, projects, practice)</li>
+                <li style="margin-bottom: 8px;">How DevOps hiring works in 2026</li>
+                <li style="margin-bottom: 8px;">What companies actually expect from DevOps engineers</li>
+                <li style="margin-bottom: 8px;">Common mistakes learners make—and how to avoid them</li>
+              </ul>
             </div>
 
-            <!-- Support -->
-            <div style="text-align: center; padding: 24px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);">
-              <p style="color: #212529; font-size: 16px; font-weight: 600; margin: 0 0 8px 0;">Questions?</p>
-              <p style="color: #6c757d; font-size: 14px; margin: 0; font-weight: 500;">Contact us at <span style="color: #212529; font-weight: 600;">info@devopscommunity.com</span></p>
+            <!-- Who We Are -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">👥 Who We Are – QuantumVector by DevOps Community</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                <strong>QuantumVector (quantumvector.sh)</strong> is <strong>not a consultancy</strong>.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We are a <strong>community-driven initiative led by 10–15 experienced DevOps engineers</strong> who actively work on <strong>real production systems</strong> across cloud, Kubernetes, CI/CD, monitoring, and automation.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0; font-weight: 600;">Everything we teach is based on:</p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Real production incidents</li>
+                <li style="margin-bottom: 8px;">Live systems</li>
+                <li style="margin-bottom: 8px;">Actual workflows used in companies today</li>
+              </ul>
+            </div>
+
+            <!-- WhatsApp Group -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid #0ea5e9; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #0c4a6e; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">📲 Important: Join the WhatsApp Group</h3>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                All webinar updates, joining links, and materials will be shared via our <strong>official WhatsApp group</strong>.
+              </p>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0;">
+                👉 <strong>Register for DevOps Roadmap 2026 Webinar & Join WhatsApp Group:</strong><br/>
+                <span style="font-size: 13px;">(Use the same link you registered with)</span>
+              </p>
+            </div>
+
+            <!-- Want to Go Deeper -->
+            <div style="margin-bottom: 32px; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Want to Go Deeper?</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We also offer <strong>Offline & Online DevOps Courses</strong> focused on:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Hands-on production-level learning</li>
+                <li style="margin-bottom: 8px;">Real projects, not demos</li>
+                <li style="margin-bottom: 8px;">Career guidance and mentorship</li>
+              </ul>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0;">
+                For complete details, visit:<br/>
+                👉 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none; font-weight: 600;">https://quantumvector.sh</a>
+              </p>
+            </div>
+
+            <!-- Closing -->
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              Looking forward to seeing you in the live session.
+            </p>
+
+            <!-- Signature -->
+            <div style="border-top: 1px solid #e9ecef; padding-top: 24px;">
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 8px 0;">
+                Warm regards,<br/>
+                <strong>Team DevOps Community</strong><br/>
+                <strong>QuantumVector</strong>
+              </p>
+              <p style="color: #6c757d; font-size: 14px; margin: 8px 0 0 0;">
+                🌐 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none;">https://quantumvector.sh</a>
+              </p>
+            </div>
+
+            <!-- Transaction ID -->
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+              <div style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px;">Transaction ID</div>
+              <div style="color: #212529; font-size: 13px; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; background-color: #f8f9fa; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
             </div>
           </div>
 
           <!-- Footer -->
-          <div style="background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); padding: 20px; text-align: center; border-top: 1px solid #dee2e6;">
-            <p style="color: #6c757d; font-size: 12px; margin: 0; font-weight: 500;">This is an automated confirmation email.</p>
+          <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
+            <p style="color: #6c757d; font-size: 12px; margin: 0;">This is an automated confirmation email.</p>
           </div>
         </div>
       </div>
@@ -285,7 +302,8 @@ async function sendConfirmationEmail(emailData: { email: string; amount: number;
       to: email,
       name: userName,
       paymentId: id,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      webinar: 'devops_roadmap_2026'
     });
   } catch (error) {
     logEvent('EMAIL_ERROR', {
@@ -293,7 +311,8 @@ async function sendConfirmationEmail(emailData: { email: string; amount: number;
       name: userName,
       paymentId: id,
       error: error instanceof Error ? error.message : 'Unknown error',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      webinar: 'devops_roadmap_2026'
     });
     throw error;
   }
@@ -465,21 +484,38 @@ export async function POST(request: Request) {
         const { POST } = await import('../courses/docker-kubernetes/route');
         return POST(req as Request);
       },
-      // Terraform Webinar (inline email send)
-      terraform_webinar: async () => {
+      // DevOps Roadmap 2026 Webinar (inline email send)
+      roadmap_webinar: async () => {
         try {
-          await sendConfirmationEmail({
+          await sendRoadmapWebinarEmail({
             email: payment.email,
             amount: payment.amount,
             id: payment.id,
             name: payment.notes?.name,
             contact: payment.contact
           });
-          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'terraform_webinar' });
-          return NextResponse.json({ message: 'Terraform webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'roadmap_webinar' });
+          return NextResponse.json({ message: 'DevOps Roadmap 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
         } catch (emailError) {
-          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'terraform_webinar', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
-          return NextResponse.json({ message: 'Terraform webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'roadmap_webinar', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'DevOps Roadmap 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
+      // Alternative label for compatibility
+      devops_roadmap_2026: async () => {
+        try {
+          await sendRoadmapWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'devops_roadmap_2026' });
+          return NextResponse.json({ message: 'DevOps Roadmap 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'devops_roadmap_2026', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'DevOps Roadmap 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
         }
       },
       // Testing: run all handlers/emails
@@ -538,18 +574,18 @@ export async function POST(request: Request) {
           results.push({ handler: 'docker_kubernetes', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
-        // Terraform email inline
+        // Roadmap webinar email inline
         try {
-          await sendConfirmationEmail({
+          await sendRoadmapWebinarEmail({
             email: payment.email,
             amount: payment.amount,
             id: payment.id,
             name: payment.notes?.name,
             contact: payment.contact
           });
-          results.push({ handler: 'terraform_webinar', ok: true });
+          results.push({ handler: 'roadmap_webinar', ok: true });
         } catch (e) {
-          results.push({ handler: 'terraform_webinar', ok: false, error: (e as Error)?.message || 'Unknown error' });
+          results.push({ handler: 'roadmap_webinar', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
         logEvent('TESTING_RUN_COMPLETED', { requestId, paymentId: payment.id, label: 'testing', results });
