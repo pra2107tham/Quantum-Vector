@@ -240,9 +240,16 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
               <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
                 All webinar updates, joining links, and materials will be shared via our <strong>official WhatsApp group</strong>.
               </p>
-              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0;">
-                👉 <strong>Register for DevOps Roadmap 2026 Webinar & Join WhatsApp Group:</strong><br/>
-                <span style="font-size: 13px;">(Use the same link you registered with)</span>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0;">
+                👉 <strong>Join the DevOps Roadmap 2026 WhatsApp Group:</strong>
+              </p>
+              <div style="text-align: center; margin: 16px 0;">
+                <a href="https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA" style="display: inline-block; background: #25D366; color: #ffffff; font-size: 16px; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); transition: all 0.3s ease;">
+                  Join WhatsApp Group
+                </a>
+              </div>
+              <p style="color: #0369a1; font-size: 14px; line-height: 1.6; margin: 12px 0 0 0; text-align: center;">
+                <a href="https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA" style="color: #0369a1; text-decoration: underline;">https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA</a>
               </p>
             </div>
 
