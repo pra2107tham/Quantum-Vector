@@ -49,20 +49,20 @@ export default function CoursesPage() {
                 <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm whitespace-nowrap">
                   🎯 Job-Ready
                 </span>
-                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#e54a2d] text-[11px] md:text-sm whitespace-nowrap">
-                  🔥 Only 6 Seats
+                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm whitespace-nowrap">
+                  ☁️ AWS Focused
                 </span>
               </div>
 
               {/* Title */}
               <h1 className="font-outfit font-bold text-[#2d2d2d] text-[26px] md:text-[44px] lg:text-[52px] leading-tight w-full">
-                DevOps & Cloud
-                <span className="text-[#1447e6]"> Learning Program</span>
+                AWS DevOps
+                <span className="text-[#1447e6]"> Courses</span>
               </h1>
 
               {/* Description */}
               <p className="font-sans font-normal text-[#2d2d2d] text-[13px] md:text-[16px] leading-relaxed w-full max-w-[550px]">
-                Go from zero to job-ready in 2–3 months. Master Linux, Docker, Kubernetes, AWS, and CI/CD with hands-on projects and 1:1 mentorship.
+                Master DevOps with AWS Cloud from scratch to production. Complete curriculum covering Linux, Docker, Kubernetes, and AWS services.
               </p>
 
               {/* Course Highlights */}
@@ -83,10 +83,10 @@ export default function CoursesPage() {
 
               {/* CTA Button */}
               <Link
-                href="/dclp"
+                href="/courses/aws-devops"
                 className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-7 py-2.5 md:py-3.5 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap mt-2"
               >
-                View Program Details →
+                View Course Details →
               </Link>
             </div>
 
@@ -94,7 +94,7 @@ export default function CoursesPage() {
             <div className="w-full md:w-[40%] shrink-0">
               <div className="glass-card glass-card-blur-md glass-card-opacity-light flex flex-col gap-4 md:gap-5 items-start p-4 md:p-6 relative rounded-[12px] md:rounded-[16px] shrink-0 w-full">
                 <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-[22px]">
-                  Why Choose DCLP?
+                  Why Choose Our Course?
                 </h3>
                 <div className="flex flex-col gap-3 md:gap-4 w-full">
                   {[
@@ -124,7 +124,7 @@ export default function CoursesPage() {
             className="absolute bottom-[20px] md:bottom-[30px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
           >
             <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm whitespace-nowrap">See Details</span>
-            <motion.div
+        <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             >
@@ -147,19 +147,19 @@ export default function CoursesPage() {
             </p>
           </div>
 
-          {/* DCLP Program Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+          {/* AWS DevOps Course Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="w-full max-w-[900px] px-2"
           >
-            <Link href="/dclp" className="block">
+            <Link href="/courses/aws-devops" className="block">
               <div className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[14px] md:rounded-[20px] p-4 md:p-6 hover:shadow-xl transition-all group">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
                   {/* Icon */}
-                  <div className="bg-[#1447e6] rounded-[12px] md:rounded-[16px] p-3 md:p-4 shrink-0 group-hover:scale-105 transition-transform">
+                  <div className="bg-[#ff9900] rounded-[12px] md:rounded-[16px] p-3 md:p-4 shrink-0 group-hover:scale-105 transition-transform">
                     <AcademicCapIcon className="w-8 h-8 md:w-10 md:h-10 text-white" />
                   </div>
                   
@@ -167,15 +167,15 @@ export default function CoursesPage() {
                   <div className="flex-1">
                     <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 mb-2">
                       <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[18px] md:text-[24px]">
-                        DevOps & Cloud Learning Program
+                        Complete AWS DevOps Course
                       </h3>
-                      <span className="glass-card glass-card-blur-sm px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold text-[#e54a2d] whitespace-nowrap w-fit">
-                        Only 6 Seats
+                      <span className="glass-card glass-card-blur-sm px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold text-[#1447e6] whitespace-nowrap w-fit">
+                        Starts Jan 12, 2026
                       </span>
                     </div>
                     
                     <p className="font-sans text-[#66707d] text-[12px] md:text-[15px] mb-3">
-                      Complete 90-day program covering Linux, Docker, Kubernetes, AWS, Terraform, and CI/CD with real-world projects.
+                      Master DevOps with AWS Cloud from scratch. Complete curriculum covering Linux, Docker, Kubernetes, CI/CD, and AWS services with 4 real-world projects.
                     </p>
 
                     {/* Features */}
@@ -191,12 +191,12 @@ export default function CoursesPage() {
                     <div className="flex items-center justify-between flex-wrap gap-3">
                       <div className="flex items-center gap-3 md:gap-4">
                         <div className="flex items-center gap-1">
-                          <UserGroupIcon className="w-4 h-4 text-[#1447e6]" />
-                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">6/Batch</span>
+                          <ClockIcon className="w-4 h-4 text-[#1447e6]" />
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">2-3 Months</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <RocketLaunchIcon className="w-4 h-4 text-[#1447e6]" />
-                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">Job-Ready</span>
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">4 Projects</span>
                         </div>
                       </div>
                       <span className="bg-[#1447e6] text-white font-sans font-semibold text-[11px] md:text-sm px-4 md:px-5 py-1.5 md:py-2 rounded-full group-hover:bg-[#0f3bb8] transition-colors">
@@ -207,7 +207,7 @@ export default function CoursesPage() {
                 </div>
               </div>
             </Link>
-          </motion.div>
+              </motion.div>
         </div>
       </div>
 
@@ -217,6 +217,6 @@ export default function CoursesPage() {
           <Footer />
         </div>
       </div>
-    </div>
+          </div>
   );
-}
+} 
