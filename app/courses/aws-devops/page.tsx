@@ -855,13 +855,13 @@ export default function AWSCoursePage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div 
-                  className="glass-card glass-card-blur-lg glass-card-opacity-medium rounded-[20px] p-6 md:p-8 max-w-[500px] w-full relative pointer-events-auto bg-white/90"
+                  className="bg-white rounded-[20px] p-6 md:p-8 max-w-[500px] w-full relative pointer-events-auto shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Close Button */}
                   <button
                     onClick={() => setShowRegistrationModal(false)}
-                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 transition-colors"
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
                     aria-label="Close"
                   >
                     <XMarkIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2d2d2d]" />
@@ -881,7 +881,7 @@ export default function AWSCoursePage() {
                       </p>
                     </div>
 
-                    <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] mb-4">
+                    <div className="bg-gray-50 border border-gray-200 p-4 rounded-[12px] mb-4">
                       <p className="font-sans font-semibold text-[#2d2d2d] text-[13px] md:text-base mb-1">
                         Please come back in a few hours
                       </p>
