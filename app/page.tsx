@@ -41,7 +41,7 @@ export default function Home() {
       <div className="relative w-full mt-[60px] md:mt-[120px]">
         <div className="relative flex flex-col gap-[50px] md:gap-[100px] items-center justify-center pt-[40px] md:pt-[80px] pb-[30px] md:pb-[60px] px-2 md:px-4 max-w-[1447.97px] mx-auto">
           
-          {/* DCLP Program Marketing Section - Primary CTA */}
+          {/* AWS DevOps Course Marketing Section - Primary CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,10 +50,10 @@ export default function Home() {
             className="w-full max-w-[1300px] px-2"
           >
             <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-4 md:p-8 lg:p-10 rounded-[16px] md:rounded-[20px] relative overflow-hidden">
-              {/* Urgency Badge */}
+              {/* Badge */}
               <div className="absolute top-3 md:top-4 right-3 md:right-4">
-                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-bold text-[#e54a2d] animate-pulse">
-                  🔥 Only 6 Seats Available
+                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-bold text-[#ff9900]">
+                  ☁️ AWS Focused
                 </span>
               </div>
 
@@ -64,24 +64,24 @@ export default function Home() {
                     Transform Your Career
                   </p>
                   <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-3xl lg:text-4xl leading-tight">
-                    DevOps & Cloud Job-Ready Program
+                    Complete AWS DevOps Job-Ready Course
                   </h2>
                 </div>
                 
                 {/* Value Proposition */}
                 <p className="font-sans font-normal text-[#2d2d2d] text-[13px] md:text-base lg:text-lg leading-relaxed max-w-3xl">
-                  Stop watching tutorials that lead nowhere. Our <span className="font-semibold text-[#1447e6]">intensive 90-day program</span> gives you the exact skills, projects, and mentorship to land your DevOps role.
+                  Master DevOps with AWS Cloud from scratch. Our <span className="font-semibold text-[#1447e6]">comprehensive 2-3 month program</span> gives you the exact skills, projects, and mentorship to land your DevOps role.
                 </p>
                 
                 {/* Benefits Grid */}
                 <div className="grid grid-cols-2 gap-2 md:gap-4">
                   <div className="flex items-start gap-2">
                     <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
-                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">Personal mentorship (6 learners max)</span>
+                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">Online & Offline (Bangalore)</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
-                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">Production-grade projects</span>
+                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">4 Production-grade AWS projects</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
@@ -96,13 +96,13 @@ export default function Home() {
                 {/* CTA */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mt-2">
                   <Link
-                    href="/dclp"
+                    href="/courses/aws-devops"
                     className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-8 py-2.5 md:py-3.5 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg"
                   >
-                    View Program Details →
+                    View Course Details →
                   </Link>
                   <span className="font-sans text-[11px] md:text-sm text-[#66707d]">
-                    Next batch starts soon
+                    Starts January 12th, 2026
                   </span>
                 </div>
               </div>

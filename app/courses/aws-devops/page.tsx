@@ -26,6 +26,7 @@ import {
   CircleStackIcon,
   CurrencyRupeeIcon,
   CalendarIcon,
+  VideoCameraIcon,
 } from "@heroicons/react/24/outline";
 
 // Tech Stack Icons
@@ -458,6 +459,9 @@ export default function AWSCoursePage() {
                     <CalendarIcon className="w-4 h-4" />
                     Starts Jan 12th, 2026
                   </span>
+                  <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
+                    📍 Online & Offline (Bangalore)
+                  </span>
                 </div>
 
                 {/* Title */}
@@ -476,7 +480,7 @@ export default function AWSCoursePage() {
                     A comprehensive, hands-on DevOps program covering Linux, CI/CD, Docker, Kubernetes, and AWS Cloud services.
                   </p>
                   <p className="font-sans font-normal text-[#66707d] text-[12px] md:text-sm leading-relaxed max-w-xl">
-                    Learn from industry experts and build real-world projects on AWS infrastructure.
+                    Available both <span className="font-semibold text-[#1447e6]">online</span> and <span className="font-semibold text-[#ff9900]">offline in Bangalore</span>. Learn from industry experts and build real-world projects on AWS infrastructure.
                   </p>
                 </div>
 
@@ -534,6 +538,7 @@ export default function AWSCoursePage() {
                       {[
                         "Complete tech stack (10+ tools)",
                         "4 Real-world AWS projects",
+                        "Online & Offline (Bangalore) options",
                         "1-on-1 mentorship & doubt clearing",
                         "Resume & interview preparation",
                         "Lifetime access to recordings",
@@ -604,6 +609,83 @@ export default function AWSCoursePage() {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Online & Offline Options */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="w-full"
+          >
+            <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-8 rounded-[16px] md:rounded-[20px]">
+              <div className="text-center mb-6 md:mb-8">
+                <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-3xl mb-2 md:mb-3">
+                  Choose Your Learning Mode
+                </h2>
+                <p className="font-sans text-[#66707d] text-[12px] md:text-base">
+                  We offer flexible learning options to suit your needs
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {/* Online Option */}
+                <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-6 rounded-[12px] md:rounded-[16px] border-2 border-[#1447e6]/20">
+                  <div className="flex items-center gap-3 mb-3 md:mb-4">
+                    <div className="p-2 md:p-3 rounded-[10px] bg-[#1447e6]/10">
+                      <VideoCameraIcon className="w-6 h-6 md:w-8 md:h-8 text-[#1447e6]" />
+                    </div>
+                    <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-xl">
+                      Online Learning
+                    </h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {[
+                      "Live interactive sessions",
+                      "Recordings for lifetime access",
+                      "Join from anywhere in India",
+                      "Same curriculum & projects",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
+                        <span className="font-sans text-[#2d2d2d] text-[12px] md:text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Offline Option */}
+                <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-6 rounded-[12px] md:rounded-[16px] border-2 border-[#ff9900]/20">
+                  <div className="flex items-center gap-3 mb-3 md:mb-4">
+                    <div className="p-2 md:p-3 rounded-[10px] bg-[#ff9900]/10">
+                      <GlobeAltIcon className="w-6 h-6 md:w-8 md:h-8 text-[#ff9900]" />
+                    </div>
+                    <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-xl">
+                      Offline in Bangalore
+                    </h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {[
+                      "In-person classroom sessions",
+                      "Direct interaction with mentors",
+                      "Hands-on lab access",
+                      "Networking with fellow students",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#ff9900] shrink-0 mt-0.5" />
+                        <span className="font-sans text-[#2d2d2d] text-[12px] md:text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-4 md:mt-6 text-center">
+                <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
+                  Both modes include the same comprehensive curriculum, projects, and lifetime access to recordings
+                </p>
               </div>
             </div>
           </motion.div>
@@ -697,6 +779,7 @@ export default function AWSCoursePage() {
               </h2>
               <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
                 Complete curriculum from Linux to Kubernetes. 4 real-world AWS projects. 
+                Available <strong>online</strong> and <strong>offline in Bangalore</strong>. 
                 Course starts on <strong>January 12th, 2026</strong>.
               </p>
               
