@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -422,6 +423,11 @@ function ModuleCard({ module, index }: { module: any; index: number }) {
 
 export default function AWSCoursePage() {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
@@ -826,72 +832,78 @@ export default function AWSCoursePage() {
       </div>
 
       {/* Registration Modal */}
-      <AnimatePresence>
-        {showRegistrationModal && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowRegistrationModal(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[9998]"
-            />
-            
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium rounded-[20px] p-6 md:p-8 max-w-[500px] w-full relative">
-                {/* Close Button */}
-                <button
-                  onClick={() => setShowRegistrationModal(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 transition-colors"
-                  aria-label="Close"
+      {mounted && createPortal(
+        <AnimatePresence>
+          {showRegistrationModal && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowRegistrationModal(false)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-md z-[9998]"
+              />
+              
+              {/* Modal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-none"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div 
+                  className="glass-card glass-card-blur-lg glass-card-opacity-medium rounded-[20px] p-6 md:p-8 max-w-[500px] w-full relative pointer-events-auto bg-white/90"
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <XMarkIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2d2d2d]" />
-                </button>
-
-                {/* Content */}
-                <div className="text-center">
-                  <div className="mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-[#1447e6]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <CalendarIcon className="w-8 h-8 md:w-10 md:h-10 text-[#1447e6]" />
-                    </div>
-                    <h3 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-2xl mb-2">
-                      Registrations Coming Soon
-                    </h3>
-                    <p className="font-sans text-[#66707d] text-[14px] md:text-base leading-relaxed">
-                      Registrations for the AWS DevOps course are yet to start and will be opening soon.
-                    </p>
-                  </div>
-
-                  <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] mb-4">
-                    <p className="font-sans font-semibold text-[#2d2d2d] text-[13px] md:text-base mb-1">
-                      Please come back in a few hours
-                    </p>
-                    <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
-                      We're setting up the registration process and will be ready shortly.
-                    </p>
-                  </div>
-
+                  {/* Close Button */}
                   <button
                     onClick={() => setShowRegistrationModal(false)}
-                    className="bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg"
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 transition-colors"
+                    aria-label="Close"
                   >
-                    Got it, thanks!
+                    <XMarkIcon className="w-5 h-5 md:w-6 md:h-6 text-[#2d2d2d]" />
                   </button>
+
+                  {/* Content */}
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="w-16 h-16 md:w-20 md:h-20 bg-[#1447e6]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <CalendarIcon className="w-8 h-8 md:w-10 md:h-10 text-[#1447e6]" />
+                      </div>
+                      <h3 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-2xl mb-2">
+                        Registrations Coming Soon
+                      </h3>
+                      <p className="font-sans text-[#66707d] text-[14px] md:text-base leading-relaxed">
+                        Registrations for the AWS DevOps course are yet to start and will be opening soon.
+                      </p>
+                    </div>
+
+                    <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] mb-4">
+                      <p className="font-sans font-semibold text-[#2d2d2d] text-[13px] md:text-base mb-1">
+                        Please come back in a few hours
+                      </p>
+                      <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
+                        We're setting up the registration process and will be ready shortly.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => setShowRegistrationModal(false)}
+                      className="bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-base px-6 md:px-8 py-2.5 md:py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg"
+                    >
+                      Got it, thanks!
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
