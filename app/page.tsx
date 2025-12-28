@@ -77,7 +77,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-2 md:gap-4">
                   <div className="flex items-start gap-2">
                     <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
-                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">Online & Offline (Bangalore)</span>
+                    <span className="font-sans text-[11px] md:text-sm text-[#2d2d2d]">Online & Offline (Hyderabad)</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0 mt-0.5" />
