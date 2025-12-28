@@ -39,7 +39,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
-          <Link href="/dclp">
+          <Link href="/courses/aws-devops">
             <div className="bg-[#1447e6] flex h-[44px] md:h-[52px] items-center justify-center px-5 md:px-[24px] py-3 relative rounded-[30px] shadow-lg shrink-0 hover:bg-[#0f3bb8] transition-colors cursor-pointer">
               <p className="font-sans font-semibold leading-normal not-italic relative shrink-0 text-[13px] md:text-[16px] text-white whitespace-nowrap">
                 Start Your Journey →
