@@ -162,7 +162,7 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
         
         <!-- Main Container -->
         <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
-          
+
           <!-- Content Container -->
           <div style="padding: 32px;">
             
@@ -180,8 +180,8 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
             <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden;">
               <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px; border-bottom: 1px solid #1e40af;">
                 <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0;">📅 Webinar Details</h3>
-              </div>
-              
+            </div>
+
               <div style="background-color: #ffffff; padding: 24px;">
                 <div style="margin-bottom: 16px;">
                   <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Date</div>
@@ -251,8 +251,8 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
               <p style="color: #0369a1; font-size: 14px; line-height: 1.6; margin: 12px 0 0 0; text-align: center;">
                 <a href="https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA" style="color: #0369a1; text-decoration: underline;">https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA</a>
               </p>
-            </div>
-
+              </div>
+              
             <!-- Want to Go Deeper -->
             <div style="margin-bottom: 32px; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
               <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Want to Go Deeper?</h3>
@@ -268,7 +268,7 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
                 For complete details, visit:<br/>
                 👉 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none; font-weight: 600;">https://quantumvector.sh</a>
               </p>
-            </div>
+                  </div>
 
             <!-- Closing -->
             <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
@@ -284,6 +284,103 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
               </p>
               <p style="color: #6c757d; font-size: 14px; margin: 8px 0 0 0;">
                 🌐 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Transaction ID -->
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+              <div style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px;">Transaction ID</div>
+              <div style="color: #212529; font-size: 13px; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; background-color: #f8f9fa; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
+                  </div>
+                </div>
+                
+          <!-- Footer -->
+          <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
+            <p style="color: #6c757d; font-size: 12px; margin: 0;">This is an automated confirmation email.</p>
+                </div>
+              </div>
+            </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    logEvent('EMAIL_SUCCESS', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      timestamp: new Date().toISOString(),
+      webinar: 'devops_roadmap_2026'
+    });
+  } catch (error) {
+    logEvent('EMAIL_ERROR', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString(),
+      webinar: 'devops_roadmap_2026'
+    });
+    throw error;
+  }
+}
+
+// Send confirmation email for AWS DevOps Course
+async function sendAWSCourseEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
+  const { email, amount, id, name } = emailData;
+  const amountInRupees = (amount / 100).toFixed(2);
+  const userName = name || 'Student';
+
+  logEvent('EMAIL_ATTEMPT', {
+    to: email,
+    name: userName,
+    contact: emailData.contact || 'Not provided',
+    amount: amountInRupees,
+    paymentId: id,
+    course: 'aws_devops'
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Registration Confirmed - AWS DevOps Course',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa;">
+        
+        <!-- Main Container -->
+        <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
+          
+          <!-- Content Container -->
+          <div style="padding: 32px;">
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">Hi${userName !== 'Student' ? ` ${userName}` : ''},</p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              Thank you for registering for the <strong>AWS DevOps Course</strong>.
+            </p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              We've received your registration successfully.
+            </p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              For the next steps and further process, <strong>our team will contact you shortly</strong> with all the required details.
+            </p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              If you have any questions in the meantime, you can contact us at <strong>8527144657</strong>.
+            </p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              Looking forward to connecting with you.
+            </p>
+
+            <!-- Signature -->
+            <div style="border-top: 1px solid #e9ecef; padding-top: 24px;">
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 8px 0;">
+                Best regards,<br/>
+                <strong>Team DevOps Community</strong><br/>
+                <strong>QuantumVector</strong>
               </p>
             </div>
 
@@ -310,7 +407,7 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
       name: userName,
       paymentId: id,
       timestamp: new Date().toISOString(),
-      webinar: 'devops_roadmap_2026'
+      course: 'aws_devops'
     });
   } catch (error) {
     logEvent('EMAIL_ERROR', {
@@ -319,7 +416,7 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
       paymentId: id,
       error: error instanceof Error ? error.message : 'Unknown error',
       timestamp: new Date().toISOString(),
-      webinar: 'devops_roadmap_2026'
+      course: 'aws_devops'
     });
     throw error;
   }
@@ -478,6 +575,23 @@ export async function POST(request: Request) {
         const { POST } = await import('../courses/aws-devops/route');
         return POST(req as Request);
       },
+      // AWS DevOps Course (inline email send)
+      aws_devops_course: async () => {
+        try {
+          await sendAWSCourseEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'aws_devops_course' });
+          return NextResponse.json({ message: 'AWS DevOps course payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'aws_devops_course', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'AWS DevOps course payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
       azure_course: async (req?: Request) => {
         const { POST } = await import('../courses/azure-devops/route');
         return POST(req as Request);
@@ -593,6 +707,20 @@ export async function POST(request: Request) {
           results.push({ handler: 'roadmap_webinar', ok: true });
         } catch (e) {
           results.push({ handler: 'roadmap_webinar', ok: false, error: (e as Error)?.message || 'Unknown error' });
+        }
+
+        // AWS DevOps course email inline
+        try {
+          await sendAWSCourseEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          results.push({ handler: 'aws_devops_course', ok: true });
+        } catch (e) {
+          results.push({ handler: 'aws_devops_course', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
         logEvent('TESTING_RUN_COMPLETED', { requestId, paymentId: payment.id, label: 'testing', results });
