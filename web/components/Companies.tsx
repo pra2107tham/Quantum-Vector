@@ -57,7 +57,7 @@ export default function Companies() {
                          opacity-80 hover:opacity-100 transition`}
               aria-label={company.name}
             >
-              <company.Icon className="w-10 h-10 md:w-12 md:h-12 text-[#1447e6]" />
+              <company.Icon className="w-10 h-10 md:w-12 md:h-12 text-gray-800" />
             </div>
           ))}
         </div>
