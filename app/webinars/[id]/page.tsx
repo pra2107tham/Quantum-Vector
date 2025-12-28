@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import {
   CalendarIcon,
   ClockIcon,
-  CurrencyDollarIcon,
   VideoCameraIcon,
   CheckCircleIcon,
   UserGroupIcon,
@@ -30,7 +29,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Full End-to-End DevOps Roadmap PDF",
-    status: "upcoming",
+    status: "completed",
     description: "DevOps in 2026 demands real-world skills, not random tools or outdated tutorials. This session gives you a clear, practical, and industry-aligned DevOps career roadmap, so you know exactly what to learn and why.",
     whyMatters: {
       title: "Why DevOps Roadmap 2026 Matters 🚀",
@@ -68,13 +67,13 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
   const webinar = webinarData[id];
 
   if (!webinar) {
-    return (
+  return (
       <div className="relative w-full min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-outfit font-bold text-[#2d2d2d] text-2xl mb-4">Webinar Not Found</h1>
           <Link href="/webinars" className="text-[#1447e6] hover:underline">
             ← Back to Webinars
-          </Link>
+              </Link>
         </div>
       </div>
     );
@@ -91,8 +90,8 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
           className="object-cover object-center pointer-events-none"
           priority
           unoptimized
-        />
-      </div>
+                    />
+                  </div>
       <div className="fixed inset-0 -z-20 bg-[#dee2e9]" />
 
       {/* Hero Section */}
@@ -101,25 +100,22 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
           <Header />
 
           {/* Hero Content */}
-          <div className="absolute flex flex-col lg:flex-row gap-6 lg:gap-10 items-start left-0 md:left-[59px] top-[110px] md:top-[140px] w-full md:w-[calc(100%-118px)] max-w-full md:max-w-none px-3 md:px-0 md:pr-[59px] pb-[40px] md:pb-[60px]">
-            {/* Left: Main Content */}
+          <div className="absolute flex flex-col gap-6 lg:gap-10 items-start left-0 md:left-[59px] top-[110px] md:top-[140px] w-full md:w-[calc(100%-118px)] max-w-full md:max-w-none px-3 md:px-0 md:pr-[59px] pb-[40px] md:pb-[60px]">
+            {/* Main Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex-1 flex flex-col gap-4 md:gap-5"
+              className="flex-1 flex flex-col gap-4 md:gap-5 w-full max-w-4xl"
             >
               {/* Badges */}
               <div className="flex items-center gap-2 flex-wrap">
-                {webinar.status === "upcoming" && (
-                  <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm">
-                    🎯 Upcoming
+                {webinar.status === "completed" && (
+                  <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#198754] text-[11px] md:text-sm">
+                    ✓ Completed
                   </span>
-                )}
-                <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#e54a2d] text-[11px] md:text-sm">
-                  ⚡ Limited Seats
-                </span>
-              </div>
+              )}
+            </div>
 
               {/* Title */}
               <h1 className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-[36px] lg:text-[44px] leading-tight">
@@ -142,10 +138,6 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{webinar.time}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CurrencyDollarIcon className="w-5 h-5 text-[#1447e6] shrink-0" />
-                  <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">One-Time Fee: {webinar.price}</span>
-                </div>
-                <div className="flex items-center gap-2">
                   <VideoCameraIcon className="w-5 h-5 text-[#1447e6] shrink-0" />
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{webinar.mode}</span>
                 </div>
@@ -158,53 +150,17 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
                 </p>
               </div>
             </motion.div>
-
-            {/* Right: Pricing Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="w-full lg:w-[380px] shrink-0"
-            >
-              <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-6 rounded-[16px] md:rounded-[20px] sticky top-[120px]">
-                <div className="text-center mb-4">
-                  <p className="font-sans text-[#66707d] text-[12px] md:text-sm mb-2">Registration Fee</p>
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">{webinar.price}</span>
-                  </div>
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-2">One-Time Fee</p>
-                </div>
-
-                <div className="border-t border-white/30 pt-4 mb-4">
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] text-center mb-3">
-                    Includes: {webinar.bonus}
-                  </p>
-                  <p className="font-sans text-[#e54a2d] text-[11px] md:text-[12px] text-center font-semibold">
-                    Limited Seats Available
-                  </p>
-                </div>
-
-                <a
-                  href={webinar.paymentLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-[16px] py-3 md:py-3.5 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center block"
-                >
-                  Register Now – {webinar.price}
-                </a>
-              </div>
-            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Content Sections */}
+            {/* Content Sections */}
       <div className="relative w-full mt-[30px] md:mt-[50px] mb-[40px] md:mb-[60px]">
         <div className="relative flex flex-col gap-6 md:gap-8 items-center px-3 md:px-4 max-w-[1200px] mx-auto">
           {/* Why This Matters */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[16px] md:rounded-[20px] p-5 md:p-8 w-full"
@@ -215,14 +171,14 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
             <p className="font-sans font-normal text-[#2d2d2d] text-[14px] md:text-[16px] leading-relaxed">
               {webinar.whyMatters.content}
             </p>
-          </motion.div>
+              </motion.div>
 
           {/* What You'll Learn */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
             className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[16px] md:rounded-[20px] p-5 md:p-8 w-full"
           >
             <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] mb-4">
@@ -256,7 +212,7 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
                   <span className="font-sans text-[#2d2d2d] text-[13px] md:text-[15px]">{item}</span>
                 </div>
               ))}
-            </div>
+          </div>
             <p className="font-sans font-medium text-[#66707d] text-[12px] md:text-[14px] mt-4">
               No prior DevOps experience required.
             </p>
@@ -299,31 +255,8 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
             </p>
           </motion.div>
 
-          {/* Final CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="glass-card glass-card-blur-md glass-card-opacity-medium rounded-[16px] md:rounded-[20px] p-6 md:p-8 w-full text-center"
-          >
-            <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] mb-3">
-              🚀 Get Clarity. Get Direction. Build Your DevOps Career.
-            </h2>
-            <p className="font-sans font-normal text-[#66707d] text-[14px] md:text-[16px] mb-6">
-              Stop guessing your DevOps learning path. Start 2026 with a roadmap you can actually follow.
-            </p>
-            <a
-              href={webinar.paymentLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-[16px] py-3 md:py-4 px-8 md:px-10 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg"
-            >
-              Register Now – Limited Seats Available →
-            </a>
-          </motion.div>
-        </div>
-      </div>
+            </div>
+          </div>
 
       {/* Footer */}
       <div className="relative w-full mt-[40px] md:mt-[60px]">
@@ -333,5 +266,5 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
       </div>
     </div>
   );
-}
+} 
 
