@@ -379,8 +379,8 @@ function ModuleCard({ module, index }: { module: any; index: number }) {
                         {cmd}
                       </code>
                     ))}
-                  </div>
-                </div>
+      </div>
+    </div>
               )}
 
               {/* Phases (for Networking) */}
@@ -469,7 +469,7 @@ export default function AWSCoursePage() {
                     Starts Jan 12th, 2026
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
-                    📍 Online & Offline (Bangalore)
+                    📍 Online & Offline (Hyderabad)
                   </span>
                 </div>
 
@@ -489,7 +489,7 @@ export default function AWSCoursePage() {
                     A comprehensive, hands-on DevOps program covering Linux, CI/CD, Docker, Kubernetes, and AWS Cloud services.
                   </p>
                   <p className="font-sans font-normal text-[#66707d] text-[12px] md:text-sm leading-relaxed max-w-xl">
-                    Available both <span className="font-semibold text-[#1447e6]">online</span> and <span className="font-semibold text-[#ff9900]">offline in Bangalore</span>. Learn from industry experts and build real-world projects on AWS infrastructure.
+                    Available both <span className="font-semibold text-[#1447e6]">online</span> and <span className="font-semibold text-[#ff9900]">offline in Hyderabad</span>. Learn from industry experts and build real-world projects on AWS infrastructure.
                   </p>
                 </div>
 
@@ -522,7 +522,7 @@ export default function AWSCoursePage() {
                   </a>
                 </div>
               </motion.div>
-
+              
               {/* Right Content - Pricing Card */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -534,7 +534,7 @@ export default function AWSCoursePage() {
                   <div className="text-center mb-4">
                     <p className="font-sans text-[#66707d] text-[12px] md:text-sm">Total Course Fee</p>
                     <div className="flex items-center justify-center gap-2">
-                      <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">₹20,000</span>
+                      <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">₹22,000</span>
                     </div>
                     <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">Pay ₹3,000 now to secure your seat</p>
                   </div>
@@ -547,7 +547,7 @@ export default function AWSCoursePage() {
                       {[
                         "Complete tech stack (10+ tools)",
                         "4 Real-world AWS projects",
-                        "Online & Offline (Bangalore) options",
+                        "Online & Offline (Hyderabad) options",
                         "1-on-1 mentorship & doubt clearing",
                         "Resume & interview preparation",
                         "Lifetime access to recordings",
@@ -568,7 +568,7 @@ export default function AWSCoursePage() {
                     Pay ₹3,000 to Enroll
                   </button>
                   <p className="font-sans text-[#66707d] text-[10px] md:text-xs text-center mt-2">
-                    Remaining ₹17,000 to be paid before course starts
+                    Remaining ₹19,000 to be paid before course starts
                   </p>
                 </div>
               </motion.div>
@@ -623,9 +623,9 @@ export default function AWSCoursePage() {
           </motion.div>
 
           {/* Online & Offline Options */}
-          <motion.div
+              <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="w-full"
           >
@@ -672,7 +672,7 @@ export default function AWSCoursePage() {
                       <GlobeAltIcon className="w-6 h-6 md:w-8 md:h-8 text-[#ff9900]" />
                     </div>
                     <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-xl">
-                      Offline in Bangalore
+                      Offline in Hyderabad
                     </h3>
                   </div>
                   <ul className="space-y-2">
@@ -768,10 +768,10 @@ export default function AWSCoursePage() {
                         ))}
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
           </motion.div>
 
           {/* Pricing Section */}
@@ -788,7 +788,7 @@ export default function AWSCoursePage() {
               </h2>
               <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
                 Complete curriculum from Linux to Kubernetes. 4 real-world AWS projects. 
-                Available <strong>online</strong> and <strong>offline in Bangalore</strong>. 
+                Available <strong>online</strong> and <strong>offline in Hyderabad</strong>. 
                 Course starts on <strong>January 12th, 2026</strong>.
               </p>
               
@@ -796,12 +796,12 @@ export default function AWSCoursePage() {
               <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-6">
                 <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
                   <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Total Course Fee</p>
-                  <p className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-3xl">₹20,000</p>
+                  <p className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-3xl">₹22,000</p>
                 </div>
                 <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
                   <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Pay Now to Enroll</p>
                   <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-3xl">₹3,000</p>
-                  <p className="font-sans text-[#66707d] text-[10px] md:text-xs">Remaining ₹17,000 before course starts</p>
+                  <p className="font-sans text-[#66707d] text-[10px] md:text-xs">Remaining ₹19,000 before course starts</p>
                 </div>
               </div>
 
@@ -821,8 +821,8 @@ export default function AWSCoursePage() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </div>
+            </div>
+          </div>
 
       {/* Footer Section */}
       <div className="relative w-full mt-[50px] md:mt-[80px]">
@@ -906,5 +906,5 @@ export default function AWSCoursePage() {
       )}
     </div>
   );
-}
+} 
 
