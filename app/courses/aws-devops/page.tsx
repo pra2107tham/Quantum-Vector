@@ -615,16 +615,54 @@ export default function AWSCoursePage() {
                   </div>
                 </div>
                 <div className="w-full md:w-[280px] shrink-0">
-                  <div className="glass-card glass-card-blur-sm glass-card-opacity-medium p-4 rounded-[12px] h-full flex flex-col justify-center">
-                    <p className="font-outfit font-semibold text-[#1447e6] text-[14px] md:text-lg mb-2">DevOps Process</p>
-                    <p className="font-sans text-[#2d2d2d] text-[12px] md:text-sm">
-                      Suitable for Agile methodology with tools supporting every phase of SDLC
-                    </p>
+                <div className="glass-card glass-card-blur-sm glass-card-opacity-medium p-4 rounded-[12px] h-full flex flex-col justify-center">
+                  <p className="font-outfit font-semibold text-[#1447e6] text-[14px] md:text-lg mb-2">DevOps Process</p>
+                  <p className="font-sans text-[#2d2d2d] text-[12px] md:text-sm">
+                    Suitable for Agile methodology with tools supporting every phase of SDLC
+                  </p>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
+
+        {/* AI-Assisted Cloud Operations */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="w-full"
+        >
+          <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-8 rounded-[16px] md:rounded-[20px]">
+            <div className="flex flex-col lg:flex-row gap-6 items-start">
+              <div className="flex-1">
+                <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-3xl mb-4">
+                  AI-Assisted Cloud Operations Stack
+                </h2>
+                <p className="font-sans text-[#2d2d2d] text-[13px] md:text-[16px] leading-relaxed mb-4">
+                  This AI content mirrors the original Pack of 6 capstone — real-world log analysis, IAM automation, and incident playbooks generated with AI.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {aiProject.features.map((feature, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <CheckCircleIcon className="w-4 h-4 text-[#1447e6] shrink-0 mt-0.5" />
+                      <span className="font-sans text-[#2d2d2d] text-[12px] md:text-[14px]">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="w-full lg:w-[320px] flex flex-col gap-2">
+                {aiProject.schedule.map((day, index) => (
+                  <div key={index} className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[12px]">
+                    <p className="font-outfit font-semibold text-[#1447e6] text-[13px] md:text-[15px]">{day.day}</p>
+                    <p className="font-sans font-bold text-[#2d2d2d] text-[12px] md:text-[14px]">{day.title}</p>
+                    <p className="font-sans text-[#66707d] text-[11px] md:text-[13px]">{day.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
           {/* Online & Offline Options */}
               <motion.div
@@ -700,6 +738,12 @@ export default function AWSCoursePage() {
                   Both modes include the same comprehensive curriculum, projects, and lifetime access to recordings
                 </p>
               </div>
+            <div className="mt-4">
+              <p className="font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-[16px]">Offline location</p>
+              <p className="font-sans text-[#66707d] text-[12px] md:text-[14px]">
+                Flat No.403, Nandini Residency, 15/A Addagutta Society - HMT Hills Rd, near JNTU, Addagutta Society, Jal Vayu Vihar, Kukatpally, Hyderabad, Telangana 500085
+              </p>
+            </div>
             </div>
           </motion.div>
 
