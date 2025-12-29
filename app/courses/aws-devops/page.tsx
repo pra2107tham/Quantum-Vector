@@ -310,6 +310,29 @@ const projects = [
   },
 ];
 
+const aiProject = {
+  title: "AI-Assisted Cloud Operations Stack",
+  subtitle: "Log Analysis • IAM Rotation • Incident Automation",
+  overview:
+    "Hands-on AI content built around real-world cloud operations: incident analysis, policy automation, and observability enhancements using AI guidance.",
+  features: [
+    "AI-powered log collection & incident summaries",
+    "Python automation scripts guided by AI prompts",
+    "Automated IAM key rotation workflows",
+    "Context-aware alerting with AI-generated insights",
+  ],
+  schedule: [
+    { day: "Day 1", title: "AI + DevOps Foundations", desc: "Incident storytelling and AI-assisted monitoring" },
+    { day: "Day 2", title: "Log Pipeline Automation", desc: "Collect logs, feed contextual prompts, summarize insights" },
+    { day: "Day 3", title: "IAM & Secrets Automation", desc: "AI-driven key rotation and least privilege guidance" },
+    { day: "Day 4", title: "Alerting & Notifications", desc: "AI summaries, Slack/email integration, triage automation" },
+    { day: "Day 5", title: "Ops Playbooks", desc: "Build AI-assisted runbooks and handoff templates" },
+  ],
+};
+
+const offlineAddress =
+  "Flat No.403, Nandini Residency, 15/A Addagutta Society - HMT Hills Rd, near JNTU, Addagutta Society, Jal Vayu Vihar, Kukatpally, Hyderabad, Telangana 500085";
+
 // Module Card Component
 function ModuleCard({ module, index }: { module: any; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -737,13 +760,13 @@ export default function AWSCoursePage() {
                 <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
                   Both modes include the same comprehensive curriculum, projects, and lifetime access to recordings
                 </p>
+                <div className="mt-4">
+                  <p className="font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-[16px]">Offline location</p>
+                  <p className="font-sans text-[#66707d] text-[12px] md:text-[14px]">
+                    {offlineAddress}
+                  </p>
+                </div>
               </div>
-            <div className="mt-4">
-              <p className="font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-[16px]">Offline location</p>
-              <p className="font-sans text-[#66707d] text-[12px] md:text-[14px]">
-                Flat No.403, Nandini Residency, 15/A Addagutta Society - HMT Hills Rd, near JNTU, Addagutta Society, Jal Vayu Vihar, Kukatpally, Hyderabad, Telangana 500085
-              </p>
-            </div>
             </div>
           </motion.div>
 
