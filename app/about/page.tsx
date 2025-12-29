@@ -168,9 +168,17 @@ export default function AboutPage() {
             <p className="font-sans font-normal text-[#2d2d2d] text-[16px] md:text-[18px] mb-8 max-w-xl mx-auto">
               Whether you&apos;re a developer, system admin, student, or career switcher — DevOps Community is your launchpad to the future of engineering.
             </p>
-            <p className="font-sans font-semibold text-black text-[18px] md:text-[20px] mb-10">
+            <p className="font-sans font-semibold text-black text-[18px] md:text-[20px] mb-6">
               👉 Let&apos;s automate, collaborate, and innovate — together.
             </p>
+            <div className="glass-card glass-card-blur-sm glass-card-opacity-light rounded-[16px] p-4 mb-6">
+              <p className="font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-[16px]">
+                Visit our Hyderabad office:
+              </p>
+              <p className="font-sans text-[#66707d] text-[12px] md:text-[14px] leading-relaxed">
+                Flat No.403, Nandini Residency, 15/A Addagutta Society - HMT Hills Rd, near JNTU, Addagutta Society, Jal Vayu Vihar, Kukatpally, Hyderabad, Telangana 500085
+              </p>
+            </div>
             <Link href="/webinars">
               <button className="bg-[#1447e6] hover:bg-[#0d3bb3] text-white font-sans font-semibold text-[14px] md:text-[16px] py-3.5 px-10 rounded-[30px] transition-all duration-200 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-lg whitespace-nowrap">
                 Explore Webinars & Courses

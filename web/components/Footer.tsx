@@ -45,9 +45,6 @@ export default function Footer() {
             <Link href="/courses" className="font-sans font-normal text-[12px] md:text-[14px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
               Courses
             </Link>
-            <Link href="/dclp" className="font-sans font-normal text-[12px] md:text-[14px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
-              DCLP
-            </Link>
             <Link href="/about" className="font-sans font-normal text-[12px] md:text-[14px] text-white hover:text-blue-200 transition-colors whitespace-nowrap">
               About
             </Link>
@@ -77,6 +74,12 @@ export default function Footer() {
           >
             <Image src={imgEmail} alt="Email" fill sizes="40px" className="object-contain" />
           </a>
+        </div>
+        <div className="mt-4 text-center">
+          <p className="font-sans font-semibold text-white text-[12px] md:text-[14px]">Visit our Hyderabad office</p>
+          <p className="font-sans text-white/80 text-[11px] md:text-[12px] leading-relaxed">
+            Flat No.403, Nandini Residency, 15/A Addagutta Society - HMT Hills Rd, near JNTU, Addagutta Society, Jal Vayu Vihar, Kukatpally, Hyderabad, Telangana 500085
+          </p>
         </div>
         
         {/* Divider */}
