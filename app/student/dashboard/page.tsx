@@ -39,7 +39,7 @@ export default function StudentDashboardPage() {
         <Header />
       </div>
 
-      <div className="relative flex items-center justify-center px-4 pb-12 pt-4 md:pt-8 text-center">
+      <div className="relative flex items-center justify-center px-4 pb-12 pt-4 md:pt-8 text-center min-h-[calc(100vh-140px)]">
         <div className="glass-card glass-card-blur-md glass-card-opacity-light p-8 md:p-10 rounded-[16px] md:rounded-[20px] w-full max-w-2xl shadow-xl">
           <h1 className="font-outfit font-bold text-[#2d2d2d] text-[26px] md:text-[32px] mb-4">
             Student Dashboard

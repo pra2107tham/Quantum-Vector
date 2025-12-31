@@ -55,7 +55,7 @@ export default function StudentLoginPage() {
         <Header />
       </div>
 
-      <div className="relative flex items-center justify-center px-4 pb-12 pt-4 md:pt-8">
+      <div className="relative flex items-center justify-center px-4 pb-12 pt-4 md:pt-8 min-h-[calc(100vh-140px)]">
         <div className="glass-card glass-card-blur-md glass-card-opacity-light p-6 md:p-8 rounded-[16px] md:rounded-[20px] w-full max-w-md shadow-xl">
           <h1 className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-[28px] mb-4 text-center">
             Student Login
