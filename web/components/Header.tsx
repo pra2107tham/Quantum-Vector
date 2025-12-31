@@ -66,13 +66,13 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Register for DCLP Button - Desktop */}
+        {/* Student Login Button - Desktop */}
         <Link 
-          href="/dclp"
+          href="/student-login"
           className="hidden lg:flex bg-[#1447e6] h-[44px] xl:h-[52px] items-center justify-center px-4 xl:px-[18px] py-2 rounded-[30px] shrink-0 hover:bg-[#0f3bb8] transition-colors cursor-pointer"
         >
           <p className="font-sans font-semibold text-[14px] xl:text-[18px] text-white whitespace-nowrap">
-            Register for DCLP
+            Student Login
           </p>
         </Link>
 
@@ -127,12 +127,12 @@ export default function Header() {
               About
             </Link>
             <Link
-              href="/dclp"
+              href="/student-login"
               onClick={() => setIsMobileMenuOpen(false)}
               className="bg-[#1447e6] flex h-[48px] items-center justify-center px-[18px] py-[12px] rounded-[30px] hover:bg-[#0f3bb8] transition-colors mt-2 shadow-md"
             >
               <p className="font-sans font-semibold text-[16px] text-white whitespace-nowrap">
-                Register for DCLP
+                Student Login
               </p>
             </Link>
           </div>
