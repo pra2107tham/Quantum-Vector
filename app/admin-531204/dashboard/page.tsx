@@ -113,7 +113,7 @@ export default function AdminDashboardPage() {
         <Header />
       </div>
 
-      <div className="relative flex items-start justify-center px-4 pb-12 pt-4 md:pt-8 min-h-[calc(100vh-140px)]">
+      <div className="relative flex items-center justify-center px-4 pb-12 pt-4 md:pt-8 min-h-[calc(100vh-140px)]">
         <div className="glass-card glass-card-blur-md glass-card-opacity-light p-6 md:p-8 rounded-[16px] md:rounded-[20px] w-full max-w-4xl shadow-xl">
           <div className="flex flex-col gap-2 mb-6">
             <h1 className="font-outfit font-bold text-[#2d2d2d] text-[26px] md:text-[30px] text-center">
