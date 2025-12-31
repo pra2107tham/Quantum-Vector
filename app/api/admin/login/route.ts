@@ -5,7 +5,8 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 
 function setCookie(res: NextResponse, name: string, value: string, days = 1) {
   const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
-  res.headers.append("Set-Cookie", `${name}=${value}; Path=/; Expires=${expires}; HttpOnly; SameSite=Lax`);
+  // Not HttpOnly because the client-side dashboard gate checks document.cookie for simplicity
+  res.headers.append("Set-Cookie", `${name}=${value}; Path=/; Expires=${expires}; SameSite=Lax`);
 }
 
 export async function POST(request: Request) {
