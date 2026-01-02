@@ -8,6 +8,9 @@ import {
   ClockIcon,
   CurrencyDollarIcon,
   VideoCameraIcon,
+  CheckCircleIcon,
+  ChevronDownIcon,
+  RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
@@ -41,6 +44,10 @@ const webinars = [
 ];
 
 export default function WebinarsPage() {
+  const scrollToWebinars = () => {
+    document.getElementById("webinars-section")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
       {/* Background Image */}
