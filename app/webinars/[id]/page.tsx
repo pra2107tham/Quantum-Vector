@@ -78,7 +78,7 @@ const webinarData: Record<string, any> = {
       content:
         "Use these Python automation foundations to move into CI/CD, IaC, and Kubernetes with confidence. Keep practicing with real scenarios—configs, logs, and cloud tasks—so your skills stay production-grade, not tutorial-level.",
     },
-    paymentLink: "https://pay.example.com/python-for-devops-2026",
+    paymentLink: "http://pages.razorpay.com/pl_RyuwUJfRjvq5vL/view?label=python_for_devops_2026",
   },
   "devops-roadmap-2026": {
     id: "devops-roadmap-2026",
