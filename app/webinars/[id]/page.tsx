@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
@@ -130,8 +130,8 @@ const webinarData: Record<string, any> = {
   },
 };
 
-export default async function WebinarDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default function WebinarDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const webinar = webinarData[id];
 
   if (!webinar) {
@@ -520,14 +520,17 @@ export default async function WebinarDetailPage({ params }: { params: Promise<{ 
                       Schedule & Logistics
                     </p>
                     <div className="space-y-2">
-                      {detailItems.slice(0, 3).map((item, idx) => (
-                        <div key={idx} className="flex items-center gap-2">
-                          {React.createElement(item.icon, { className: "w-4 h-4 text-[#1447e6] shrink-0" })}
-                          <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">
-                            {item.value}
-                          </span>
-                        </div>
-                      ))}
+                      {detailItems.slice(0, 3).map((item, idx) => {
+                        const Icon = item.icon;
+                        return (
+                          <div key={idx} className="flex items-center gap-2">
+                            <Icon className="w-4 h-4 text-[#1447e6] shrink-0" />
+                            <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">
+                              {item.value}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
