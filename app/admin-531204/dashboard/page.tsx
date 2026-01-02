@@ -13,6 +13,17 @@ type Student = {
   password: string;
 };
 
+type StudentFile = {
+  id: number;
+  title: string;
+  description: string | null;
+  file_name: string;
+  file_url: string;
+  file_type: string;
+  file_size: number;
+  uploaded_at: string;
+};
+
 function hasAdminSession() {
   if (typeof document === "undefined") return false;
   return document.cookie.split(";").some((c) => c.trim().startsWith("admin_session="));
@@ -36,6 +47,16 @@ export default function AdminDashboardPage() {
   const [students, setStudents] = useState<Student[]>([]);
   const [listError, setListError] = useState("");
   const [listLoading, setListLoading] = useState(false);
+  
+  // File upload states
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileTitle, setFileTitle] = useState("");
+  const [fileDescription, setFileDescription] = useState("");
+  const [uploadError, setUploadError] = useState("");
+  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [files, setFiles] = useState<StudentFile[]>([]);
+  const [filesLoading, setFilesLoading] = useState(false);
 
   useEffect(() => {
     if (!hasAdminSession()) {
@@ -93,6 +114,86 @@ export default function AdminDashboardPage() {
       setListLoading(false);
     }
   };
+
+  const handleFileUpload = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      setUploadError("Please select a file");
+      return;
+    }
+
+    setUploadError("");
+    setUploadSuccess(false);
+    setUploadLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("title", fileTitle || selectedFile.name);
+      if (fileDescription) {
+        formData.append("description", fileDescription);
+      }
+
+      const res = await fetch("/api/admin/files/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setUploadError(data.error || "Failed to upload file");
+        return;
+      }
+
+      setUploadSuccess(true);
+      setSelectedFile(null);
+      setFileTitle("");
+      setFileDescription("");
+      // Refresh files list
+      fetchFiles();
+    } catch {
+      setUploadError("Something went wrong. Please try again.");
+    } finally {
+      setUploadLoading(false);
+    }
+  };
+
+  const fetchFiles = async () => {
+    setFilesLoading(true);
+    try {
+      const res = await fetch("/api/admin/files/list");
+      const data = await res.json();
+      if (res.ok) {
+        setFiles(data.files || []);
+      }
+    } catch {
+      // Silent fail for now
+    } finally {
+      setFilesLoading(false);
+    }
+  };
+
+  const handleDeleteFile = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this file?")) return;
+
+    try {
+      const res = await fetch("/api/admin/files/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+
+      if (res.ok) {
+        fetchFiles();
+      }
+    } catch {
+      // Silent fail
+    }
+  };
+
+  useEffect(() => {
+    fetchFiles();
+  }, []);
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
@@ -237,6 +338,129 @@ export default function AdminDashboardPage() {
               ) : (
                 <p className="font-sans text-[#66707d] text-sm">No students to show yet.</p>
               )}
+            </div>
+
+            {/* File Upload Section */}
+            <div className="border-t border-gray-200 pt-6">
+              <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[18px] md:text-[20px] mb-3">
+                Upload Files for Students
+              </h2>
+              <p className="font-sans text-[#66707d] text-sm mb-4">
+                Upload photos, videos, or PDFs that students can access from their dashboard.
+              </p>
+
+              <form onSubmit={handleFileUpload} className="flex flex-col gap-4">
+                <label className="flex flex-col gap-2">
+                  <span className="font-sans text-[#2d2d2d] text-sm">File (Images, Videos, PDFs - Max 50MB)</span>
+                  <input
+                    type="file"
+                    accept="image/*,video/*,.pdf"
+                    onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                    required
+                    className="rounded-[12px] border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1447e6]"
+                  />
+                  {selectedFile && (
+                    <span className="font-sans text-[#66707d] text-xs">
+                      Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
+                    </span>
+                  )}
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="font-sans text-[#2d2d2d] text-sm">Title (optional)</span>
+                  <input
+                    type="text"
+                    value={fileTitle}
+                    onChange={(e) => setFileTitle(e.target.value)}
+                    placeholder="Leave empty to use file name"
+                    className="rounded-[12px] border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1447e6]"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="font-sans text-[#2d2d2d] text-sm">Description (optional)</span>
+                  <textarea
+                    value={fileDescription}
+                    onChange={(e) => setFileDescription(e.target.value)}
+                    placeholder="Add a description for this file"
+                    rows={3}
+                    className="rounded-[12px] border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1447e6]"
+                  />
+                </label>
+
+                {uploadError && (
+                  <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-[12px] px-3 py-2">
+                    {uploadError}
+                  </div>
+                )}
+
+                {uploadSuccess && (
+                  <div className="text-sm text-green-600 bg-green-50 border border-green-200 rounded-[12px] px-3 py-2">
+                    File uploaded successfully!
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={uploadLoading || !selectedFile}
+                  className="bg-[#1447e6] text-white font-sans font-semibold rounded-[12px] py-3 hover:bg-[#0f3bb8] transition-colors disabled:opacity-70"
+                >
+                  {uploadLoading ? "Uploading..." : "Upload File"}
+                </button>
+              </form>
+
+              {/* Files List */}
+              <div className="mt-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[16px] md:text-[18px]">
+                    Uploaded Files ({files.length})
+                  </h3>
+                  <button
+                    onClick={fetchFiles}
+                    disabled={filesLoading}
+                    className="text-sm text-[#1447e6] font-semibold hover:underline disabled:opacity-50"
+                  >
+                    {filesLoading ? "Loading..." : "Refresh"}
+                  </button>
+                </div>
+
+                {files.length > 0 ? (
+                  <div className="space-y-3">
+                    {files.map((file) => (
+                      <div
+                        key={file.id}
+                        className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] flex items-start justify-between gap-4"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-sans font-semibold text-[#2d2d2d] text-sm mb-1 truncate">
+                            {file.title}
+                          </h4>
+                          {file.description && (
+                            <p className="font-sans text-[#66707d] text-xs mb-2 line-clamp-2">
+                              {file.description}
+                            </p>
+                          )}
+                          <div className="flex flex-wrap gap-2 text-xs text-[#66707d]">
+                            <span>{file.file_name}</span>
+                            <span>•</span>
+                            <span>{(file.file_size / 1024 / 1024).toFixed(2)} MB</span>
+                            <span>•</span>
+                            <span>{new Date(file.uploaded_at).toLocaleDateString()}</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleDeleteFile(file.id)}
+                          className="text-red-600 hover:text-red-700 text-sm font-semibold shrink-0"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="font-sans text-[#66707d] text-sm">No files uploaded yet.</p>
+                )}
+              </div>
             </div>
           </div>
 
