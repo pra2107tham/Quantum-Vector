@@ -16,6 +16,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data
 const webinars = [
   {
+    id: "python-for-devops-2026",
+    title: "Python for DevOps 2026 – Live Weekend Webinar",
+    tagline:
+      "Hands-on Python automation for real DevOps workflows across two weekends.",
+    date: "10, 11, 17, 18 (Two Weekends)",
+    time: "6:00 PM – 9:00 PM IST",
+    price: "₹1999",
+    mode: "Live Online",
+    bonus: "Code templates + AWS/Boto3 snippets for automation",
+    status: "upcoming",
+  },
+  {
     id: "devops-roadmap-2026",
     title: "DevOps Roadmap 2026 – Complete Career Guide",
     tagline: "Learn What to Study, How to Study, and How to Get DevOps Jobs in 2026",
@@ -24,7 +36,7 @@ const webinars = [
     price: "₹99",
     mode: "Live Online",
     bonus: "Full End-to-End DevOps Roadmap PDF",
-    status: "upcoming",
+    status: "completed",
   },
 ];
 
