@@ -325,6 +325,212 @@ async function sendRoadmapWebinarEmail(emailData: { email: string; amount: numbe
   }
 }
 
+// Send confirmation email for Python for DevOps 2026 Webinar
+async function sendPythonDevOpsWebinarEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
+  const { email, amount, id, name } = emailData;
+  const amountInRupees = (amount / 100).toFixed(2);
+  const userName = name || 'Student';
+
+  logEvent('EMAIL_ATTEMPT', {
+    to: email,
+    name: userName,
+    contact: emailData.contact || 'Not provided',
+    amount: amountInRupees,
+    paymentId: id,
+    webinar: 'python_for_devops_2026'
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Registration Confirmed - Python for DevOps 2026 Webinar',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa;">
+        
+        <!-- Main Container -->
+        <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
+
+          <!-- Content Container -->
+          <div style="padding: 32px;">
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">Hi${userName !== 'Student' ? ` ${userName}` : ''},</p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              Thank you for registering for the <strong>Python for DevOps 2026 – Live Weekend Webinar</strong>.
+            </p>
+            
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              We're excited to have you join us for this hands-on, beginner-to-intermediate live program focused on real DevOps automation with Python.
+            </p>
+
+            <!-- Webinar Details -->
+            <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden;">
+              <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px; border-bottom: 1px solid #1e40af;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0;">📅 Webinar Details</h3>
+            </div>
+
+              <div style="background-color: #ffffff; padding: 24px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Dates</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">10, 11, 17, 18 (Two Weekends)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Time</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">6:00 PM – 9:00 PM (IST)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">10+ Hours (Live, Hands-on)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Mode</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">Live Online</div>
+                </div>
+                <div>
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">One-Time Fee</div>
+                  <div style="color: #198754; font-size: 18px; font-weight: 700;">₹${amountInRupees}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- What You'll Learn -->
+            <div style="margin-bottom: 32px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🔍 What You'll Learn</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                This webinar focuses on practical DevOps use cases, automation scripts, and industry-relevant workflows used in real production environments:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Python fundamentals tailored for DevOps engineers</li>
+                <li style="margin-bottom: 8px;">Environment variables, .env files, and CLI-based scripts</li>
+                <li style="margin-bottom: 8px;">Automating tasks using loops, lists, dictionaries, and sets</li>
+                <li style="margin-bottom: 8px;">File operations for configuration and server management</li>
+                <li style="margin-bottom: 8px;">Log parsing and system data processing scripts</li>
+                <li style="margin-bottom: 8px;">Remote automation using Fabric</li>
+                <li style="margin-bottom: 8px;">AWS automation using Boto3 (EC2, S3, basic cloud tasks)</li>
+              </ul>
+            </div>
+
+            <!-- Hands-on Projects -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Hands-on Projects (Included)</h3>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;"><strong>Project 1:</strong> Manage and optimize server configurations using Python dictionaries</li>
+                <li style="margin-bottom: 8px;"><strong>Project 2:</strong> Automate file and configuration updates based on external triggers</li>
+                <li style="margin-bottom: 8px;"><strong>Project 3:</strong> AWS automation script to deploy or manage cloud resources</li>
+              </ul>
+              <p style="color: #212529; font-size: 14px; line-height: 1.6; margin: 12px 0 0 0; font-style: italic;">
+                All projects are DevOps-oriented, not generic Python exercises.
+              </p>
+            </div>
+
+            <!-- Who We Are -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">👥 Who We Are – QuantumVector by DevOps Community</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                <strong>QuantumVector (quantumvector.sh)</strong> is <strong>not a consultancy</strong>.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We are a <strong>community-driven initiative led by 10–15 experienced DevOps engineers</strong> who actively work on <strong>real production systems</strong> across cloud, Kubernetes, CI/CD, monitoring, and automation.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0; font-weight: 600;">Everything we teach is based on:</p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Real production incidents</li>
+                <li style="margin-bottom: 8px;">Live systems</li>
+                <li style="margin-bottom: 8px;">Actual workflows used in companies today</li>
+              </ul>
+            </div>
+
+            <!-- WhatsApp Group -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid #0ea5e9; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #0c4a6e; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">📲 Important: Join the WhatsApp Group</h3>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                All webinar updates, joining links, and materials will be shared via our <strong>official WhatsApp group</strong>.
+              </p>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0;">
+                👉 <strong>Join the Python for DevOps 2026 WhatsApp Group:</strong>
+              </p>
+              <div style="text-align: center; margin: 16px 0;">
+                <a href="https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA" style="display: inline-block; background: #25D366; color: #ffffff; font-size: 16px; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); transition: all 0.3s ease;">
+                  Join WhatsApp Group
+                </a>
+              </div>
+              <p style="color: #0369a1; font-size: 14px; line-height: 1.6; margin: 12px 0 0 0; text-align: center;">
+                <a href="https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA" style="color: #0369a1; text-decoration: underline;">https://chat.whatsapp.com/C0I21LEw5NVKNzdEBCEOGA</a>
+              </p>
+              </div>
+              
+            <!-- Want to Go Deeper -->
+            <div style="margin-bottom: 32px; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Want to Go Deeper?</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We also offer <strong>Offline & Online DevOps Courses</strong> focused on:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Hands-on production-level learning</li>
+                <li style="margin-bottom: 8px;">Real projects, not demos</li>
+                <li style="margin-bottom: 8px;">Career guidance and mentorship</li>
+              </ul>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0;">
+                For complete details, visit:<br/>
+                👉 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none; font-weight: 600;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Closing -->
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              Looking forward to seeing you in the live sessions.
+            </p>
+
+            <!-- Signature -->
+            <div style="border-top: 1px solid #e9ecef; padding-top: 24px;">
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 8px 0;">
+                Warm regards,<br/>
+                <strong>Team DevOps Community</strong><br/>
+                <strong>QuantumVector</strong>
+              </p>
+              <p style="color: #6c757d; font-size: 14px; margin: 8px 0 0 0;">
+                🌐 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Transaction ID -->
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+              <div style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px;">Transaction ID</div>
+              <div style="color: #212529; font-size: 13px; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; background-color: #f8f9fa; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
+                  </div>
+                </div>
+                
+          <!-- Footer -->
+          <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
+            <p style="color: #6c757d; font-size: 12px; margin: 0;">This is an automated confirmation email.</p>
+                </div>
+              </div>
+            </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    logEvent('EMAIL_SUCCESS', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      timestamp: new Date().toISOString(),
+      webinar: 'python_for_devops_2026'
+    });
+  } catch (error) {
+    logEvent('EMAIL_ERROR', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString(),
+      webinar: 'python_for_devops_2026'
+    });
+    throw error;
+  }
+}
+
 // Send confirmation email for AWS DevOps Course
 async function sendAWSCourseEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
   const { email, amount, id, name } = emailData;
@@ -639,6 +845,40 @@ export async function POST(request: Request) {
           return NextResponse.json({ message: 'DevOps Roadmap 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
         }
       },
+      // Python for DevOps 2026 Webinar (inline email send)
+      python_for_devops_2026: async () => {
+        try {
+          await sendPythonDevOpsWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'python_for_devops_2026' });
+          return NextResponse.json({ message: 'Python for DevOps 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'python_for_devops_2026', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Python for DevOps 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
+      // Alternative label for compatibility
+      python_devops_webinar: async () => {
+        try {
+          await sendPythonDevOpsWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'python_devops_webinar' });
+          return NextResponse.json({ message: 'Python for DevOps 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'python_devops_webinar', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Python for DevOps 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
       // Testing: run all handlers/emails
       testing: async () => {
         const makeReq = () => new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });
@@ -721,6 +961,20 @@ export async function POST(request: Request) {
           results.push({ handler: 'aws_devops_course', ok: true });
         } catch (e) {
           results.push({ handler: 'aws_devops_course', ok: false, error: (e as Error)?.message || 'Unknown error' });
+        }
+
+        // Python for DevOps 2026 webinar email inline
+        try {
+          await sendPythonDevOpsWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          results.push({ handler: 'python_for_devops_2026', ok: true });
+        } catch (e) {
+          results.push({ handler: 'python_for_devops_2026', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
         logEvent('TESTING_RUN_COMPLETED', { requestId, paymentId: payment.id, label: 'testing', results });

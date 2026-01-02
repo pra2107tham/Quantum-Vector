@@ -62,7 +62,7 @@ export function NavbarTop() {
             className="text-blue-900"
           />
           {/* Register for Webinar Button (Desktop) */}
-          <Link href="/webinars/terraform-azure-5day" style={{ cursor: 'pointer', zIndex: 1000 }}>
+          <Link href="/webinars/python-for-devops-2026" style={{ cursor: 'pointer', zIndex: 1000 }}>
             <button
               className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-800 transition-colors font-medium text-sm"
             >

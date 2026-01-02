@@ -155,21 +155,21 @@ export default function Home() {
                   </div>
                   
                   <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] lg:text-[32px] leading-tight">
-                    DevOps Roadmap 2026 – Complete Career Guide
+                    Python for DevOps 2026 – Live Weekend Webinar
                   </h2>
                   
                   <p className="font-sans font-normal text-[#66707d] text-[13px] md:text-[16px] leading-relaxed">
-                    Learn What to Study, How to Study, and How to Get DevOps Jobs in 2026
+                    Hands-on Python automation for real DevOps workflows across two weekends.
                   </p>
                   
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">28th Dec 2025</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">10, 11, 17, 18 (Two Weekends)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">9:00–10:30 AM IST</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">6:00 PM – 9:00 PM IST</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
@@ -179,7 +179,7 @@ export default function Home() {
                   
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[10px]">
                     <p className="font-sans font-medium text-[#1447e6] text-[11px] md:text-[13px]">
-                      📄 Bonus: Full End-to-End DevOps Roadmap PDF
+                      📄 Bonus: Code templates + AWS/Boto3 snippets for automation
                     </p>
                   </div>
                 </div>
@@ -188,10 +188,10 @@ export default function Home() {
                 <div className="w-full md:w-[240px] shrink-0 flex flex-col gap-4">
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] text-center">
                     <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] mb-1">One-Time Fee</p>
-                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹99</p>
+                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹1999</p>
                   </div>
                   <Link
-                    href="/webinars/devops-roadmap-2026"
+                    href="/webinars/python-for-devops-2026"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
                   >
                     View Details & Register →
