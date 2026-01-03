@@ -11,7 +11,6 @@ import {
   DocumentIcon,
   PhotoIcon,
   VideoCameraIcon,
-  ArrowDownTrayIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
@@ -49,8 +48,9 @@ export default function StudentDashboardPage() {
   const [files, setFiles] = useState<StudentFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedPDF, setSelectedPDF] = useState<{ file: StudentFile; url: string } | null>(null);
-  const [pdfLoading, setPdfLoading] = useState(false);
+  const [selectedPreview, setSelectedPreview] = useState<{ file: StudentFile; url: string } | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [zoom, setZoom] = useState(100); // PDF zoom percentage
   const [mounted, setMounted] = useState(false);
   const [urlCache, setUrlCache] = useState<Record<string, string>>({});
 
@@ -121,47 +121,16 @@ export default function StudentDashboardPage() {
     }
   };
 
-  const handleOpenPDF = async (file: StudentFile) => {
-    setPdfLoading(true);
+  const handleOpenPreview = async (file: StudentFile) => {
+    setPreviewLoading(true);
     try {
       const url = await getSignedUrl(file.file_path);
-      setSelectedPDF({ file, url });
+      setSelectedPreview({ file, url });
+      setZoom(100); // Reset to 100% when opening new file
     } catch (error) {
-      alert("Failed to load PDF. Please try again.");
+      alert("Failed to load file. Please try again.");
     } finally {
-      setPdfLoading(false);
-    }
-  };
-
-  const handleDownload = async (file: StudentFile) => {
-    try {
-      const url = await getSignedUrl(file.file_path);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = file.file_name;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      alert("Failed to download file. Please try again.");
-    }
-  };
-
-  const handleViewImage = async (file: StudentFile) => {
-    try {
-      const url = await getSignedUrl(file.file_path);
-      window.open(url, "_blank");
-    } catch (error) {
-      alert("Failed to load image. Please try again.");
-    }
-  };
-
-  const handleViewVideo = async (file: StudentFile) => {
-    try {
-      const url = await getSignedUrl(file.file_path);
-      window.open(url, "_blank");
-    } catch (error) {
-      alert("Failed to load video. Please try again.");
+      setPreviewLoading(false);
     }
   };
 
@@ -222,6 +191,7 @@ export default function StudentDashboardPage() {
                 const isImage = file.file_type.startsWith("image/");
                 const isVideo = file.file_type.startsWith("video/");
                 const isPDF = file.file_type === "application/pdf";
+                const typeLabel = isPDF ? "PDF Document" : isImage ? "Image" : isVideo ? "Video" : "File";
 
                 return (
                   <div
@@ -271,47 +241,23 @@ export default function StudentDashboardPage() {
                             {file.description}
                           </p>
                         )}
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-[#66707d] mb-3">
-                          <span>{file.file_name}</span>
-                          <span>•</span>
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-[#66707d] mb-3">
+                          <span className="glass-card glass-card-blur-sm px-2 py-1 rounded-full text-[#1447e6] font-semibold">{typeLabel}</span>
                           <span>{formatFileSize(file.file_size)}</span>
                           <span>•</span>
                           <span>{new Date(file.uploaded_at).toLocaleDateString()}</span>
+                          <span>•</span>
+                          <span className="font-mono text-[#2d2d2d] truncate max-w-[180px]">{file.file_name}</span>
                         </div>
 
                         {/* Actions */}
                         <div className="flex flex-wrap gap-2">
-                          {isPDF ? (
-                            <button
-                              onClick={() => handleOpenPDF(file)}
-                              disabled={pdfLoading}
-                              className="inline-flex items-center gap-2 bg-[#1447e6] text-white font-sans font-semibold text-[12px] md:text-[13px] px-4 py-2 rounded-full hover:bg-[#0f3bb8] transition-colors disabled:opacity-70"
-                            >
-                              {pdfLoading ? "Loading..." : "View PDF"}
-                              <ArrowDownTrayIcon className="w-4 h-4" />
-                            </button>
-                          ) : isImage ? (
-                            <button
-                              onClick={() => handleViewImage(file)}
-                              className="inline-flex items-center gap-2 bg-[#1447e6] text-white font-sans font-semibold text-[12px] md:text-[13px] px-4 py-2 rounded-full hover:bg-[#0f3bb8] transition-colors"
-                            >
-                              View Image
-                              <ArrowDownTrayIcon className="w-4 h-4" />
-                            </button>
-                          ) : isVideo ? (
-                            <button
-                              onClick={() => handleViewVideo(file)}
-                              className="inline-flex items-center gap-2 bg-[#1447e6] text-white font-sans font-semibold text-[12px] md:text-[13px] px-4 py-2 rounded-full hover:bg-[#0f3bb8] transition-colors"
-                            >
-                              Watch Video
-                              <ArrowDownTrayIcon className="w-4 h-4" />
-                            </button>
-                          ) : null}
                           <button
-                            onClick={() => handleDownload(file)}
-                            className="inline-flex items-center gap-2 glass-card glass-card-blur-sm glass-card-opacity-light font-sans font-semibold text-[#2d2d2d] text-[12px] md:text-[13px] px-4 py-2 rounded-full hover:bg-white/20 transition-colors"
+                            onClick={() => handleOpenPreview(file)}
+                            disabled={previewLoading}
+                            className="inline-flex items-center gap-2 bg-[#1447e6] text-white font-sans font-semibold text-[12px] md:text-[13px] px-4 py-2 rounded-full hover:bg-[#0f3bb8] transition-colors disabled:opacity-70"
                           >
-                            Download
+                            {previewLoading ? "Loading..." : "View"}
                           </button>
                         </div>
                       </div>
@@ -324,17 +270,17 @@ export default function StudentDashboardPage() {
         </div>
       </div>
 
-      {/* PDF Modal */}
+      {/* Preview Modal (Image / Video / PDF) */}
       {mounted && createPortal(
         <AnimatePresence>
-          {selectedPDF && (
+          {selectedPreview && (
             <>
               {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                onClick={() => setSelectedPDF(null)}
+                onClick={() => setSelectedPreview(null)}
                 className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9998]"
               />
               
@@ -348,53 +294,110 @@ export default function StudentDashboardPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div 
-                  className="bg-white rounded-[20px] w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl pointer-events-auto"
+                  className="bg-white rounded-[20px] w-full max-w-3xl max-h-[90vh] min-h-[70vh] flex flex-col shadow-2xl pointer-events-auto"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header */}
                   <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-outfit font-bold text-[#2d2d2d] text-[18px] md:text-[20px] truncate">
-                        {selectedPDF.file.title}
+                        {selectedPreview.file.title}
                       </h3>
-                      {selectedPDF.file.description && (
+                      {selectedPreview.file.description && (
                         <p className="font-sans text-[#66707d] text-[13px] md:text-[14px] mt-1 line-clamp-1">
-                          {selectedPDF.file.description}
+                          {selectedPreview.file.description}
                         </p>
                       )}
                     </div>
-                    <button
-                      onClick={() => setSelectedPDF(null)}
-                      className="ml-4 p-2 rounded-full hover:bg-gray-100 transition-colors shrink-0"
-                      aria-label="Close"
-                    >
-                      <XMarkIcon className="w-6 h-6 text-[#2d2d2d]" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {selectedPreview.file.file_type === "application/pdf" && (
+                        <div className="flex items-center gap-2 bg-[#f3f5fb] rounded-full px-3 py-1">
+                          <button
+                            onClick={() => setZoom((z) => Math.max(50, z - 25))}
+                            className="text-[#1447e6] font-bold text-sm px-2 py-1 rounded-full hover:bg-white"
+                            aria-label="Zoom out"
+                          >
+                            −
+                          </button>
+                          <span className="font-sans text-[#2d2d2d] text-sm w-12 text-center">
+                            {zoom}%
+                          </span>
+                          <button
+                            onClick={() => setZoom((z) => Math.min(200, z + 25))}
+                            className="text-[#1447e6] font-bold text-sm px-2 py-1 rounded-full hover:bg-white"
+                            aria-label="Zoom in"
+                          >
+                            +
+                          </button>
+                          <button
+                            onClick={() => setZoom(100)}
+                            className="text-[#1447e6] font-semibold text-sm px-2 py-1 rounded-full hover:bg-white"
+                            aria-label="Reset zoom"
+                          >
+                            Reset
+                          </button>
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setSelectedPreview(null)}
+                        className="ml-2 p-2 rounded-full hover:bg-gray-100 transition-colors shrink-0"
+                        aria-label="Close"
+                      >
+                        <XMarkIcon className="w-6 h-6 text-[#2d2d2d]" />
+                      </button>
+                    </div>
                   </div>
 
-                  {/* PDF Viewer */}
-                  <div className="flex-1 overflow-hidden">
-                    <iframe
-                      src={selectedPDF.url}
-                      className="w-full h-full min-h-[500px] border-0"
-                      title={selectedPDF.file.title}
-                    />
+                  {/* Viewer */}
+                  <div className="flex-1 overflow-auto bg-[#f7f8fb]">
+                    {selectedPreview.file.file_type === "application/pdf" ? (
+                      <div className="w-full h-full">
+                        <iframe
+                          key={zoom} // Force reload when zoom changes
+                          src={`${selectedPreview.url}#zoom=${zoom}&toolbar=0&navpanes=0&scrollbar=1`}
+                          className="w-full h-full min-h-[600px] border-0 bg-white"
+                          title={selectedPreview.file.title}
+                        />
+                      </div>
+                    ) : selectedPreview.file.file_type.startsWith("image/") ? (
+                      <div className="w-full h-full flex items-center justify-center p-4">
+                        <img
+                          src={selectedPreview.url}
+                          alt={selectedPreview.file.title}
+                          className="max-h-[70vh] max-w-full object-contain rounded-[12px] shadow-lg"
+                        />
+                      </div>
+                    ) : selectedPreview.file.file_type.startsWith("video/") ? (
+                      <div className="w-full h-full flex items-center justify-center bg-black">
+                        <video
+                          src={selectedPreview.url}
+                          controls
+                          className="w-full h-full max-h-[70vh]"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center p-6">
+                        <p className="font-sans text-[#66707d]">Preview not available for this file type.</p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Footer */}
                   <div className="flex items-center justify-between p-4 md:p-6 border-t border-gray-200">
-                    <div className="flex items-center gap-4 text-sm text-[#66707d]">
-                      <span>{formatFileSize(selectedPDF.file.file_size)}</span>
+                    <div className="flex items-center gap-4 text-sm text-[#66707d] flex-wrap">
+                      <span className="glass-card glass-card-blur-sm px-2 py-1 rounded-full text-[#1447e6] font-semibold">
+                        {selectedPreview.file.file_type === "application/pdf"
+                          ? "PDF Document"
+                          : selectedPreview.file.file_type.startsWith("image/")
+                          ? "Image"
+                          : selectedPreview.file.file_type.startsWith("video/")
+                          ? "Video"
+                          : "File"}
+                      </span>
+                      <span>{formatFileSize(selectedPreview.file.file_size)}</span>
                       <span>•</span>
-                      <span>{selectedPDF.file.file_name}</span>
+                      <span>{selectedPreview.file.file_name}</span>
                     </div>
-                    <button
-                      onClick={() => handleDownload(selectedPDF.file)}
-                      className="inline-flex items-center gap-2 bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[14px] px-4 py-2 rounded-full hover:bg-[#0f3bb8] transition-colors"
-                    >
-                      <ArrowDownTrayIcon className="w-4 h-4" />
-                      Download
-                    </button>
                   </div>
                 </div>
               </motion.div>
