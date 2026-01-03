@@ -16,7 +16,7 @@ export async function GET() {
   try {
     const { data, error } = await supabase
       .from("student_files")
-      .select("*")
+      .select("id, title, description, file_name, file_path, file_type, file_size, uploaded_at")
       .order("uploaded_at", { ascending: false });
 
     if (error) {
