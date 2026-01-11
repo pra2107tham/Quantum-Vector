@@ -489,7 +489,7 @@ export default function AWSCoursePage() {
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm flex items-center gap-1">
                     <CalendarIcon className="w-4 h-4" />
-                    Starts Jan 12th, 2026
+                    Starts Jan 19th, 2026
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
                     📍 Online & Offline (Hyderabad)
@@ -860,7 +860,7 @@ export default function AWSCoursePage() {
               <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
                 Complete curriculum from Linux to Kubernetes. 4 real-world AWS projects. 
                 Available <strong>online</strong> and <strong>offline in Hyderabad</strong>. 
-                Course starts on <strong>January 12th, 2026</strong>.
+                Course starts on <strong>January 19th, 2026</strong>.
               </p>
               
               {/* Pricing Summary */}
