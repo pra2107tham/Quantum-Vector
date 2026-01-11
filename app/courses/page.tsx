@@ -170,7 +170,7 @@ export default function CoursesPage() {
                         Complete AWS DevOps Course
                       </h3>
                       <span className="glass-card glass-card-blur-sm px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold text-[#1447e6] whitespace-nowrap w-fit">
-                        Starts Jan 12, 2026
+                        Starts Jan 19, 2026
                       </span>
                     </div>
                     
