@@ -31,7 +31,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Code templates + AWS/Boto3 snippets for automation",
-    status: "upcoming",
+    status: "completed",
     description:
       "A hands-on, weekend-only webinar that treats Python as a DevOps automation tool—not just a programming language. Build scripts, automate infra tasks, and practice the exact workflows companies expect in 2026.",
     whyMatters: {

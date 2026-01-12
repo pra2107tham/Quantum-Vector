@@ -28,7 +28,7 @@ const webinars = [
     price: "₹1999",
     mode: "Live Online",
     bonus: "Code templates + AWS/Boto3 snippets for automation",
-    status: "upcoming",
+    status: "completed",
   },
   {
     id: "devops-roadmap-2026",
