@@ -471,7 +471,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </motion.div>
 
-          {/* Hands-on Projects */}
+          {/* Webinar Modules */}
           {projects.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -481,10 +481,10 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             >
               <div className="text-center mb-6 md:mb-8">
                 <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
-                  Hands-on Projects 🚀
+                  Webinar Modules 📚
                 </h2>
                 <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
-                  DevOps-oriented projects, not generic Python exercises
+                  Practical modules covered throughout the webinar sessions
                 </p>
               </div>
 
@@ -504,7 +504,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                       </div>
                       <div className="flex-1">
                         <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-1 md:mb-2">
-                          Project {index + 1}
+                          Module {index + 1}
                         </h3>
                         <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{item}</p>
                       </div>
