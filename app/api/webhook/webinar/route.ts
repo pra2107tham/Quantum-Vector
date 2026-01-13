@@ -628,6 +628,220 @@ async function sendAWSCourseEmail(emailData: { email: string; amount: number; id
   }
 }
 
+// Send confirmation email for Docker & Kubernetes 2026 Webinar
+async function sendDockerKubernetesWebinarEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
+  const { email, amount, id, name } = emailData;
+  const amountInRupees = (amount / 100).toFixed(2);
+  const userName = name || 'Student';
+
+  logEvent('EMAIL_ATTEMPT', {
+    to: email,
+    name: userName,
+    contact: emailData.contact || 'Not provided',
+    amount: amountInRupees,
+    paymentId: id,
+    webinar: 'docker_kubernetes_2026'
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Registration Confirmed - Docker & Kubernetes Webinar January 2026',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa;">
+
+        <!-- Main Container -->
+        <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
+
+          <!-- Content Container -->
+          <div style="padding: 32px;">
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">Hi${userName !== 'Student' ? ` ${userName}` : ''},</p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              Thank you for registering for the <strong>Docker & Kubernetes Webinar – Live Weekend Program</strong>.
+            </p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              We're excited to have you join us for this comprehensive hands-on program focused on containerization and Kubernetes orchestration with a real-time e-commerce microservices project.
+            </p>
+
+            <!-- Webinar Details -->
+            <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden;">
+              <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px; border-bottom: 1px solid #1e40af;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0;">📅 Webinar Details</h3>
+            </div>
+
+              <div style="background-color: #ffffff; padding: 24px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Dates</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">24, 25, 31 Jan & 1 Feb 2026 (Weekends Only)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Time</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">8:00 AM – 10:30 AM (IST)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">10+ Hours (Live, Hands-on)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Mode</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">Live Online</div>
+                </div>
+                <div>
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">One-Time Fee</div>
+                  <div style="color: #198754; font-size: 18px; font-weight: 700;">₹${amountInRupees}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-Time Project -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid #0ea5e9; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #0c4a6e; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">🛒 Real-Time E-Commerce Microservices Project</h3>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                Build a complete e-commerce application using microservice architecture throughout the webinar. This isn't a pre-built demo—we'll develop it <strong>live</strong>, showing you real production-grade containerization and orchestration patterns.
+              </p>
+              <p style="color: #0369a1; font-size: 14px; font-weight: 600; margin: 0 0 12px 0;">Microservices We'll Build:</p>
+              <ul style="color: #0369a1; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;"><strong>User Login Service</strong> - Authentication and session management</li>
+                <li style="margin-bottom: 8px;"><strong>Shopping Cart Service</strong> - Real-time cart operations with state management</li>
+                <li style="margin-bottom: 8px;"><strong>Product Inventory Service</strong> - Product catalog with database integration</li>
+                <li style="margin-bottom: 8px;"><strong>Payment Service</strong> - Secure payment processing microservice</li>
+              </ul>
+            </div>
+
+            <!-- What You'll Learn -->
+            <div style="margin-bottom: 32px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">📚 Webinar Modules</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                This webinar covers Kubernetes from basics to advanced production-ready concepts:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Kubernetes architecture, cluster setup, and kubectl commands</li>
+                <li style="margin-bottom: 8px;">PODs, ReplicaSets, Deployments with Rolling Update strategies</li>
+                <li style="margin-bottom: 8px;">DaemonSets, StatefulSets for stateful applications</li>
+                <li style="margin-bottom: 8px;">PersistentVolumes, PersistentVolumeClaims, ConfigMaps & Secrets</li>
+                <li style="margin-bottom: 8px;">Kubernetes Services: ClusterIP, NodePort, LoadBalancer</li>
+                <li style="margin-bottom: 8px;">Ingress Controller setup for HTTP/HTTPS routing</li>
+                <li style="margin-bottom: 8px;">Liveness and Readiness Probes for health monitoring</li>
+                <li style="margin-bottom: 8px;">Horizontal Pod Autoscaler (HPA) with Metrics Server</li>
+                <li style="margin-bottom: 8px;">Node maintenance: Cordon, Drain, Uncordon operations</li>
+                <li style="margin-bottom: 8px;">Scheduling with Taints, Tolerations, Affinity & Anti-Affinity</li>
+                <li style="margin-bottom: 8px;">Kubernetes RBAC: Roles, RoleBindings, ServiceAccounts</li>
+                <li style="margin-bottom: 8px;">Production-ready microservices deployment patterns</li>
+              </ul>
+            </div>
+
+            <!-- What You'll Get -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🎁 What You'll Get</h3>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">10+ hours of live, hands-on weekend sessions</li>
+                <li style="margin-bottom: 8px;">Real e-commerce microservices project with complete source code</li>
+                <li style="margin-bottom: 8px;">Docker scripts and Kubernetes manifests for all services</li>
+                <li style="margin-bottom: 8px;">Production-ready patterns for health checks, scaling, and RBAC</li>
+                <li style="margin-bottom: 8px;">Lifetime access to session recordings and materials</li>
+              </ul>
+            </div>
+
+            <!-- Who We Are -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">👥 Who We Are – QuantumVector by DevOps Community</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                <strong>QuantumVector (quantumvector.sh)</strong> is <strong>not a consultancy</strong>.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We are a <strong>community-driven initiative led by 10–15 experienced DevOps engineers</strong> who actively work on <strong>real production systems</strong> across cloud, Kubernetes, CI/CD, monitoring, and automation.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0; font-weight: 600;">Everything we teach is based on:</p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Real production incidents</li>
+                <li style="margin-bottom: 8px;">Live systems</li>
+                <li style="margin-bottom: 8px;">Actual workflows used in companies today</li>
+              </ul>
+            </div>
+
+            <!-- Next Steps -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #78350f; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">📞 Next Steps</h3>
+              <p style="color: #92400e; font-size: 15px; line-height: 1.6; margin: 0;">
+                <strong>Our team will contact you shortly</strong> with the WhatsApp group link, joining details, and all required materials for the webinar.
+              </p>
+            </div>
+
+            <!-- Want to Go Deeper -->
+            <div style="margin-bottom: 32px; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Want to Go Deeper?</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We also offer <strong>Offline & Online DevOps Courses</strong> focused on:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Hands-on production-level learning</li>
+                <li style="margin-bottom: 8px;">Real projects, not demos</li>
+                <li style="margin-bottom: 8px;">Career guidance and mentorship</li>
+              </ul>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0;">
+                For complete details, visit:<br/>
+                👉 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none; font-weight: 600;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Closing -->
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              Looking forward to seeing you in the live sessions.
+            </p>
+
+            <!-- Signature -->
+            <div style="border-top: 1px solid #e9ecef; padding-top: 24px;">
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 8px 0;">
+                Warm regards,<br/>
+                <strong>Team DevOps Community</strong><br/>
+                <strong>QuantumVector</strong>
+              </p>
+              <p style="color: #6c757d; font-size: 14px; margin: 8px 0 0 0;">
+                🌐 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Transaction ID -->
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+              <div style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px;">Transaction ID</div>
+              <div style="color: #212529; font-size: 13px; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; background-color: #f8f9fa; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
+                  </div>
+                </div>
+
+          <!-- Footer -->
+          <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
+            <p style="color: #6c757d; font-size: 12px; margin: 0;">This is an automated confirmation email.</p>
+                </div>
+              </div>
+            </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    logEvent('EMAIL_SUCCESS', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      timestamp: new Date().toISOString(),
+      webinar: 'docker_kubernetes_2026'
+    });
+  } catch (error) {
+    logEvent('EMAIL_ERROR', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString(),
+      webinar: 'docker_kubernetes_2026'
+    });
+    throw error;
+  }
+}
+
 export async function POST(request: Request) {
   const requestId = crypto.randomBytes(8).toString('hex');
   logEvent('WEBHOOK_RECEIVED', { requestId });
@@ -879,6 +1093,40 @@ export async function POST(request: Request) {
           return NextResponse.json({ message: 'Python for DevOps 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
         }
       },
+      // Docker & Kubernetes Webinar 2026 (inline email send)
+      docker_kubernetes_webinar_2026: async () => {
+        try {
+          await sendDockerKubernetesWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'docker_kubernetes_webinar_2026' });
+          return NextResponse.json({ message: 'Docker & Kubernetes 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'docker_kubernetes_webinar_2026', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Docker & Kubernetes 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
+      // Alternative label for compatibility
+      docker_k8s_webinar: async () => {
+        try {
+          await sendDockerKubernetesWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'docker_k8s_webinar' });
+          return NextResponse.json({ message: 'Docker & Kubernetes 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'docker_k8s_webinar', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Docker & Kubernetes 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
       // Testing: run all handlers/emails
       testing: async () => {
         const makeReq = () => new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });
@@ -975,6 +1223,20 @@ export async function POST(request: Request) {
           results.push({ handler: 'python_for_devops_2026', ok: true });
         } catch (e) {
           results.push({ handler: 'python_for_devops_2026', ok: false, error: (e as Error)?.message || 'Unknown error' });
+        }
+
+        // Docker & Kubernetes 2026 webinar email inline
+        try {
+          await sendDockerKubernetesWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          results.push({ handler: 'docker_kubernetes_webinar_2026', ok: true });
+        } catch (e) {
+          results.push({ handler: 'docker_kubernetes_webinar_2026', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
         logEvent('TESTING_RUN_COMPLETED', { requestId, paymentId: payment.id, label: 'testing', results });
