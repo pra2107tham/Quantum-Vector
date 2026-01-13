@@ -143,6 +143,17 @@ const webinarData: Record<string, any> = {
     status: "upcoming",
     description:
       "A comprehensive weekend webinar series focused on Docker containerization and Kubernetes orchestration. Build a real-time e-commerce microservices application with User Login, Shopping Cart, Product Inventory, and Payment services—learning production-grade container orchestration workflows.",
+    projectHighlight: {
+      title: "Real-Time E-Commerce Microservices Project 🛒",
+      description:
+        "Build a complete e-commerce application using microservice architecture throughout the webinar. This isn't a pre-built demo—we'll develop it live, showing you real production-grade containerization and orchestration patterns.",
+      services: [
+        "User Login Service - Authentication and session management",
+        "Shopping Cart Service - Real-time cart operations with state management",
+        "Product Inventory Service - Product catalog with database integration",
+        "Payment Service - Secure payment processing microservice",
+      ],
+    },
     whyMatters: {
       title: "Why Docker & Kubernetes Matter 🚀",
       content:
@@ -448,6 +459,66 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
               </p>
             </div>
           </motion.div>
+
+          {/* Real-Time Project Highlight */}
+          {webinar.projectHighlight && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full"
+            >
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/20">
+                <div className="text-center mb-6 md:mb-8">
+                  <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-3 md:mb-4">
+                    {webinar.projectHighlight.title}
+                  </h2>
+                  <p className="font-sans text-[#2d2d2d] text-[13px] md:text-lg max-w-3xl mx-auto">
+                    {webinar.projectHighlight.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 max-w-4xl mx-auto">
+                  {webinar.projectHighlight.services.map((service: string, index: number) => {
+                    const [serviceName, serviceDesc] = service.split(' - ');
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-5 rounded-[12px] md:rounded-[16px] hover:shadow-lg transition-all hover:scale-[1.02]"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded-[8px] bg-[#1447e6]/10 shrink-0">
+                            <RocketLaunchIcon className="w-5 h-5 md:w-6 md:h-6 text-[#1447e6]" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[13px] md:text-base mb-1">
+                              {serviceName}
+                            </h3>
+                            <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
+                              {serviceDesc}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 md:mt-8 text-center">
+                  <div className="inline-flex items-center gap-2 glass-card glass-card-blur-sm px-4 md:px-6 py-2 md:py-3 rounded-full">
+                    <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#198754]" />
+                    <span className="font-sans font-semibold text-[#2d2d2d] text-[11px] md:text-sm">
+                      Built live during the webinar - not pre-recorded demos
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* What You'll Learn */}
           <motion.div
