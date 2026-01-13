@@ -153,45 +153,45 @@ export default function Home() {
                       ⚡ Limited Seats
                     </span>
                   </div>
-                  
+
                   <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] lg:text-[32px] leading-tight">
-                    Python for DevOps 2026 – Live Weekend Webinar
+                    Docker & Kubernetes Webinar – Live Weekend Program
                   </h2>
-                  
+
                   <p className="font-sans font-normal text-[#66707d] text-[13px] md:text-[16px] leading-relaxed">
-                    Hands-on Python automation for real DevOps workflows across two weekends.
+                    Master containerization and orchestration with hands-on microservices project across weekend sessions.
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">10, 11, 17, 18 (Two Weekends)</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">24, 25, 31 Jan & 1 Feb (Weekends)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">6:00 PM – 9:00 PM IST</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:00 AM – 10:30 AM IST</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
                       <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">Live Online</span>
                     </div>
                   </div>
-                  
+
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[10px]">
                     <p className="font-sans font-medium text-[#1447e6] text-[11px] md:text-[13px]">
-                      📄 Bonus: Code templates + AWS/Boto3 snippets for automation
+                      🛒 Real-time E-Commerce Project: User Login, Cart, Inventory & Payment Microservices
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Right: CTA */}
                 <div className="w-full md:w-[240px] shrink-0 flex flex-col gap-4">
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] text-center">
                     <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] mb-1">One-Time Fee</p>
-                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹1999</p>
+                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹2999</p>
                   </div>
                   <Link
-                    href="/webinars/python-for-devops-2026"
+                    href="/webinars/docker-kubernetes-2026"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
                   >
                     View Details & Register →

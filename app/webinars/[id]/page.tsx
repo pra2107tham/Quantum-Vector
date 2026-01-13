@@ -128,6 +128,95 @@ const webinarData: Record<string, any> = {
       "Actionable roadmap to move into DevOps, SRE, or Platform Engineering",
     ],
   },
+  "docker-kubernetes-2026": {
+    id: "docker-kubernetes-2026",
+    title: "Docker & Kubernetes Webinar – Live Weekend Program",
+    tagline:
+      "Master containerization and orchestration with hands-on microservices project across weekend sessions.",
+    date: "24, 25, 31 Jan & 1 Feb (Weekends Only)",
+    time: "8:00 AM – 10:30 AM IST",
+    duration: "10+ Hours (Live, Hands-on)",
+    price: "₹2999",
+    originalPrice: null,
+    mode: "Live Online",
+    bonus: "Docker scripts + K8s manifests + E-commerce project code",
+    status: "upcoming",
+    description:
+      "A comprehensive weekend webinar series focused on Docker containerization and Kubernetes orchestration. Build a real-time e-commerce microservices application with User Login, Shopping Cart, Product Inventory, and Payment services—learning production-grade container orchestration workflows.",
+    projectHighlight: {
+      title: "Real-Time E-Commerce Microservices Project 🛒",
+      description:
+        "Build a complete e-commerce application using microservice architecture throughout the webinar. This isn't a pre-built demo—we'll develop it live, showing you real production-grade containerization and orchestration patterns.",
+      services: [
+        "User Login Service - Authentication and session management",
+        "Shopping Cart Service - Real-time cart operations with state management",
+        "Product Inventory Service - Product catalog with database integration",
+        "Payment Service - Secure payment processing microservice",
+      ],
+    },
+    whyMatters: {
+      title: "Why Docker & Kubernetes Matter 🚀",
+      content:
+        "Modern cloud-native applications run on containers orchestrated by Kubernetes. Companies expect engineers who can containerize applications, manage deployments, configure auto-scaling, and implement production-ready microservices. This webinar bridges theory and practice with a real e-commerce project using microservice architecture.",
+    },
+    projects: [
+      "Build and containerize User Login microservice with Docker",
+      "Deploy Shopping Cart service with persistent storage in Kubernetes",
+      "Implement Product Inventory service with ConfigMaps and Secrets",
+      "Create Payment microservice with service mesh communication",
+      "Set up Ingress routing and LoadBalancer for external access",
+      "Configure auto-scaling with HPA based on CPU metrics",
+    ],
+    outcomes: [
+      "Master Docker containerization for microservices applications",
+      "Deploy and manage applications on Kubernetes clusters",
+      "Implement production-ready patterns: health checks, auto-scaling, RBAC",
+      "Build a complete e-commerce platform with microservice architecture",
+      "Understand Kubernetes objects: Pods, Deployments, Services, Ingress",
+      "Configure persistent storage, ConfigMaps, and Secrets for real applications",
+    ],
+    whatYoullLearn: [
+      "Introduction to Kubernetes architecture and real-world use cases",
+      "Cluster setup using Minikube/Kubeadm with hands-on installation",
+      "Working with kubectl commands and Kubernetes objects",
+      "PODs, ReplicaSets, Deployments with Rolling Update strategies",
+      "DaemonSets, StatefulSets for stateful applications",
+      "PersistentVolumes and PersistentVolumeClaims for data storage",
+      "Managing ConfigMaps and Secrets for configuration management",
+      "Kubernetes Services: ClusterIP, NodePort, LoadBalancer",
+      "Ingress Controller setup for HTTP/HTTPS routing",
+      "Resource Quotas and LimitRange for resource management",
+      "Liveness and Readiness Probes for health monitoring",
+      "Horizontal Pod Autoscaler (HPA) with Metrics Server",
+      "Node maintenance: Cordon, Drain, Uncordon operations",
+      "Scheduling with Taints, Tolerations, Affinity & Anti-Affinity",
+      "Kubernetes RBAC: Roles, RoleBindings, ServiceAccounts",
+      "Kubernetes Dashboard setup with read-only access control",
+      "Production-ready microservices deployment patterns",
+    ],
+    whoIsFor: [
+      "DevOps engineers wanting to master container orchestration",
+      "Backend developers moving to cloud-native microservices",
+      "Students (CS/IT/Cloud) targeting Kubernetes-based roles",
+      "SRE and Platform engineers managing production clusters",
+      "Freshers preparing for DevOps/Cloud/SRE positions",
+      "Anyone with basic Docker knowledge wanting to learn Kubernetes",
+    ],
+    whatYoullGet: [
+      "10+ hours of live, hands-on weekend sessions",
+      "Real e-commerce microservices project with complete source code",
+      "Docker scripts and Kubernetes manifests for all services",
+      "Production-ready patterns for health checks, scaling, and RBAC",
+      "Access to all project resources and configuration files",
+      "Lifetime access to session recordings and materials",
+    ],
+    whereToLearn: {
+      title: "Next Steps After the Webinar 🏗️",
+      content:
+        "After mastering Docker and Kubernetes fundamentals, move into advanced topics like Helm charts, Service Mesh (Istio), CI/CD with ArgoCD/Flux, and multi-cluster management. Practice deploying real applications on cloud platforms (EKS, GKE, AKS) and focus on production observability with Prometheus and Grafana.",
+    },
+    paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
+  },
 };
 
 export default function WebinarDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -294,13 +383,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                       What's Included?
                     </h3>
                     <div className="space-y-2">
-                      {[
-                        "Live, hands-on sessions across two weekends",
-                        "Fabric + Boto3 automation templates",
-                        "Project walkthroughs with reusable code",
-                        "Python scripts for configs, logs & cloud",
-                        "DevOps-focused automation examples",
-                      ].map((item, i) => (
+                      {webinar.whatYoullGet.slice(0, 5).map((item: string, i: number) => (
                         <div key={i} className="flex items-start gap-2">
                           <CheckCircleIcon className="w-4 h-4 text-[#1447e6] shrink-0 mt-0.5" />
                           <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">{item}</span>
@@ -377,6 +460,66 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </motion.div>
 
+          {/* Real-Time Project Highlight */}
+          {webinar.projectHighlight && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full"
+            >
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/20">
+                <div className="text-center mb-6 md:mb-8">
+                  <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-3 md:mb-4">
+                    {webinar.projectHighlight.title}
+                  </h2>
+                  <p className="font-sans text-[#2d2d2d] text-[13px] md:text-lg max-w-3xl mx-auto">
+                    {webinar.projectHighlight.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 max-w-4xl mx-auto">
+                  {webinar.projectHighlight.services.map((service: string, index: number) => {
+                    const [serviceName, serviceDesc] = service.split(' - ');
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-5 rounded-[12px] md:rounded-[16px] hover:shadow-lg transition-all hover:scale-[1.02]"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded-[8px] bg-[#1447e6]/10 shrink-0">
+                            <RocketLaunchIcon className="w-5 h-5 md:w-6 md:h-6 text-[#1447e6]" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[13px] md:text-base mb-1">
+                              {serviceName}
+                            </h3>
+                            <p className="font-sans text-[#66707d] text-[11px] md:text-sm">
+                              {serviceDesc}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 md:mt-8 text-center">
+                  <div className="inline-flex items-center gap-2 glass-card glass-card-blur-sm px-4 md:px-6 py-2 md:py-3 rounded-full">
+                    <CheckCircleIcon className="w-4 h-4 md:w-5 md:h-5 text-[#198754]" />
+                    <span className="font-sans font-semibold text-[#2d2d2d] text-[11px] md:text-sm">
+                      Built live during the webinar - not pre-recorded demos
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* What You'll Learn */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -399,7 +542,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </motion.div>
 
-          {/* Hands-on Projects */}
+          {/* Webinar Modules */}
           {projects.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -409,10 +552,10 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             >
               <div className="text-center mb-6 md:mb-8">
                 <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
-                  Hands-on Projects 🚀
+                  Webinar Modules 📚
                 </h2>
                 <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
-                  DevOps-oriented projects, not generic Python exercises
+                  Practical modules covered throughout the webinar sessions
                 </p>
               </div>
 
@@ -432,7 +575,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                       </div>
                       <div className="flex-1">
                         <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-1 md:mb-2">
-                          Project {index + 1}
+                          Module {index + 1}
                         </h3>
                         <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{item}</p>
                       </div>
@@ -548,9 +691,9 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
           >
             <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-12 rounded-[16px] md:rounded-[20px] text-center">
               <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-4xl mb-3 md:mb-4">
-                {webinar.status === "completed" 
-                  ? "Session Completed" 
-                  : "Ready to Master Python for DevOps?"}
+                {webinar.status === "completed"
+                  ? "Session Completed"
+                  : "Ready to Join This Webinar?"}
               </h2>
               {webinar.status === "completed" ? (
                 <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
@@ -559,8 +702,8 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
               ) : (
                 <>
                   <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
-                    {webinar.duration}. Live, hands-on learning. Real DevOps automation workflows. 
-                    Learn Python the way companies use it in production—not from random tutorials.
+                    {webinar.duration}. Live, hands-on learning. Production-ready workflows.
+                    {webinar.tagline}
                   </p>
                   
                   {/* Pricing Summary */}

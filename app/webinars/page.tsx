@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data
 const webinars = [
   {
+    id: "docker-kubernetes-2026",
+    title: "Docker & Kubernetes Webinar – Live Weekend Program",
+    tagline:
+      "Master containerization and orchestration with hands-on microservices project across weekend sessions.",
+    date: "24, 25, 31 Jan & 1 Feb (Weekends Only)",
+    time: "8:00 AM – 10:30 AM IST",
+    price: "₹2999",
+    mode: "Live Online",
+    bonus: "Docker scripts + K8s manifests + E-commerce project code",
+    status: "upcoming",
+  },
+  {
     id: "python-for-devops-2026",
     title: "Python for DevOps 2026 – Live Weekend Webinar",
     tagline:
