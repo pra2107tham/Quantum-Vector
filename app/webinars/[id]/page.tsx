@@ -215,7 +215,7 @@ const webinarData: Record<string, any> = {
       content:
         "After mastering Docker and Kubernetes fundamentals, move into advanced topics like Helm charts, Service Mesh (Istio), CI/CD with ArgoCD/Flux, and multi-cluster management. Practice deploying real applications on cloud platforms (EKS, GKE, AKS) and focus on production observability with Prometheus and Grafana.",
     },
-    paymentLink: null,
+    paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
   },
 };
 
