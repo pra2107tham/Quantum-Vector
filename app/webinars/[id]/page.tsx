@@ -100,7 +100,7 @@ const webinarData: Record<string, any> = {
       content:
         "After mastering Terraform fundamentals, move into advanced topics like Terraform Cloud, Sentinel policy as code, advanced module patterns, and GitOps workflows. Practice with real cloud platforms (AWS, Azure, GCP) and focus on multi-cloud strategies, disaster recovery patterns, and infrastructure testing with tools like Terratest.",
     },
-    paymentLink: "",
+    paymentLink: "https://pages.razorpay.com/pl_S5CfnjyD8LK5Cx/view?label=terraform_iac_webinar",
   },
   "python-for-devops-2026": {
     id: "python-for-devops-2026",
