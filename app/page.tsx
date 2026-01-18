@@ -155,21 +155,21 @@ export default function Home() {
                   </div>
 
                   <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] lg:text-[32px] leading-tight">
-                    Docker & Kubernetes Webinar – Live Weekend Program
+                    Terraform Webinar – Infrastructure as Code Mastery
                   </h2>
 
                   <p className="font-sans font-normal text-[#66707d] text-[13px] md:text-[16px] leading-relaxed">
-                    Master containerization and orchestration with hands-on microservices project across weekend sessions.
+                    Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.
                   </p>
 
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">24, 25, 31 Jan & 1 Feb (Weekends)</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">21–25 Jan (5 Days)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:00 AM – 10:30 AM IST</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:30 AM – 9:30 AM IST</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
@@ -179,7 +179,7 @@ export default function Home() {
 
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[10px]">
                     <p className="font-sans font-medium text-[#1447e6] text-[11px] md:text-[13px]">
-                      🛒 Real-time E-Commerce Project: User Login, Cart, Inventory & Payment Microservices
+                      🏗️ Real Projects: Multi-Tier Apps, Kubernetes Clusters, Multi-Cloud Provisioning
                     </p>
                   </div>
                 </div>
@@ -188,10 +188,10 @@ export default function Home() {
                 <div className="w-full md:w-[240px] shrink-0 flex flex-col gap-4">
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] text-center">
                     <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] mb-1">One-Time Fee</p>
-                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹2999</p>
+                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹999</p>
                   </div>
                   <Link
-                    href="/webinars/docker-kubernetes-2026"
+                    href="/webinars/terraform-webinar-2026"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
                   >
                     View Details & Register →

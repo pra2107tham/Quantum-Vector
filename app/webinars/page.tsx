@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data
 const webinars = [
   {
+    id: "terraform-webinar-2026",
+    title: "Terraform Webinar – Infrastructure as Code Mastery",
+    tagline:
+      "Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.",
+    date: "21–25 Jan (5 Days)",
+    time: "8:30 AM – 9:30 AM IST (10:30 AM on weekends)",
+    price: "₹999",
+    mode: "Live Online",
+    bonus: "Terraform modules + Real-world project templates + CI/CD integration",
+    status: "upcoming",
+  },
+  {
     id: "docker-kubernetes-2026",
     title: "Docker & Kubernetes Webinar – Live Weekend Program",
     tagline:
