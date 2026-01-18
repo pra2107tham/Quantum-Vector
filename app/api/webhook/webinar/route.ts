@@ -842,6 +842,218 @@ async function sendDockerKubernetesWebinarEmail(emailData: { email: string; amou
   }
 }
 
+// Send confirmation email for Terraform Webinar 2026
+async function sendTerraformWebinarEmail(emailData: { email: string; amount: number; id: string; name?: string; contact?: string }) {
+  const { email, amount, id, name } = emailData;
+  const amountInRupees = (amount / 100).toFixed(2);
+  const userName = name || 'Student';
+
+  logEvent('EMAIL_ATTEMPT', {
+    to: email,
+    name: userName,
+    contact: emailData.contact || 'Not provided',
+    amount: amountInRupees,
+    paymentId: id,
+    webinar: 'terraform_webinar_2026'
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Registration Confirmed - Terraform Webinar January 2026',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8f9fa;">
+
+        <!-- Main Container -->
+        <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid #e9ecef;">
+
+          <!-- Content Container -->
+          <div style="padding: 32px;">
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">Hi${userName !== 'Student' ? ` ${userName}` : ''},</p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0;">
+              Thank you for registering for the <strong>Terraform Webinar – Infrastructure as Code Mastery</strong>.
+            </p>
+
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              We're excited to have you join us for this comprehensive 5-day program focused on production-ready Terraform and Infrastructure as Code patterns.
+            </p>
+
+            <!-- Webinar Details -->
+            <div style="margin-bottom: 32px; border: 2px solid #2563eb; border-radius: 10px; overflow: hidden;">
+              <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 20px; border-bottom: 1px solid #1e40af;">
+                <h3 style="color: #ffffff; font-size: 18px; font-weight: 600; margin: 0;">📅 Webinar Details</h3>
+            </div>
+
+              <div style="background-color: #ffffff; padding: 24px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Dates</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">21–25 Jan 2026 (5 Days)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Time</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">8:30 AM – 9:30 AM IST (10:30 AM on weekends)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">7+ Hours (Live, Hands-on)</div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Mode</div>
+                  <div style="color: #212529; font-size: 15px; font-weight: 600;">Live Online</div>
+                </div>
+                <div>
+                  <div style="color: #6c757d; font-size: 12px; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">One-Time Fee</div>
+                  <div style="color: #198754; font-size: 18px; font-weight: 700;">₹${amountInRupees}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- What You'll Build -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid #0ea5e9; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #0c4a6e; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">🏗️ Real-World Projects You'll Build</h3>
+              <p style="color: #0369a1; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                Build production-ready infrastructure with Terraform throughout the webinar. These aren't demos—we'll develop them <strong>live</strong>, showing you real Infrastructure as Code patterns.
+              </p>
+              <ul style="color: #0369a1; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;"><strong>Multi-Tier Application</strong> - Networking and Security Groups</li>
+                <li style="margin-bottom: 8px;"><strong>Kubernetes Cluster</strong> - Deploy and manage with Terraform</li>
+                <li style="margin-bottom: 8px;"><strong>Cloud Networking</strong> - VPCs, Subnets, Gateways automation</li>
+                <li style="margin-bottom: 8px;"><strong>Auto-Scaling Infrastructure</strong> - Production-ready patterns</li>
+                <li style="margin-bottom: 8px;"><strong>Multi-Cloud Provisioning</strong> - Cross-cloud resource management</li>
+                <li style="margin-bottom: 8px;"><strong>Custom Modules</strong> - Reusable and standardized infrastructure</li>
+              </ul>
+            </div>
+
+            <!-- What You'll Learn -->
+            <div style="margin-bottom: 32px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">📚 What You'll Learn</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                This webinar covers Terraform from fundamentals to advanced production-ready concepts:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Terraform fundamentals, providers, resources, and configuration</li>
+                <li style="margin-bottom: 8px;">State management with remote backends and locking</li>
+                <li style="margin-bottom: 8px;">Variables, outputs, and handling sensitive data</li>
+                <li style="margin-bottom: 8px;">Modules, data sources, and provisioners</li>
+                <li style="margin-bottom: 8px;">Loops, conditionals, and dynamic blocks</li>
+                <li style="margin-bottom: 8px;">Workspaces for multi-environment management</li>
+                <li style="margin-bottom: 8px;">Terraform Cloud and Enterprise features</li>
+                <li style="margin-bottom: 8px;">CI/CD integration and automation patterns</li>
+                <li style="margin-bottom: 8px;">Testing, debugging, and production best practices</li>
+              </ul>
+            </div>
+
+            <!-- What You'll Get -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🎁 What You'll Get</h3>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">7+ hours of live, hands-on sessions across 5 days</li>
+                <li style="margin-bottom: 8px;">Real-world project walkthroughs with production patterns</li>
+                <li style="margin-bottom: 8px;">Reusable Terraform modules and templates</li>
+                <li style="margin-bottom: 8px;">CI/CD integration examples and automation scripts</li>
+                <li style="margin-bottom: 8px;">Best practices documentation and code organization guides</li>
+              </ul>
+            </div>
+
+            <!-- Who We Are -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">👥 Who We Are – QuantumVector by DevOps Community</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                <strong>QuantumVector (quantumvector.sh)</strong> is <strong>not a consultancy</strong>.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We are a <strong>community-driven initiative led by 10–15 experienced DevOps engineers</strong> who actively work on <strong>real production systems</strong> across cloud, Kubernetes, CI/CD, monitoring, and automation.
+              </p>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 12px 0; font-weight: 600;">Everything we teach is based on:</p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Real production incidents</li>
+                <li style="margin-bottom: 8px;">Live systems</li>
+                <li style="margin-bottom: 8px;">Actual workflows used in companies today</li>
+              </ul>
+            </div>
+
+            <!-- Next Steps -->
+            <div style="margin-bottom: 32px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #78350f; font-size: 18px; font-weight: 600; margin: 0 0 12px 0;">📞 Next Steps</h3>
+              <p style="color: #92400e; font-size: 15px; line-height: 1.6; margin: 0;">
+                <strong>Our team will contact you shortly</strong> with the WhatsApp group link, joining details, and all required materials for the webinar.
+              </p>
+            </div>
+
+            <!-- Want to Go Deeper -->
+            <div style="margin-bottom: 32px; border: 1px solid #dee2e6; border-radius: 8px; padding: 24px;">
+              <h3 style="color: #212529; font-size: 18px; font-weight: 600; margin: 0 0 16px 0;">🚀 Want to Go Deeper?</h3>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                We also offer <strong>Offline & Online DevOps Courses</strong> focused on:
+              </p>
+              <ul style="color: #212529; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; padding-left: 24px;">
+                <li style="margin-bottom: 8px;">Hands-on production-level learning</li>
+                <li style="margin-bottom: 8px;">Real projects, not demos</li>
+                <li style="margin-bottom: 8px;">Career guidance and mentorship</li>
+              </ul>
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0;">
+                For complete details, visit:<br/>
+                👉 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none; font-weight: 600;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Closing -->
+            <p style="color: #212529; font-size: 16px; line-height: 1.6; margin: 0 0 32px 0;">
+              Looking forward to seeing you in the live sessions.
+            </p>
+
+            <!-- Signature -->
+            <div style="border-top: 1px solid #e9ecef; padding-top: 24px;">
+              <p style="color: #212529; font-size: 15px; line-height: 1.6; margin: 0 0 8px 0;">
+                Warm regards,<br/>
+                <strong>Team DevOps Community</strong><br/>
+                <strong>QuantumVector</strong>
+              </p>
+              <p style="color: #6c757d; font-size: 14px; margin: 8px 0 0 0;">
+                🌐 <a href="https://quantumvector.sh" style="color: #2563eb; text-decoration: none;">https://quantumvector.sh</a>
+              </p>
+                  </div>
+
+            <!-- Transaction ID -->
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+              <div style="color: #6c757d; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px;">Transaction ID</div>
+              <div style="color: #212529; font-size: 13px; font-weight: 600; font-family: 'SF Mono', Monaco, monospace; background-color: #f8f9fa; padding: 8px 12px; border-radius: 4px; border: 1px solid #dee2e6;">${id}</div>
+                  </div>
+                </div>
+
+          <!-- Footer -->
+          <div style="background: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
+            <p style="color: #6c757d; font-size: 12px; margin: 0;">This is an automated confirmation email.</p>
+                </div>
+              </div>
+            </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    logEvent('EMAIL_SUCCESS', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      timestamp: new Date().toISOString(),
+      webinar: 'terraform_webinar_2026'
+    });
+  } catch (error) {
+    logEvent('EMAIL_ERROR', {
+      to: email,
+      name: userName,
+      paymentId: id,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString(),
+      webinar: 'terraform_webinar_2026'
+    });
+    throw error;
+  }
+}
+
 export async function POST(request: Request) {
   const requestId = crypto.randomBytes(8).toString('hex');
   logEvent('WEBHOOK_RECEIVED', { requestId });
@@ -1127,6 +1339,40 @@ export async function POST(request: Request) {
           return NextResponse.json({ message: 'Docker & Kubernetes 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
         }
       },
+      // Terraform Webinar 2026 (inline email send)
+      terraform_webinar_2026: async () => {
+        try {
+          await sendTerraformWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'terraform_webinar_2026' });
+          return NextResponse.json({ message: 'Terraform 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'terraform_webinar_2026', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Terraform 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
+      // Alternative label for compatibility
+      terraform_iac_webinar: async () => {
+        try {
+          await sendTerraformWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          logEvent('WEBHOOK_SUCCESS', { requestId, paymentId: payment.id, emailSent: true, handler: 'terraform_iac_webinar' });
+          return NextResponse.json({ message: 'Terraform 2026 webinar payment processed and email sent successfully' }, { status: 200, headers: corsHeaders });
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'terraform_iac_webinar', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'Terraform 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
       // Testing: run all handlers/emails
       testing: async () => {
         const makeReq = () => new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });
@@ -1237,6 +1483,20 @@ export async function POST(request: Request) {
           results.push({ handler: 'docker_kubernetes_webinar_2026', ok: true });
         } catch (e) {
           results.push({ handler: 'docker_kubernetes_webinar_2026', ok: false, error: (e as Error)?.message || 'Unknown error' });
+        }
+
+        // Terraform 2026 webinar email inline
+        try {
+          await sendTerraformWebinarEmail({
+            email: payment.email,
+            amount: payment.amount,
+            id: payment.id,
+            name: payment.notes?.name,
+            contact: payment.contact
+          });
+          results.push({ handler: 'terraform_webinar_2026', ok: true });
+        } catch (e) {
+          results.push({ handler: 'terraform_webinar_2026', ok: false, error: (e as Error)?.message || 'Unknown error' });
         }
 
         logEvent('TESTING_RUN_COMPLETED', { requestId, paymentId: payment.id, label: 'testing', results });
