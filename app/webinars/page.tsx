@@ -23,8 +23,8 @@ const webinars = [
     title: "Terraform Webinar – Infrastructure as Code Mastery",
     tagline:
       "Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.",
-    date: "21–25 Jan (5 Days)",
-    time: "8:30 AM – 9:30 AM IST (10:30 AM on weekends)",
+    date: "28, 29, 30 Jan, 31 Jan, 1 Feb",
+    time: "8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)",
     price: "₹999",
     mode: "Live Online",
     bonus: "Terraform modules + Real-world project templates + CI/CD integration",
@@ -35,8 +35,8 @@ const webinars = [
     title: "Docker & Kubernetes Webinar – Live Weekend Program",
     tagline:
       "Master containerization and orchestration with hands-on microservices project across weekend sessions.",
-    date: "24, 25, 31 Jan & 1 Feb (Weekends Only)",
-    time: "8:00 AM – 10:30 AM IST",
+    date: "31 Jan, 1, 7, 8 Feb",
+    time: "7:00 PM – 9:30 PM IST",
     price: "₹2999",
     mode: "Live Online",
     bonus: "Docker scripts + K8s manifests + E-commerce project code",

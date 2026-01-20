@@ -102,7 +102,7 @@ export default function Home() {
                     View Course Details →
                   </Link>
                   <span className="font-sans text-[11px] md:text-sm text-[#66707d]">
-                    Starts January 19th, 2026
+                    Starts February 2nd, 2026
                   </span>
                 </div>
               </div>
@@ -165,11 +165,11 @@ export default function Home() {
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">21–25 Jan (5 Days)</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">28, 29, 30 Jan, 31 Jan, 1 Feb</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:30 AM – 9:30 AM IST</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
