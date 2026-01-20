@@ -24,8 +24,8 @@ const webinarData: Record<string, any> = {
     title: "Terraform Webinar – Infrastructure as Code Mastery",
     tagline:
       "Master Terraform for production-ready Infrastructure as Code with hands-on projects designed for experienced DevOps professionals.",
-    date: "21–25 Jan (5 Days)",
-    time: "8:30 AM – 9:30 AM IST (10:30 AM on weekends)",
+    date: "28, 29, 30 Jan, 31 Jan, 1 Feb",
+    time: "8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)",
     duration: "7+ Hours (Live, Hands-on)",
     price: "₹999",
     originalPrice: null,
@@ -216,8 +216,8 @@ const webinarData: Record<string, any> = {
     title: "Docker & Kubernetes Webinar – Live Weekend Program",
     tagline:
       "Master containerization and orchestration with hands-on microservices project across weekend sessions.",
-    date: "24, 25, 31 Jan & 1 Feb (Weekends Only)",
-    time: "8:00 AM – 10:30 AM IST",
+    date: "31 Jan, 1, 7, 8 Feb",
+    time: "7:00 PM – 9:30 PM IST",
     duration: "10+ Hours (Live, Hands-on)",
     price: "₹2999",
     originalPrice: null,
