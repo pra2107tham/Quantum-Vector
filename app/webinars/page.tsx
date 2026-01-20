@@ -36,7 +36,7 @@ const webinars = [
     tagline:
       "Master containerization and orchestration with hands-on microservices project across weekend sessions.",
     date: "31 Jan, 1, 7, 8 Feb",
-    time: "8:00 AM – 10:30 AM IST",
+    time: "7:00 PM – 9:30 PM IST",
     price: "₹2999",
     mode: "Live Online",
     bonus: "Docker scripts + K8s manifests + E-commerce project code",
