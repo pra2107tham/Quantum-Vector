@@ -489,7 +489,7 @@ export default function AWSCoursePage() {
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm flex items-center gap-1">
                     <CalendarIcon className="w-4 h-4" />
-                    Starts Jan 19th, 2026
+                    Starts Feb 2nd, 2026
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
                     📍 Online & Offline (Hyderabad)
