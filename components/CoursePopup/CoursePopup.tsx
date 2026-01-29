@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { XMarkIcon, CalendarIcon, ClockIcon, CurrencyRupeeIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, CalendarIcon, ClockIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 declare global {
@@ -17,8 +17,6 @@ interface CoursePopupProps {
   courseName: string;
   startDate: string;
   duration: string;
-  price: string;
-  blockingFee: string;
   enrollUrl: string;
 }
 
@@ -28,8 +26,6 @@ export default function CoursePopup({
   courseName,
   startDate,
   duration,
-  price,
-  blockingFee,
   enrollUrl
 }: CoursePopupProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -150,18 +146,6 @@ export default function CoursePopup({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <CurrencyRupeeIcon className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-500 line-through text-sm">{price}</span>
-                    <span className="font-bold text-green-600 text-lg">{blockingFee}</span>
-                    <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                      Limited seats
-                    </span>
-                  </div>
-                </div>
               </div>
 
               <div className="mb-6">
@@ -195,7 +179,7 @@ export default function CoursePopup({
                   <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold 
                                    py-3 px-6 rounded-lg transition-colors duration-200 
                                    shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                    🚀 Enroll Now - {blockingFee}
+                    🚀 Enroll Now
                   </button>
                 </Link>
                 
