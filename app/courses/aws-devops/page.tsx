@@ -530,14 +530,11 @@ export default function AWSCoursePage() {
 
                 {/* CTA Buttons */}
                 <div className="flex items-center gap-3 mt-3">
-                  <a
-                    href="https://pages.razorpay.com/pl_Rwt4Zoczp4A65X/view?label=aws_devops_course"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
+                  <span
+                    className="bg-gray-400 text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full cursor-not-allowed shadow-lg whitespace-nowrap"
                   >
-                    Enroll Now
-                  </a>
+                    Registration Closed – Wait for Next Batch
+                  </span>
                   <a
                     href="#curriculum"
                     className="glass-card glass-card-blur-sm glass-card-opacity-light font-sans font-semibold text-[#2d2d2d] text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:bg-white/20 transition-colors whitespace-nowrap"
@@ -811,14 +808,11 @@ export default function AWSCoursePage() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-                <a
-                  href="https://pages.razorpay.com/pl_Rwt4Zoczp4A65X/view?label=aws_devops_course"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
+                <span
+                  className="bg-gray-400 text-white font-sans font-semibold text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full cursor-not-allowed shadow-lg whitespace-nowrap"
                 >
-                  Enroll Now
-                </a>
+                  Registration Closed – Wait for Next Batch
+                </span>
                 <a
                   href="#curriculum"
                   className="glass-card glass-card-blur-sm font-sans font-semibold text-[#2d2d2d] text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-white/20 transition-colors whitespace-nowrap"
