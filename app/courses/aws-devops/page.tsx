@@ -25,7 +25,6 @@ import {
   GlobeAltIcon,
   ShieldCheckIcon,
   CircleStackIcon,
-  CurrencyRupeeIcon,
   CalendarIcon,
   VideoCameraIcon,
   XMarkIcon,
@@ -537,7 +536,7 @@ export default function AWSCoursePage() {
                     rel="noopener noreferrer"
                     className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-6 py-2.5 md:py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
                   >
-                    Enroll Now – ₹3,000
+                    Enroll Now
                   </a>
                   <a
                     href="#curriculum"
@@ -545,58 +544,6 @@ export default function AWSCoursePage() {
                   >
                     View Curriculum
                   </a>
-                </div>
-              </motion.div>
-              
-              {/* Right Content - Pricing Card */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-full lg:w-[380px] shrink-0"
-              >
-                <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-6 rounded-[16px] md:rounded-[20px]">
-                  <div className="text-center mb-4">
-                    <p className="font-sans text-[#66707d] text-[12px] md:text-sm">Total Course Fee</p>
-                    <div className="flex items-center justify-center gap-2">
-                      <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">₹22,000</span>
-                    </div>
-                    <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">Pay ₹3,000 now to secure your seat</p>
-                  </div>
-
-                  <div className="border-t border-white/30 pt-4 mb-4">
-                    <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-3">
-                      What's Included?
-                    </h3>
-                    <div className="space-y-2">
-                      {[
-                        "Complete tech stack (10+ tools)",
-                        "4 Real-world AWS projects",
-                        "Online & Offline (Hyderabad) options",
-                        "1-on-1 mentorship & doubt clearing",
-                        "Resume & interview preparation",
-                        "Lifetime access to recordings",
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-start gap-2">
-                          <CheckCircleIcon className="w-4 h-4 text-[#1447e6] shrink-0 mt-0.5" />
-                          <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <a
-                    href="https://pages.razorpay.com/pl_Rwt4Zoczp4A65X/view?label=aws_devops_course"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg flex items-center justify-center gap-2"
-                  >
-                    <CurrencyRupeeIcon className="w-5 h-5" />
-                    Pay ₹3,000 to Enroll
-                  </a>
-                  <p className="font-sans text-[#66707d] text-[10px] md:text-xs text-center mt-2">
-                    Remaining ₹19,000 to be paid before course starts
-                  </p>
                 </div>
               </motion.div>
             </div>
@@ -863,19 +810,6 @@ export default function AWSCoursePage() {
                 Course starts on <strong>January 19th, 2026</strong>.
               </p>
               
-              {/* Pricing Summary */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-6">
-                <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Total Course Fee</p>
-                  <p className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-3xl">₹22,000</p>
-                </div>
-                <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Pay Now to Enroll</p>
-                  <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-3xl">₹3,000</p>
-                  <p className="font-sans text-[#66707d] text-[10px] md:text-xs">Remaining ₹19,000 before course starts</p>
-                </div>
-              </div>
-
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
                 <a
                   href="https://pages.razorpay.com/pl_Rwt4Zoczp4A65X/view?label=aws_devops_course"
@@ -883,7 +817,7 @@ export default function AWSCoursePage() {
                   rel="noopener noreferrer"
                   className="bg-[#1447e6] text-white font-sans font-semibold text-[14px] md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap"
                 >
-                  Enroll Now – ₹3,000
+                  Enroll Now
                 </a>
                 <a
                   href="#curriculum"
