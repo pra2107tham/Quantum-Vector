@@ -657,7 +657,7 @@ export default function AWSCoursePage() {
           className="w-full"
         >
           <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-8 rounded-[16px] md:rounded-[20px]">
-            <div className="flex flex-col lg:flex-row gap-6 items-start">
+            <div className="flex flex-col lg:flex-row gap-6 items-center">
               <div className="flex-1">
                 <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-3xl mb-4">
                   AI-Assisted Cloud Operations Stack
@@ -786,7 +786,7 @@ export default function AWSCoursePage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
               {curriculumModules.map((module, index) => (
                 <ModuleCard key={module.id} module={module} index={index} />
               ))}
