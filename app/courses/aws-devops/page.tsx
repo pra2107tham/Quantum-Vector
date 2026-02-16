@@ -489,7 +489,7 @@ export default function AWSCoursePage() {
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm flex items-center gap-1">
                     <CalendarIcon className="w-4 h-4" />
-                    Starts Feb 9th, 2026
+                    Starts Feb 25th, 2026 • 9 PM IST
                   </span>
                   <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
                     📍 Online & Offline (Hyderabad)
@@ -657,7 +657,7 @@ export default function AWSCoursePage() {
           className="w-full"
         >
           <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-8 rounded-[16px] md:rounded-[20px]">
-            <div className="flex flex-col lg:flex-row gap-6 items-start">
+            <div className="flex flex-col lg:flex-row gap-6 items-center">
               <div className="flex-1">
                 <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[20px] md:text-3xl mb-4">
                   AI-Assisted Cloud Operations Stack
@@ -786,7 +786,7 @@ export default function AWSCoursePage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
               {curriculumModules.map((module, index) => (
                 <ModuleCard key={module.id} module={module} index={index} />
               ))}
@@ -860,7 +860,7 @@ export default function AWSCoursePage() {
               <p className="font-sans text-[#2d2d2d] text-[14px] md:text-xl mb-4 max-w-2xl mx-auto">
                 Complete curriculum from Linux to Kubernetes. 4 real-world AWS projects.
                 Available <strong>online</strong> and <strong>offline in Hyderabad</strong>.
-                Course starts on <strong>February 9th, 2026</strong>.
+                Course starts on <strong>February 25th, 2026</strong> at <strong>9 PM IST</strong>.
               </p>
 
               {/* Pricing Summary */}
