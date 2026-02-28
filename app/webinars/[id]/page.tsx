@@ -305,7 +305,7 @@ const webinarData: Record<string, any> = {
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
       "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
-    date: "7th & 8th March 2025",
+    date: "7th & 8th March 2026",
     time: "7:30 PM – 9:30 PM IST (each day)",
     duration: "6–7 Hours Total (Live, Hands-on)",
     price: "₹2,500",
@@ -369,7 +369,7 @@ const webinarData: Record<string, any> = {
       "Anyone who wants to learn how modern engineers use AI in DevOps workflows",
     ],
     whatYoullGet: [
-      "2 live sessions (2 hours each) on 7th & 8th March 2025",
+      "2 live sessions (2 hours each) on 7th & 8th March 2026",
       "Complete project source code — full microservices blog platform, yours to keep",
       "Full recordings — rewatch at your own pace, forever",
       "Claude AI workflow setup guide so you can keep using it after the workshop",

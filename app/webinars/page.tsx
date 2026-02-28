@@ -23,7 +23,7 @@ const webinars = [
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
       "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
-    date: "7th & 8th March 2025",
+    date: "7th & 8th March 2026",
     time: "7:30 PM – 9:30 PM IST (each day)",
     price: "₹2,500",
     mode: "Live Online",
