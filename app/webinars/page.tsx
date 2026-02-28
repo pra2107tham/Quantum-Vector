@@ -65,6 +65,18 @@ const webinars = [
     bonus: "Full End-to-End DevOps Roadmap PDF",
     status: "completed",
   },
+  {
+    id: "aws-eks-workshop-2025",
+    title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
+    tagline:
+      "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
+    date: "7th & 8th March 2025",
+    time: "7:30 PM – 9:30 PM IST (each day)",
+    price: "₹2,500",
+    mode: "Live Online",
+    bonus: "Full source code + recordings + Claude AI workflow setup",
+    status: "upcoming",
+  },
 ];
 
 export default function WebinarsPage() {
