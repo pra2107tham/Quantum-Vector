@@ -381,7 +381,7 @@ const webinarData: Record<string, any> = {
       content:
         "After deploying your first EKS cluster, explore advanced topics like CI/CD with GitHub Actions, GitOps with ArgoCD, Kubernetes auto-scaling with KEDA, and multi-cluster management. Continue using Claude AI as your DevOps co-pilot for writing Helm charts, debugging production issues, and understanding infrastructure concepts on demand. Contact us at frontdesk@thedevopscommunity.com for any questions.",
     },
-    paymentLink: null,
+    paymentLink: "https://pages.razorpay.com/pl_SLS7aY5Umx3R6A/view?label=aws_eks_workshop_2026",
   },
 };
 
