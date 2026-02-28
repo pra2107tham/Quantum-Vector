@@ -1373,6 +1373,28 @@ export async function POST(request: Request) {
           return NextResponse.json({ message: 'Terraform 2026 webinar payment processed but email failed' }, { status: 200, headers: corsHeaders });
         }
       },
+      // AWS EKS Workshop 2026 (inline email send via dedicated handler)
+      aws_eks_workshop_2026: async () => {
+        try {
+          const { POST: awsEksPost } = await import('./aws-eks/route');
+          const req = new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });
+          return await awsEksPost(req);
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'aws_eks_workshop_2026', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'AWS EKS Workshop 2026 payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
+      // Alternative label for compatibility
+      aws_eks_workshop: async () => {
+        try {
+          const { POST: awsEksPost } = await import('./aws-eks/route');
+          const req = new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });
+          return await awsEksPost(req);
+        } catch (emailError) {
+          logEvent('EMAIL_SEND_FAILED', { requestId, paymentId: payment.id, handler: 'aws_eks_workshop', error: emailError instanceof Error ? emailError.message : 'Unknown error' });
+          return NextResponse.json({ message: 'AWS EKS Workshop 2026 payment processed but email failed' }, { status: 200, headers: corsHeaders });
+        }
+      },
       // Testing: run all handlers/emails
       testing: async () => {
         const makeReq = () => new Request(request.url, { method: request.method, headers: request.headers, body: rawBody });

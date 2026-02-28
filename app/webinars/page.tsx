@@ -16,18 +16,18 @@ import Header from "@/web/components/Header";
 import Footer from "@/web/components/Footer";
 import { imgImage10 } from "@/web/assets";
 
-// Webinar data
+// Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
-    id: "terraform-webinar-2026",
-    title: "Terraform Webinar – Infrastructure as Code Mastery",
+    id: "aws-eks-workshop-2025",
+    title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
-      "Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.",
-    date: "28, 29, 30 Jan, 31 Jan, 1 Feb",
-    time: "8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)",
-    price: "₹999",
+      "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
+    date: "7th & 8th March 2026",
+    time: "7:30 PM – 9:30 PM IST (each day)",
+    price: "₹2,500",
     mode: "Live Online",
-    bonus: "Terraform modules + Real-world project templates + CI/CD integration",
+    bonus: "Full source code + recordings + Claude AI workflow setup",
     status: "upcoming",
   },
   {
@@ -40,7 +40,19 @@ const webinars = [
     price: "₹2999",
     mode: "Live Online",
     bonus: "Docker scripts + K8s manifests + E-commerce project code",
-    status: "upcoming",
+    status: "completed",
+  },
+  {
+    id: "terraform-webinar-2026",
+    title: "Terraform Webinar – Infrastructure as Code Mastery",
+    tagline:
+      "Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.",
+    date: "28, 29, 30 Jan, 31 Jan, 1 Feb",
+    time: "8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)",
+    price: "₹999",
+    mode: "Live Online",
+    bonus: "Terraform modules + Real-world project templates + CI/CD integration",
+    status: "completed",
   },
   {
     id: "python-for-devops-2026",

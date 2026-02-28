@@ -31,7 +31,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Terraform modules + Real-world project templates + CI/CD integration",
-    status: "upcoming",
+    status: "completed",
     description:
       "A comprehensive 5-day live program focused on Terraform Infrastructure as Code for experienced DevOps professionals. Learn production-ready patterns, best practices, and real-world implementations with hands-on projects covering multi-tier applications, Kubernetes cluster provisioning, and multi-cloud deployments.",
     whyMatters: {
@@ -223,7 +223,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Docker scripts + K8s manifests + E-commerce project code",
-    status: "upcoming",
+    status: "completed",
     description:
       "A comprehensive weekend webinar series focused on Docker containerization and Kubernetes orchestration. Build a real-time e-commerce microservices application with User Login, Shopping Cart, Product Inventory, and Payment services—learning production-grade container orchestration workflows.",
     projectHighlight: {
@@ -299,6 +299,89 @@ const webinarData: Record<string, any> = {
         "After mastering Docker and Kubernetes fundamentals, move into advanced topics like Helm charts, Service Mesh (Istio), CI/CD with ArgoCD/Flux, and multi-cluster management. Practice deploying real applications on cloud platforms (EKS, GKE, AKS) and focus on production observability with Prometheus and Grafana.",
     },
     paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
+  },
+  "aws-eks-workshop-2025": {
+    id: "aws-eks-workshop-2025",
+    title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
+    tagline:
+      "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
+    date: "7th & 8th March 2026",
+    time: "7:30 PM – 9:30 PM IST (each day)",
+    duration: "6–7 Hours Total (Live, Hands-on)",
+    price: "₹2,500",
+    originalPrice: null,
+    mode: "Live Online",
+    bonus: "Full source code + recordings + Claude AI workflow setup",
+    status: "upcoming",
+    description:
+      "A 2-day live workshop where you build and deploy a full-stack blog platform using Docker, Kubernetes, and AWS — exactly how it's done in real companies. You'll provision a real EKS cluster, containerize 3 independent microservices, connect a MySQL RDS database, expose your app to the internet via AWS ALB and Route 53, and use Claude AI at every step to write configs, debug errors, and accelerate your deployment.",
+    whyMatters: {
+      title: "Why This Workshop Matters 🚀",
+      content:
+        "Most DevOps courses teach you theory. This workshop makes you do it live. You won't watch someone else deploy an app — you'll deploy your own, on real AWS infrastructure, with real tools, in real time. If you've been struggling to go from tutorials to actual cloud deployments, this is exactly what bridges that gap. You'll also learn how elite DevOps engineers work in 2025 — using Claude AI to move faster, debug smarter, and understand AWS and Kubernetes concepts on demand.",
+    },
+    projectHighlight: {
+      title: "What You'll Build 🏗️",
+      description:
+        "A production-grade blog platform running on AWS with 3 independent backend microservices, a React + TypeScript frontend, and a MySQL database on Amazon RDS — fully containerized and orchestrated on Amazon EKS with a live URL accessible from the internet.",
+      services: [
+        "Auth Microservice - User authentication and JWT token management",
+        "Posts Microservice - Blog post creation, editing, and retrieval",
+        "Comments Microservice - Comment system with relational data",
+        "React + TypeScript Frontend - Served via Nginx on Kubernetes",
+      ],
+    },
+    projects: [
+      "Day 1: Set up professional DevOps environment (AWS CLI, eksctl, kubectl, VS Code)",
+      "Day 1: Provision AWS infrastructure — EKS Cluster, Amazon ECR, Amazon RDS (MySQL)",
+      "Day 1: Build Docker images for all 3 microservices and the frontend",
+      "Day 1: Push Docker images to Amazon ECR and configure Claude AI in VS Code",
+      "Day 2: Deploy all services to EKS with Kubernetes manifests",
+      "Day 2: Configure Helm and the NGINX Ingress Controller",
+      "Day 2: Set up path-based routing so traffic flows correctly to each microservice",
+      "Day 2: Expose the app to the internet via AWS ALB + Route 53 with a real URL",
+    ],
+    outcomes: [
+      "Fully deployed production-grade blog platform running on Amazon EKS",
+      "Real-world experience provisioning AWS infrastructure (EKS, ECR, RDS)",
+      "Ability to containerize microservices and push images to ECR",
+      "Hands-on Kubernetes skills: Deployments, Services, Ingress, Helm",
+      "Confidence using Claude AI to write configs, debug errors, and understand AWS",
+      "A live project URL you can show on your resume and portfolio",
+    ],
+    whatYoullLearn: [
+      "How to set up a complete professional DevOps environment from scratch",
+      "Provisioning an EKS cluster, ECR registry, and RDS MySQL instance on AWS",
+      "Building and tagging Docker images for multiple microservices",
+      "Writing production-ready Kubernetes manifests and Dockerfiles with Claude AI",
+      "Deploying microservices to EKS and managing pods with kubectl",
+      "Configuring Helm charts and NGINX Ingress for path-based routing",
+      "Exposing services to the internet with AWS ALB and Route 53",
+      "Debugging real pod crashes and CrashLoopBackOff errors in real time",
+      "Using Claude AI inside VS Code to write configs and understand AWS concepts",
+      "How modern engineering teams use AI to accelerate cloud deployments",
+    ],
+    whoIsFor: [
+      "Developers who want to break into DevOps",
+      "DevOps learners who have done courses but never deployed anything real",
+      "Software engineers who want AWS + Kubernetes experience on their resume",
+      "Final year students and freshers targeting cloud and infrastructure roles",
+      "Anyone who wants to learn how modern engineers use AI in DevOps workflows",
+    ],
+    whatYoullGet: [
+      "2 live sessions (2 hours each) on 7th & 8th March 2026",
+      "Complete project source code — full microservices blog platform, yours to keep",
+      "Full recordings — rewatch at your own pace, forever",
+      "Claude AI workflow setup guide so you can keep using it after the workshop",
+      "Step-by-step guidance so no one gets left behind",
+      "Live Q&A and doubt resolution during both sessions",
+    ],
+    whereToLearn: {
+      title: "Keep Building After the Workshop 🏗️",
+      content:
+        "After deploying your first EKS cluster, explore advanced topics like CI/CD with GitHub Actions, GitOps with ArgoCD, Kubernetes auto-scaling with KEDA, and multi-cluster management. Continue using Claude AI as your DevOps co-pilot for writing Helm charts, debugging production issues, and understanding infrastructure concepts on demand. Contact us at frontdesk@thedevopscommunity.com for any questions.",
+    },
+    paymentLink: "https://pages.razorpay.com/pl_SLS7aY5Umx3R6A/view?label=aws_eks_workshop_2026",
   },
 };
 
