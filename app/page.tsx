@@ -147,29 +147,32 @@ export default function Home() {
                 <div className="flex-1 flex flex-col gap-4">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#1447e6] text-[11px] md:text-sm">
-                      🎯 Upcoming Webinar
+                      🎯 Upcoming Workshop
                     </span>
                     <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#e54a2d] text-[11px] md:text-sm">
                       ⚡ Limited Seats
                     </span>
+                    <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm">
+                      🤖 Claude AI
+                    </span>
                   </div>
 
                   <h2 className="font-outfit font-bold text-[#2d2d2d] text-[20px] md:text-[28px] lg:text-[32px] leading-tight">
-                    Terraform Webinar – Infrastructure as Code Mastery
+                    AWS + Kubernetes + Claude AI – Your First Production DevOps Project
                   </h2>
 
                   <p className="font-sans font-normal text-[#66707d] text-[13px] md:text-[16px] leading-relaxed">
-                    Master Terraform for production-ready Infrastructure as Code with hands-on projects across 5 days.
+                    Deploy a real microservices blog platform on Amazon EKS — live, hands-on, 2 days. Use Claude AI to write configs, debug errors, and ship faster than ever.
                   </p>
 
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">28, 29, 30 Jan, 31 Jan, 1 Feb</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">7th & 8th March 2025</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">8:30 AM – 9:30 AM IST (10:30 AM on 31 Jan & 1 Feb)</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">7:30 PM – 9:30 PM IST (each day)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <VideoCameraIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
@@ -179,7 +182,7 @@ export default function Home() {
 
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-3 rounded-[10px]">
                     <p className="font-sans font-medium text-[#1447e6] text-[11px] md:text-[13px]">
-                      🏗️ Real Projects: Multi-Tier Apps, Kubernetes Clusters, Multi-Cloud Provisioning
+                      🏗️ Build: Auth + Posts + Comments microservices on EKS · RDS · ALB · Route 53
                     </p>
                   </div>
                 </div>
@@ -188,10 +191,10 @@ export default function Home() {
                 <div className="w-full md:w-[240px] shrink-0 flex flex-col gap-4">
                   <div className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 rounded-[12px] text-center">
                     <p className="font-sans text-[#66707d] text-[11px] md:text-[12px] mb-1">One-Time Fee</p>
-                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹999</p>
+                    <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹2,500</p>
                   </div>
                   <Link
-                    href="/webinars/terraform-webinar-2026"
+                    href="/webinars/aws-eks-workshop-2025"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
                   >
                     View Details & Register →

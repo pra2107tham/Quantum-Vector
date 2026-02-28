@@ -31,7 +31,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Terraform modules + Real-world project templates + CI/CD integration",
-    status: "upcoming",
+    status: "completed",
     description:
       "A comprehensive 5-day live program focused on Terraform Infrastructure as Code for experienced DevOps professionals. Learn production-ready patterns, best practices, and real-world implementations with hands-on projects covering multi-tier applications, Kubernetes cluster provisioning, and multi-cloud deployments.",
     whyMatters: {
@@ -223,7 +223,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Docker scripts + K8s manifests + E-commerce project code",
-    status: "upcoming",
+    status: "completed",
     description:
       "A comprehensive weekend webinar series focused on Docker containerization and Kubernetes orchestration. Build a real-time e-commerce microservices application with User Login, Shopping Cart, Product Inventory, and Payment services—learning production-grade container orchestration workflows.",
     projectHighlight: {
