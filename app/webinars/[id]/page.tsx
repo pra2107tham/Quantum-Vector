@@ -300,8 +300,8 @@ const webinarData: Record<string, any> = {
     },
     paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
   },
-  "aws-eks-workshop-2025": {
-    id: "aws-eks-workshop-2025",
+  "aws-eks-workshop-2026": {
+    id: "aws-eks-workshop-2026",
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
       "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
@@ -314,21 +314,21 @@ const webinarData: Record<string, any> = {
     bonus: "Full source code + recordings + Claude AI workflow setup",
     status: "upcoming",
     description:
-      "A 2-day live workshop where you build and deploy a full-stack blog platform using Docker, Kubernetes, and AWS — exactly how it's done in real companies. You'll provision a real EKS cluster, containerize 3 independent microservices, connect a MySQL RDS database, expose your app to the internet via AWS ALB and Route 53, and use Claude AI at every step to write configs, debug errors, and accelerate your deployment.",
+      "A 2-day live workshop where you build and deploy a full-stack blog platform using Docker, Kubernetes, and AWS — the way it's done at real companies. You'll provision a real EKS cluster, containerize three independent microservices, connect a MySQL RDS database, expose your app to the internet via AWS ALB and Route 53, and use Claude AI at every step to write configs, debug errors, and speed up your deployment.",
     whyMatters: {
       title: "Why This Workshop Matters 🚀",
       content:
-        "Most DevOps courses teach you theory. This workshop makes you do it live. You won't watch someone else deploy an app — you'll deploy your own, on real AWS infrastructure, with real tools, in real time. If you've been struggling to go from tutorials to actual cloud deployments, this is exactly what bridges that gap. You'll also learn how elite DevOps engineers work in 2025 — using Claude AI to move faster, debug smarter, and understand AWS and Kubernetes concepts on demand.",
+        "Most DevOps courses teach you theory. This workshop makes you do it live. You won't watch someone else deploy an app — you'll deploy your own, on real AWS infrastructure, with real tools, in real time. If you've been struggling to go from tutorials to actual cloud deployments, this is what bridges that gap. You'll also learn how experienced DevOps engineers work in 2026 — using Claude AI to move faster, debug smarter, and understand AWS and Kubernetes concepts on demand.",
     },
     projectHighlight: {
       title: "What You'll Build 🏗️",
       description:
-        "A production-grade blog platform running on AWS with 3 independent backend microservices, a React + TypeScript frontend, and a MySQL database on Amazon RDS — fully containerized and orchestrated on Amazon EKS with a live URL accessible from the internet.",
+        "A production-ready blog platform running on AWS with three independent backend microservices, a React + TypeScript frontend, and a MySQL database on Amazon RDS — fully containerized and orchestrated on Amazon EKS with a live URL you can share.",
       services: [
-        "Auth Microservice - User authentication and JWT token management",
-        "Posts Microservice - Blog post creation, editing, and retrieval",
-        "Comments Microservice - Comment system with relational data",
-        "React + TypeScript Frontend - Served via Nginx on Kubernetes",
+        "Auth Microservice: User authentication and JWT token management",
+        "Posts Microservice: Blog post creation, editing, and retrieval",
+        "Comments Microservice: Comment system with relational data",
+        "React + TypeScript Frontend: Served via Nginx on Kubernetes",
       ],
     },
     projects: [
