@@ -194,7 +194,7 @@ export default function Home() {
                     <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-[28px]">₹2,500</p>
                   </div>
                   <Link
-                    href="/webinars/aws-eks-workshop-2025"
+                    href="/webinars/aws-eks-workshop-2026"
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-[15px] py-3 px-6 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg text-center"
                   >
                     View Details & Register →

@@ -300,8 +300,8 @@ const webinarData: Record<string, any> = {
     },
     paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
   },
-  "aws-eks-workshop-2025": {
-    id: "aws-eks-workshop-2025",
+  "aws-eks-workshop-2026": {
+    id: "aws-eks-workshop-2026",
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
       "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
@@ -325,10 +325,10 @@ const webinarData: Record<string, any> = {
       description:
         "A production-ready blog platform running on AWS with three independent backend microservices, a React + TypeScript frontend, and a MySQL database on Amazon RDS — fully containerized and orchestrated on Amazon EKS with a live URL you can share.",
       services: [
-        "Auth Microservice - User authentication and JWT token management",
-        "Posts Microservice - Blog post creation, editing, and retrieval",
-        "Comments Microservice - Comment system with relational data",
-        "React + TypeScript Frontend - Served via Nginx on Kubernetes",
+        "Auth Microservice: User authentication and JWT token management",
+        "Posts Microservice: Blog post creation, editing, and retrieval",
+        "Comments Microservice: Comment system with relational data",
+        "React + TypeScript Frontend: Served via Nginx on Kubernetes",
       ],
     },
     projects: [

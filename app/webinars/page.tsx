@@ -19,7 +19,7 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
-    id: "aws-eks-workshop-2025",
+    id: "aws-eks-workshop-2026",
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:
       "Deploy a real microservices blog platform on Amazon EKS using Docker, Kubernetes, and AWS — with Claude AI as your co-pilot.",
