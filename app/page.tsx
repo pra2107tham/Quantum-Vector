@@ -168,7 +168,7 @@ export default function Home() {
                   <div className="flex flex-wrap gap-3 md:gap-4">
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
-                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">7th & 8th March 2026</span>
+                      <span className="font-sans text-[#2d2d2d] text-[11px] md:text-[13px]">14th & 15th March 2026</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6] shrink-0" />
