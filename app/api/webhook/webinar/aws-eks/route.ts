@@ -161,7 +161,7 @@ async function sendConfirmationEmail(emailData: {
                                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#374151;">
                                   <tr>
                                     <td style="padding:6px 0; width:40%; color:#6b7280; font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Dates</td>
-                                    <td style="padding:6px 0; font-weight:600; color:#111827;">7th &amp; 8th March 2026</td>
+                                    <td style="padding:6px 0; font-weight:600; color:#111827;">14th &amp; 15th March 2026</td>
                                   </tr>
                                   <tr>
                                     <td style="padding:6px 0; color:#6b7280; font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Time</td>
@@ -190,7 +190,7 @@ async function sendConfirmationEmail(emailData: {
                               <td style="padding:16px; font-family:Arial,Helvetica,sans-serif;">
                                 <div style="font-size:15px; font-weight:700; color:#111827; margin-bottom:10px;">What's Included</div>
                                 <ul style="padding-left:20px; margin:0; color:#374151; font-size:14px; line-height:1.8;">
-                                  <li>2 live sessions (2 hours each) on 7th &amp; 8th March 2026</li>
+                                  <li>2 live sessions (2 hours each) on 14th &amp; 15th March 2026</li>
                                   <li>Full project source code — microservices blog platform</li>
                                   <li>Session recordings — rewatch at your own pace, forever</li>
                                   <li>Claude AI workflow setup guide for VS Code</li>
