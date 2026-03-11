@@ -1,7 +1,7 @@
 "use client"
 
 import Hls from 'hls.js'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaExpand, FaBackward, FaForward } from 'react-icons/fa'
 
 type VideoPlayerProps = {
@@ -139,9 +139,8 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
     loadProgress()
   }, [videoId])
 
-  // Save progress function
-  const saveProgress = async (progressSeconds: number, completed: boolean = false) => {
-    if (isSavingProgress || Math.abs(progressSeconds - lastSavedProgress) < 5) return // Throttle saves
+  const saveProgress = useCallback(async (progressSeconds: number, completed: boolean = false) => {
+    if (isSavingProgress || Math.abs(progressSeconds - lastSavedProgress) < 5) return
     
     setIsSavingProgress(true)
     try {
@@ -162,7 +161,7 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
     } finally {
       setIsSavingProgress(false)
     }
-  }
+  }, [videoId, isSavingProgress, lastSavedProgress])
 
   // Wire up element events for UI state
   useEffect(() => {
@@ -208,7 +207,6 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
       el.removeEventListener('pause', onPause)
       el.removeEventListener('ended', onEnded)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playbackUrl, lastSavedProgress, saveProgress])
 
   function formatTime(totalSeconds: number) {

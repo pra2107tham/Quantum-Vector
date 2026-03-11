@@ -90,7 +90,7 @@ export default function VideoAccessButton({
         type="video"
         title={video.title}
         price={coursePrice}
-        description={video.description}
+        description={video.description ?? undefined}
         courseId={courseId}
         videoId={video.id}
       />

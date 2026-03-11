@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import AcademyHero from '@/components/Academy/AcademyHero'
 import AcademyGrid from '@/components/Academy/AcademyGrid'
+import type { Course } from '@/components/Academy/AcademyCourseCard'
 import type { User } from '@supabase/supabase-js'
 
 export default async function AcademyPage() {
@@ -74,7 +75,7 @@ export default async function AcademyPage() {
               <p className="text-sm text-gray-500 mt-1">On‑demand lessons with free previews</p>
             </div>
             <AcademyGrid
-              courses={(courses ?? []) as import('@/components/Academy/AcademyCourseCard').Course[]}
+              courses={(courses ?? []) as Course[]}
               categories={(categories ?? []) as { id: string; name: string }[]}
               enrolledIds={enrolledCourseIds}
             />
