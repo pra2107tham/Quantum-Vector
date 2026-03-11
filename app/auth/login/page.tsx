@@ -29,7 +29,7 @@ export default function LoginPage() {
       } else {
         router.push('/academy');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
@@ -103,7 +103,7 @@ export default function LoginPage() {
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/auth/signup" className="font-medium text-blue-700 hover:text-blue-800">
                 Sign up here
               </Link>

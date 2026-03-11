@@ -4,9 +4,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import AuthModal from '@/components/Auth/AuthModal';
 import CheckoutModal from '@/components/Academy/CheckoutModal';
+import type { User } from '@supabase/supabase-js';
 
 interface CourseEnrollmentSectionProps {
-  user: any;
+  user: User | null;
   isEnrolled: boolean;
   courseId: string;
   coursePrice: number;
@@ -32,7 +33,7 @@ export default function CourseEnrollmentSection({
     return (
       <div className="space-y-3">
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-          <p className="text-green-700 font-medium">✓ You're enrolled in this course</p>
+          <p className="text-green-700 font-medium">✓ You&apos;re enrolled in this course</p>
         </div>
         <Link
           href="/academy/dashboard"

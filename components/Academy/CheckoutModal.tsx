@@ -93,7 +93,7 @@ export default function CheckoutModal({
 
         {/* Features */}
         <div>
-          <h4 className="font-semibold text-gray-900 mb-2">What's included:</h4>
+          <h4 className="font-semibold text-gray-900 mb-2">What&apos;s included:</h4>
           <ul className="space-y-1">
             {displayFeatures.map((feature, index) => (
               <li key={index} className="flex items-start gap-2">

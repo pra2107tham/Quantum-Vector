@@ -22,6 +22,7 @@ export default function AcademyCourseCard({ course, href, enrolled }: { course: 
       <div className="relative rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md overflow-hidden">
         {course.thumbnail_url && (
           <div className="h-36 w-full overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={course.thumbnail_url} alt={course.title} className="h-full w-full object-cover" />
           </div>
         )}

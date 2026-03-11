@@ -13,9 +13,6 @@ export type AcademyFiltersProps = {
   onChange: (f: AcademyFilter) => void;
 };
 
-const chipBase =
-  "px-2.5 py-1 rounded-full text-xs sm:text-sm font-medium ring-1 transition-colors";
-
 export default function AcademyFilters({ categories, onChange }: AcademyFiltersProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string | null>(null);

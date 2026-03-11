@@ -30,10 +30,12 @@ export default async function DashboardPage() {
     .select('*')
     .eq('user_id', user.id)
 
-  const progressMap = progress?.reduce((acc, p) => {
+  type ProgressRow = { video_id: string; completed: boolean; progress_seconds: number }
+
+  const progressMap = (progress as ProgressRow[] | null)?.reduce((acc, p) => {
     acc[p.video_id] = p
     return acc
-  }, {} as Record<string, any>) || {}
+  }, {} as Record<string, ProgressRow>) || {}
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 py-20">
@@ -85,7 +87,7 @@ export default async function DashboardPage() {
                 if (!course) return null
 
                 const totalVideos = course.videos?.length || 0
-                const completedVideos = course.videos?.filter((video: any) => 
+                const completedVideos = course.videos?.filter((video: { id: string }) => 
                   progressMap[video.id]?.completed
                 ).length || 0
                 const courseProgress = totalVideos > 0 ? (completedVideos / totalVideos) * 100 : 0
@@ -95,6 +97,7 @@ export default async function DashboardPage() {
                     <div className="md:flex">
                       {course.thumbnail_url && (
                         <div className="md:w-1/3">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={course.thumbnail_url}
                             alt={course.title}
@@ -150,7 +153,7 @@ export default async function DashboardPage() {
             <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">No Courses Yet</h3>
               <p className="text-gray-600 mb-6">
-                You haven't enrolled in any courses yet. Browse our course catalog to get started!
+                You haven&apos;t enrolled in any courses yet. Browse our course catalog to get started!
               </p>
               <Link
                 href="/academy"

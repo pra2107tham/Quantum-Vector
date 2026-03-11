@@ -58,7 +58,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
           setTimeout(() => { setMode('login'); setError(null); }, 3000);
         }
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);

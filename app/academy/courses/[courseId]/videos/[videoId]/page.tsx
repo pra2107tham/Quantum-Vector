@@ -66,12 +66,13 @@ export default async function VideoPage({ params }: PageProps) {
   const typedAllVideos: CourseVideoNav[] = (allVideos || []) as unknown as CourseVideoNav[]
   const currentIndex = typedAllVideos.findIndex((v: CourseVideoNav) => v.id === videoId) || 0
   const nextVideo = typedAllVideos?.[currentIndex + 1]
-  const prevVideo = typedAllVideos?.[currentIndex - 1]
 
   const totalCourseSeconds = typedAllVideos.reduce((acc, v) => acc + (v.duration_seconds || 0), 0)
 
+  type ProgressRow = { video_id: string; completed: boolean; progress_seconds: number }
+
   // Get user progress for all videos (if logged in)
-  let progressMap: Record<string, any> = {}
+  let progressMap: Record<string, ProgressRow> = {}
   if (user) {
     const { data: progress } = await supabase
       .from('video_progress')
@@ -79,10 +80,10 @@ export default async function VideoPage({ params }: PageProps) {
       .eq('user_id', user.id)
       .in('video_id', typedAllVideos.map(v => v.id))
     
-    progressMap = progress?.reduce((acc, p) => {
+    progressMap = (progress as ProgressRow[] | null)?.reduce((acc, p) => {
       acc[p.video_id] = p
       return acc
-    }, {} as Record<string, any>) || {}
+    }, {} as Record<string, ProgressRow>) || {}
   }
 
   function formatDuration(seconds: number) {

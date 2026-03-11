@@ -56,8 +56,9 @@ export async function GET(
       bytes: info.bytes,
       secure_url_sample: (info.secure_url || '').slice(0, 100) + '...'
     })
-  } catch (e: any) {
-    console.log('⚠️ Cloudinary lookup failed for public_id:', video.cloudinary_public_id, 'error:', e?.error || e?.message || e)
+  } catch (e: unknown) {
+    const err = e as { error?: string; message?: string } | null
+    console.log('⚠️ Cloudinary lookup failed for public_id:', video.cloudinary_public_id, 'error:', err?.error || err?.message || e)
   }
 
   // Access control

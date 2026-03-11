@@ -29,7 +29,7 @@ export function NavbarTop() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
+    const mounted = true;
     async function load() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!mounted) return;

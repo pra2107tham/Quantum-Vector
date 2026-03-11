@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import type { User } from '@supabase/supabase-js'
 
 export async function getUser() {
   const supabase = await createClient()
@@ -26,7 +27,7 @@ export async function getUserProfile(userId: string) {
   return profile
 }
 
-export async function createUserProfile(user: any) {
+export async function createUserProfile(user: User) {
   const supabase = await createClient()
   
   const { data: existingProfile } = await supabase

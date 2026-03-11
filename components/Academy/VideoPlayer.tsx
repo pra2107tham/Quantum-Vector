@@ -98,8 +98,8 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
           console.log('🎬 VideoPlayer: HLS not supported')
           setError('Your browser does not support HLS playback.')
         }
-      } catch (e: any) {
-        setError(e?.message || 'Failed to initialize player')
+      } catch (e: unknown) {
+        setError((e as Error)?.message || 'Failed to initialize player')
       } finally {
         setLoading(false)
       }
@@ -208,7 +208,8 @@ export default function VideoPlayer({ videoId, title, isPremium, watermarkText, 
       el.removeEventListener('pause', onPause)
       el.removeEventListener('ended', onEnded)
     }
-  }, [playbackUrl, lastSavedProgress])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playbackUrl, lastSavedProgress, saveProgress])
 
   function formatTime(totalSeconds: number) {
     const sec = Math.max(0, Math.floor(totalSeconds || 0))

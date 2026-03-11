@@ -5,12 +5,15 @@ import Link from 'next/link';
 import { FaPlay, FaLock } from 'react-icons/fa';
 import AuthModal from '@/components/Auth/AuthModal';
 import CheckoutModal from '@/components/Academy/CheckoutModal';
+import type { User } from '@supabase/supabase-js';
+
+type VideoAccessButtonVideo = { id: string; title: string; description?: string | null; is_free_preview: boolean }
 
 interface VideoAccessButtonProps {
-  video: any;
+  video: VideoAccessButtonVideo;
   courseId: string;
   courseTitle: string;
-  user: any;
+  user: User | null;
   isEnrolled: boolean;
   isCompleted: boolean;
   coursePrice?: number;
@@ -19,7 +22,6 @@ interface VideoAccessButtonProps {
 export default function VideoAccessButton({ 
   video, 
   courseId, 
-  courseTitle, 
   user, 
   isEnrolled, 
   isCompleted,
@@ -31,7 +33,7 @@ export default function VideoAccessButton({
 
   const status = getVideoStatus(video, user, isEnrolled);
 
-  function getVideoStatus(video: any, user: any, isEnrolled: boolean) {
+  function getVideoStatus(video: VideoAccessButtonVideo, user: User | null, isEnrolled: boolean) {
     if (video.is_free_preview) return 'free';
     if (!user) return 'login_required';
     if (isEnrolled) return 'enrolled';

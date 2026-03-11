@@ -52,31 +52,34 @@ export default async function CoursePage({ params }: PageProps) {
     isEnrolled = !!enrollment
   }
 
+  type VideoRow = { id: string; title: string; description?: string | null; duration_seconds: number; order_index: number; is_free_preview: boolean }
+  type ProgressRow = { video_id: string; completed: boolean; progress_seconds: number }
+
   // Get user progress (only if enrolled)
-  let progressMap: Record<string, any> = {}
+  let progressMap: Record<string, ProgressRow> = {}
   if (user && isEnrolled) {
     const { data: progress } = await supabase
       .from('video_progress')
       .select('*')
       .eq('user_id', user.id)
-      .in('video_id', course.videos?.map((v: any) => v.id) || [])
+      .in('video_id', course.videos?.map((v: VideoRow) => v.id) || [])
     
-    progressMap = progress?.reduce((acc: any, p: any) => {
+    progressMap = (progress as ProgressRow[] | null)?.reduce((acc, p) => {
       acc[p.video_id] = p
       return acc
-    }, {} as Record<string, any>) || {}
+    }, {} as Record<string, ProgressRow>) || {}
   }
 
   // Sort videos by order_index
-  const sortedVideos = course.videos?.sort((a: any, b: any) => a.order_index - b.order_index) || []
+  const sortedVideos = (course.videos as VideoRow[] | undefined)?.sort((a, b) => a.order_index - b.order_index) || []
   
   // Calculate total duration
-  const totalDuration = sortedVideos.reduce((acc: number, video: any) => acc + (video.duration_seconds || 0), 0)
+  const totalDuration = sortedVideos.reduce((acc: number, video) => acc + (video.duration_seconds || 0), 0)
   const hours = Math.floor(totalDuration / 3600)
   const minutes = Math.floor((totalDuration % 3600) / 60)
 
-  const freeVideos = sortedVideos.filter((v: any) => v.is_free_preview)
-  const paidVideos = sortedVideos.filter((v: any) => !v.is_free_preview)
+  const freeVideos = sortedVideos.filter((v) => v.is_free_preview)
+  const paidVideos = sortedVideos.filter((v) => !v.is_free_preview)
 
   function formatDuration(seconds: number) {
     const hrs = Math.floor(seconds / 3600)
@@ -84,7 +87,7 @@ export default async function CoursePage({ params }: PageProps) {
     return `${hrs > 0 ? `${hrs}h ` : ''}${mins}min`
   }
 
-  function getVideoStatus(video: any) {
+  function getVideoStatus(video: VideoRow) {
     if (video.is_free_preview) return 'free'
     if (!user) return 'login_required'
     if (isEnrolled) return 'enrolled'
@@ -161,7 +164,7 @@ export default async function CoursePage({ params }: PageProps) {
                 <h2 className="text-2xl font-bold text-blue-900 mb-6">Course Content</h2>
                 
                 <div className="space-y-4">
-                  {sortedVideos.map((video: any, index: number) => {
+                  {sortedVideos.map((video, index) => {
                     const status = getVideoStatus(video)
                     const progress = progressMap[video.id]
                     const isCompleted = progress?.completed || false
@@ -223,6 +226,7 @@ export default async function CoursePage({ params }: PageProps) {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
               {course.thumbnail_url && (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={course.thumbnail_url}
                   alt={course.title}

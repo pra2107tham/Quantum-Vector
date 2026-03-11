@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import AcademyHero from '@/components/Academy/AcademyHero'
 import AcademyGrid from '@/components/Academy/AcademyGrid'
-import AcademyAuthSection from '@/components/Academy/AcademyAuthSection'
+import type { User } from '@supabase/supabase-js'
 
 export default async function AcademyPage() {
   const user = await getUser() // Optional user (no redirect if not logged in)
@@ -56,7 +56,7 @@ export default async function AcademyPage() {
                 {courses?.filter(course => enrolledCourseIds.includes(course.id)).map((course) => (
                   <CourseCard 
                     key={course.id} 
-                    course={course} 
+                    course={course as CourseWithVideos} 
                     isEnrolled={true}
                     user={user}
                   />
@@ -74,8 +74,8 @@ export default async function AcademyPage() {
               <p className="text-sm text-gray-500 mt-1">On‑demand lessons with free previews</p>
             </div>
             <AcademyGrid
-              courses={(courses as any) || []}
-              categories={(categories as any) || []}
+              courses={(courses ?? []) as import('@/components/Academy/AcademyCourseCard').Course[]}
+              categories={(categories ?? []) as { id: string; name: string }[]}
               enrolledIds={enrolledCourseIds}
             />
           </div>
@@ -91,16 +91,24 @@ export default async function AcademyPage() {
   )
 }
 
-function CourseCard({ course, isEnrolled, user }: { course: any, isEnrolled: boolean, user: any }) {
+type CourseVideo = { id: string; is_free_preview: boolean; duration_seconds?: number | null }
+type CourseWithVideos = {
+  id: string; title: string; description?: string | null; price: number;
+  thumbnail_url?: string | null; course_categories?: { name: string } | null;
+  videos?: CourseVideo[];
+}
+
+function CourseCard({ course, isEnrolled, user }: { course: CourseWithVideos, isEnrolled: boolean, user: User | null }) {
   const videoCount = course.videos?.length || 0
-  const freePreviewCount = course.videos?.filter((v: any) => v.is_free_preview)?.length || 0
-  const totalDuration = course.videos?.reduce((acc: number, video: any) => acc + (video.duration_seconds || 0), 0) || 0
+  const freePreviewCount = course.videos?.filter((v) => v.is_free_preview)?.length || 0
+  const totalDuration = course.videos?.reduce((acc: number, video) => acc + (video.duration_seconds || 0), 0) || 0
   const hours = Math.floor(totalDuration / 3600)
   const minutes = Math.floor((totalDuration % 3600) / 60)
   
   return (
     <div className="bg-white/95 rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       {course.thumbnail_url && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={course.thumbnail_url}
           alt={course.title}

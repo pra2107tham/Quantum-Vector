@@ -23,7 +23,7 @@ export default function AcademyGrid({
     let arr = [...courses];
 
     if (filter.category) {
-      arr = arr.filter((c) => c && (c as any).category_id === filter.category);
+      arr = arr.filter((c) => c && (c as Course & { category_id?: string }).category_id === filter.category);
     }
 
     if (filter.search.trim()) {
@@ -44,7 +44,7 @@ export default function AcademyGrid({
         break;
       default:
         // newest by created_at desc; created_at exists on Course via select(*), but not typed
-        arr.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        arr.sort((a, b) => new Date((b as Course & { created_at?: string }).created_at ?? 0).getTime() - new Date((a as Course & { created_at?: string }).created_at ?? 0).getTime());
     }
 
     return arr;

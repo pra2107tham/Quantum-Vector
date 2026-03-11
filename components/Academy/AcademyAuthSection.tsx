@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import AuthModal from '@/components/Auth/AuthModal';
+import type { User } from '@supabase/supabase-js';
 
 interface AcademyAuthSectionProps {
-  user: any;
+  user: User | null;
 }
 
 export default function AcademyAuthSection({ user }: AcademyAuthSectionProps) {

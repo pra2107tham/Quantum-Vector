@@ -7,7 +7,7 @@ import CheckoutModal from '@/components/Academy/CheckoutModal';
 
 interface VideoAccessGuardProps {
   canAccess: boolean;
-  isEnrolled: boolean;
+  isEnrolled?: boolean;
   hasUser?: boolean;
   courseId: string;
   courseTitle?: string;
@@ -19,7 +19,6 @@ interface VideoAccessGuardProps {
 
 export default function VideoAccessGuard({ 
   canAccess, 
-  isEnrolled, 
   hasUser = false,
   courseId, 
   courseTitle, 
