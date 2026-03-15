@@ -305,9 +305,9 @@ const webinarData: Record<string, any> = {
     title: "Build & Deploy a Production-Grade Microservices E-Commerce Platform – Using the Complete DevOps Stack",
     tagline:
       "Docker • Kubernetes • Jenkins • ArgoCD • Helm • Prometheus • Grafana • PostgreSQL • AWS • AI/ML",
-    date: "28, 29, 30 March 2026",
-    time: "Live Online Sessions",
-    duration: "3 Days (Live, Hands-on)",
+    date: "28 & 29 March 2026",
+    time: "7:30 PM – 10:00 PM IST (each day)",
+    duration: "2 Days (Live, Hands-on)",
     price: "₹2,499",
     originalPrice: "₹2,999",
     mode: "Live Online",
@@ -361,7 +361,7 @@ const webinarData: Record<string, any> = {
       "Day 2: Managing Kubernetes deployments with Helm charts",
       "Day 2: Implementing GitOps using ArgoCD with auto-sync, self-heal, and prune",
       "Day 2: Monitoring Kubernetes clusters with Prometheus and Grafana dashboards",
-      "Day 3: Scaling microservices and advanced observability with OpenTelemetry tracing",
+      "Day 2: Scaling microservices and advanced observability with OpenTelemetry tracing",
     ],
     outcomes: [
       "Deploy a 13-service production-grade e-commerce platform on AWS EKS",
@@ -396,7 +396,7 @@ const webinarData: Record<string, any> = {
       "Professionals interested in microservices architecture and GitOps practices",
     ],
     whatYoullGet: [
-      "3 days of live, hands-on sessions — all 3 sessions + recordings included",
+      "2 days of live, hands-on sessions — all 2 sessions + recordings included",
       "Complete project source code for all 13 microservices",
       "Kubernetes deployment manifests and Helm charts",
       "Jenkins CI/CD pipeline configuration",
