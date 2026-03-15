@@ -409,7 +409,7 @@ const webinarData: Record<string, any> = {
       content:
         "After deploying this production-grade platform, explore advanced topics like multi-cluster management with ArgoCD, Kubernetes auto-scaling with KEDA, Service Mesh with Istio, and advanced observability patterns. Continue building on this architecture by enabling the AI Shopping Assistant (Google Gemini + AlloyDB) and extending the CI/CD pipelines with security scanning and policy enforcement.",
     },
-    paymentLink: "https://pages.razorpay.com/pl_S5CfnjyD8LK5Cx/view?label=devops_microservices_workshop_2026",
+    paymentLink: "https://rzp.io/rzp/nytYEDp",
   },
   "aws-eks-workshop-2026": {
     id: "aws-eks-workshop-2026",
