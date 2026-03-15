@@ -306,7 +306,7 @@ const webinarData: Record<string, any> = {
     tagline:
       "Docker • Kubernetes • Jenkins • ArgoCD • Helm • Prometheus • Grafana • PostgreSQL • AWS • AI/ML",
     date: "28 & 29 March 2026",
-    time: "7:30 PM – 10:00 PM IST (each day)",
+    time: "7:00 PM – 10:00 PM IST (each day)",
     duration: "2 Days (Live, Hands-on)",
     price: "₹2,499",
     originalPrice: "₹2,999",
@@ -423,7 +423,7 @@ const webinarData: Record<string, any> = {
     originalPrice: null,
     mode: "Live Online",
     bonus: "Full source code + recordings + Claude AI workflow setup",
-    status: "upcoming",
+    status: "completed",
     description:
       "A 2-day live workshop where you build and deploy a full-stack blog platform using Docker, Kubernetes, and AWS — the way it's done at real companies. You'll provision a real EKS cluster, containerize three independent microservices, connect a MySQL RDS database, expose your app to the internet via AWS ALB and Route 53, and use Claude AI at every step to write configs, debug errors, and speed up your deployment.",
     whyMatters: {
@@ -492,7 +492,7 @@ const webinarData: Record<string, any> = {
       content:
         "After deploying your first EKS cluster, explore advanced topics like CI/CD with GitHub Actions, GitOps with ArgoCD, Kubernetes auto-scaling with KEDA, and multi-cluster management. Continue using Claude AI as your DevOps co-pilot for writing Helm charts, debugging production issues, and understanding infrastructure concepts on demand. Contact us at frontdesk@thedevopscommunity.com for any questions.",
     },
-    paymentLink: "https://pages.razorpay.com/pl_SLS7aY5Umx3R6A/view?label=aws_eks_workshop_2026",
+    paymentLink: "",
   },
 };
 
