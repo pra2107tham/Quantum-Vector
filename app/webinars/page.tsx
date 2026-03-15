@@ -22,9 +22,9 @@ const webinars = [
     id: "devops-microservices-workshop-2026",
     title: "Build & Deploy a Production-Grade Microservices E-Commerce Platform",
     tagline:
-      "3 days. 13 services. 1 real project. Deploy on AWS EKS with Jenkins CI/CD, ArgoCD GitOps, and Prometheus monitoring.",
-    date: "28, 29, 30 March 2026",
-    time: "Live Online Sessions",
+      "2 days. 13 services. 1 real project. Deploy on AWS EKS with Jenkins CI/CD, ArgoCD GitOps, and Prometheus monitoring.",
+    date: "28 & 29 March 2026",
+    time: "7:30 PM – 10:00 PM IST (each day)",
     price: "₹2,499",
     mode: "Live Online",
     bonus: "Complete source code + Kubernetes manifests + Jenkins pipelines + Helm charts + recordings",
