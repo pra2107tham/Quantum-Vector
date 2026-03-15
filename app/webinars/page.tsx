@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
+    id: "devops-microservices-workshop-2026",
+    title: "Build & Deploy a Production-Grade Microservices E-Commerce Platform",
+    tagline:
+      "3 days. 13 services. 1 real project. Deploy on AWS EKS with Jenkins CI/CD, ArgoCD GitOps, and Prometheus monitoring.",
+    date: "28, 29, 30 March 2026",
+    time: "Live Online Sessions",
+    price: "₹2,499",
+    mode: "Live Online",
+    bonus: "Complete source code + Kubernetes manifests + Jenkins pipelines + Helm charts + recordings",
+    status: "upcoming",
+  },
+  {
     id: "aws-eks-workshop-2026",
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
     tagline:

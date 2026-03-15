@@ -300,6 +300,117 @@ const webinarData: Record<string, any> = {
     },
     paymentLink: "https://pages.razorpay.com/pl_S3RQ3QPcNGva1R/view?label=docker_kubernetes_webinar_2026",
   },
+  "devops-microservices-workshop-2026": {
+    id: "devops-microservices-workshop-2026",
+    title: "Build & Deploy a Production-Grade Microservices E-Commerce Platform – Using the Complete DevOps Stack",
+    tagline:
+      "Docker • Kubernetes • Jenkins • ArgoCD • Helm • Prometheus • Grafana • PostgreSQL • AWS • AI/ML",
+    date: "28, 29, 30 March 2026",
+    time: "Live Online Sessions",
+    duration: "3 Days (Live, Hands-on)",
+    price: "₹2,499",
+    originalPrice: "₹2,999",
+    mode: "Live Online",
+    bonus: "Complete source code + Kubernetes manifests + Jenkins pipelines + Helm charts + Grafana dashboards + recordings",
+    status: "upcoming",
+    description:
+      "Join DevOps engineers, developers, and career-switchers building the same system that powers modern cloud platforms — live, with your hands on the keyboard. Deploy a production-style microservices e-commerce platform on AWS EKS using the complete DevOps toolchain: Docker, Kubernetes, Jenkins, ArgoCD, Helm, Prometheus, and Grafana.",
+    workshopImages: [
+      {
+        src: "/webinar/devops-microservices/service-communication-map.png",
+        alt: "Service Communication Map – 13 Microservices",
+        caption: "Service Communication Map · 13 Microservices",
+      },
+      {
+        src: "/webinar/devops-microservices/architecture-aws-eks.png",
+        alt: "Microservices E-Commerce Platform on AWS EKS",
+        caption: "Microservices E-Commerce Platform on AWS EKS",
+      },
+    ],
+    projectHighlight: {
+      title: "What You'll Build 🏗️",
+      description:
+        "A production-style microservices e-commerce platform composed of 13 services running on Kubernetes (AWS EKS). The platform includes backend services written in different languages, database integrations, automated CI/CD pipelines, and GitOps deployment workflows.",
+      services: [
+        "Frontend Web Application - Go-based web UI & API gateway on port 8080",
+        "Authentication Service - Login, register, and JWT token management",
+        "Product Catalog Service - gRPC-based product listings with ~9 products",
+        "Shopping Cart Service - Per-user cart backed by Redis",
+        "Checkout Orchestration Service - Coordinates the full order flow across 6 services",
+        "Payment Processing Service - Card validation and transaction ID generation",
+        "Currency Conversion Service - ECB exchange rate based conversion",
+        "Shipping Service - Quote calculation and tracking ID generation",
+        "Email Notification Service - Order confirmation emails via Jinja2 templates",
+        "Recommendation Engine - Returns up to 5 relevant product suggestions",
+        "Advertising Service - Contextual ads based on product categories",
+        "AI Shopping Assistant - Powered by Google Gemini + LangChain + vector search",
+        "Load Generator - Locust-based traffic simulator for realistic load testing",
+      ],
+    },
+    whyMatters: {
+      title: "Why This Workshop Matters 🚀",
+      content:
+        "Modern applications are built using distributed microservices that run inside containers and are orchestrated by Kubernetes. Managing these systems requires automation pipelines, infrastructure security, and monitoring solutions. Instead of learning isolated tools, this workshop demonstrates how the entire DevOps ecosystem works together in a real production workflow — the same system that powers modern cloud platforms.",
+    },
+    projects: [
+      "Day 1: Introduction to microservices architecture and containerizing applications using Docker",
+      "Day 1: Creating an AWS EKS Kubernetes cluster and deploying microservices",
+      "Day 1: Kubernetes service networking, discovery, and deploying PostgreSQL in-cluster",
+      "Day 1: Managing application secrets using AWS Secrets Manager and implementing IRSA",
+      "Day 2: Creating Jenkins CI/CD pipelines and automating Docker image builds",
+      "Day 2: Managing Kubernetes deployments with Helm charts",
+      "Day 2: Implementing GitOps using ArgoCD with auto-sync, self-heal, and prune",
+      "Day 2: Monitoring Kubernetes clusters with Prometheus and Grafana dashboards",
+      "Day 3: Scaling microservices and advanced observability with OpenTelemetry tracing",
+    ],
+    outcomes: [
+      "Deploy a 13-service production-grade e-commerce platform on AWS EKS",
+      "Build and push Docker images to DockerHub and manage multi-service deployments",
+      "Implement a full Jenkins CI/CD pipeline for automated builds and deployments",
+      "Set up GitOps with ArgoCD — auto-sync, self-heal, and prune from Git",
+      "Manage Kubernetes resources with Helm charts and Kustomize overlays",
+      "Secure workloads using AWS Secrets Manager and IAM Roles for Service Accounts (IRSA)",
+      "Monitor applications with Prometheus metrics and Grafana dashboards",
+      "Understand how polyglot microservices communicate via gRPC and HTTP REST",
+    ],
+    whatYoullLearn: [
+      "Microservices architecture patterns and containerization with Docker multi-stage builds",
+      "Provisioning and managing AWS EKS clusters with eksctl and kubectl",
+      "Kubernetes objects: Pods, Deployments, Services, Ingress, ConfigMaps, Secrets",
+      "Deploying PostgreSQL and Redis in-cluster with proper security contexts",
+      "AWS Secrets Manager integration and IRSA for secure credential management",
+      "Jenkins CI/CD pipeline creation for automated Docker image builds and publishing",
+      "Helm charts for parameterized Kubernetes application deployments",
+      "GitOps workflow: Git → ArgoCD → EKS with auto-sync, self-heal, and prune",
+      "Prometheus scraping and Grafana dashboard configuration for cluster observability",
+      "OpenTelemetry tracing across polyglot microservices (Go, Python, Node.js, C#, Java)",
+      "gRPC-first inter-service communication with protobuf and Kubernetes DNS discovery",
+      "Horizontal Pod Autoscaler (HPA) and production-ready scaling patterns",
+    ],
+    whoIsFor: [
+      "DevOps engineers wanting hands-on experience with the full modern DevOps stack",
+      "Software developers looking to understand cloud-native microservices deployments",
+      "Cloud engineers preparing for AWS/Kubernetes production roles",
+      "Kubernetes learners ready to move from tutorials to real production workflows",
+      "Engineers preparing for DevOps, SRE, or Platform Engineering roles",
+      "Professionals interested in microservices architecture and GitOps practices",
+    ],
+    whatYoullGet: [
+      "3 days of live, hands-on sessions — all 3 sessions + recordings included",
+      "Complete project source code for all 13 microservices",
+      "Kubernetes deployment manifests and Helm charts",
+      "Jenkins CI/CD pipeline configuration",
+      "ArgoCD GitOps setup with Kustomize overlays for MicroK8s and EKS",
+      "Prometheus monitoring and Grafana dashboard configurations",
+      "Architecture documentation and ARCHITECTURE.md reference guide",
+    ],
+    whereToLearn: {
+      title: "Keep Building After the Workshop 🏗️",
+      content:
+        "After deploying this production-grade platform, explore advanced topics like multi-cluster management with ArgoCD, Kubernetes auto-scaling with KEDA, Service Mesh with Istio, and advanced observability patterns. Continue building on this architecture by enabling the AI Shopping Assistant (Google Gemini + AlloyDB) and extending the CI/CD pipelines with security scanning and policy enforcement.",
+    },
+    paymentLink: "https://pages.razorpay.com/pl_S5CfnjyD8LK5Cx/view?label=devops_microservices_workshop_2026",
+  },
   "aws-eks-workshop-2026": {
     id: "aws-eks-workshop-2026",
     title: "AWS + Kubernetes + Claude AI – Your First Production DevOps Project",
@@ -682,6 +793,52 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                     </span>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Architecture Images */}
+          {webinar.workshopImages && webinar.workshopImages.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full"
+            >
+              <div className="text-center mb-6 md:mb-8">
+                <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
+                  Architecture Overview 🗺️
+                </h2>
+                <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
+                  Visual walkthrough of the production microservices platform you'll build
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+                {webinar.workshopImages.map((img: { src: string; alt: string; caption: string }, idx: number) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[16px] md:rounded-[20px] overflow-hidden"
+                  >
+                    <div className="relative w-full aspect-[4/3]">
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-contain p-3 md:p-4"
+                        unoptimized
+                      />
+                    </div>
+                    {img.caption && (
+                      <div className="px-4 pb-3 md:pb-4 text-center">
+                        <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{img.caption}</p>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           )}
