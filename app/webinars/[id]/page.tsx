@@ -317,12 +317,12 @@ const webinarData: Record<string, any> = {
       "Join DevOps engineers, developers, and career-switchers building the same system that powers modern cloud platforms — live, with your hands on the keyboard. Deploy a production-style microservices e-commerce platform on AWS EKS using the complete DevOps toolchain: Docker, Kubernetes, Jenkins, ArgoCD, Helm, Prometheus, and Grafana.",
     workshopImages: [
       {
-        src: "/webinar/devops-microservices/service-communication-map.png",
+        src: "/service.jpg",
         alt: "Service Communication Map – 13 Microservices",
         caption: "Service Communication Map · 13 Microservices",
       },
       {
-        src: "/webinar/devops-microservices/architecture-aws-eks.png",
+        src: "/ecommerce.jpg",
         alt: "Microservices E-Commerce Platform on AWS EKS",
         caption: "Microservices E-Commerce Platform on AWS EKS",
       },
