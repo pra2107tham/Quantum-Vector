@@ -24,7 +24,7 @@ const webinars = [
     tagline:
       "2 days. 13 services. 1 real project. Deploy on AWS EKS with Jenkins CI/CD, ArgoCD GitOps, and Prometheus monitoring.",
     date: "28 & 29 March 2026",
-    time: "7:30 PM – 10:00 PM IST (each day)",
+    time: "7:00 PM – 10:00 PM IST (each day)",
     price: "₹2,499",
     mode: "Live Online",
     bonus: "Complete source code + Kubernetes manifests + Jenkins pipelines + Helm charts + recordings",
@@ -40,7 +40,7 @@ const webinars = [
     price: "₹2,500",
     mode: "Live Online",
     bonus: "Full source code + recordings + Claude AI workflow setup",
-    status: "upcoming",
+    status: "completed",
   },
   {
     id: "docker-kubernetes-2026",
