@@ -280,24 +280,6 @@ const curriculumModules = [
       "Interview-Level Questions",
     ],
   },
-  {
-    id: 14,
-    icon: <ChartBarIcon className="w-8 h-8" />,
-    title: "Observability",
-    subtitle: "Monitor, Log & Trace Everything",
-    color: "#0d9488",
-    topics: [
-      "Observability vs Monitoring — The 3 Pillars (Metrics, Logs, Traces)",
-      "Prometheus Architecture & PromQL Basics",
-      "Grafana Dashboards & Alerting",
-      "ELK Stack (Elasticsearch, Logstash, Kibana)",
-      "Distributed Tracing with Jaeger / OpenTelemetry",
-      "AWS CloudWatch Metrics, Alarms & Log Groups",
-      "AWS X-Ray for Application Tracing",
-      "SLIs, SLOs & Error Budgets",
-      "Incident Detection, Alerting & On-Call Runbooks",
-    ],
-  },
 ];
 
 // Real-World Projects
@@ -800,7 +782,7 @@ export default function AWSCoursePage() {
                 Complete Curriculum
               </h2>
               <p className="font-sans text-[#66707d] text-[12px] md:text-lg max-w-2xl mx-auto">
-                14 comprehensive modules covering everything from Linux basics to Kubernetes, AWS Cloud and Observability
+                13 comprehensive modules covering everything from Linux basics to Kubernetes and AWS Cloud
               </p>
             </motion.div>
 
