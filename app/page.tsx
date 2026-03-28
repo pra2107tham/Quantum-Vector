@@ -102,7 +102,7 @@ export default function Home() {
                     View Course Details →
                   </Link>
                   <span className="font-sans text-[11px] md:text-sm text-[#66707d]">
-                    Starts March 25th, 2026 • 9 PM IST
+                    Starts April 6th, 2026 • 9 PM IST
                   </span>
                 </div>
               </div>
