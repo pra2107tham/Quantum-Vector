@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
+    id: "mcp-eks-webinar-2026",
+    title: "MCP + AI Platform on Kubernetes (EKS)",
+    tagline:
+      "Build a production-grade AI Control Plane on AWS EKS — Model registration, versioning, CI/CD, observability, and enterprise security.",
+    date: "11 & 12 April 2026",
+    time: "7:00 PM – 10:00 PM IST (each day)",
+    price: "₹2,499",
+    mode: "Live Online",
+    bonus: "Full source code + Kubernetes manifests + Terraform configs + CI/CD pipelines + recordings",
+    status: "upcoming",
+  },
+  {
     id: "devops-microservices-workshop-2026",
     title: "Build & Deploy a Production-Grade Microservices E-Commerce Platform",
     tagline:
