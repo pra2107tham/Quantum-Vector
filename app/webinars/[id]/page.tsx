@@ -231,10 +231,10 @@ const webinarData: Record<string, any> = {
       description:
         "Build a complete e-commerce application using microservice architecture throughout the webinar. This isn't a pre-built demo—we'll develop it live, showing you real production-grade containerization and orchestration patterns.",
       services: [
-        "User Login Service - Authentication and session management",
-        "Shopping Cart Service - Real-time cart operations with state management",
-        "Product Inventory Service - Product catalog with database integration",
-        "Payment Service - Secure payment processing microservice",
+        "User Login Service: Authentication and session management",
+        "Shopping Cart Service: Real-time cart operations with state management",
+        "Product Inventory Service: Product catalog with database integration",
+        "Payment Service: Secure payment processing microservice",
       ],
     },
     whyMatters: {
@@ -320,23 +320,30 @@ const webinarData: Record<string, any> = {
       content:
         "Most engineers learn Docker, learn Kubernetes, and maybe deploy one app. But in real companies, you manage 100+ services and ML models, you need control planes, versioning, scaling, and monitoring, and you need automation and governance. This is NOT a basic DevOps project and NOT a demo-level ML pipeline. This project teaches you exactly how AI systems are managed at scale — the rare skill that companies are actively hiring for.",
     },
+    workshopImages: [
+      {
+        src: "/mcp-eks-architecture.jpg",
+        alt: "MCP + AI Platform on Kubernetes (EKS) Architecture",
+        caption: "MCP + AI Platform on Kubernetes (EKS) Architecture",
+      },
+    ],
     projectHighlight: {
       title: "What You'll Build 🏗️",
       description:
         "A Model Control Plane (MCP) — the brain of modern AI platforms. Think of it like: Kubernetes manages containers, MCP manages AI models and services. You will design and deploy a centralized platform to manage ML models on a Kubernetes-based orchestration layer with scalable microservices architecture.",
       services: [
-        "Amazon EKS Cluster - Production-ready setup with VPC, Subnets, IAM roles, Security Groups",
-        "Cluster Autoscaler + HPA - Auto Scaling for dynamic workload management",
-        "Model Serving APIs - Containerized microservices (Docker) with version-controlled ML models",
-        "Model Control Plane (MCP) - Centralized model registration, versioning & lifecycle management",
-        "Deployment Pipelines - Staging → Production with metadata tracking",
-        "Terraform IaC - Full infrastructure automation for all AWS resources",
-        "CI/CD Pipelines - GitHub Actions / Jenkins with GitOps workflows",
-        "NGINX Ingress / AWS ALB - Secure API exposure and path-based routing",
-        "Prometheus + Grafana - Metrics collection and real-time dashboards",
-        "CloudWatch - Centralized logs and AWS-native observability",
-        "IAM Roles for Service Accounts (IRSA) - Enterprise-grade identity and access management",
-        "Kubernetes RBAC + Network Policies - Workload isolation and access control",
+        "Amazon EKS Cluster: Production-ready setup with VPC, Subnets, IAM roles, Security Groups",
+        "Cluster Autoscaler + HPA: Auto Scaling for dynamic workload management",
+        "Model Serving APIs: Containerized microservices (Docker) with version-controlled ML models",
+        "Model Control Plane (MCP): Centralized model registration, versioning & lifecycle management",
+        "Deployment Pipelines: Staging → Production with metadata tracking",
+        "Terraform IaC: Full infrastructure automation for all AWS resources",
+        "CI/CD Pipelines: GitHub Actions / Jenkins with GitOps workflows",
+        "NGINX Ingress / AWS ALB: Secure API exposure and path-based routing",
+        "Prometheus + Grafana: Metrics collection and real-time dashboards",
+        "CloudWatch: Centralized logs and AWS-native observability",
+        "IAM Roles for Service Accounts (IRSA): Enterprise-grade identity and access management",
+        "Kubernetes RBAC + Network Policies: Workload isolation and access control",
       ],
     },
     projects: [
@@ -431,19 +438,19 @@ const webinarData: Record<string, any> = {
       description:
         "A production-style microservices e-commerce platform composed of 13 services running on Kubernetes (AWS EKS). The platform includes backend services written in different languages, database integrations, automated CI/CD pipelines, and GitOps deployment workflows.",
       services: [
-        "Frontend Web Application - Go-based web UI & API gateway on port 8080",
-        "Authentication Service - Login, register, and JWT token management",
-        "Product Catalog Service - gRPC-based product listings with ~9 products",
-        "Shopping Cart Service - Per-user cart backed by Redis",
-        "Checkout Orchestration Service - Coordinates the full order flow across 6 services",
-        "Payment Processing Service - Card validation and transaction ID generation",
-        "Currency Conversion Service - ECB exchange rate based conversion",
-        "Shipping Service - Quote calculation and tracking ID generation",
-        "Email Notification Service - Order confirmation emails via Jinja2 templates",
-        "Recommendation Engine - Returns up to 5 relevant product suggestions",
-        "Advertising Service - Contextual ads based on product categories",
-        "AI Shopping Assistant - Powered by Google Gemini + LangChain + vector search",
-        "Load Generator - Locust-based traffic simulator for realistic load testing",
+        "Frontend Web Application: Go-based web UI & API gateway on port 8080",
+        "Authentication Service: Login, register, and JWT token management",
+        "Product Catalog Service: gRPC-based product listings with ~9 products",
+        "Shopping Cart Service: Per-user cart backed by Redis",
+        "Checkout Orchestration Service: Coordinates the full order flow across 6 services",
+        "Payment Processing Service: Card validation and transaction ID generation",
+        "Currency Conversion Service: ECB exchange rate based conversion",
+        "Shipping Service: Quote calculation and tracking ID generation",
+        "Email Notification Service: Order confirmation emails via Jinja2 templates",
+        "Recommendation Engine: Returns up to 5 relevant product suggestions",
+        "Advertising Service: Contextual ads based on product categories",
+        "AI Shopping Assistant: Powered by Google Gemini + LangChain + vector search",
+        "Load Generator: Locust-based traffic simulator for realistic load testing",
       ],
     },
     whyMatters: {
@@ -856,7 +863,7 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 max-w-4xl mx-auto">
                   {webinar.projectHighlight.services.map((service: string, index: number) => {
-                    const [serviceName, serviceDesc] = service.split(' - ');
+                    const [serviceName, serviceDesc] = service.split(': ');
                     return (
                       <motion.div
                         key={index}
