@@ -404,7 +404,7 @@ const webinarData: Record<string, any> = {
       content:
         "After deploying your AI Control Plane, explore advanced topics like multi-tenant AI deployments, advanced MLOps workflows with model drift detection, cost optimization for GPU workloads on EKS, and multi-cluster management. The control plane design skills you learn here apply directly to SaaS control planes, microservices management systems, and enterprise AI platforms. Contact us at frontdesk@thedevopscommunity.com for any questions.",
     },
-    paymentLink: "",
+    paymentLink: "https://rzp.io/rzp/xVUGYW0w",
   },
   "devops-microservices-workshop-2026": {
     id: "devops-microservices-workshop-2026",
