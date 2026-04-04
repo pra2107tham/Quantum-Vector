@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavBody,
@@ -11,13 +11,37 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "./resizable-navbar";
-import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import AuthModal from "@/components/Auth/AuthModal";
+import dynamic from "next/dynamic";
+import { createClient } from "@/lib/supabase/client";
+
+const UserMenu = dynamic(() => import("./UserMenu"), { ssr: false });
 
 export function NavbarTop() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const supabase = createClient();
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    async function load() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (mounted) setIsAuthenticated(!!user);
+    }
+    load();
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      if (mounted) setIsAuthenticated(!!session?.user);
+    });
+    return () => { mounted = false; sub.subscription.unsubscribe(); };
+  }, [supabase]);
 
   const handleCoursesClick = (e: React.MouseEvent) => {
     if (isHomePage) {
@@ -40,6 +64,10 @@ export function NavbarTop() {
       link: "/webinars",
     },
     {
+      name: "Academy",
+      link: "/academy",
+    },
+    {
       name: "Solutions",
       children: [
         { name: "Mock Interviews", link: "/mock-interviews" },
@@ -48,27 +76,37 @@ export function NavbarTop() {
     },
   ];
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-
   return (
     <div className="relative w-full">
       <Navbar className="">
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems 
-            items={navItems} 
+          <NavItems
+            items={navItems}
             className="text-blue-900"
           />
-          {/* Register for Webinar Button (Desktop) */}
-          <Link href="/webinars/python-for-devops-2026" style={{ cursor: 'pointer', zIndex: 1000 }}>
-            <button
-              className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-800 transition-colors font-medium text-sm"
-            >
-              Register for Webinar
-            </button>
-          </Link>
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <UserMenu />
+            ) : (
+              <>
+                <button
+                  onClick={() => { setAuthModalMode('login'); setIsAuthModalOpen(true); }}
+                  className="text-blue-700 hover:text-blue-800 transition-colors font-medium text-sm cursor-pointer"
+                >
+                  Sign In
+                </button>
+                <Link href="/webinars/python-for-devops-2026" style={{ cursor: 'pointer', zIndex: 1000 }}>
+                  <button
+                    className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:cursor-pointer hover:bg-blue-800 transition-colors font-medium text-sm"
+                  >
+                    Register for Webinar
+                  </button>
+                </Link>
+              </>
+            )}
+          </div>
         </NavBody>
 
         {/* Mobile Navigation */}
@@ -113,7 +151,7 @@ export function NavbarTop() {
                       onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                     >
                       <span>{item.name}</span>
-                      <span className={`transition-transform duration-200 ${openIdx === idx ? "rotate-180" : "rotate-0"}`}>▾</span>
+                      <span className={`transition-transform duration-200 ${openIdx === idx ? "rotate-180" : "rotate-0"}`}>{'\u25BE'}</span>
                     </button>
                     {openIdx === idx && (
                       <div className="pl-2">
@@ -132,9 +170,45 @@ export function NavbarTop() {
                   </div>
                 );
               })}
+
+              {/* Mobile auth section */}
+              {isAuthenticated ? (
+                <div className="pt-2 border-t border-blue-200 mt-2">
+                  <Link
+                    href="/academy/dashboard"
+                    className="block py-2.5 px-4 text-lg font-medium text-blue-900 hover:bg-black hover:text-white rounded-md transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <form action="/auth/logout" method="post">
+                    <button
+                      type="submit"
+                      className="w-full text-left py-2.5 px-4 text-lg font-medium text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <div className="pt-2 border-t border-blue-200 mt-2 space-y-2">
+                  <button
+                    onClick={() => { setAuthModalMode('login'); setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }}
+                    className="block w-full text-left py-2.5 px-4 text-lg font-medium text-blue-900 hover:bg-black hover:text-white rounded-md transition-colors"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => { setAuthModalMode('signup'); setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }}
+                    className="block w-full text-left py-2.5 px-4 text-lg font-medium text-blue-700 hover:bg-blue-50 rounded-md transition-colors"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              )}
             </div>
             <Link
-              href="/webinars/terraform-azure-5day"
+              href="/webinars/python-for-devops-2026"
               className="block bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium text-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -143,7 +217,13 @@ export function NavbarTop() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
     </div>
   );
 }
-
