@@ -131,7 +131,7 @@ const webinarData: Record<string, any> = {
       content:
         "After completing this program, you'll have the foundation to tackle advanced topics: multi-cluster Kubernetes management, Service Mesh with Istio, Kubernetes security hardening, advanced Helm chart patterns, and production observability with distributed tracing. Continue your journey with QuantumVector — we focus on real production-grade DevOps workflows, practical understanding over theory, and career-oriented learning. Contact us at frontdesk@thedevopscommunity.com for any questions.",
     },
-    paymentLink: "",
+    paymentLink: "https://rzp.io/rzp/Ofp55zvQ",
   },
   "terraform-webinar-2026": {
     id: "terraform-webinar-2026",
