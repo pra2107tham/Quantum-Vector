@@ -19,6 +19,58 @@ import { imgImage10 } from "@/web/assets";
 
 // Webinar data
 const webinarData: Record<string, any> = {
+  "devops-live-april-may-2026": {
+    id: "devops-live-april-may-2026",
+    title: "Live DevOps Webinar – April & May 2026",
+    tagline:
+      "A hands-on, 4-day live program across two weekends — build real DevOps skills with production-grade projects.",
+    date: "25, 26 April & 2, 3 May 2026",
+    time: "7:00 PM – 9:30 PM IST (each day)",
+    duration: "4 Days · 10+ Hours (Live, Hands-on)",
+    price: "₹3,499",
+    originalPrice: "₹3,999",
+    earlyBirdNote: "Early bird price ₹3,499 valid till Tuesday — ₹3,999 after that.",
+    mode: "Live Online",
+    bonus: "Full source code + recordings + resources",
+    status: "upcoming",
+    description:
+      "A comprehensive 4-day live program spread across two weekends, focused on real DevOps skills and production-grade projects. Learn from hands-on sessions and get everything you need to accelerate your DevOps career. Full details coming soon.",
+    whyMatters: {
+      title: "Why This Webinar Matters 🚀",
+      content:
+        "Modern DevOps demands real-world skills, not just theory. This 4-day program gives you hands-on experience with production-grade tooling and workflows that companies are actually using in 2026.",
+    },
+    projects: [
+      "Hands-on production-grade DevOps projects across all 4 days",
+      "Real-world workflows and automation patterns",
+    ],
+    outcomes: [
+      "Gain practical, production-level DevOps experience",
+      "Build projects you can showcase on your resume",
+      "Get live mentoring and Q&A from experienced DevOps engineers",
+    ],
+    whatYoullLearn: [
+      "Detailed curriculum to be announced — stay tuned!",
+    ],
+    whoIsFor: [
+      "DevOps engineers looking to level up their practical skills",
+      "Developers wanting to transition into DevOps/cloud roles",
+      "Students and freshers targeting DevOps and SRE positions",
+      "Anyone interested in production-grade DevOps workflows",
+    ],
+    whatYoullGet: [
+      "4 days of live, hands-on weekend sessions (10+ hours total)",
+      "Full recordings — rewatch at your own pace, forever",
+      "Complete project source code and resource materials",
+      "Live Q&A and doubt resolution during all sessions",
+    ],
+    whereToLearn: {
+      title: "Keep Building After the Webinar 🏗️",
+      content:
+        "Continue your DevOps journey with QuantumVector. We focus on real production-grade DevOps workflows, practical understanding over theory, and career-oriented learning.",
+    },
+    paymentLink: "",
+  },
   "terraform-webinar-2026": {
     id: "terraform-webinar-2026",
     title: "Terraform Webinar – Infrastructure as Code Mastery",
@@ -755,7 +807,13 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                     <p className="font-sans text-[#66707d] text-[12px] md:text-sm">One-Time Fee</p>
                     <div className="flex items-center justify-center gap-2">
                       <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">{webinar.price}</span>
+                      {webinar.originalPrice && (
+                        <span className="font-outfit font-medium text-[#66707d] text-[18px] md:text-[22px] line-through">{webinar.originalPrice}</span>
+                      )}
                     </div>
+                    {webinar.earlyBirdNote && (
+                      <p className="font-sans text-[#e54a2d] text-[11px] md:text-xs mt-1 font-semibold">{webinar.earlyBirdNote}</p>
+                    )}
                     {webinar.duration && (
                       <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">{webinar.duration}</p>
                     )}

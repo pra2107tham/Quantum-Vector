@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
+    id: "devops-live-april-may-2026",
+    title: "Live DevOps Webinar – April & May 2026",
+    tagline:
+      "A hands-on, 4-day live program across two weekends — build real DevOps skills with production-grade projects.",
+    date: "25, 26 April & 2, 3 May 2026",
+    time: "7:00 PM – 9:30 PM IST (each day)",
+    price: "₹3,499",
+    mode: "Live Online",
+    bonus: "Full source code + recordings + resources",
+    status: "upcoming",
+  },
+  {
     id: "mcp-eks-webinar-2026",
     title: "MCP + AI Platform on Kubernetes (EKS)",
     tagline:
