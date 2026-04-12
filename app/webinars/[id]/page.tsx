@@ -35,6 +35,22 @@ const webinarData: Record<string, any> = {
     status: "upcoming",
     description:
       "A comprehensive 4-day beginner-friendly live program spread across two weekends. You will containerize real microservices with Docker, set up a production-grade Kubernetes cluster on-premises using kubeadm, manage deployments with Helm 3, build a full observability stack with Prometheus and Grafana, and deploy an end-to-end microservices project on AWS EC2 (Ubuntu 22.04).",
+    techStack: [
+      { layer: "Containerization", tech: "Docker, Dockerfile, Multi-Stage Builds", accent: "#1447e6" },
+      { layer: "Orchestration", tech: "Kubernetes (kubeadm), containerd, Flannel CNI", accent: "#1447e6" },
+      { layer: "Package Manager", tech: "Helm 3", accent: "#1447e6" },
+      { layer: "Microservices Backend", tech: "Node.js (Express), Python (Flask), Spring Boot (Java)", accent: "#0ea5e9" },
+      { layer: "Frontend", tech: "React.js + Nginx", accent: "#0ea5e9" },
+      { layer: "Database", tech: "MongoDB (StatefulSet), Redis (cache)", accent: "#0ea5e9" },
+      { layer: "Messaging / Queue", tech: "RabbitMQ", accent: "#0ea5e9" },
+      { layer: "API Gateway / Ingress", tech: "Nginx Ingress Controller", accent: "#6366f1" },
+      { layer: "Service Discovery", tech: "Kubernetes Services (ClusterIP/LB)", accent: "#6366f1" },
+      { layer: "Observability — Metrics", tech: "Prometheus, Node Exporter, kube-state-metrics", accent: "#e54a2d" },
+      { layer: "Observability — Visualization", tech: "Grafana", accent: "#e54a2d" },
+      { layer: "Observability — Alerting", tech: "Alertmanager (Slack/Email)", accent: "#e54a2d" },
+      { layer: "CI/CD", tech: "GitHub Actions, ArgoCD", accent: "#198754" },
+      { layer: "Infrastructure", tech: "AWS EC2 (Ubuntu 22.04)", accent: "#ff9900" },
+    ],
     projectHighlight: {
       title: "MODULE 10 — Real-Time Microservices Project 🏗️",
       description:
@@ -947,6 +963,56 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </motion.div>
 
+          {/* Complete Tech Stack */}
+          {webinar.techStack && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full"
+            >
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/30">
+                <div className="text-center mb-6 md:mb-8">
+                  <span className="inline-block bg-[#1447e6]/10 text-[#1447e6] font-sans font-bold text-[11px] md:text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                    Complete Tech Stack
+                  </span>
+                  <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-4xl">
+                    Every Tool You Will Learn & Use 🛠️
+                  </h2>
+                </div>
+                <div className="flex flex-col gap-2 md:gap-3 max-w-4xl mx-auto">
+                  {webinar.techStack.map((row: { layer: string; tech: string; accent: string }, index: number) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.04 }}
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 glass-card glass-card-blur-sm glass-card-opacity-light px-4 md:px-5 py-3 md:py-3.5 rounded-[10px] md:rounded-[12px] hover:shadow-md transition-all group"
+                    >
+                      <span
+                        className="shrink-0 font-sans font-semibold text-[10px] md:text-xs px-2.5 py-1 rounded-full whitespace-nowrap"
+                        style={{ backgroundColor: `${row.accent}18`, color: row.accent }}
+                      >
+                        {row.layer}
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {row.tech.split(', ').map((t: string, i: number) => (
+                          <span
+                            key={i}
+                            className="font-sans font-medium text-[11px] md:text-sm text-[#2d2d2d] bg-white/50 border border-white/60 px-2 py-0.5 rounded-md group-hover:border-[#1447e6]/20 transition-colors"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Real-Time Project Highlight */}
           {webinar.projectHighlight && (
             <motion.div
@@ -1083,38 +1149,50 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
               viewport={{ once: true }}
               className="w-full"
             >
-              <div className="text-center mb-6 md:mb-8">
-                <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
-                  Webinar Modules 📚
-                </h2>
-                <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
-                  Practical modules covered throughout the webinar sessions
-                </p>
-              </div>
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/20">
+                <div className="text-center mb-6 md:mb-8">
+                  <span className="inline-block bg-[#1447e6]/10 text-[#1447e6] font-sans font-bold text-[11px] md:text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                    Project Workflow
+                  </span>
+                  <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
+                    End-to-End Project Modules 📚
+                  </h2>
+                  <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
+                    8 hands-on steps — from Dockerfile to live Grafana dashboards
+                  </p>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {projects.map((item: string, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-6 rounded-[16px] md:rounded-[20px] hover:shadow-lg transition-shadow"
-                  >
-                    <div className="flex items-start gap-3 md:gap-4">
-                      <div className="p-2 md:p-3 rounded-[10px] md:rounded-[12px] bg-[#1447e6]/10 shrink-0">
-                        <RocketLaunchIcon className="w-6 h-6 md:w-8 md:h-8 text-[#1447e6]" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-1 md:mb-2">
-                          Module {index + 1}
-                        </h3>
-                        <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{item}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="flex flex-col gap-3 md:gap-4 max-w-4xl mx-auto">
+                  {projects.map((item: string, index: number) => {
+                    const colonIdx = item.indexOf(': ');
+                    const stepLabel = colonIdx !== -1 ? item.slice(0, colonIdx) : `Step ${index + 1}`;
+                    const stepDesc = colonIdx !== -1 ? item.slice(colonIdx + 2) : item;
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -16 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.06 }}
+                        className="flex items-start gap-4 md:gap-5 glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-5 rounded-[12px] md:rounded-[16px] border border-[#1447e6]/10 hover:border-[#1447e6]/30 hover:shadow-lg transition-all group"
+                      >
+                        <div className="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1447e6] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                          <span className="font-outfit font-bold text-white text-[13px] md:text-[15px]">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <div className="flex-1 pt-0.5">
+                          <p className="font-outfit font-bold text-[#1447e6] text-[12px] md:text-sm mb-0.5">
+                            {stepLabel}
+                          </p>
+                          <p className="font-sans text-[#2d2d2d] text-[12px] md:text-[15px] leading-relaxed">
+                            {stepDesc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             </motion.div>
           )}
