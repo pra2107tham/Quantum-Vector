@@ -19,6 +19,120 @@ import { imgImage10 } from "@/web/assets";
 
 // Webinar data
 const webinarData: Record<string, any> = {
+  "devops-live-april-may-2026": {
+    id: "devops-live-april-may-2026",
+    title: "Docker, Kubernetes, Observability & Microservices – A Complete Beginner's Guide",
+    tagline:
+      "4-day live program across two weekends — build a real-time microservices project with Docker, Kubernetes on-prem (kubeadm), Helm, Prometheus, Grafana, and a full observability stack.",
+    date: "25, 26 April & 2, 3 May 2026",
+    time: "7:00 PM – 9:30 PM IST (each day)",
+    duration: "4 Days · 10+ Hours (Live, Hands-on)",
+    price: "₹3,499",
+    originalPrice: "₹3,999",
+    earlyBirdNote: "Early bird price ₹3,499 valid till Tuesday — ₹3,999 after that.",
+    mode: "Live Online",
+    bonus: "Full source code + recordings + Kubernetes manifests + Helm charts + Grafana dashboards",
+    status: "upcoming",
+    description:
+      "A comprehensive 4-day beginner-friendly live program spread across two weekends. You will containerize real microservices with Docker, set up a production-grade Kubernetes cluster on-premises using kubeadm, manage deployments with Helm 3, build a full observability stack with Prometheus and Grafana, and deploy an end-to-end microservices project on AWS EC2 (Ubuntu 22.04).",
+    techStack: [
+      { layer: "Containerization", tech: "Docker, Dockerfile, Multi-Stage Builds", accent: "#1447e6" },
+      { layer: "Orchestration", tech: "Kubernetes (kubeadm), containerd, Flannel CNI", accent: "#1447e6" },
+      { layer: "Package Manager", tech: "Helm 3", accent: "#1447e6" },
+      { layer: "Microservices Backend", tech: "Node.js (Express), Python (Flask), Spring Boot (Java)", accent: "#0ea5e9" },
+      { layer: "Frontend", tech: "React.js + Nginx", accent: "#0ea5e9" },
+      { layer: "Database", tech: "MongoDB (StatefulSet), Redis (cache)", accent: "#0ea5e9" },
+      { layer: "Messaging / Queue", tech: "RabbitMQ", accent: "#0ea5e9" },
+      { layer: "API Gateway / Ingress", tech: "Nginx Ingress Controller", accent: "#6366f1" },
+      { layer: "Service Discovery", tech: "Kubernetes Services (ClusterIP/LB)", accent: "#6366f1" },
+      { layer: "Observability — Metrics", tech: "Prometheus, Node Exporter, kube-state-metrics", accent: "#e54a2d" },
+      { layer: "Observability — Visualization", tech: "Grafana", accent: "#e54a2d" },
+      { layer: "Observability — Alerting", tech: "Alertmanager (Slack/Email)", accent: "#e54a2d" },
+      { layer: "CI/CD", tech: "GitHub Actions, ArgoCD", accent: "#198754" },
+      { layer: "Infrastructure", tech: "AWS EC2 (Ubuntu 22.04)", accent: "#ff9900" },
+    ],
+    projectHighlight: {
+      title: "MODULE 10 — Real-Time Microservices Project 🏗️",
+      description:
+        "Cloud-Native E-Commerce Platform: 5 independent microservices deployed on Kubernetes, fully monitored with Prometheus & Grafana — demonstrating everything from Modules 1–9 working together.",
+      services: [
+        "frontend-svc (React + Nginx): Web UI for browsing products & checkout",
+        "product-svc (Node.js + Express): Product catalog REST API",
+        "cart-svc (Python + Flask): Shopping cart — uses Redis for sessions",
+        "order-svc (Spring Boot Java): Order processing, publishes to RabbitMQ",
+        "notification-svc (Node.js worker): Consumes RabbitMQ, sends email events",
+        "mongodb (StatefulSet): Persistent product & order storage",
+        "redis (Deployment): Cart session cache",
+        "rabbitmq (StatefulSet): Async messaging between order & notification services",
+      ],
+    },
+    whyMatters: {
+      title: "Why This Webinar Matters 🚀",
+      content:
+        "Most DevOps courses teach tools in isolation. This program shows you how the entire modern DevOps ecosystem fits together — from writing a Dockerfile to monitoring live production traffic in Grafana. You'll leave with a real end-to-end project deployed on Kubernetes, experience every layer of the stack, and have the confidence to work on production systems from day one.",
+    },
+    projects: [
+      "Step 1 — Containerize: Write multi-stage Dockerfiles for all 5 services and push images to Docker Hub (or ECR)",
+      "Step 2 — Kubernetes manifests: Create Deployment + Service YAMLs for each microservice, StatefulSets for MongoDB & RabbitMQ, and PVCs for persistent data",
+      "Step 3 — ConfigMaps & Secrets: Externalize DB URIs, RabbitMQ credentials, and JWT keys",
+      "Step 4 — Ingress: Install Nginx Ingress Controller and route shop.example.com → frontend-svc, api.example.com/products → product-svc, etc.",
+      "Step 5 — Helm chart: Package the entire app as a single Helm chart with values.yaml controlling replicas, image tags, and resource limits",
+      "Step 6 — Autoscaling: Apply HPA to product-svc and order-svc (scale 2→10 pods at 70% CPU)",
+      "Step 7 — Observability: Expose /metrics endpoints, configure ServiceMonitor CRDs, and import a custom Grafana dashboard showing request rate, error rate, and p95 latency per microservice",
+      "Step 8 — Load test & verify: Run a load generator (k6/hey) and watch HPA scale pods and Grafana dashboards light up in real time",
+    ],
+    outcomes: [
+      "Build production-grade Docker images with multi-stage builds",
+      "Design stateless vs stateful workloads — Deployments vs StatefulSets",
+      "Wire inter-service communication via Kubernetes DNS & Services",
+      "Externalize configuration with ConfigMaps and Secrets",
+      "Package a multi-service app as a reusable Helm chart",
+      "Implement horizontal autoscaling under real load with HPA",
+      "Build full observability: metrics scraping, custom Grafana dashboards, and Alertmanager alerting",
+      "Perform zero-downtime rolling updates and rollbacks via helm upgrade/rollback",
+    ],
+    whatYoullLearn: [
+      "Container fundamentals: Docker architecture, Dockerfile, image layers, volumes, and networks",
+      "Multi-stage Docker builds for optimized production images",
+      "Kubernetes architecture: control plane, worker nodes, etcd, kubelet, kube-proxy",
+      "On-premises cluster setup with kubeadm, containerd runtime, and Flannel CNI",
+      "Core Kubernetes objects: Pods, ReplicaSets, Deployments, Services, ConfigMaps, Secrets",
+      "StatefulSets for MongoDB — persistent volumes and ordered pod management",
+      "Redis deployment as an in-cluster caching layer",
+      "RabbitMQ setup for asynchronous microservice communication",
+      "Nginx Ingress Controller — path-based routing and TLS termination",
+      "Kubernetes Services — ClusterIP and LoadBalancer for internal and external traffic",
+      "Helm 3 — chart structure, values, templating, and managing releases",
+      "Prometheus — scraping metrics from Node Exporter and kube-state-metrics",
+      "Grafana — importing dashboards, building panels, and visualizing cluster health",
+      "Alertmanager — routing alerts to Slack and Email for production incidents",
+      "GitHub Actions for CI/CD — automated builds and image publishing",
+      "ArgoCD GitOps — syncing Kubernetes deployments from Git repositories",
+      "AWS EC2 (Ubuntu 22.04) — infrastructure setup for on-premises Kubernetes",
+    ],
+    whoIsFor: [
+      "Beginners who want a complete, end-to-end hands-on DevOps foundation",
+      "Developers who understand code but have never worked with containers or Kubernetes",
+      "Students and freshers targeting DevOps, SRE, or Cloud engineering roles",
+      "Engineers who have learned Docker/Kubernetes theory but never deployed a real project",
+      "Anyone who wants to add a production-grade Kubernetes project to their portfolio",
+    ],
+    whatYoullGet: [
+      "GitHub repo with 5 microservice codebases & Dockerfiles (portfolio-ready)",
+      "A working Helm chart packaging the complete e-commerce platform",
+      "A live Kubernetes cluster running the full app on EC2",
+      "Grafana dashboards showing real-time metrics (request rate, error rate, p95 latency)",
+      "Portfolio-ready case study to showcase in interviews",
+      "4 days of live, hands-on weekend sessions — 10+ hours total with full recordings",
+      "Live Q&A and doubt resolution during all 4 sessions",
+    ],
+    whereToLearn: {
+      title: "Keep Building After the Webinar 🏗️",
+      content:
+        "After completing this program, you'll have the foundation to tackle advanced topics: multi-cluster Kubernetes management, Service Mesh with Istio, Kubernetes security hardening, advanced Helm chart patterns, and production observability with distributed tracing. Continue your journey with QuantumVector — we focus on real production-grade DevOps workflows, practical understanding over theory, and career-oriented learning. Contact us at frontdesk@thedevopscommunity.com for any questions.",
+    },
+    paymentLink: "https://rzp.io/rzp/Ofp55zvQ",
+  },
   "terraform-webinar-2026": {
     id: "terraform-webinar-2026",
     title: "Terraform Webinar – Infrastructure as Code Mastery",
@@ -755,7 +869,13 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
                     <p className="font-sans text-[#66707d] text-[12px] md:text-sm">One-Time Fee</p>
                     <div className="flex items-center justify-center gap-2">
                       <span className="font-outfit font-bold text-[#2d2d2d] text-[32px] md:text-[40px]">{webinar.price}</span>
+                      {webinar.originalPrice && (
+                        <span className="font-outfit font-medium text-[#66707d] text-[18px] md:text-[22px] line-through">{webinar.originalPrice}</span>
+                      )}
                     </div>
+                    {webinar.earlyBirdNote && (
+                      <p className="font-sans text-[#e54a2d] text-[11px] md:text-xs mt-1 font-semibold">{webinar.earlyBirdNote}</p>
+                    )}
                     {webinar.duration && (
                       <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">{webinar.duration}</p>
                     )}
@@ -842,6 +962,56 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
               </p>
             </div>
           </motion.div>
+
+          {/* Complete Tech Stack */}
+          {webinar.techStack && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full"
+            >
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/30">
+                <div className="text-center mb-6 md:mb-8">
+                  <span className="inline-block bg-[#1447e6]/10 text-[#1447e6] font-sans font-bold text-[11px] md:text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                    Complete Tech Stack
+                  </span>
+                  <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-4xl">
+                    Every Tool You Will Learn & Use 🛠️
+                  </h2>
+                </div>
+                <div className="flex flex-col gap-2 md:gap-3 max-w-4xl mx-auto">
+                  {webinar.techStack.map((row: { layer: string; tech: string; accent: string }, index: number) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.04 }}
+                      className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 glass-card glass-card-blur-sm glass-card-opacity-light px-4 md:px-5 py-3 md:py-3.5 rounded-[10px] md:rounded-[12px] hover:shadow-md transition-all group"
+                    >
+                      <span
+                        className="shrink-0 font-sans font-semibold text-[10px] md:text-xs px-2.5 py-1 rounded-full whitespace-nowrap"
+                        style={{ backgroundColor: `${row.accent}18`, color: row.accent }}
+                      >
+                        {row.layer}
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {row.tech.split(', ').map((t: string, i: number) => (
+                          <span
+                            key={i}
+                            className="font-sans font-medium text-[11px] md:text-sm text-[#2d2d2d] bg-white/50 border border-white/60 px-2 py-0.5 rounded-md group-hover:border-[#1447e6]/20 transition-colors"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* Real-Time Project Highlight */}
           {webinar.projectHighlight && (
@@ -979,38 +1149,50 @@ export default function WebinarDetailPage({ params }: { params: Promise<{ id: st
               viewport={{ once: true }}
               className="w-full"
             >
-              <div className="text-center mb-6 md:mb-8">
-                <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
-                  Webinar Modules 📚
-                </h2>
-                <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
-                  Practical modules covered throughout the webinar sessions
-                </p>
-              </div>
+              <div className="glass-card glass-card-blur-lg glass-card-opacity-medium p-6 md:p-10 rounded-[16px] md:rounded-[20px] border-2 border-[#1447e6]/20">
+                <div className="text-center mb-6 md:mb-8">
+                  <span className="inline-block bg-[#1447e6]/10 text-[#1447e6] font-sans font-bold text-[11px] md:text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                    Project Workflow
+                  </span>
+                  <h2 className="font-outfit font-bold text-[#2d2d2d] text-[22px] md:text-4xl mb-2 md:mb-3">
+                    End-to-End Project Modules 📚
+                  </h2>
+                  <p className="font-sans text-[#66707d] text-[12px] md:text-lg">
+                    8 hands-on steps — from Dockerfile to live Grafana dashboards
+                  </p>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {projects.map((item: string, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-6 rounded-[16px] md:rounded-[20px] hover:shadow-lg transition-shadow"
-                  >
-                    <div className="flex items-start gap-3 md:gap-4">
-                      <div className="p-2 md:p-3 rounded-[10px] md:rounded-[12px] bg-[#1447e6]/10 shrink-0">
-                        <RocketLaunchIcon className="w-6 h-6 md:w-8 md:h-8 text-[#1447e6]" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg mb-1 md:mb-2">
-                          Module {index + 1}
-                        </h3>
-                        <p className="font-sans text-[#66707d] text-[11px] md:text-sm">{item}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="flex flex-col gap-3 md:gap-4 max-w-4xl mx-auto">
+                  {projects.map((item: string, index: number) => {
+                    const colonIdx = item.indexOf(': ');
+                    const stepLabel = colonIdx !== -1 ? item.slice(0, colonIdx) : `Step ${index + 1}`;
+                    const stepDesc = colonIdx !== -1 ? item.slice(colonIdx + 2) : item;
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -16 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.06 }}
+                        className="flex items-start gap-4 md:gap-5 glass-card glass-card-blur-sm glass-card-opacity-light p-4 md:p-5 rounded-[12px] md:rounded-[16px] border border-[#1447e6]/10 hover:border-[#1447e6]/30 hover:shadow-lg transition-all group"
+                      >
+                        <div className="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#1447e6] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                          <span className="font-outfit font-bold text-white text-[13px] md:text-[15px]">
+                            {index + 1}
+                          </span>
+                        </div>
+                        <div className="flex-1 pt-0.5">
+                          <p className="font-outfit font-bold text-[#1447e6] text-[12px] md:text-sm mb-0.5">
+                            {stepLabel}
+                          </p>
+                          <p className="font-sans text-[#2d2d2d] text-[12px] md:text-[15px] leading-relaxed">
+                            {stepDesc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             </motion.div>
           )}

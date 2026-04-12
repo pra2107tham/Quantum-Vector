@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
+    id: "devops-live-april-may-2026",
+    title: "Docker, Kubernetes, Observability & Microservices – A Complete Beginner's Guide",
+    tagline:
+      "4-day live program across two weekends — build a real-time microservices project with Docker, Kubernetes on-prem (kubeadm), Helm, Prometheus, Grafana, and a full observability stack.",
+    date: "25, 26 April & 2, 3 May 2026",
+    time: "7:00 PM – 9:30 PM IST (each day)",
+    price: "₹3,499",
+    mode: "Live Online",
+    bonus: "Full source code + recordings + Kubernetes manifests + Helm charts + Grafana dashboards",
+    status: "upcoming",
+  },
+  {
     id: "mcp-eks-webinar-2026",
     title: "MCP + AI Platform on Kubernetes (EKS)",
     tagline:
