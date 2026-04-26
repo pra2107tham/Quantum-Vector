@@ -25,7 +25,9 @@ const webinars = [
       "Build a Production-Grade AI-Augmented DevSecOps Pipeline — Not Just Tutorials. Real Systems. Real Security. Real Deployment.",
     date: "9 & 10 May 2026",
     time: "7:00 PM – 10:00 PM IST (each day)",
-    price: "₹2,499",
+    price: "₹2,249",
+    originalPrice: "₹2,499",
+    earlyBirdNote: "Offer price ₹2,249 valid till 28 Apr — ₹2,499 after that.",
     mode: "Live Online",
     bonus: "Full source code + Jenkins pipeline definitions + Kubernetes manifests + SonarQube, Trivy, OWASP, OPA policy files + recordings",
     status: "upcoming",
@@ -316,13 +318,25 @@ export default function WebinarsPage() {
 
                         {/* Bottom Row */}
                         <div className="flex items-center justify-between flex-wrap gap-3">
-                          <div className="flex items-center gap-3">
-                            <span className="font-outfit font-bold text-[#1447e6] text-[20px] md:text-[24px]">
-                              {webinar.price}
-                            </span>
-                            <span className="font-sans text-[#66707d] text-[10px] md:text-xs">
-                              One-Time Fee
-                            </span>
+                          <div className="flex flex-col gap-0.5">
+                            <div className="flex items-center gap-3">
+                              <span className="font-outfit font-bold text-[#1447e6] text-[20px] md:text-[24px]">
+                                {webinar.price}
+                              </span>
+                              {"originalPrice" in webinar && webinar.originalPrice && (
+                                <span className="font-outfit font-medium text-[#66707d] text-[14px] md:text-[16px] line-through">
+                                  {webinar.originalPrice}
+                                </span>
+                              )}
+                              <span className="font-sans text-[#66707d] text-[10px] md:text-xs">
+                                One-Time Fee
+                              </span>
+                            </div>
+                            {"earlyBirdNote" in webinar && webinar.earlyBirdNote && (
+                              <p className="font-sans text-[#e54a2d] text-[10px] md:text-xs font-semibold">
+                                {webinar.earlyBirdNote}
+                              </p>
+                            )}
                           </div>
                           <span className="bg-[#1447e6] text-white font-sans font-semibold text-[11px] md:text-sm px-4 md:px-5 py-1.5 md:py-2 rounded-full group-hover:bg-[#0f3bb8] transition-colors">
                             Learn More →
