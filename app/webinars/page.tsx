@@ -19,6 +19,18 @@ import { imgImage10 } from "@/web/assets";
 // Webinar data — ordered most recent first (upcoming always at top)
 const webinars = [
   {
+    id: "devsecops-eks-may-2026",
+    title: "AI-Ready DevSecOps Live Project on EKS",
+    tagline:
+      "Build a Production-Grade AI-Augmented DevSecOps Pipeline — Not Just Tutorials. Real Systems. Real Security. Real Deployment.",
+    date: "9 & 10 May 2026",
+    time: "7:00 PM – 10:00 PM IST (each day)",
+    price: "₹2,499",
+    mode: "Live Online",
+    bonus: "Full source code + Jenkins pipeline definitions + Kubernetes manifests + SonarQube, Trivy, OWASP, OPA policy files + recordings",
+    status: "upcoming",
+  },
+  {
     id: "devops-live-april-may-2026",
     title: "Docker, Kubernetes, Observability & Microservices – A Complete Beginner's Guide",
     tagline:
