@@ -308,13 +308,12 @@ export default function AiLlmEngineeringBootcampPage() {
               >
                 <div className="glass-card glass-card-blur-md glass-card-opacity-light p-5 md:p-6 rounded-[16px] md:rounded-[20px]">
                   <div className="text-center mb-4">
-                    <p className="font-sans text-[#66707d] text-[12px] md:text-sm">Enrollment Fee</p>
+                    <p className="font-sans text-[#66707d] text-[12px] md:text-sm">Total Course Fee</p>
                     <div className="flex items-center justify-center gap-2">
-                      <span className="font-outfit font-bold text-[#22c55e] text-[28px] md:text-[34px]">₹4,999</span>
+                      <span className="font-sans text-[#66707d] line-through text-[12px] md:text-sm">₹39,999</span>
+                      <span className="font-outfit font-bold text-[#22c55e] text-[28px] md:text-[34px]">₹29,999</span>
                     </div>
-                    <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">
-                      Pay ₹4,999 now to secure your seat and start your AI journey.
-                    </p>
+                    <p className="font-sans text-[#66707d] text-[11px] md:text-xs mt-1">45 days • Monday to Friday • Live online</p>
                   </div>
 
                   <div className="border-t border-white/30 pt-4 mb-4">
@@ -338,7 +337,7 @@ export default function AiLlmEngineeringBootcampPage() {
                     className="w-full bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base py-3 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg flex items-center justify-center gap-2"
                   >
                     <CurrencyRupeeIcon className="w-5 h-5" />
-                    Pay ₹4,999 to Enroll
+                    Reserve Your Seat – ₹4,999 Enrollment
                   </a>
                   <p className="font-sans text-[#66707d] text-[10px] md:text-xs text-center mt-2">
                     Limited seats for this cohort
@@ -556,10 +555,10 @@ export default function AiLlmEngineeringBootcampPage() {
                 <div className="glass-card glass-card-blur-sm p-4 rounded-[12px] md:rounded-[16px]">
                   <div className="flex items-center gap-2 mb-2">
                     <CurrencyRupeeIcon className="w-5 h-5 text-[#1447e6]" />
-                    <p className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg">Enrollment Fee ₹4,999</p>
+                    <p className="font-outfit font-semibold text-[#2d2d2d] text-[14px] md:text-lg">Offer Price ₹29,999</p>
                   </div>
                   <p className="font-sans text-[#66707d] text-[12px] md:text-sm">
-                    Pay just ₹4,999 today to reserve your spot in the cohort.
+                    Course fee ₹39,999. Limited seats for the current cohort.
                   </p>
                 </div>
                 <div className="glass-card glass-card-blur-sm p-4 rounded-[12px] md:rounded-[16px]">
@@ -597,12 +596,12 @@ export default function AiLlmEngineeringBootcampPage() {
 
               <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-6">
                 <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Enrollment Fee</p>
-                  <p className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-3xl">₹4,999</p>
+                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Course Fee</p>
+                  <p className="font-outfit font-bold text-[#2d2d2d] text-[24px] md:text-3xl">₹39,999</p>
                 </div>
                 <div className="glass-card glass-card-blur-sm p-3 md:p-4 rounded-[12px]">
-                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Payable Today</p>
-                  <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-3xl">₹4,999</p>
+                  <p className="font-sans text-[#66707d] text-[11px] md:text-sm">Offer Price</p>
+                  <p className="font-outfit font-bold text-[#1447e6] text-[24px] md:text-3xl">₹29,999</p>
                 </div>
               </div>
 
