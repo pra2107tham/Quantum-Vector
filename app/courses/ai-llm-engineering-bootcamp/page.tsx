@@ -145,7 +145,7 @@ export default function AiLlmEngineeringBootcampPage() {
       <div className="fixed inset-0 -z-10 w-full h-full">
         <Image
           src={imgImage10}
-          alt="DevOps Community Background"
+          alt="AI and LLM Engineering Bootcamp Background"
           fill
           className="object-cover object-center pointer-events-none"
           priority
