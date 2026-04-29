@@ -198,6 +198,69 @@ export default function Courses() {
         </div>
       ),
     },
+    {
+      title: "Complete AI & LLM Engineering Bootcamp",
+      content: (
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="md:col-span-8">
+            <div className="bg-ghostwhite rounded-xl p-6 border-2 border-gray-200 h-full">
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-black">Complete AI & LLM Engineering Bootcamp</h3>
+                <p className="text-neutral-600">From zero to production-ready AI engineer with 8 hands-on projects.</p>
+              </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-medium mb-2">Core Topics</h4>
+                    <ul className="space-y-2 text-sm text-neutral-600">
+                      <li>• Python, Git, Docker, Pydantic</li>
+                      <li>• LLM fundamentals & prompt engineering</li>
+                      <li>• Agents, RAG, LangChain, LangGraph</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <h4 className="font-medium mb-2">Production Skills</h4>
+                    <ul className="space-y-2 text-sm text-neutral-600">
+                      <li>• Voice AI & multimodal systems</li>
+                      <li>• Redis queues, async scaling</li>
+                      <li>• MCP server with STDIO/SSE</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-sm line-through text-neutral-400">₹39,999</span>
+                  <span className="text-sm font-semibold text-emerald-700">Offer: ₹29,999</span>
+                </div>
+                <button className="p-[3px] relative mt-4">
+                  <div className="absolute inset-0 bg-black rounded-lg" />
+                  <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-white hover:text-black">
+                    <Link href="/courses/ai-llm-bootcamp/" className="block">
+                      View Details
+                    </Link>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="md:col-span-4">
+            <div className="relative h-full rounded-xl border-2 border-gray-200 p-2 md:p-3">
+              <GlowingEffect blur={0} borderWidth={3} spread={80} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className="border-0.75 relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl p-6 md:p-6">
+                <div className="space-y-3">
+                  <h4 className="font-medium text-lg">Course Highlights</h4>
+                  <ul className="space-y-3 text-sm text-neutral-600">
+                    <li>• 8 Production Projects</li>
+                    <li>• Agents + RAG + Memory</li>
+                    <li>• Voice + Multi-modal AI</li>
+                    <li>• MCP Integration</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   return (
