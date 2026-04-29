@@ -50,43 +50,43 @@ export default function CoursesPage() {
                   🎯 Job-Ready
                 </span>
                 <span className="glass-card glass-card-blur-sm glass-card-opacity-light px-3 py-1.5 rounded-full font-sans font-semibold text-[#ff9900] text-[11px] md:text-sm whitespace-nowrap">
-                  ☁️ AWS Focused
+                  🤖 AI + Cloud
                 </span>
               </div>
 
               {/* Title */}
               <h1 className="font-outfit font-bold text-[#2d2d2d] text-[26px] md:text-[44px] lg:text-[52px] leading-tight w-full">
-                AWS DevOps
+                DevOps & AI
                 <span className="text-[#1447e6]"> Courses</span>
               </h1>
 
               {/* Description */}
               <p className="font-sans font-normal text-[#2d2d2d] text-[13px] md:text-[16px] leading-relaxed w-full max-w-[550px]">
-                Master DevOps with AWS Cloud from scratch to production. Complete curriculum covering Linux, Docker, Kubernetes, and AWS services.
+                Choose a job-ready track in DevOps or AI/LLM engineering. Live classes, mentorship, and portfolio projects take you from zero to production.
               </p>
 
               {/* Course Highlights */}
               <div className="flex flex-wrap gap-3 md:gap-4">
                 <div className="flex items-center gap-1.5">
                   <ClockIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">2–3 Month Program</span>
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">Weekday Live Classes</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <UserGroupIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">1:1 Mentorship</span>
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">Mentor Support</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <RocketLaunchIcon className="w-4 h-4 md:w-5 md:h-5 text-[#1447e6]" />
-                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">Real Projects</span>
+                  <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm">Project Portfolio</span>
                 </div>
               </div>
 
               {/* CTA Button */}
               <Link
-                href="/courses/aws-devops"
+                href="#courses-section"
                 className="bg-[#1447e6] text-white font-sans font-semibold text-[13px] md:text-base px-5 md:px-7 py-2.5 md:py-3.5 rounded-full hover:bg-[#0f3bb8] transition-colors shadow-lg whitespace-nowrap mt-2"
               >
-                View Course Details →
+                View All Courses →
               </Link>
             </div>
 
@@ -97,12 +97,12 @@ export default function CoursesPage() {
                   Why Choose Our Course?
                 </h3>
                 <div className="flex flex-col gap-3 md:gap-4 w-full">
-                  {[
-                    { title: "Industry Curriculum", desc: "Updated for 2024 job market" },
-                    { title: "Project Portfolio", desc: "4 production-grade projects" },
-                    { title: "Lifetime Access", desc: "Recordings & materials forever" },
-                    { title: "Career Support", desc: "Resume + interview prep" },
-                  ].map((item, index) => (
+                    {[
+                      { title: "Industry Curriculum", desc: "DevOps and AI tracks" },
+                      { title: "Project Portfolio", desc: "Hands-on builds" },
+                      { title: "Live Classes", desc: "Weekday instructor-led sessions" },
+                      { title: "Career Support", desc: "Resume + interview prep" },
+                    ].map((item, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <div className="bg-[#1447e6] rounded-full p-0.5 shrink-0 mt-0.5">
                         <CheckCircleIcon className="w-3 h-3 md:w-4 md:h-4 text-white" />
@@ -124,7 +124,7 @@ export default function CoursesPage() {
             className="absolute bottom-[20px] md:bottom-[30px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
           >
             <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm whitespace-nowrap">See Details</span>
-        <motion.div
+            <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             >
@@ -140,16 +140,16 @@ export default function CoursesPage() {
           {/* Section Header */}
           <div className="text-center">
             <h2 className="font-outfit font-semibold text-[#2d2d2d] text-[22px] md:text-[36px] mb-2">
-              Program Details
+              Available Courses
             </h2>
             <p className="font-sans text-[#66707d] text-[12px] md:text-base max-w-xl mx-auto">
-              Everything you need to become a DevOps professional
+              Choose the track that matches your career goals
             </p>
           </div>
 
           {/* AWS DevOps Course Card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
@@ -207,7 +207,69 @@ export default function CoursesPage() {
                 </div>
               </div>
             </Link>
-              </motion.div>
+          </motion.div>
+
+          {/* AI & LLM Engineering Bootcamp Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="w-full max-w-[900px] px-2"
+          >
+            <Link href="/courses/ai-llm-engineering-bootcamp" className="block">
+              <div className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[14px] md:rounded-[20px] p-4 md:p-6 hover:shadow-xl transition-all group">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                  {/* Icon */}
+                  <div className="bg-[#1447e6] rounded-[12px] md:rounded-[16px] p-3 md:p-4 shrink-0 group-hover:scale-105 transition-transform">
+                    <AcademicCapIcon className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 mb-2">
+                      <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[18px] md:text-[24px]">
+                        Complete AI & LLM Engineering Bootcamp
+                      </h3>
+                      <span className="glass-card glass-card-blur-sm px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold text-[#1447e6] whitespace-nowrap w-fit">
+                        45 Days • Mon–Fri • 8:30–9:30 AM IST
+                      </span>
+                    </div>
+
+                    <p className="font-sans text-[#66707d] text-[12px] md:text-[15px] mb-3">
+                      From zero to production-ready AI engineer with Python, LLMs, agents, RAG, LangChain, LangGraph, voice AI, and MCP.
+                    </p>
+
+                    {/* Features */}
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3">
+                      {["Python", "LLMs", "RAG", "LangChain", "LangGraph", "MCP"].map((feature, i) => (
+                        <span key={i} className="glass-card glass-card-blur-sm px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-sans text-[#2d2d2d]">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Bottom Row */}
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <div className="flex items-center gap-1">
+                          <ClockIcon className="w-4 h-4 text-[#1447e6]" />
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">45 Days</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <RocketLaunchIcon className="w-4 h-4 text-[#1447e6]" />
+                          <span className="font-sans text-[#2d2d2d] text-[10px] md:text-sm">8 Projects</span>
+                        </div>
+                      </div>
+                      <span className="bg-[#1447e6] text-white font-sans font-semibold text-[11px] md:text-sm px-4 md:px-5 py-1.5 md:py-2 rounded-full group-hover:bg-[#0f3bb8] transition-colors">
+                        Learn More →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         </div>
       </div>
 
