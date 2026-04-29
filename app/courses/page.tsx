@@ -207,7 +207,47 @@ export default function CoursesPage() {
                 </div>
               </div>
             </Link>
-              </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="w-full max-w-[900px] px-2"
+          >
+            <Link href="/courses/ai-llm-bootcamp" className="block">
+              <div className="glass-card glass-card-blur-md glass-card-opacity-light rounded-[14px] md:rounded-[20px] p-4 md:p-6 hover:shadow-xl transition-all group">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                  <div className="bg-[#6d28d9] rounded-[12px] md:rounded-[16px] p-3 md:p-4 shrink-0 group-hover:scale-105 transition-transform">
+                    <AcademicCapIcon className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-outfit font-semibold text-[#2d2d2d] text-[18px] md:text-[24px] mb-2">Complete AI & LLM Engineering Bootcamp</h3>
+                    <p className="font-sans text-[#66707d] text-[12px] md:text-[15px] mb-3">
+                      From Python and Git to LLMs, RAG, LangChain, LangGraph, Voice AI, and MCP with 8 portfolio projects and production-focused workflows.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 mb-3">
+                      {["Python", "LLMs", "RAG", "LangChain", "LangGraph", "MCP"].map((feature, i) => (
+                        <span key={i} className="glass-card glass-card-blur-sm px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-sans text-[#2d2d2d]">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <span className="font-sans text-[#2d2d2d] text-[11px] md:text-sm line-through">₹39,999</span>
+                        <span className="font-sans font-semibold text-emerald-700 text-[12px] md:text-sm">Offer: ₹29,999</span>
+                      </div>
+                      <span className="bg-[#6d28d9] text-white font-sans font-semibold text-[11px] md:text-sm px-4 md:px-5 py-1.5 md:py-2 rounded-full group-hover:bg-[#5b21b6] transition-colors">
+                        Learn More →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         </div>
       </div>
 
